@@ -1,5 +1,5 @@
 import React from 'react';
-var BDRPanelTable = require('./BDRPanelTable');
+var BDRPanelTable = require('./BDRPanelTable.js');
 
 class BDRPanel extends React.Component {
   render() {

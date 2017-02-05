@@ -1,6 +1,13 @@
 import React from 'react';
 
-
+class BDRPTableCell extends React.Component {
+  render(){
+        return <div id="" className={"col-sm-" + this.props.colwidth } >
+                    <strong id="" className="">{this.props.header }</strong><br/>
+                    <span id="" className=""> {this.props.children } </span>
+                  </div>;
+  }
+}
 
 class BDRPanelTable extends React.Component {
   constructor(props){
@@ -19,41 +26,19 @@ class BDRPanelTable extends React.Component {
 
 
                 <div id="" className="row ">
-                  <div id="" className="col-sm-4 ">
-                    <strong id="" className="">Date/Time</strong><br/>
-                    <span id="" className=""> {this.state.bdrdate } <br/> { this.state.bdrtime }<br/>Period {this.state.incidentPeriod }</span>
-                  </div>
-                  <div id="" className="col-sm-4 ">
-                    <strong id="" className="">Student</strong><br/>
-                    <span id="" className=""> {this.state.studentName} </span>
-                  </div>
-    
-
-                  <div id="" className="col-sm-4 ">
-                  <strong id="" className="">Staff</strong><br/>
-                  <span id="bdrStaffName-167" className=""> {this.state.staffName} </span>
-                  </div>
-                </div>
-                <div id="" className="row ">
-                  <div id="" className="col-sm-4 ">
-                    <strong id="" className="">Location</strong><br/>
-                    <span id="" className=""> {this.state.location} </span>
-                  </div>
-		  <div id="" className="col-sm-4 ">
-                    <strong id="" className="">Others Involved</strong><br/>
-                    <span id="" className=""> {this.state.othersInvolved} </span>
-                  </div>
-		  <div id="" className="col-sm-4 ">
-                    <strong id="" className="">Possible Motivation</strong><br/>
-                    <span id="" className=""> {this.state.possibleMotivation} </span>
-                   </div>
+                  <BDRPTableCell colwidth="4" header="Date/Time"> {this.state.bdrdate} <br/> {this.state.bdrtime} <br/> {"Period " + this.state.incidentPeriod} </BDRPTableCell>
+                  <BDRPTableCell colwidth="4" header="Student Name"> {this.state.studentName }</BDRPTableCell>
+   		  <BDRPTableCell colwidth="4" header="Staff Name"> {this.state.staffName }</BDRPTableCell>
                 </div>
 
                 <div id="" className="row ">
-                  <div id="" className="col-sm-12 anecdoteTD">
-                    <strong id="" className="">Incident Description</strong><br/>
-                    <span id="" className=""> {this.state.behaviorAnecdote } </span>
-                  </div>
+                  <BDRPTableCell colwidth="4" header="Location"> {this.state.location} </BDRPTableCell>
+		  <BDRPTableCell colwidth="4" header="Location"> {this.state.othersInvolved} </BDRPTableCell>
+		  <BDRPTableCell colwidth="4" header="Possible Motivation"> {this.state.possibleMotivation} </BDRPTableCell>
+                </div>
+
+                <div id="" className="row ">
+                  <BDRPTableCell colwidth="12" header="Incident Description"> {this.state.behaviorAnecdote } </BDRPTableCell>
                 </div>
               </div>;
   }
