@@ -64,8 +64,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var HelloMessage = __webpack_require__(178);
-	var names = ["Jared", "Allen", "Sutton"];
+	var BDRPanel = __webpack_require__(178);
 
 	var Messages = function (_React$Component) {
 	  _inherits(Messages, _React$Component);
@@ -79,15 +78,13 @@
 	  _createClass(Messages, [{
 	    key: 'render',
 	    value: function render() {
-	      var list = names.map(function (name) {
-	        return _react2.default.createElement(HelloMessage, { key: name, name: name });
+	      var list = this.props.bdrs.map(function (bdr) {
+	        return _react2.default.createElement(BDRPanel, { key: bdr.entryID, bdr: bdr });
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        ' ',
-	        list,
-	        ' '
+	        { id: '', className: 'jumbotron' },
+	        list
 	      );
 	    }
 	  }]);
@@ -95,7 +92,20 @@
 	  return Messages;
 	}(_react2.default.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(Messages, null), document.getElementById('content'));
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function () {
+	  if (this.readyState == 4 && this.status == 200) {
+	    // Data reception is done, do whatever with it!
+	    var parsed = JSON.parse(this.responseText);
+	    var arr = parsed.map(function (user) {
+	      return user;
+	    });
+	    _reactDom2.default.render(_react2.default.createElement(Messages, { bdrs: arr }), document.getElementById('content'));
+	  }
+	};
+	xhttp.open("GET", "/query", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send();
 
 /***/ },
 /* 1 */
@@ -21551,31 +21561,235 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var HelloMessage = function (_React$Component) {
-	  _inherits(HelloMessage, _React$Component);
+	var BDRPanelTable = __webpack_require__(179);
 
-	  function HelloMessage() {
-	    _classCallCheck(this, HelloMessage);
+	var BDRPanel = function (_React$Component) {
+	  _inherits(BDRPanel, _React$Component);
 
-	    return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+	  function BDRPanel() {
+	    _classCallCheck(this, BDRPanel);
+
+	    return _possibleConstructorReturn(this, (BDRPanel.__proto__ || Object.getPrototypeOf(BDRPanel)).apply(this, arguments));
 	  }
 
-	  _createClass(HelloMessage, [{
+	  _createClass(BDRPanel, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        'Hello ',
-	        this.props.name
+	        { id: '', className: 'panel panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: '', className: 'panel-body' },
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'panel panel-default' },
+	            _react2.default.createElement(
+	              'div',
+	              { id: '', className: 'panel-body' },
+	              this.props.bdr.studentName,
+	              _react2.default.createElement(BDRPanelTable, { bdr: this.props.bdr })
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
 
-	  return HelloMessage;
+	  return BDRPanel;
 	}(_react2.default.Component);
 
-	module.exports = HelloMessage;
+	module.exports = BDRPanel;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BDRPanelTable = function (_React$Component) {
+	  _inherits(BDRPanelTable, _React$Component);
+
+	  function BDRPanelTable(props) {
+	    _classCallCheck(this, BDRPanelTable);
+
+	    var _this = _possibleConstructorReturn(this, (BDRPanelTable.__proto__ || Object.getPrototypeOf(BDRPanelTable)).call(this, props));
+
+	    var bdr = _this.props.bdr;
+	    bdr.bdrdate = bdr.incidentDateTime.split("-")[1] + '/' + bdr.incidentDateTime.split("-")[2].split("T")[0] + '/' + bdr.incidentDateTime.split("-")[2].split("T")[1];
+	    bdr.bdrHour = parseInt(bdr.incidentDateTime.split("T")[1].split(":")[0]) - 4;
+	    bdr.bdrAMPM = bdr.bdrHour > 11 ? "PM" : "AM";
+	    bdr.bdrMinute = bdr.incidentDateTime.split("T")[1].split(":")[1];
+	    bdr.bdrtime = bdr.bdrHour + ":" + bdr.bdrMinute + " " + bdr.bdrAMPM;
+	    _this.state = bdr;
+	    return _this;
+	  }
+
+	  _createClass(BDRPanelTable, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: '', className: 'col-xs-12' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: '', className: 'row ' },
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Date/Time'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.bdrdate,
+	              ' ',
+	              _react2.default.createElement('br', null),
+	              ' ',
+	              this.state.bdrtime,
+	              _react2.default.createElement('br', null),
+	              'Period ',
+	              this.state.incidentPeriod
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Student'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.studentName,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Staff'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: 'bdrStaffName-167', className: '' },
+	              ' ',
+	              this.state.staffName,
+	              ' '
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: '', className: 'row ' },
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Location'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.location,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Others Involved'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.othersInvolved,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-4 ' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Possible Motivation'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.possibleMotivation,
+	              ' '
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: '', className: 'row ' },
+	          _react2.default.createElement(
+	            'div',
+	            { id: '', className: 'col-sm-12 anecdoteTD' },
+	            _react2.default.createElement(
+	              'strong',
+	              { id: '', className: '' },
+	              'Incident Description'
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'span',
+	              { id: '', className: '' },
+	              ' ',
+	              this.state.behaviorAnecdote,
+	              ' '
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return BDRPanelTable;
+	}(_react2.default.Component);
+
+	module.exports = BDRPanelTable;
 
 /***/ }
 /******/ ]);
