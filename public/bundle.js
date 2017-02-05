@@ -21586,9 +21586,27 @@
 	            { id: '', className: 'panel panel-default' },
 	            _react2.default.createElement(
 	              'div',
-	              { id: '', className: 'panel-body' },
-	              this.props.bdr.studentName,
-	              _react2.default.createElement(BDRPanelTable, { bdr: this.props.bdr })
+	              { id: '', className: "panel-body panel-" + this.props.bdr.swipCode + "swip" },
+	              (parseInt(this.props.bdr.swipCode) > 0 ? "-" + this.props.bdr.swipCode + " SWIP(s): " : "Restored: ") + " " + this.props.bdr.problemBehavior
+	            )
+	          ),
+	          _react2.default.createElement(BDRPanelTable, { bdr: this.props.bdr }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-12' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel panel-success' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'panel-heading' },
+	                "Restore Anecdote"
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'panel-body' },
+	                this.props.bdr.restoreAnecdote
+	              )
 	            )
 	          )
 	        )
@@ -21605,7 +21623,7 @@
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -21621,165 +21639,137 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var BDRPanelTable = function (_React$Component) {
-	  _inherits(BDRPanelTable, _React$Component);
+	var BDRPTableCell = function (_React$Component) {
+	  _inherits(BDRPTableCell, _React$Component);
+
+	  function BDRPTableCell() {
+	    _classCallCheck(this, BDRPTableCell);
+
+	    return _possibleConstructorReturn(this, (BDRPTableCell.__proto__ || Object.getPrototypeOf(BDRPTableCell)).apply(this, arguments));
+	  }
+
+	  _createClass(BDRPTableCell, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "", className: "col-sm-" + this.props.colwidth + " " + (this.props.middlecell ? this.props.middlecell : " ") },
+	        _react2.default.createElement(
+	          "strong",
+	          { id: "", className: "" },
+	          this.props.header
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "span",
+	          { id: "", className: "" },
+	          " ",
+	          this.props.children,
+	          " "
+	        )
+	      );
+	    }
+	  }]);
+
+	  return BDRPTableCell;
+	}(_react2.default.Component);
+
+	var BDRPanelTable = function (_React$Component2) {
+	  _inherits(BDRPanelTable, _React$Component2);
 
 	  function BDRPanelTable(props) {
 	    _classCallCheck(this, BDRPanelTable);
 
-	    var _this = _possibleConstructorReturn(this, (BDRPanelTable.__proto__ || Object.getPrototypeOf(BDRPanelTable)).call(this, props));
+	    var _this2 = _possibleConstructorReturn(this, (BDRPanelTable.__proto__ || Object.getPrototypeOf(BDRPanelTable)).call(this, props));
 
-	    var bdr = _this.props.bdr;
-	    bdr.bdrdate = bdr.incidentDateTime.split("-")[1] + '/' + bdr.incidentDateTime.split("-")[2].split("T")[0] + '/' + bdr.incidentDateTime.split("-")[2].split("T")[1];
+	    var bdr = _this2.props.bdr;
+	    bdr.bdrdate = bdr.incidentDateTime.split("-")[1] + '/' + bdr.incidentDateTime.split("-")[2].split("T")[0] + '/' + bdr.incidentDateTime.split("-")[0];
 	    bdr.bdrHour = parseInt(bdr.incidentDateTime.split("T")[1].split(":")[0]) - 4;
 	    bdr.bdrAMPM = bdr.bdrHour > 11 ? "PM" : "AM";
 	    bdr.bdrMinute = bdr.incidentDateTime.split("T")[1].split(":")[1];
 	    bdr.bdrtime = bdr.bdrHour + ":" + bdr.bdrMinute + " " + bdr.bdrAMPM;
-	    _this.state = bdr;
-	    return _this;
+	    _this2.state = bdr;
+	    return _this2;
 	  }
 
 	  _createClass(BDRPanelTable, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        { id: '', className: 'col-xs-12' },
+	        "div",
+	        { id: "", className: "col-xs-12" },
 	        _react2.default.createElement(
-	          'div',
-	          { id: '', className: 'row ' },
+	          "div",
+	          { id: "", className: "row bdr-row" },
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Date/Time'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.bdrdate,
-	              ' ',
-	              _react2.default.createElement('br', null),
-	              ' ',
-	              this.state.bdrtime,
-	              _react2.default.createElement('br', null),
-	              'Period ',
-	              this.state.incidentPeriod
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", header: "Date/Time" },
+	            " ",
+	            this.state.bdrdate,
+	            " ",
+	            _react2.default.createElement("br", null),
+	            " ",
+	            this.state.bdrtime,
+	            " ",
+	            _react2.default.createElement("br", null),
+	            " ",
+	            "Period " + this.state.incidentPeriod,
+	            " "
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Student'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.studentName,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", middlecell: "bdr-middle-cell", header: "Student Name" },
+	            " ",
+	            this.state.studentName
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Staff'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: 'bdrStaffName-167', className: '' },
-	              ' ',
-	              this.state.staffName,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", header: "Staff Name" },
+	            " ",
+	            this.state.staffName
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { id: '', className: 'row ' },
+	          "div",
+	          { id: "", className: "row bdr-row" },
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Location'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.location,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", header: "Location" },
+	            " ",
+	            this.state.location,
+	            " "
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Others Involved'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.othersInvolved,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", middlecell: "bdr-middle-cell", header: "Others Involved" },
+	            " ",
+	            this.state.othersInvolved,
+	            " "
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-4 ' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Possible Motivation'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.possibleMotivation,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "4", header: "Possible Motivation" },
+	            " ",
+	            this.state.possibleMotivation,
+	            " "
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { id: '', className: 'row ' },
+	          "div",
+	          { id: "", className: "row bdr-row" },
 	          _react2.default.createElement(
-	            'div',
-	            { id: '', className: 'col-sm-12 anecdoteTD' },
-	            _react2.default.createElement(
-	              'strong',
-	              { id: '', className: '' },
-	              'Incident Description'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              { id: '', className: '' },
-	              ' ',
-	              this.state.behaviorAnecdote,
-	              ' '
-	            )
+	            BDRPTableCell,
+	            { colwidth: "6", header: "Incident Description" },
+	            " ",
+	            this.state.behaviorAnecdote,
+	            " "
+	          ),
+	          _react2.default.createElement(
+	            BDRPTableCell,
+	            { colwidth: "6", header: "Staff Response" },
+	            " ",
+	            this.state.teacherResponse,
+	            " "
 	          )
 	        )
 	      );
