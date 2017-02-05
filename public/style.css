@@ -1,0 +1,97 @@
+    #allStudentsTContainer { 
+    overflow-y:scroll;
+    height:400px;
+    }
+    
+  #goal-upclose-col1 .panel-footer {display:none}
+    .nav li:hover {cursor:pointer;}
+    
+    .mastery-column {
+  width:140px;
+    //height:200px;
+    position:absolute;
+    display:block;
+    margin-top:20px;
+    //z-index:1;
+    
+  }
+  
+  .modal-open {
+    overflow: scroll;
+}
+  
+  /* #navbar-brand-div,#navbar-right-ul,#topNavUL {margin-top:24px;} */
+ 
+  
+  #comment-row {height:200px;
+  overflow-y:scroll;}
+  
+  #comment-row .panel {background:#efefef; }
+  
+  #new-comment-row .panel {background:#d7f5f2}
+  
+  .bigbadge { font-size:30px;}
+  
+  .newLOrow {height:80px;}
+  
+  #bdrUpcloseModalBody .bdr-upclose-btn { display:none;}
+  
+  #bdrUpcloseModalBody {height: 730px;}
+  
+  .panel-1swip {
+  
+  background: #f0ad4e;
+    color: white;
+  
+  }
+  
+  .badgeNY { background:#A0522D}
+  
+  .badgeA { background: #ffc107}
+  
+  .badgeM { background: #32CD32}
+  
+  .badgeE { background: #4169E1}
+  
+  
+  .panel--1swip, .panel--2swip {background: #398439;
+  color: white;}
+  
+  .panel-2swip {
+  background: #d9534f;
+     color: white;
+  }
+  
+  .course-panel-heading {
+   cursor:pointer;
+  }
+
+.mastery-row { position:relative;
+margin-top:140px;
+z-index
+}
+.mastery-row-head { z-index:0;
+margin-top:0px;}
+
+.mastery-row-head:hover {z-index:3}
+
+  
+  .mastery-col-0 {
+      //background:lightblue;
+     z-index:2;
+      
+    }
+
+.mastery-table {
+  border:1px solid #efefef;
+  overflow-x:scroll;
+  margin-top:20px;
+  height:600px;
+  background:#ffeb3b;
+    //width:600px;
+  
+}
+
+.grading-mastery-table {
+  height:400px;
+}
