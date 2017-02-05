@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-var HelloMessage = require('./HelloMessage.js');
+var BDRPanel = require('./BDRPanel.js');
 
 class Messages extends React.Component {
   render(){
-    var list = this.props.names.map((name) => (<HelloMessage key={name} name={name} />));
-    return <div> {list} </div>;
+    var list = this.props.bdrs.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
+    return( <div id="" className="jumbotron">
+              {list}
+	    </div> );
 }
 }
 
@@ -14,9 +16,9 @@ var xhttp = new XMLHttpRequest();
     if (this.readyState == 4 && this.status == 200) {
           // Data reception is done, do whatever with it!
     var parsed = JSON.parse(this.responseText);
-    var arr = parsed.map((user) => 'k' + user.firstName);
+    var arr = parsed.map((user) => user);
     ReactDOM.render(
-    <Messages names={arr}/>,
+    <Messages bdrs={arr}/>,
     document.getElementById('content')
     );
     }
@@ -24,4 +26,3 @@ var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "/query", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send();
-

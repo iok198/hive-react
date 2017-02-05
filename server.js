@@ -33,7 +33,7 @@ function qur(res){
 }
 }
 app.get('/query',function(req, res) {
-  connection.query('SELECT * from userDirectory where entryID<3',qur(res))
+  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',qur(res))
 })
 
 app.listen(3000, function () {
