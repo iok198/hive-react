@@ -2,13 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var BDRPanel = require('./BDRPanel.js');
 
-class Messages extends React.Component {
+class BDRs extends React.Component {
   render(){
     var list = this.props.bdrs.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
+    let buttonText = 'Show BDRs';
+    
+    if (this.state.showBDRs){
+      buttonText = 'Hide BDRs';
+    }
+    
     return( <div id="" className="jumbotron">
+              <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
               {list}
 	    </div> );
 }
+
+  _handleClick(){
+    this.setState({showBDRs: !this.state.showBDRs});
+  }
 }
 
 var xhttp = new XMLHttpRequest();
@@ -18,7 +29,7 @@ var xhttp = new XMLHttpRequest();
     var parsed = JSON.parse(this.responseText);
     var arr = parsed.map((user) => user);
     ReactDOM.render(
-    <Messages bdrs={arr}/>,
+    <BDRs bdrs={arr}/>,
     document.getElementById('content')
     );
     }
