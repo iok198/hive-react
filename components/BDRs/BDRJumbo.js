@@ -19,7 +19,8 @@ class BDRJumbo extends React.Component {
     }
     
     return( <div id="" className="jumbotron">
-              <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
+              <button className="button" onClick={this._handleClick.bind(this)}>{buttonText}</button>
+              <br />
               {list}
 	    </div> );
 }
