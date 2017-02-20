@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 var BDRPanel = require('./BDRPanel.js');
 
 class BDRs extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {showBDRs: false};  
+   }
+
   render(){
-    var list = this.props.bdrs.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
+    let list;
+
     let buttonText = 'Show BDRs';
-    
     if (this.state.showBDRs){
       buttonText = 'Hide BDRs';
+      list = this._getBDRs();
     }
     
     return( <div id="" className="jumbotron">
@@ -19,6 +26,11 @@ class BDRs extends React.Component {
 
   _handleClick(){
     this.setState({showBDRs: !this.state.showBDRs});
+  }
+
+  _getBDRs(){
+    const bdrArr = this.props.bdrs;
+    return bdrArr.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
   }
 }
 
