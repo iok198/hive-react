@@ -10,7 +10,10 @@ var xhttp = new XMLHttpRequest();
       var parsed = JSON.parse(this.responseText);
       var arr = parsed.map((user) => user);
       ReactDOM.render(
-        <BDRJumbo bdrs={arr}/>,
+        <div>
+        <BDRJumbo bdrs={arr}/>
+        <GradeJumbo/>
+        </div>,
         document.getElementById('content')
       );
     }
