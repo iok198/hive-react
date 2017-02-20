@@ -12,7 +12,7 @@ var xhttp = new XMLHttpRequest();
       ReactDOM.render(
         <div>
         <BDRJumbo bdrs={arr}/>
-        <GradeJumbo/>
+        <GradeJumbo />
         </div>,
         document.getElementById('content')
       );
