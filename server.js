@@ -45,7 +45,7 @@ function usersQueryCallback(res){
     'Content-Length': Buffer.byteLength(rslStr + courseQuery),
     'Content-Type': 'text/plain' })
     res.write(rslStr)
-    res.write(courseQuery)
+    /* res.write(courseQuery) */
 
   res.end()
 }
