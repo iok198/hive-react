@@ -19,6 +19,6 @@ var xhttp = new XMLHttpRequest();
     }
   };
   
-  xhttp.open("GET", "/query", true);
+  xhttp.open("GET", "/bdrs", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send();

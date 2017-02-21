@@ -32,8 +32,12 @@ function qur(res){
     res.send(JSON.stringify(rsl));
 }
 }
-app.get('/query',function(req, res) {
+app.get('/bdrs',function(req, res) {
   connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',qur(res))
+})
+
+app.get('/users',function(req, res){
+  connection.query('SELECT * FROM userDirectory where entryID=1',qur(res))
 })
 
 app.listen(3000, function () {
