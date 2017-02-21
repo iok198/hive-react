@@ -42,7 +42,7 @@ function usersQueryCallback(res){
     rsl[0].stuCourseQuObj = courseQuery
     var rslStr = JSON.stringify(rsl)
     res.writeHead(200, {
-    'Content-Length': Buffer.byteLength(rslStr + courseQuery),
+    'Content-Length': Buffer.byteLength(rslStr),
     'Content-Type': 'text/plain' })
     res.write(rslStr)
     /* res.write(courseQuery) */
