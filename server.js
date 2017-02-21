@@ -37,9 +37,9 @@ function defaultQueryCallback(res){
 function usersQueryCallback(res){
   return function (err,rsl,fds){
     
+    rsl[0].stuCourseQuObj = courseQueryPrepare(rsl[0])
+    var courseQuery = JSON.stringify(rsl[0].stuCourseObj)
     
-    var courseQuery = JSON.stringify(courseQueryPrepare(rsl[0]))
-    rsl[0].stuCourseQuObj = courseQuery
     var rslStr = JSON.stringify(rsl)
     res.writeHead(200, {
     'Content-Length': Buffer.byteLength(rslStr),
