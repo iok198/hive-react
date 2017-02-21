@@ -9,7 +9,7 @@ requestForReact("/bdrs",(arr) => ( [
         document.getElementById('content')]))
 
 requestForReact("/users",(arr) => ( [
-          <GradeJumbo />,
+          <GradeJumbo user={arr[0]} />,
           document.getElementById('content2')
   
   ]))
