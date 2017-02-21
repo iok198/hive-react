@@ -4,11 +4,15 @@ var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
 var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
 var requestForReact = require('./utilities/requestForReact.js')
 
-requestForReact("/bdrs",(arr) => ( [<div>
-        <BDRJumbo bdrs={arr}/>
-        <GradeJumbo />
-        </div>,
-        document.getElementById('content')]));
+requestForReact("/bdrs",(arr) => ( [
+          <BDRJumbo bdrs={arr}/>,
+        document.getElementById('content')]))
+
+requestForReact("/users",(arr) => ( [
+          <GradeJumbo />,
+          document.getElementsById('content')
+  
+  ]))
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
