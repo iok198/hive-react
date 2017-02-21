@@ -38,11 +38,12 @@ function usersQueryCallback(res){
   return function (err,rsl,fds){
     var rslStr = JSON.stringify(rsl)
     var courseQuery = JSON.stringify(courseQueryPrepare(rsl[0]));
+    res.writeHead(200, {
+    'Content-Length': Buffer.byteLength(rslStr + courseQuery),
+    'Content-Type': 'text/plain' })
     res.write(rslStr)
     res.write(courseQuery)
-    res.writeHead(200, {
-  'Content-Length': Buffer.byteLength(rslStr + courseQuery),
-  'Content-Type': 'text/plain' })
+
   res.end()
 }
 }
