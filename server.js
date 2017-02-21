@@ -36,8 +36,8 @@ function defaultQueryCallback(res){
 
 function usersQueryCallback(res){
   return function (err,rsl,fds){
-    res.send(JSON.stringify(rsl))
-    res.send(JSON.stringify(courseQueryPrepare(rsl[0])))
+    res.write(JSON.stringify(rsl))
+    res.write(JSON.stringify(courseQueryPrepare(rsl[0])))
 }
 }
 
