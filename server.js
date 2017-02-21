@@ -1,6 +1,7 @@
 var express = require('express')
 var app = express()
-var connection = require('./hive-sql.js');
+var connection = require('./hive-sql.js')
+var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 
 app.use(express.static('public'))
 
@@ -27,17 +28,24 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-function qur(res){
+function defaultQueryCallback(res){
   return function (err,rsl,fds){
     res.send(JSON.stringify(rsl));
 }
 }
+
+function usersQueryCallback(res){
+  return function (err,rsl,fds){
+    res.send(JSON.stringify(courseQueryPrepare(rsl[0])))
+}
+}
+
 app.get('/bdrs',function(req, res) {
-  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',qur(res))
+  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(res))
 })
 
 app.get('/users',function(req, res){
-  connection.query('SELECT * FROM userDirectory where entryID=1',qur(res))
+  connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(res))
 })
 
 app.listen(3000, function () {
