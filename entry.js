@@ -10,7 +10,7 @@ requestForReact("/bdrs",(arr) => ( [
 
 requestForReact("/users",(arr) => ( [
           <GradeJumbo />,
-          document.getElementsById('content')
+          document.getElementById('content')
   
   ]))
 /*
