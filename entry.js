@@ -12,7 +12,7 @@ requestForReact("/users",(arr) => ( [
           <GradeJumbo user={arr[0]} />,
           document.getElementById('content2')
   
-  ]))
+  ],console.log))
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
