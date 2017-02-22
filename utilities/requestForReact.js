@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-function requestForReact(url,renderArgs){
+function requestForReact(url,renderArgs,callback){
 
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
@@ -8,6 +8,8 @@ var xhttp = new XMLHttpRequest();
       var parsed = JSON.parse(this.responseText);
       var arr = parsed.map((user) => user);
       ReactDOM.render.apply(ReactDOM,renderArgs(arr));
+      if(typeof callback == "function"){
+      callback(arr)}
     }
   }
   
