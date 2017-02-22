@@ -59,6 +59,10 @@ app.get('/users',function(req, res){
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(res))
 })
 
+app.get('/los/:courseQueryStr',function(req, res){
+  connection.query('SELECT * FROM LOs WHERE courseStr in ' + req.params.courseQueryStr, defaultQueryCallback(res))
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
