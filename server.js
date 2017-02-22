@@ -61,7 +61,7 @@ app.get('/users',function(req, res){
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
-  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr, defaultQueryCallback(res))
+  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString(), defaultQueryCallback(res))
 })
 
 app.listen(3000, function () {
