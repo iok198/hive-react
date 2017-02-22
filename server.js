@@ -30,7 +30,8 @@ app.get('/', function (req, res) {
 
 function defaultQueryCallback(res){
   return function (err,rsl,fds){
-    res.send(JSON.stringify(rsl));
+    if(err){console.log(err)}
+    res.send(JSON.stringify(rsl))
 }
 }
 
