@@ -37,7 +37,7 @@ function defaultQueryCallback(res){
 
 function usersQueryCallback(res){
   return function (err,rsl,fds){
-    
+    if(err) console.log(err);
     rsl[0].stuCourseQuObj = courseQueryPrepare(rsl[0])
     var courseQuery = JSON.stringify(rsl[0].stuCourseObj)
     
@@ -61,8 +61,13 @@ app.get('/users',function(req, res){
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
-  console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString());
+  console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
   connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(res))
+})
+
+app.get('/grades/:courseQueryStr',function(req,res){
+  console.log(req.params.courseQueryStr.toString())
+  connection.query('select concat(courseStr,\':\',LOID), group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) separator \', \') as mstudentsN, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':2n\'), stuUDID, null) separator \', \') as mstudentsA, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':3n\'), stuUDID, null) separator \', \') as mstudentsM, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':4n\'), stuUDID, null) separator \', \') as mstudentsE, sum(recentrating REGEXP concat(\'m\', LOID, \':1n\')) as mcountN, sum(recentrating REGEXP concat(\'m\', LOID, \':2n\')) as mcountA, sum(recentrating REGEXP concat(\'m\', LOID, \':3n\')) as mcountM, sum(recentrating REGEXP concat(\'m\', LOID, \':4n\')) as mcountE from (select * from (select entryID as LOID from hive1617.LOs where courseStr REGEXP \'s7..........\') L left join (select courseStr, recentrating, stuUDID, assessID from (select * from (select * from (select * from hive1617.assessments where courseStr REGEXP \'s7..........\') a RIGHT JOIN (select max(entryID) as maxID, group_concat(distinct studentUDID) as stuUDID, group_concat(distinct assessmentID) as assessID, substring_index(group_concat(ratings order by entryID desc SEPARATOR \'|\'), \'|\', 1) as recentrating from hive1617.assessmentRatings group by concat(studentUDID, \':\', assessmentID) order by group_concat(entryID separator \' \')) aR on a.entryID=aR.assessID) aRJ where MRatings=\'y\') aRC) aRC2 on aRC2.recentrating REGEXP concat(\'m\', L.LOID, \':.n\')) aRC3 group by concat(courseStr,\':\',LOID)',defaultQueryCallback(res))
 })
 
 app.listen(3000, function () {
