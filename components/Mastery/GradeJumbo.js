@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var MasteryPanel = require('./MasteryPanel.js')
 var MasteryStuRow = require('./MasteryStuRow.js')
+var MasteryStuPanel = require('./MasteryStuPanel.js')
 
 class GradeJumbo extends React.Component {
   constructor(){
