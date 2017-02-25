@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
-var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
+var GreetingJumbo = require('./components/Greeting/GreetingJumbo.js')
 var requestForReact = require('./utilities/requestForReact.js')
 
 requestForReact("/bdrs",(arr) => ( [
@@ -9,7 +9,7 @@ requestForReact("/bdrs",(arr) => ( [
         document.getElementById('content')]))
 
 requestForReact("/users",(arr) => ( [
-          <GradeJumbo user={arr[0]} />,
+          <GreetingJumbo user={arr[0]} />,
           document.getElementById('content2')
   
   ]), console.log)
