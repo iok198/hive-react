@@ -69,10 +69,6 @@ app.get('/users',function(req, res){
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
-app.get('/holymoly',function(req,res){
-  connection.query('SELECT 1; select 2', defaultQueryCallback(req,res))
-})
-
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr));
   connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
