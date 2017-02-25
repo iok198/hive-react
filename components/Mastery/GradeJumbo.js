@@ -33,7 +33,7 @@ class GradeJumbo extends React.Component {
     var i=0;
     while (i<sMasteryArr.length){
         var nStr = sMasteryArr[i].courseStrLOIDsID.split("-")
-        var i = sFit(sMasteryArr[i], nStr[0] + '-' + nStr[1], i);
+        var i = sFit(sMasteryArr[i], nStr[0] + '-' + nStr[1], i)();
     }
     
     function sFit(obj, str,index){
