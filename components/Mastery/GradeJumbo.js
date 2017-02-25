@@ -21,20 +21,21 @@ class GradeJumbo extends React.Component {
     const masteryArr = this.props.mArr[1]
     const courseStrArr = this.props.mArr[2].split('|')
     
-    const LOsArr = masteryArr.map((mRecord) => {
-      var LOObj = {}
-      LOObj.str = mRecord.courseStrLOID
-      LOObj.data = {}
-      return LOObj
+    
+    var columns = {}
+    
+    masteryArr.map((mRecord) => {
+      columns[mRecord.courseStrLOID] = null
     })
     
     var rowsByStu = {}
     
     sMasteryArr.map((mRecord) => {
-      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID].push(mRecord)}
-      else {rowsByStu[mRecord.stuUDID] = []}
+      var cLs = mRecord.courseStrLOIDsID.split("-")
+      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID][cLs[0] + "-" + cLs[1]] = mRecord}
+      else {rowsByStu[mRecord.stuUDID] = columns}
     })
-    console.log(LOsArr)
+    console.log(columns)
     console.log(rowsByStu)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
   }
