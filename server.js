@@ -29,14 +29,21 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-function defaultQueryCallback(res){
+function defaultQueryCallback(req,res){
   return function (err,rsl,fds){
     if(err){console.log(err)}
     res.send(JSON.stringify(rsl))
 }
 }
 
-function usersQueryCallback(res){
+function masteryQueryCallback(req,res){
+  return function (err,rsl,fds){
+    if(err){console.log(err)}
+    res.send(JSON.stringify(rsl.push(req.params.courseStr)))
+}
+}
+
+function usersQueryCallback(req,res){
   return function (err,rsl,fds){
     if(err) console.log(err);
     rsl[0].stuCourseQuObj = courseQueryPrepare(rsl[0])
@@ -54,25 +61,25 @@ function usersQueryCallback(res){
 }
 
 app.get('/bdrs',function(req, res) {
-  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(res))
+  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(req,res))
 })
 
 app.get('/users',function(req, res){
-  connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(res))
+  connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
 app.get('/holymoly',function(req,res){
-  connection.query('SELECT 1; select 2', defaultQueryCallback(res))
+  connection.query('SELECT 1; select 2', defaultQueryCallback(req,res))
 })
 
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr));
-  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),defaultQueryCallback(res))
+  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
   console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
-  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(res))
+  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(req,res))
 })
 
 app.get('/grades/:courseQueryStr',function(req,res){
@@ -90,7 +97,7 @@ app.get('/grades/:courseQueryStr',function(req,res){
   'substring_index(group_concat(ratings order by entryID desc SEPARATOR \'|\'), \'|\', 1) as recentrating from hive1617.assessmentRatings ' + 
   'group by concat(studentUDID, \':\', assessmentID) order by group_concat(entryID separator \' \')) aR on a.entryID=aR.assessID) aRJ ' +
   'where MRatings=\'y\') aRC) aRC2 on aRC2.recentrating REGEXP concat(\'m\', L.LOID, \':.n\')) aRC3 group by ' + 
-  'concat(courseStr,\'-\',LOID)',defaultQueryCallback(res))
+  'concat(courseStr,\'-\',LOID)',defaultQueryCallback(req,res))
 })
 
 app.listen(3000, function () {
