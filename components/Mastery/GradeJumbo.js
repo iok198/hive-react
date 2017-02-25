@@ -18,7 +18,7 @@ class GradeJumbo extends React.Component {
   
   _getMastery(){
     const masteryArr = this.props.mArr;
-    return masteryArr.map((mRecord) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} />));
+    return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
   }
 
 }
