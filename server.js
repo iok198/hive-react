@@ -65,7 +65,7 @@ app.get('/holymoly',function(req,res){
   connection.query('SELECT 1; select 2', defaultQueryCallback(res))
 })
 
-app.get('/hula:courseStr',function(req,res){
+app.get('/hula/:courseStr',function(req,res){
   connection.query(gradeQueries(connection.escape(req.params.courseStr)).studentRatingQuery,defaultQueryCallback(res))
 })
 
