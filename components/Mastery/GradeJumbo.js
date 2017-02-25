@@ -38,11 +38,12 @@ class GradeJumbo extends React.Component {
     function sFit(obj){
         var cLstr = obj.courseStrLOIDsID.split('-');
         var cL = cLstr[0] + '-' + cLstr[1];
+        var objC = Object.assign({},obj)
         return function (){
             if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
-            rowsByStu[obj.stuUDID] = columns
+            rowsByStu[obj.stuUDID] = Object.assign({},columns)
             }
-            rowsByStu[obj.stuUDID][cL] = obj
+            rowsByStu[obj.stuUDID][cL] = Object.assign({},objC)
           }
     }
     
