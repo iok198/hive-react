@@ -60,6 +60,10 @@ app.get('/users',function(req, res){
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(res))
 })
 
+app.get('/holymoly',function(req,res){
+  connection.query('SELECT 1; select 2', defaultQueryCallback(res))
+})
+
 app.get('/los/:courseQueryStr',function(req, res){
   console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
   connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(res))
