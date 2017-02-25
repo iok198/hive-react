@@ -23,7 +23,8 @@ class GradeJumbo extends React.Component {
     
     const LOsArr = masteryArr.map((mRecord) => {
       var LOObj = {}
-      LOObj[mRecord.courseStrLOID] = {}
+      LOObj.str = mRecord.courseStrLOID
+      LOObj.data = {}
       return LOObj
     })
     var columns = {};
