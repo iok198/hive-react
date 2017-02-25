@@ -29,12 +29,12 @@ class GradeJumbo extends React.Component {
     })
     
     var rowsByStu = {}
-    /*
-    sMasteryArr.map((mRecord) => {
-      var cLs = mRecord.courseStrLOIDsID.split("-")
-      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID][cLs[0] + "-" + cLs[1]] = mRecord}
-      else {rowsByStu[mRecord.stuUDID] = columns}
-    })*/
+    
+    sMasteryArr.map((sRecord) => {
+      var cLs = sRecord.courseStrLOIDsID.split("-")
+      if (rowsByStu.hasOwnProperty(sRecord.stuUDID)) { rowsByStu[sRecord.stuUDID][cLs[0] + "-" + cLs[1]] = sRecord}
+      else {rowsByStu[sRecord.stuUDID] = columns}
+    })
     console.log(columns)
     console.log(rowsByStu)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
