@@ -67,13 +67,13 @@ app.get('/los/:courseQueryStr',function(req, res){
 
 app.get('/grades/:courseQueryStr',function(req,res){
   console.log(req.params.courseQueryStr.toString())
-  connection.query('select concat(courseStr,\'-\',LOID) as courseStrLOID, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) ' + 
+  connection.query('select concat(courseStr,\'-\',LOID) as courseStrLOID, group_concat(distinct LOText) as LOText, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) ' + 
   'separator \', \') as mstudentsN, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':2n\'), stuUDID, null) separator \', \') ' + 
   'as mstudentsA, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':3n\'), stuUDID, null) separator \', \') as mstudentsM, ' +
   'group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':4n\'), stuUDID, null) separator \', \') as mstudentsE, ' + 
   'sum(recentrating REGEXP concat(\'m\', LOID, \':1n\')) as mcountN, sum(recentrating REGEXP concat(\'m\', LOID, \':2n\')) as mcountA, ' +
   'sum(recentrating REGEXP concat(\'m\', LOID, \':3n\')) as mcountM, sum(recentrating REGEXP concat(\'m\', LOID, \':4n\')) as mcountE from ' +
-  '(select * from (select entryID as LOID from hive1617.LOs where courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\') L ' +
+  '(select * from (select entryID as LOID, LOText from hive1617.LOs where courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\') L ' +
   'left join (select courseStr, recentrating, stuUDID, assessID from (select * from (select * from (select * from hive1617.assessments ' +
   'where courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\') a RIGHT JOIN (select max(entryID) as maxID, ' + 
   'group_concat(distinct studentUDID) as stuUDID, group_concat(distinct assessmentID) as assessID, ' + 

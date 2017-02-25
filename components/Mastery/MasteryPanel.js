@@ -6,12 +6,12 @@ class MasteryPanel extends React.Component {
                   <div className="panel panel-default">
                     <div id="" className="panel-body">
                       <span className="badge" ># Assessment(s)</span>
-                      <span className="lo-text-span">I can reflect on my own learning and set goals.</span>
+                      <span className="lo-text-span">{this.props.mRecord.LOText}</span>
                       <br />
-                      <span id="" className="badge badgeNY">0</span>
-                      <span id="" className="badge badgeA">0</span>
-                      <span id="" className="badge badgeM">27</span>
-                      <span id="" className="badge badgeE">0</span>
+                      <span id="" className="badge badgeNY">{this.props.mRecord.mcountN}</span>
+                      <span id="" className="badge badgeA">{this.props.mRecord.mcountA}</span>
+                      <span id="" className="badge badgeM">{this.props.mRecord.mcountM}</span>
+                      <span id="" className="badge badgeE">{this.props.mRecord.mcountE}</span>
                     </div>
                   </div>
                </div>
