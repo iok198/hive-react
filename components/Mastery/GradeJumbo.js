@@ -49,6 +49,11 @@ class GradeJumbo extends React.Component {
     
     farr.map((f) => f())
     
+    var rowArr = []
+    
+    for(var k in rowsByStu){
+      rowArr.push({stuUDID: k, data: rowsByStu[k]})
+    }
     
     /*
     for (var i=0;i<sMasteryArr.length;i++){
@@ -57,9 +62,9 @@ class GradeJumbo extends React.Component {
         rowsByStu[sMasteryArr[i].stuUDID][cL] = sMasteryArr[i]
     }
 */
-    console.log(farr)
-    console.log(columns)
-    console.log(rowsByStu)
+    /* console.log(farr) */
+    /* console.log(columns) */
+    console.log(rowArr)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
   }
 
