@@ -32,7 +32,7 @@ class GradeJumbo extends React.Component {
     
     sMasteryArr.map((sRecord) => {
       var cLs = sRecord.courseStrLOIDsID.split("-")
-      if (rowsByStu.hasOwnProperty(sRecord.stuUDID)) { rowsByStu[sRecord.stuUDID][cLs[0] + "-" + cLs[1]] = sRecord}
+      if (rowsByStu.hasOwnProperty(sRecord.stuUDID)) { return null}
       else {rowsByStu[sRecord.stuUDID] = columns}
     })
     console.log(columns)
