@@ -31,7 +31,7 @@ class GradeJumbo extends React.Component {
     var rowsByStu = {}
     
     sMasteryArr.map((mRecord) => {
-      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID].append(mRecord)}
+      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID].push(mRecord)}
       else {rowsByStu[mRecord.stuUDID] = []}
     })
     console.log(LOsArr)
