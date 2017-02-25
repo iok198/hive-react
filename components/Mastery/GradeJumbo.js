@@ -2,12 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class GradeJumbo extends React.Component {
+  constructor(){
+    super();
+  }
+  
   render(){
-      let name = this.props.user.title;
+      let list = this._getMastery();
     
     return( <div id="" className="jumbotron">
-              <h1>Hello {name}</h1>
+              <h1>Hello Jared</h1>
+              {list}
 	    </div> );
+  }
+  
+  _getMastery(){
+    const masteryArr = this.props.mArr;
+    return masteryArr.map((mRecord) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} />));
   }
 
 }

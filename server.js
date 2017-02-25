@@ -67,7 +67,7 @@ app.get('/los/:courseQueryStr',function(req, res){
 
 app.get('/grades/:courseQueryStr',function(req,res){
   console.log(req.params.courseQueryStr.toString())
-  connection.query('select concat(courseStr,\':\',LOID), group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) ' + 
+  connection.query('select concat(courseStr,\'-\',LOID) as courseStrLOID, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) ' + 
   'separator \', \') as mstudentsN, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':2n\'), stuUDID, null) separator \', \') ' + 
   'as mstudentsA, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':3n\'), stuUDID, null) separator \', \') as mstudentsM, ' +
   'group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':4n\'), stuUDID, null) separator \', \') as mstudentsE, ' + 
