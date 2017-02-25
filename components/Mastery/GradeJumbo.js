@@ -31,7 +31,7 @@ class GradeJumbo extends React.Component {
     var rowsByStu = {}
     
     function sFit (sRecord){
-      return () => {
+      return (sR) => {
         var cLs = sRecord.courseStrLOIDsID.split("-")
         if (rowsByStu.hasOwnProperty(sRecord.stuUDID)) { rowsByStu[sRecord.stuUDID][cLs[0] + "-" + cLs[1]] = sRecord}
         else {rowsByStu[sRecord.stuUDID] = columns}
