@@ -39,7 +39,7 @@ class GradeJumbo extends React.Component {
     }
     
     var sFuns = sMasteryArr.map((sRecord) => {
-      return sFit(sRecord)()
+      return sFit(sRecord)
     })
     console.log(sFuns)
     console.log(columns)
