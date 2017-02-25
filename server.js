@@ -66,7 +66,8 @@ app.get('/holymoly',function(req,res){
 })
 
 app.get('/hula/:courseStr',function(req,res){
-  connection.query(gradeQueries(connection.escape(req.params.courseStr)).studentRatingQuery,defaultQueryCallback(res))
+  var queries = gradeQueries(connection.escape(req.params.courseStr));
+  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),defaultQueryCallback(res))
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
