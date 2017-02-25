@@ -2,7 +2,7 @@ import React from 'react'
 
 class MasteryPanel extends React.Component {
     render(){
-        return <div id={"mastery-col-head-" + this.props.mRecord.courseStrLOID } className="mastery-column" style={{left: 180px}}>
+        return <div id={"mastery-col-head-" + this.props.mRecord.courseStrLOID } className="mastery-column" style={{left: '180px'}}>
                   <div className="panel panel-default">
                     <div id="" className="panel-body">
                       <span className="badge" ># Assessment(s)</span>
