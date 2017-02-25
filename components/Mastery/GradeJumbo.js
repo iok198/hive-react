@@ -30,21 +30,22 @@ class GradeJumbo extends React.Component {
     
     var rowsByStu = {}
     
-    var i=0;
-    while (i<sMasteryArr.length){
-        var nStr = sMasteryArr[i].courseStrLOIDsID.split("-")
-        var i = sFit(sMasteryArr[i], nStr[0] + '-' + nStr[1], i)();
+    for (var i=0;i<sMasteryArr.length;i++){
+        sFit(sMasteryArr[i])();
     }
     
-    function sFit(obj, str,index){
+    function sFit(obj){
         return function (){
             if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
             rowsByStu[obj.stuUDID] = columns
             }
-            rowsByStu[obj.stuUDID][str] = obj;
-            return index++;
           }
-          
+    }
+    
+    for (var i=0;i<sMasteryArr.length;i++){
+        var cLstr = sMasteryArr[i].courseStrLOIDsID.split("-")
+        var cL = cLstr[0] + "-" + cLstr[1]
+        rowsByStu[sMasteryArr[i].stuUDID][cL] = sMasteryArr[i]
     }
 
     
