@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+var BDRPanel = require('./MasteryPanel.js')
 
 class GradeJumbo extends React.Component {
   constructor(){
