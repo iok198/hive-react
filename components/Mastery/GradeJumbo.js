@@ -27,9 +27,15 @@ class GradeJumbo extends React.Component {
       LOObj.data = {}
       return LOObj
     })
-    var columns = {};
-    /*sMasteryArr.map((mRecord) => )*/
+    
+    var rowsByStu = {}
+    
+    sMasteryArr.map((mRecord) => {
+      if (rowsByStu.hasOwnProperty(mRecord.stuUDID)) { rowsByStu[mRecord.stuUDID].append(mRecord)}
+      else {rowsByStu[mRecord.stuUDID] = []}
+    })
     console.log(LOsArr)
+    console.log(rowsByStu)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
   }
 
