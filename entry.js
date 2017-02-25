@@ -15,7 +15,7 @@ requestForReact("/users",(arr) => ( [
   
   ]), console.log)
   
-requestForReact("/grades/s7..........",(arr) => ( [
+requestForReact("/mastery/s7..........",(arr) => ( [
           <GradeJumbo mArr={arr} />,
           document.getElementById('content3')
   
