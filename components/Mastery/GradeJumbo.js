@@ -14,7 +14,8 @@ class GradeJumbo extends React.Component {
     
     return( <div id="" className="jumbotron">
               <h1>Hello Jared</h1>
-              {list}
+              {list.header}
+              {list.body}
 	    </div> );
   }
   
@@ -70,7 +71,7 @@ class GradeJumbo extends React.Component {
     var studentRows = rowArr.map((stuData,id) => (<MasteryStuRow key={stuData.stuUDID} stuData={stuData} colOffset={id}>
       {Object.keys(stuData.data).map((key,id2) => (<MasteryStuPanel key={stuData.data[key] || Math.random()} ratingData={stuData.data[key]} colOffset={id2}/>))}
     </MasteryStuRow>))
-    return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
+    return {header: masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>)), body: studentRows};
   }
 
 }
