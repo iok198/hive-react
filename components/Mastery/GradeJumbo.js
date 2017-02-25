@@ -29,9 +29,10 @@ class GradeJumbo extends React.Component {
     })
     
     var rowsByStu = {}
+    var farr = []
     
     for (var i=0;i<sMasteryArr.length;i++){
-        sFit(sMasteryArr[i])();
+        farr.push(sFit(sMasteryArr[i]));
     }
     
     function sFit(obj){
@@ -41,13 +42,14 @@ class GradeJumbo extends React.Component {
             }
           }
     }
-    
+    console.log(farr);
+    /*
     for (var i=0;i<sMasteryArr.length;i++){
         var cLstr = sMasteryArr[i].courseStrLOIDsID.split("-")
         var cL = cLstr[0] + "-" + cLstr[1]
         rowsByStu[sMasteryArr[i].stuUDID][cL] = sMasteryArr[i]
     }
-
+*/
     
     console.log(columns)
     console.log(rowsByStu)
