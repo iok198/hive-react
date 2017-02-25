@@ -77,7 +77,7 @@ class GradeJumbo extends React.Component {
       }
       )}
     </MasteryStuRow>))
-    var headerRow = (<MasteryStuRow key={3813} stuData{{}} colOffset={0} > {masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>))} </MasteryStuRow>)
+    var headerRow = (<MasteryStuRow key={3813} stuData={{}} colOffset={0} > {masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>))} </MasteryStuRow>)
     return {header: headerRow, body: studentRows};
   }
 
