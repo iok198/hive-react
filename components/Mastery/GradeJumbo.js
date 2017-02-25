@@ -36,13 +36,17 @@ class GradeJumbo extends React.Component {
     }
     
     function sFit(obj){
+        var cLstr = obj.courseStrLOIDsID.split('-');
+        var cL = cLstr[0] + '-' + cLstr[1];
         return function (){
             if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
             rowsByStu[obj.stuUDID] = columns
             }
+            rowsByStu[obj.stuUDID][cL] = obj
           }
     }
-    console.log(farr);
+    
+    
     /*
     for (var i=0;i<sMasteryArr.length;i++){
         var cLstr = sMasteryArr[i].courseStrLOIDsID.split("-")
@@ -50,7 +54,7 @@ class GradeJumbo extends React.Component {
         rowsByStu[sMasteryArr[i].stuUDID][cL] = sMasteryArr[i]
     }
 */
-    
+    console.log(farr)
     console.log(columns)
     console.log(rowsByStu)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
