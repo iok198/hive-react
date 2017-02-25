@@ -30,14 +30,14 @@ class GradeJumbo extends React.Component {
     
     var rowsByStu = {}
     
-    for (var i=0;i<sMasteryArr;i++){
+    for (var i=0;i<sMasteryArr.length;i++){
         
         var cLs = sMasteryArr[i].courseStrLOIDsID.split("-")
         if (rowsByStu.hasOwnProperty(sMasteryArr[i].stuUDID)) {
-          console.log('yay')
+          
           rowsByStu[sMasteryArr[i].stuUDID][cLs[0] + "-" + cLs[1]] = sMasteryArr[i]}
         else {
-          console.log('nay')
+          
           rowsByStu[sMasteryArr[i].stuUDID] = columns
           
         }
