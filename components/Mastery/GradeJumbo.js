@@ -38,7 +38,10 @@ class GradeJumbo extends React.Component {
       }
     }
     
-    sMasteryArr.map((sRecord) => sFit(sRecord)(1))
+    var sFuns = sMasteryArr.map((sRecord) => {
+      sFit(sRecord)()
+    })
+    console.log(sFuns)
     console.log(columns)
     console.log(rowsByStu)
     return masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>));
