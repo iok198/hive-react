@@ -39,7 +39,7 @@ function defaultQueryCallback(req,res){
 function masteryQueryCallback(req,res){
   return function (err,rsl,fds){
     if(err){console.log(err)}
-    res.send(JSON.stringify(rsl.push(req.params.courseStr)))
+    res.send(JSON.stringify(rsl))
 }
 }
 
