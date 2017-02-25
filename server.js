@@ -80,7 +80,7 @@ app.get('/grades/:courseQueryStr',function(req,res){
   'substring_index(group_concat(ratings order by entryID desc SEPARATOR \'|\'), \'|\', 1) as recentrating from hive1617.assessmentRatings ' + 
   'group by concat(studentUDID, \':\', assessmentID) order by group_concat(entryID separator \' \')) aR on a.entryID=aR.assessID) aRJ ' +
   'where MRatings=\'y\') aRC) aRC2 on aRC2.recentrating REGEXP concat(\'m\', L.LOID, \':.n\')) aRC3 group by ' + 
-  'concat(courseStr,\':\',LOID)',defaultQueryCallback(res))
+  'concat(courseStr,\'-\',LOID)',defaultQueryCallback(res))
 })
 
 app.listen(3000, function () {
