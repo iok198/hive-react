@@ -46,6 +46,8 @@ class GradeJumbo extends React.Component {
           }
     }
     
+    farr.map((f) => f())
+    
     
     /*
     for (var i=0;i<sMasteryArr.length;i++){
