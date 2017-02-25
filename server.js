@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
+var gradeQueries = require('./components/Mastery/utilities/gradeQueries.js')
 
 app.use(express.static('public'))
 
@@ -62,6 +63,10 @@ app.get('/users',function(req, res){
 
 app.get('/holymoly',function(req,res){
   connection.query('SELECT 1; select 2', defaultQueryCallback(res))
+})
+
+app.get('/hula',function(req,res){
+  connection.query(gradeQueries('s7..........').studentRatingQuery,defaultQueryCallback(res))
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
