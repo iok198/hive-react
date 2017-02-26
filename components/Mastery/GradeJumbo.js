@@ -35,7 +35,7 @@ class GradeJumbo extends React.Component {
     var farr = []
     
     for (var i=0;i<sMasteryArr.length;i++){
-        farr.push(sFit(sMasteryArr[i]));
+        farr.push(sFit(sMasteryArr[i])());
     }
     
     function sFit(obj){
@@ -50,7 +50,7 @@ class GradeJumbo extends React.Component {
           }
     }
     
-    farr.map((f) => f())
+    /* farr.map((f) => f()) */
     
     var rowArr = []
     
