@@ -55,7 +55,7 @@ class GradeJumbo extends React.Component {
   }
   
   _getMastery(){
-    var mObj = this.parseMastery(),
+    var mObj = this._parseMastery(),
     sMasteryArr = mObj.sMasteryArr, 
     masteryArr = mObj.masteryArr, 
     courseStrArr = mObj.courseStrArr, 
