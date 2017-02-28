@@ -15,11 +15,11 @@ class GradeJumbo extends React.Component {
   render(){
       let list = this._getMastery();
     
-    return( <div id="" className="jumbotron">
+    return( <table id="" className="table">
               <h1>Hello Jared</h1>
               {list.header}
               {list.body}
-	    </div> );
+	    </table> );
   }
   
   _getMastery(){
