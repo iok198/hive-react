@@ -15,7 +15,7 @@ class GradeJumbo extends React.Component {
   render(){
       let list = this._getMastery();
     
-    return( <table id="" className="table">
+    return( <table id="" className="table table-bordered">
               <tbody>
               {list.header}
               {list.body}
