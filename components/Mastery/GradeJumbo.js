@@ -32,53 +32,32 @@ class GradeJumbo extends React.Component {
     })
     
     var rowsByStu = {}
-    var farr = []
-    
-    for (var i=0;i<sMasteryArr.length;i++){
-        farr.push(sFit(sMasteryArr[i])());
-    }
     
     function sFit(obj){
         var cLstr = obj.courseStrLOIDsID.split('-');
         var cL = cLstr[0] + '-' + cLstr[1];
         var objC = Object.assign({},obj)
-        return function (){
+        
             if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
             rowsByStu[obj.stuUDID] = Object.assign({},columns)
             }
             rowsByStu[obj.stuUDID][cL] = Object.assign({},objC)
+          
+    }
+    
+    sMasteryArr.forEach(sFit)
+
+    var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuRow key={rowsByStu[key1].stuUDID} stuData={rowsByStu[key1]} colOffset={id1} >
+      {Object.keys(rowsByStu[key1].data).map((key2,id2) => {
+          if (rowsByStu[key1].data[key2]){
+          return  (<MasteryStuPanel key={rowsByStu[key1].data[key2].courseStrLOIDsID} ratingData={rowsByStu[key1].data[key2]} colOffset={id2}/>)
           }
-    }
-    
-    /* farr.map((f) => f()) */
-    
-    var rowArr = []
-    
-    for(var k in rowsByStu){
-      rowArr.push({stuUDID: k, data: rowsByStu[k]})
-    }
-    
-    /*
-    for (var i=0;i<sMasteryArr.length;i++){
-        var cLstr = sMasteryArr[i].courseStrLOIDsID.split("-")
-        var cL = cLstr[0] + "-" + cLstr[1]
-        rowsByStu[sMasteryArr[i].stuUDID][cL] = sMasteryArr[i]
-    }
-*/
-    /* console.log(farr) */
-    /* console.log(columns) */
-    console.log(rowArr)
-    var studentRows = rowArr.map((stuData,id) => (<MasteryStuRow key={stuData.stuUDID} stuData={stuData} colOffset={id}>
-      {Object.keys(stuData.data).map((key,id2) => {
-      if (stuData.data[key]){
-      return  (<MasteryStuPanel key={stuData.data[key].courseStrLOIDsID} ratingData={stuData.data[key]} colOffset={id2}/>)
-      }
-      else {return (<MasteryStuPanel key={key + stuData.stuUDID} ratingData={ {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
-      }
-      )}
-    </MasteryStuRow>))
-    var headerRow = (<MasteryStuRow key={3813} stuData={{}} colOffset={0} > {masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>))} </MasteryStuRow>)
-    return {header: headerRow, body: studentRows};
+          else {return (<MasteryStuPanel key={key2 + rowsByStu[key1].stuUDID} ratingData={ {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
+          }
+          )}
+          </MasteryStuRow>))
+        var headerRow = (<MasteryStuRow key={3813} stuData={{}} colOffset={0} > {masteryArr.map((mRecord,id) => (<MasteryPanel key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>))} </MasteryStuRow>)
+        return {header: headerRow, body: studentRows};
   }
 
 }
