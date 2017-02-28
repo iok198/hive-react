@@ -51,16 +51,16 @@ class GradeJumbo extends React.Component {
     
     sMasteryArr.forEach(sFit)
 
-    var studentRows = Object.keys(rowsByStu).map((key1,id1) => (id1 < 5 ? (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
+    var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
-          if (rowsByStu[key1][key2]){
+          if (id2 < 5) {if (rowsByStu[key1][key2]){
           return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
           }
           else {return (<MasteryStuTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
-          }
+          } else { return null}}
           )}
-          </MasteryStuTR>) : null ))
-        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >{masteryArr.map((mRecord,id) => (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />))}</MasteryStuTR>)
+          </MasteryStuTR>))
+        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >{masteryArr.map((mRecord,id) => (id < 6 ? (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />) : null ))}</MasteryStuTR>)
         return {header: headerRow, body: studentRows};
   }
 
