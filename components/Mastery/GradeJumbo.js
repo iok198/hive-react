@@ -19,7 +19,7 @@ class GradeJumbo extends React.Component {
               <tbody>
               {list.header}
               {list.body}
-              <tbody>
+              </tbody>
 	    </table> );
   }
   
