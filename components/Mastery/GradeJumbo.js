@@ -57,7 +57,7 @@ console.log(masteryArr)
           if (rowsByStu[key1][key2]){
           return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
           }
-          else {return (<MasteryTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
+          else {return (<MasteryStuTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
           }
           )}
           </MasteryStuTR>))
