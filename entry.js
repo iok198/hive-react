@@ -13,13 +13,13 @@ requestForReact("/users",(arr) => ( [
           <GreetingJumbo user={arr[0]} />,
           document.getElementById('content2')
   
-  ]), console.log)
+  ]))
   
 requestForReact("/mastery/s7..........",(arr) => ( [
           <GradeJumbo mArr={arr} />,
           document.getElementById('content3')
   
-  ]), console.log) 
+  ])) 
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
