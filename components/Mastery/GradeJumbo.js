@@ -57,11 +57,11 @@ class GradeJumbo extends React.Component {
           if (rowsByStu[key1][key2]){
           return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
           }
-          else {return (<MasteryTD key={key2 + '-' + key1} ratingData={ {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
+          else {return (<MasteryTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
           }
           )}
           </MasteryStuTR>))
-        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} > {masteryArr.map((mRecord,id) => (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id}/>))} </MasteryStuTR>)
+        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >{masteryArr.map((mRecord,id) => (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />))}</MasteryStuTR>)
         return {header: headerRow, body: studentRows};
   }
 
