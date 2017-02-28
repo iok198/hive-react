@@ -23,7 +23,7 @@ class GradeJumbo extends React.Component {
 	    </table> );
   }
   
-  _getMastery(){
+  _parseMastery(){
     const sMasteryArr = this.props.mArr[0]
     const masteryArr = this.props.mArr[1]
     const courseStrArr = this.props.mArr[2].split('|')
@@ -38,18 +38,28 @@ class GradeJumbo extends React.Component {
     var rowsByStu = {}
     
     function sFit(obj){
-        var cLstr = obj.courseStrLOIDsID.split('-');
-        var cL = cLstr[0] + '-' + cLstr[1];
+        var cLstr = obj.courseStrLOIDsID.split('-')
+        var cL = cLstr[0] + '-' + cLstr[1]
         var objC = Object.assign({},obj)
         
             if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
             rowsByStu[obj.stuUDID] = Object.assign({},columns)
             }
             rowsByStu[obj.stuUDID][cL] = Object.assign({},objC)
-          
+        
     }
     
     sMasteryArr.forEach(sFit)
+    
+    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu}
+  }
+  
+  _getMastery(){
+    var mObj = this.parseMastery(),
+    sMasteryArr = mObj.sMasteryArr, 
+    masteryArr = mObj.masteryArr, 
+    courseStrArr = mObj.courseStrArr, 
+    rowsByStu = mObj.rowsByStu
 
     var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
@@ -60,7 +70,7 @@ class GradeJumbo extends React.Component {
           } else { return null}}
           )}
           </MasteryStuTR>))
-        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >{masteryArr.map((mRecord,id) => (id < 6 ? (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />) : null ))}</MasteryStuTR>)
+        var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >{masteryArr.map((mRecord,id) => (id < 5 ? (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />) : null ))}</MasteryStuTR>)
         return {header: headerRow, body: studentRows};
   }
 
