@@ -49,11 +49,11 @@ class GradeJumbo extends React.Component {
 
     console.log(rowsByStu);
     var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuRow key={rowsByStu[key1].stuUDID} stuData={rowsByStu[key1]} colOffset={id1} >
-      {Object.keys(rowsByStu[key1].data).map((key2,id2) => {
-          if (rowsByStu[key1].data[key2]){
-          return  (<MasteryStuPanel key={rowsByStu[key1].data[key2].courseStrLOIDsID} ratingData={rowsByStu[key1].data[key2]} colOffset={id2}/>)
+      {Object.keys(rowsByStu[key1]).map((key2,id2) => {
+          if (rowsByStu[key1][key2]){
+          return  (<MasteryStuPanel key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
           }
-          else {return (<MasteryStuPanel key={key2 + rowsByStu[key1].stuUDID} ratingData={ {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
+          else {return (<MasteryStuPanel key={key2 + key1} ratingData={ {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)}  
           }
           )}
           </MasteryStuRow>))
