@@ -10,6 +10,8 @@ var MasteryStuTD = require('./MasteryStuTD.js')
 class GradeJumbo extends React.Component {
   constructor(){
     super();
+    
+    this.state = {mArr:this.props.mArr}
   }
   
   render(){
@@ -27,9 +29,9 @@ class GradeJumbo extends React.Component {
   }
   
   _parseMastery(){
-    const sMasteryArr = this.props.mArr[0]
-    const masteryArr = this.props.mArr[1]
-    const courseStrArr = this.props.mArr[2].split('|')
+    const sMasteryArr = this.state.mArr[0]
+    const masteryArr = this.state.mArr[1]
+    const courseStrArr = this.state.mArr[2].split('|')
     
     
     var columns = {}
