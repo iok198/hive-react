@@ -11,7 +11,7 @@ class GradeJumbo extends React.Component {
   constructor(){
     super();
     
-    this.state = {mArr:this.props.mArr}
+    
   }
   
   render(){
@@ -28,10 +28,10 @@ class GradeJumbo extends React.Component {
 	    </div> );
   }
   
-  _parseMastery(){
-    const sMasteryArr = this.state.mArr[0]
-    const masteryArr = this.state.mArr[1]
-    const courseStrArr = this.state.mArr[2].split('|')
+  _parseMastery(mArr){
+    const sMasteryArr = mArr[0]
+    const masteryArr = mArr[1]
+    const courseStrArr = mArr[2].split('|')
     
     
     var columns = {}
@@ -60,7 +60,7 @@ class GradeJumbo extends React.Component {
   }
   
   _getMastery(){
-    var mObj = this._parseMastery(),
+    var mObj = this._parseMastery(this.props.mArr),
     sMasteryArr = mObj.sMasteryArr, 
     masteryArr = mObj.masteryArr, 
     courseStrArr = mObj.courseStrArr, 
