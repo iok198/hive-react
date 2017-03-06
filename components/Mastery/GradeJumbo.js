@@ -6,11 +6,12 @@ var MasteryStuPanel = require('./MasteryStuPanel.js')
 var MasteryTD = require('./MasteryTD.js')
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
+var parseMastery = require('./utilities/parseMastery.js')
 
 class GradeJumbo extends React.Component {
-  constructor(){
-    super();
-    
+  constructor(props){
+    super(props);
+    this.state = {parsedMastery: parseMastery(this.props.mArr)}
     
   }
   
@@ -28,39 +29,10 @@ class GradeJumbo extends React.Component {
 	    </div> );
   }
   
-  _parseMastery(mArr){
-    const sMasteryArr = mArr[0]
-    const masteryArr = mArr[1]
-    const courseStrArr = mArr[2].split('|')
-    
-    
-    var columns = {}
-    
-    var LOs = masteryArr.map((mRecord) => {
-      columns[mRecord.courseStrLOID] = null
-      return mRecord.courseStrLOID
-    })
-    
-    var rowsByStu = {}
-    
-    function sFit(obj){
-      var cLstr = obj.courseStrLOIDsID.split('-')
-      var cL = cLstr[0] + '-' + cLstr[1]
-      var objC = Object.assign({},obj)
-      
-      if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
-        rowsByStu[obj.stuUDID] = Object.assign({},columns)
-      }
-      rowsByStu[obj.stuUDID][cL] = Object.assign({},objC)
-    }
-    
-    sMasteryArr.forEach(sFit)
-    
-    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs}
-  }
   
-  _getMastery(){
-    var mObj = this._parseMastery(this.props.mArr),
+  
+  _getMastery(mArr){
+    var mObj = parseMastery(mArr),
     sMasteryArr = mObj.sMasteryArr, 
     masteryArr = mObj.masteryArr, 
     courseStrArr = mObj.courseStrArr, 
