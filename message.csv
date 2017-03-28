@@ -1,74 +1,44 @@
-"lastName","firstName","lunchNo","emailID","courseStr","classNo","altEmailStr","bdrAccess","title","imgUrl","entryID","lastLogin","mentoringStr","bestPhoneNumber"
-"AHMED","AHLAM","","aahmed17@ms442.org","s88888880908","801","dream5dany45@gmail.com","v","AHLAM","",180,"""2017-03-15T12:16:45.000Z""","22","(631)703-8235"
-"BLACKMAN","TAYLA","","tblackman17@ms442.org","s88888880908","801","jblackman523@aol.com","v","TAYLA","",181,"""2017-03-27T17:36:21.000Z""","40","(347)864-3075"
-"CASTRO","EDWARD","","ecastro17@ms442.org","s88888880008","801","null","v","EDWARD","",182,"""2017-03-03T00:56:55.000Z""","20","(347)251-8249"
-"COLON","ARIANNA","","acolon17@ms442.org","s88888880908","801","null","v","ARIANNA","",183,"""2017-03-17T14:52:50.000Z""","6","(718)852-1949"
-"CROOKS THOMPSON","NI ASIA","","nct17@ms442.org","s88888880008","801","null","v","NI ASIA","",184,"""2017-03-26T21:15:28.000Z""","46","(917)982-8836"
-"ENCARNACION","KATHERINE","","kencarnacion17@ms442.org","s88888880008","801","null","v","KATHERINE","",185,"""2017-03-27T13:39:49.000Z""","40","(718)855-8581"
-"FELICIANO","VIANNY","","vfeliciano17@ms442.org","s88888880008","801","null","v","VIANNY","",186,"""2017-03-24T15:56:44.000Z""","40","(718)600-2702"
-"FRASER","MARIAH","","mfraser17@ms442.org","s88888880008","801","null","v","MARIAH","",187,"""2017-02-16T13:12:47.000Z""","6","(347)645-4275"
-"GALAN","DYLAN","","dgalan17@ms442.org","s88888880008","801","null","v","DYLAN","",188,"""2017-03-13T14:22:30.000Z""","20","(718)438-4937"
-"GUZMAN","JAMES","","jguzman17@ms442.org","s88888880008","801","guzmanlizette@gmail.com","v","JAMES","",189,"""2017-03-27T14:39:50.000Z""","10","(718)355-1522"
-"HATEM","ENHAR","","ehatem17@ms442.org","s88888880008","801","null","v","ENHAR","",190,"""2017-03-23T17:23:58.000Z""","46","(347)247-9125"
-"KRAICS","CAHILL","","bkc@ms442.org","s88888880008","801","jkraics@yahoo.com","v","CAHILL","",191,"""2016-08-11T02:09:53.000Z""","20","(917)627-6113"
-"MANDULO","TCHAAS","","tmandulo17@ms442.org","s88888880908","801","roberta_salmon@hotmail.com","v","TCHAAS","",192,"""2017-03-20T13:55:36.000Z""","11","(917)309-2886"
-"MENDOZA","MARTIN","","mmendoza17@ms442.org","s88888880008","801","null","v","MARTIN","",193,"""2017-03-20T18:06:53.000Z""","11","(718)864-4700"
-"MORRISON","BOLAJI","","bmorrison17@ms442.org","s88888880008","801","debramorrison04@gmail.com","v","BOLAJI","",194,"""2017-03-27T17:49:48.000Z""","15","(718)812-8749"
-"PERSON","ISRAEL","","iperson17@ms442.org","s88888880008","801","null","v","ISRAEL","",195,"""2017-03-27T14:40:59.000Z""","11","(718)858-5209"
-"RIVERA","ZANDOR","","zrivera17@ms442.org","s88888880008","801","neroboy2@gmail.com","v","ZANDOR","",196,"""2017-03-21T13:57:21.000Z""","20","(718)486-0318"
-"ROTGER","KOREE","","krotger17@ms442.org","s88888880908","801","null","v","KOREE","",197,"""2017-03-23T12:53:38.000Z""","10","(518)982-8738"
-"SANCHEZ","NICOLE","","nsanchez17@ms442.org","s88888880008","801","null","v","NICOLE","",198,"""2017-03-27T12:46:33.000Z""","40","(347)922-7296"
-"SORENSEN","LOUIS","","lsorensen17@ms442.org","s88888880008","801","null","v","LOUIS","",199,"""2017-03-24T13:40:19.000Z""","11","(347)374-6926"
-"SUGLAM","TRAYQUAN","","tsuglam17@ms442.org","s88888880008","801","null","v","TRAYQUAN","",200,"""2017-03-23T17:19:02.000Z""","20","(646)299-7755"
-"BANDY","CROSS","","cbandy17@ms442.org","s88888880008","802","null","v","CROSS","",201,"""2017-03-17T13:16:38.000Z""","10","(718)634-6483"
-"BESNIER","MATHIS","","mbesnier17@ms442.org","s88888880908","802","null","v","MATHIS","",202,"""2016-08-11T02:09:53.000Z""","17","(917)608-4832"
-"BRITO VIVAS","LUIS","","lbritovivas17@ms442.org","s88888880008","802","null","v","LUIS","",203,"""2017-03-03T18:25:00.000Z""","25","(347)581-1341"
-"BURGOS","VIRGINIA","","vburgos17@ms442.org","s88888880008","802","null","v","VIRGINIA","",204,"""2017-03-23T17:37:39.000Z""","25","(718)855-4709"
-"COARD","TALIYAH","","tcoard17@ms442.org","s88888880908","802","null","v","TALIYAH","",205,"""2017-03-17T13:20:06.000Z""","22","(347)423-9191"
-"COBURN","JOSHUA","","jcoburn17@ms442.org","s88888880008","802","null","v","JOSHUA","",206,"""2017-03-22T13:54:59.000Z""","20","(646)431-2347"
-"COLLINS","GRIFFIN","","gcollins17@ms442.org","s88888880908","802","null","v","GRIFFIN","",207,"""2017-03-20T16:06:24.000Z""","17","(212)242-3099"
-"COLLINS","JASIIR","","jcollins17@ms442.org","s88888880008","802","jesscollins4k@gmail.com","v","JASIIR","",208,"""2017-03-22T14:28:07.000Z""","6","(347)240-9594"
-"DIAZ","BRANDON","","bdiaz17@ms442.org","s88888880008","802","null","v","BRANDON","",209,"""2017-03-27T17:07:58.000Z""","6","(646)996-0314"
-"FELIPE","EMILY","","efelipe17@ms442.org","s88888880008","802","aguilasoccerclub@gmail.com","v","EMILY","",210,"""2017-03-28T05:28:13.000Z""","6","(718)802-0893"
-"GARCIA","BRIANA","","bgarcia17@ms442.org","s88888880008","802","null","v","BRIANA","",211,"""2017-03-27T16:48:06.000Z""","32","(347)591-9854"
-"GOMORI","JACKSON","","jgomori17@ms442.org","s88888880008","802","bgomori@gmail.com, angela.gomori@gmail.com","v","JACKSON","",212,"""2017-03-27T14:47:01.000Z""","19","(646)418-5044"
-"JOHNSON","KAMIYA","","kjohnson17@ms442.org","s88888880008","802","null","v","KAMIYA","",213,"""2017-03-27T15:21:24.000Z""","20","(347)884-3216"
-"LEWIS","RONNIE","","rlewis17@ms442.org","s88888880008","802","null","v","RONNIE","",214,"""2017-03-12T14:00:43.000Z""","20","(347)627-8568"
-"LEWIS","SHANE","","slewis17@ms442.org","s88888880008","802","null","v","SHANE","",215,"""2017-03-27T13:25:05.000Z""","20","(347)854-9138"
-"MEDRANO","JEFFERSON","","jmm17@ms442.org","s88888880008","802","null","v","JEFFERSON","",216,"""2017-03-23T13:47:48.000Z""","17","(718)403-0277"
-"MILLER","BLESSING","","bmiller17@ms442.org","s88888880008","802","null","v","BLESSING","",217,"""2017-03-23T13:07:28.000Z""","20","(718)855-5671"
-"MIRANDA","NICOLAS","","nmiranda17@ms442.org","s88888880908","802","null","v","NICOLAS","",218,"""2017-03-27T15:30:58.000Z""","17","(917)443-6625"
-"SANTILLO","BRIAN","","bsantillo17@ms442.org","s88888880008","802","null","v","BRIAN","",219,"""2016-08-11T02:09:54.000Z""","25","(347)942-0061"
-"STERLING","PRINCE","","psterling17@ms442.org","s88888880008","802","null","v","PRINCE","",220,"""2017-03-27T16:52:58.000Z""","19","(347)227-9172"
-"BARR","MARQUIS","","mbarr17@ms442.org","s88888880008","803","null","v","MARQUIS","",221,"""2017-03-27T14:38:06.000Z""","6","(347)938-7835"
-"CASTRO","GARCIA","","lcg17@ms442.org","s88888880008","803","null","v","GARCIA","",222,"""2017-03-21T23:28:22.000Z""","6","(347)529-5732"
-"COLANDREA","ANTHONY","","acolandrea17@ms442.org","s88888880008","803","null","v","ANTHONY","",223,"""2017-03-20T19:00:19.000Z""","13","(718)243-1128"
-"DIAZ","ISAIAH","","idiaz17@ms442.org","s88888880008","803","hyin10city@gmail.com","v","ISAIAH","",224,"""2017-03-27T14:00:50.000Z""","13","(646)217-1876"
-"FRANCISCO","JASON","","jfrancisco17@ms442.org","s88888880008","803","null","v","JASON","",225,"""2017-03-27T16:47:59.000Z""","6","(347)689-9322"
-"JOHNSON","PAUL","","pjohnson17@ms442.org","s88888880008","803","null","v","PAUL","",226,"""2017-03-24T12:03:58.000Z""","6","(347)264-9098"
-"KIRKLAND","JUSTIN","","jkirkland17@ms442.org","s88888880008","803","null","v","JUSTIN","",227,"""2017-03-27T15:55:17.000Z""","6","(718)871-8668"
-"MALDONADO","ANTHONY","","amaldonado17@ms442.org","s88888880008","803","null","v","ANTHONY","",228,"""2017-03-27T15:02:55.000Z""","13","(646)353-5262"
-"MEDRANO","ERICK","","emedrano17@ms442.org","s88888880908","803","null","v","ERICK","",229,"""2017-03-24T15:03:12.000Z""","16","(347)645-3510"
-"MEJIA","NASIR","","nmejia17@ms442.org","s88888880008","803","null","v","NASIR","",230,"""2017-03-20T16:04:59.000Z""","6","(347)689-3944"
-"PELZER","JANAI","","jpelzer17@ms442.org","s88888880008","803","null","v","JANAI","",231,"""2017-03-24T13:29:46.000Z""","20","(718)826-6265"
-"PICHARDO","GEORGINA","","gpichardo17@ms442.org","s88888880008","803","null","v","GEORGINA","",232,"""2017-03-22T12:44:55.000Z""","25","(407)545-0404"
-"PLAZA","MADISON","","madisonplaza17@ms442.org","s88888880008","803","null","v","MADISON","",233,"""2017-03-23T15:24:29.000Z""","22","(347)787-8507"
-"RAMIREZ","DIEGO","","dramirez17@ms442.org","s88888880008","803","null","v","DIEGO","",234,"""2017-03-24T14:29:10.000Z""","16","(718)643-2473"
-"RAMOS","JUSTIN","","jramos17@ms442.org","s88888880008","803","negra725@aol.com","v","JUSTIN","",235,"""2017-03-24T12:06:02.000Z""","6","(718)647-9391"
-"SALCEDO","ASHLEY","","asalcedo17@ms442.org","s88888880008","803","aureacruz43@yahoo.com","v","ASHLEY","",236,"""2017-03-24T14:37:18.000Z""","16","(347)353-3339"
-"SALMON","MEAGHAN","","msalmon17@ms442.org","s88888880008","803","kraffertysalmon@gmail.com","v","MEAGHAN","",237,"""2017-03-28T05:29:09.000Z""","6","(718)637-1621"
-"SAMPSON","EMANI","","esampson17@ms442.org","s88888880008","803","null","v","EMANI","",238,"""2017-03-27T13:54:45.000Z""","16","(347)227-7006"
-"TAHA","GEHAN","","gtaha17@ms442.org","s88888880908","803","null","v","GEHAN","",239,"""2017-03-24T15:01:40.000Z""","22","(917)378-3485"
-"THOMAS","CHRISTIAN","","cthomas17@ms442.org","s88888880008","803","brenda.deligny@gmail.com","v","CHRISTIAN","",240,"""2017-02-07T13:20:05.000Z""","6","(929)234-2747"
-"VARGAS","JOSEPH","","jvargas17@ms442.org","s88888880908","803","maricevargas5@gmail.com","v","JOSEPH","",241,"""2017-03-27T16:56:30.000Z""","6","(718)488-5993"
-"BA","COURA","","bcoura17@ms442.org","s88888880008","802","null","v","BA","",253,"""2016-09-07T18:20:22.000Z""","20",
-"CHARIAH","DARGAN","","cdargan17@ms442.org","s88888880008","803","null","v","CHARIAH","",264,"""2016-11-22T14:35:59.000Z""","20","(302)241-9258"
-"GABRIEL","ALSOORA","","galsoora17@ms442.org","s88888880008","802","null","v","GABRIEL","",265,"""2017-03-16T13:44:45.000Z""","13","(347)482-5440"
-"ADAM","ALSOORA","","aalsoora17@ms442.org","s88888880008","802","null","v","ADAM","",266,"""2017-03-27T15:56:49.000Z""","17","(347)228-4902"
-"ISAIAH","FRYER","","ifryer17@ms442.org","s88888880008","802","null","v","ISAIAH","",267,"""2017-03-22T14:53:16.000Z""","10","(347)500-0508"
-"ABDIEL","RUIZ","","aruiz17@ms442.org","s88888880008","803","null","v","ABDIEL","",271,"""2016-09-15T12:58:44.000Z""","13","(646)730-7593"
-"JOSIAH","ABREU","","jabreu17@ms442.org","s88888880008","801","null","v","JOSIAH","",272,"""2017-03-23T01:01:35.000Z""","11","(347)223-4230"
-"Montalvo","Jose","","jmontalvo17@ms442.org","s88888880008","803","lydia.alvarado3@aol.com","v","JOSE","",273,"""2017-03-27T15:17:02.000Z""","16","(347)500-7616"
-"MORALES","BIANCA","","bmorales17@ms442.org","s88888880008","802","null","v","BIANCA","",278,"""2017-03-24T13:12:56.000Z""","25",""
-"ELIJAH","ITURRALDE","","eiturralde17@ms442.org","s88888880008","801","","v","ELIJAH","",287,"""2016-12-02T14:20:05.000Z""","","(347)779-4349"
-"Oyo","Wahid",,"woyo17@ms442.org","s88888880008","803","","v","Wahid",,292,"""2017-03-24T12:03:17.000Z""",,
+"courseStr","LOCode","LOText","entryID"
+"s8..........","1.LO.1","I can apply the laws of exponents to generate equivalent expressions",173
+"s8..........","1.LO.2","LO 2 - I can estimate very large quantities using scientific notation.",174
+"s8..........","1.LO.3","LO 3 - I can estimate very small quantities using scientific notation.  ",175
+"s8..........","1.LO.4","LO 4 - I can perform arithmetic operations on numbers expressed in scientific notation.",176
+"s8..........","1.LO.5","LO 5 - I can use scientific notation to choose units of appropriate size for measurements of very large quantities.",177
+"s8..........","1.LO.6","LO 6 - I can use scientific notation to choose units of appropriate size for measurements of very small quantities",178
+"s8..........","1.LO.7","LO 7 - I can interpret scientific notation that has been generated by technology.",179
+"s8..........","2.1","I can verify experimentally the properties of rotations with congruent figures ",261
+"s8..........","2.2","I can verify experimentally the properties of reflections with congruent figures ",262
+"s8..........","2.3","I can describe a sequence that exhibits the congruence between the two congruent figures ",263
+"s8..........","2.4","I can verify experimentally the properties of translations with congruent figures ",264
+"s8..........","2.5","I can describe a sequence of geometric transformations that connect congruent figures",265
+"s8..........","2.6","I can prove that triangles are similar using two pairs of their corresponding angles ",266
+"s8..........","2.7","I can derive angle measures on parallel lines cut by a transversal",267
+"s8..........","2.8","I can derive the exterior and interior angle measures of a triangle",268
+"s8..........","3.1"," I can describe the effect of dilations on two dimensional figures using coordinates",302
+"s8..........","3.2","I can describe the effect of translation on two dimensional figures using coordinates",303
+"s8..........","3.3","I can describe the effect of rotations on two dimensional figures using coordinates",304
+"s8..........","3.4","I can describe the effect of reflections on two-dimensional figures using coordinates",305
+"s8..........","3.5","I can understand that a two dimensional figure is similar to another figure using a sequence of rotations",306
+"s8..........","3.6","  I can understand that a two dimensional figure is similar to another figure using a sequence of reflections",307
+"s8..........","3.7","  I can understand that a two dimensional figure is similar to another figure using a sequence of translations",308
+"s8..........","3.8","I can understand that a two dimensional figure is similar to another figure using a sequence of dilation",309
+"s8..........","3.9"," I can describe a sequence that exhibits between two similar two-dimensional figures",310
+"s8..........","4.25"," can graph proportional relationships interpreting the unit rate as the slope",396
+"s8..........","4.26","I can compare two different proportional relationships represented in different ways",397
+"s8..........","4.27","I can use similar triangles to explain slope I can derive the equation y=mx for a line",398
+"s8..........","4.28","I can derive the equation y=mx+b for a line",399
+"s8..........","4.29"," I can solve linear equations with rational number coefficients",400
+"s8..........","4.30","I can find the solution to a system of two linear equations using the point of intersection on their graphs",401
+"s8..........","4.31","I can solve systems of two linear equations in two variables algebraically",402
+"s8..........","4.32","I can solve real-world and mathematical problems leading to two linear equations in two variables",403
+"s8..........","5.1","I can determine the definition of a function",438
+"s8..........","5.2","I can graph a function",439
+"s8..........","5.3","I can compare properties of two functions algebraically",440
+"s8..........","5.4","I can compare properties of two functions graphically",441
+"s8..........","5.5","I can compare properties of two functions numerically",442
+"s8..........","5.6","I can compare properties of two functions by verbal description",443
+"s8..........","5.7","I can interpret the equation y=mx +b",444
+"s8..........","5.8","I can produce examples of functions that are not linear",445
+"s8..........","5.9","I can interpret and use the formula for volume of a cone in real world problems",446
+"s8..........","5.10","I can interpret and use the formula for volume of a cylinder in real world problems",447
+"s8..........","5.11","I can interpret and use the formula for volume of a sphere in real world problems",448
