@@ -16,7 +16,7 @@ class GradeJumbo extends React.Component {
   }
   
   render(){
-      let list = this._getMastery();
+      let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
       {list.pagination}
@@ -31,9 +31,8 @@ class GradeJumbo extends React.Component {
   
   
   
-  _getMastery(mArr){
-    var mObj = parseMastery(mArr),
-    sMasteryArr = mObj.sMasteryArr, 
+  _getMastery(mObj){
+    var sMasteryArr = mObj.sMasteryArr, 
     masteryArr = mObj.masteryArr, 
     courseStrArr = mObj.courseStrArr, 
     rowsByStu = mObj.rowsByStu,
