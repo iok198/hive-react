@@ -38,7 +38,7 @@ class GradeJumbo extends React.Component {
     courseStrArr = mObj.courseStrArr, 
     rowsByStu = mObj.rowsByStu,
     LOs = mObj.LOs
-
+    console.log(rowsByStu)
     var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
           if (id2 < 5) {

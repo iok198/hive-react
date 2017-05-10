@@ -1,8 +1,8 @@
 import React from 'react'
-
+//possible parent: MasteryStuRow.js
 class MasteryStuTD extends React.Component {
     render(){
-        return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" >
+        return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" value={ this.props.ratingData }>
                         <form>
                           <div className="form-group">
                             <select className="form-control" id="sel1">
