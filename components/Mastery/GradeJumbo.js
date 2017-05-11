@@ -14,7 +14,7 @@ class GradeJumbo extends React.Component {
     this.state = {parsedMastery: parseMastery(this.props.mArr),
       page:0
     }
-    this.setPage = this.setPage.bind(this)
+    this._setPage = this.setPage.bind(this)
     
   }
   
