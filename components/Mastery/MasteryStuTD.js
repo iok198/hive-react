@@ -5,7 +5,7 @@ class MasteryStuTD extends React.Component {
         return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" >
                         <form>
                           <div className="form-group">
-                            <select className="form-control" id="sel1">
+                            <select className="form-control" id="sel1" value={ this.props.selection }>
                               <option>Not Yet</option>
                               <option>Approaching</option>
                               <option>Meeting</option>
