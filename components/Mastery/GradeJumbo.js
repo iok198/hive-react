@@ -18,9 +18,6 @@ class GradeJumbo extends React.Component {
     
   }
   
-  _setPage(){
-    this.setState({page:this.state.page + 1})
-  }
   
   render(){
       let list = this._getMastery(this.state.parsedMastery,this.state.page);
