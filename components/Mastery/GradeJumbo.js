@@ -33,6 +33,9 @@ class GradeJumbo extends React.Component {
 	    </div> );
   }
   
+  _setPage(){
+    this.setState({page:this.state.page + 1})
+  }
   
   
   _getMastery(mObj,page){
