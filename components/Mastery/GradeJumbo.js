@@ -63,7 +63,7 @@ class GradeJumbo extends React.Component {
         (id < 5 ? (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />) : null ))
         }
       </MasteryStuTR>)
-    var pagination = (<ul className="pagination">{LOs.map((LO,id3) => ((id3%5 == 0) ? (<li key={LO + '1'}><a href="#" onClick={this.setPage()}>{(id3/5) + 1}</a></li>) : ''))}</ul>)
+    var pagination = (<ul className="pagination">{LOs.map((LO,id3) => ((id3%5 == 0) ? (<li key={LO + '1'}><a href="#" onClick={console.log(mObj)}>{(id3/5) + 1}</a></li>) : ''))}</ul>)
     return {header: headerRow, body: studentRows, pagination: pagination};
   }
 
