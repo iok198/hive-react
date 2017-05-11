@@ -45,16 +45,11 @@ class GradeJumbo extends React.Component {
     rowsByStu = mObj.rowsByStu,
     LOs = mObj.LOs
 
-    var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
+    var studentRows = Object.keys(rowsByStu).slice(page,page+5).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
-          if (5*page < id2 && id2 <= 5*(page + 1)) {
+          /*if (5*page < id2 && id2 <= 5*(page + 1)) {*/
             return (<MasteryStuTD key={key2 + '-' + key1} ratingData={(!!rowsByStu[key1][key2]) ? rowsByStu[key1][key2] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2}/>)
-            /*if (rowsByStu[key1][key2]){
-              return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
-            } else {
-              return (<MasteryStuTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)
-            }  */
-          } else { return null}
+          /*} else { return null}*/
       }
           )}
           </MasteryStuTR>))
