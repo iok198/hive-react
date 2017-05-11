@@ -14,7 +14,8 @@ class GradeJumbo extends React.Component {
     this.state = {parsedMastery: parseMastery(this.props.mArr),
       page:0
     }
-    this.setPage = this.setPage.bind(this)
+    this.prevPage = this.prevPage.bind(this)
+    this.nextPage = this.nextPage.bind(this)
     
   }
   
@@ -33,7 +34,10 @@ class GradeJumbo extends React.Component {
 	    </div> );
   }
   
-  setPage(){
+  prevPage(){
+    this.setState({page:this.state.page - 1})
+  }
+  nextPage(){
     this.setState({page:this.state.page + 1})
   }
   
@@ -56,7 +60,10 @@ class GradeJumbo extends React.Component {
         (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />))
         }
       </MasteryStuTR>)
-    var pagination = (<ul className="pagination">{LOs.map((LO,id3) => ((id3%5 == 0) ? (<li key={LO + '1'}><a href="#" onClick={this.setPage}>{(id3/5) + 1}</a></li>) : ''))}</ul>)
+    var pagination = (<ul className="pager">
+        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#">Previous</a></li>
+        <li className="next" onClick={this.nextPage}><a href="#">Next</a></li>
+      </ul>)
     return {header: headerRow, body: studentRows, pagination: pagination};
   }
 
