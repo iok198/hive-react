@@ -6,18 +6,18 @@ class MasteryStuTD extends React.Component {
                         <form>
                           <div className="form-group">
                             <select className="form-control" id="sel1" defaultValue={ this.props.ratingData.mRating0 }>
-                              <option>Not Yet</option>
-                              <option>Approaching</option>
-                              <option>Meeting</option>
-                              <option>Exceeding</option>
+                              <option value="1">Not Yet</option>
+                              <option value="2">Approaching</option>
+                              <option value="3">Meeting</option>
+                              <option value="4">Exceeding</option>
                             </select>
                           </div>
                         </form>
                       <br />
-                      <span id="" className="badge badgeNY" value="1">{this.props.ratingData.mcountN}</span>
-                      <span id="" className="badge badgeA" value="2">{this.props.ratingData.mcountA}</span>
-                      <span id="" className="badge badgeM" value="3">{this.props.ratingData.mcountM}</span>
-                      <span id="" className="badge badgeE" value="4">{this.props.ratingData.mcountE}</span>
+                      <span id="" className="badge badgeNY" >{this.props.ratingData.mcountN}</span>
+                      <span id="" className="badge badgeA">{this.props.ratingData.mcountA}</span>
+                      <span id="" className="badge badgeM">{this.props.ratingData.mcountM}</span>
+                      <span id="" className="badge badgeE">{this.props.ratingData.mcountE}</span>
 
                </td>
     }
