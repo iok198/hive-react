@@ -42,7 +42,7 @@ class GradeJumbo extends React.Component {
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
           if (id2 < 5) {
             if (rowsByStu[key1][key2]){
-              return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} defaultVal={rowsByStu[key1][key2].mCount0}colOffset={id2}/>)
+              return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} defaultVal={rowsByStu[key1][key2].mCount0} colOffset={id2}/>)
             } else {
               return (<MasteryStuTD key={key2 + '-' + key1} ratingData={{mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2} />)
             }  
