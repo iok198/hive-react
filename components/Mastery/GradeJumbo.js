@@ -47,15 +47,13 @@ class GradeJumbo extends React.Component {
 
     var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).slice(5*page,5*page+5).map((key2,id2) => {
-          /*if (5*page < id2 && id2 <= 5*(page + 1)) {*/
             return (<MasteryStuTD key={key2 + '-' + key1} ratingData={(!!rowsByStu[key1][key2]) ? rowsByStu[key1][key2] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2}/>)
-          /*} else { return null}*/
       }
           )}
           </MasteryStuTR>))
     var headerRow = (<MasteryStuTR key={3813} stuData={{}} colOffset={0} >
-        {masteryArr.map((mRecord,id) => 
-        (id < 5 ? (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />) : null ))
+        {masteryArr.slice(5*page,5*page+5).map((mRecord,id) => 
+        (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />))
         }
       </MasteryStuTR>)
     var pagination = (<ul className="pagination">{LOs.map((LO,id3) => ((id3%5 == 0) ? (<li key={LO + '1'}><a href="#" onClick={this.setPage}>{(id3/5) + 1}</a></li>) : ''))}</ul>)
