@@ -14,7 +14,7 @@ class GradeJumbo extends React.Component {
     this.state = {parsedMastery: parseMastery(this.props.mArr),
       page:0
     }
-    this.setState = this._setState.bind(this)
+    
     
   }
   
@@ -23,7 +23,7 @@ class GradeJumbo extends React.Component {
   }
   
   render(){
-      let list = this._getMastery(this.state.parsedMastery);
+      let list = this._getMastery(this.state.parsedMastery,this.state.page);
     
     return( <div className="jumbotron">
       {list.pagination}
@@ -38,7 +38,7 @@ class GradeJumbo extends React.Component {
   
   
   
-  _getMastery(mObj){
+  _getMastery(mObj,page){
     var sMasteryArr = mObj.sMasteryArr, 
     masteryArr = mObj.masteryArr, 
     courseStrArr = mObj.courseStrArr, 
@@ -47,7 +47,7 @@ class GradeJumbo extends React.Component {
 
     var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
       {Object.keys(rowsByStu[key1]).map((key2,id2) => {
-          if (5*this.state.page < id2 < 5*(this.state.page + 1)) {
+          if (5*page < id2 < 5*(page + 1)) {
             if (rowsByStu[key1][key2]){
               return  (<MasteryStuTD key={key2 + '-' + key1} ratingData={rowsByStu[key1][key2]} colOffset={id2}/>)
             } else {
