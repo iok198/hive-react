@@ -1,5 +1,5 @@
 import React from 'react'
-var MasteryStuTD = require('./MasteryStuTD.js')
+var MasteryHeadTD = require('./MasteryHeadTD.js')
 //possible parents: GradeJumbo.js
 class MasteryHeadTR extends React.Component {
     constructor(props){

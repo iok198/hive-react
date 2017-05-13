@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var MasteryPanel = require('./MasteryPanel.js')
-var MasteryStuRow = require('./MasteryStuRow.js')
-var MasteryStuPanel = require('./MasteryStuPanel.js')
+var MasteryHeadTR = require('./MasteryHeadTR.js')
+//var MasteryStuPanel = require('./MasteryStuPanel.js')
+var MasteryHeadTD = require('./MasteryHeadTD.js')
 var MasteryTD = require('./MasteryTD.js')
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
@@ -57,7 +58,7 @@ class GradeJumbo extends React.Component {
     LOs = mObj.LOs
 
     var studentRows = Object.keys(rowsByStu).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={rowsByStu[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} />))
-    var headerRow = (<MasteryStuTR key={3813} masteryArr={masteryArr} colOffset={0} />)
+    var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} />)
     return {header: headerRow, body: studentRows};
   }
 
