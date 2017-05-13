@@ -8,7 +8,7 @@ class MasteryHeadTR extends React.Component {
     }
     render(){
         return <tr id={"mastery-row-head" } className="mastery-row" >
-        <td>{"name & such"}</td>
+        <td>{"Student / Learning Outcome"}</td>
         {[0,1,2,3].map((id,index) => 
         {
         if(!!this.props.masteryArr[id+5*this.props.page]){
