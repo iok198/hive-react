@@ -13,7 +13,7 @@ class MasteryStuTD extends React.Component {
                             </select>
                           </div>
                         </form>
-                      <br />
+                      
                       <span id="" className="badge badgeNY" >{this.props.ratingData.mcountN}</span>
                       <span id="" className="badge badgeA">{this.props.ratingData.mcountA}</span>
                       <span id="" className="badge badgeM">{this.props.ratingData.mcountM}</span>
