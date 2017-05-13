@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var MasteryPanel = require('./MasteryPanel.js')
 var MasteryHeadTR = require('./MasteryHeadTR.js')
-//var MasteryStuPanel = require('./MasteryStuPanel.js')
 var MasteryHeadTD = require('./MasteryHeadTD.js')
-var MasteryTD = require('./MasteryTD.js')
+
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
 var parseMastery = require('./utilities/parseMastery.js')
