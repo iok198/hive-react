@@ -1,6 +1,6 @@
 import React from 'react'
 
-class MasteryTD extends React.Component {
+class MasteryHeadTD extends React.Component {
     render(){
         return <td id={"mastery-col-head-" + this.props.mRecord.courseStrLOID } className="mastery-column" style={{left: (40 + this.props.colOffset*140) + 'px'}}>
                       <span className="badge" ># Assessment(s)</span>
@@ -14,4 +14,4 @@ class MasteryTD extends React.Component {
     }
 }
 
-module.exports = MasteryTD
+module.exports = MasteryHeadTD
