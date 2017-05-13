@@ -25,8 +25,8 @@ class GradeJumbo extends React.Component {
     
     return( <div className="jumbotron">
       <ul className="pager">
-        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick="event.preventDefault();">Previous</a></li>
-        <li className="next" onClick={this.nextPage}><a href="#" onClick="event.preventDefault();">Next</a></li>
+        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
+        <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>
       <table id="" className="table table-bordered">
               <tbody>
