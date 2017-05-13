@@ -21,7 +21,7 @@ class GradeJumbo extends React.Component {
   
   
   render(){
-      let list = this._getMastery(this.state.parsedMastery);
+      //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
       <ul className="pager">
@@ -30,8 +30,8 @@ class GradeJumbo extends React.Component {
       </ul>
       <table id="" className="table table-bordered">
               <tbody>
-              {list.header}
-              {list.body}
+              {(<MasteryHeadTR key={3813} masteryArr={this.state.parsedMastery.masteryArr} colOffset={0} page={this.state.page}/>)}
+              {Object.keys(this.state.parsedMastery.rowsByStu).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} />))}
               </tbody>
 	    </table>
 	    </div> );
@@ -56,9 +56,9 @@ class GradeJumbo extends React.Component {
     rowsByStu = mObj.rowsByStu,
     LOs = mObj.LOs
 
-    var studentRows = Object.keys(rowsByStu).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={rowsByStu[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} />))
-    var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} page={this.state.page}/>)
-    return {header: headerRow, body: studentRows};
+    //var studentRows = 
+    //var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} page={this.state.page}/>)
+    //return {header: headerRow, body: studentRows};
   }
 
 }
