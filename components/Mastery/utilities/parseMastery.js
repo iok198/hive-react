@@ -10,14 +10,18 @@ function parseMastery(mArr){
       columns[mRecord.courseStrLOID] = null
       return mRecord.courseStrLOID
     })
-    
+    var mRating0s = {}
     var rowsByStu = {}
     
     function sFit(obj){
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
-      
+      if(!mRating0s.hasOwnProperty(obj.stuUDID)){
+        mRating0s[obj.stuUDID] = [0,0,0,0,0]
+      }
+      if(obj.mcountN + obj.mcountA + obj.mcountM + obj.mcountE > 0){mRating0s[obj.stuUDID][obj.mRating0]++}
+      else{mRating0s[obj.stuUDID][0]++}
       if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
         rowsByStu[obj.stuUDID] = Object.assign({},columns)
       }
