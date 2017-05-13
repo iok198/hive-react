@@ -57,7 +57,7 @@ class GradeJumbo extends React.Component {
     LOs = mObj.LOs
 
     var studentRows = Object.keys(rowsByStu).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={rowsByStu[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} />))
-    var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} />)
+    var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} page={this.state.page}/>)
     return {header: headerRow, body: studentRows};
   }
 
