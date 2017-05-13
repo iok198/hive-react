@@ -24,7 +24,10 @@ class GradeJumbo extends React.Component {
       let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
-      {list.pagination}
+      <ul className="pager">
+        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#">Previous</a></li>
+        <li className="next" onClick={this.nextPage}><a href="#">Next</a></li>
+      </ul>
       <table id="" className="table table-bordered">
               <tbody>
               {list.header}
@@ -53,9 +56,9 @@ class GradeJumbo extends React.Component {
     rowsByStu = mObj.rowsByStu,
     LOs = mObj.LOs
 
-    var studentRows = Object.keys(rowsByStu).map((key1,id1) => (<MasteryStuTR key={key1} stuData={rowsByStu[key1]} colOffset={id1} >
-      {Object.keys(rowsByStu[key1]).slice(5*this.state.page,5*this.state.page+5).map((key2,id2) => {
-            return (<MasteryStuTD key={key2 + '-' + key1} ratingData={(!!rowsByStu[key1][key2]) ? rowsByStu[key1][key2] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2}/>)
+    var studentRows = Object.keys(rowsByStu).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={rowsByStu[stuUDID]} colOffset={id1} >
+      {Object.keys(rowsByStu[stuUDID]).slice(5*this.state.page,5*this.state.page+5).map((courseLOID,id2) => {
+            return (<MasteryStuTD key={courseLOID + '-' + stuUDID} ratingData={(!!rowsByStu[stuUDID][courseLOID]) ? rowsByStu[stuUDID][courseLOID] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id2}/>)
       }
           )}
           </MasteryStuTR>))
@@ -64,11 +67,7 @@ class GradeJumbo extends React.Component {
         (<MasteryTD key={mRecord.courseStrLOID} mRecord={mRecord} colOffset={id} />))
         }
       </MasteryStuTR>)
-    var pagination = (<ul className="pager">
-        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#">Previous</a></li>
-        <li className="next" onClick={this.nextPage}><a href="#">Next</a></li>
-      </ul>)
-    return {header: headerRow, body: studentRows, pagination: pagination};
+    return {header: headerRow, body: studentRows};
   }
 
 }
