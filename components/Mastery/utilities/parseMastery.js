@@ -30,7 +30,7 @@ function parseMastery(mArr){
     
     sMasteryArr.forEach(sFit)
     
-    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs}
+    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs,mRating0s:mRating0s}
   }
   
 module.exports = parseMastery
