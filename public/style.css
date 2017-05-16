@@ -7,11 +7,18 @@
     .nav li:hover {cursor:pointer;}
     
     .mastery-column {
-  width:140px;
-
+    width:140px;
     margin-top:20px;
     
   }
+  
+  .mback1 { background:#A0522D}
+  
+  .mback2 { background: #ffc107}
+  
+  .mback3 { background: #32CD32}
+  
+  .mback4 { background: #4169E1}
   
   .modal-open {
     overflow: scroll;
