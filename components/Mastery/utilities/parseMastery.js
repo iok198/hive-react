@@ -13,11 +13,14 @@ function parseMastery(mArr){
     var mRating0s = {}
     var mRatingStrs = {}
     var rowsByStu = {}
+    var LOIDsIDkeys = {}
     
-    function sFit(obj){
+    function sFit(obj,id){
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
+      LOIDsIDkeys[obj.LOID + "-" + obj.stuUDID]
+      
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
       }
@@ -37,7 +40,15 @@ function parseMastery(mArr){
     
     sMasteryArr.forEach(sFit)
     
-    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs,mRating0s:mRating0s,mRatingStrs:mRatingStrs}
+    return {sMasteryArr: sMasteryArr, 
+      masteryArr: masteryArr,
+      courseStrArr: courseStrArr,
+      rowsByStu:rowsByStu,
+      LOs:LOs,
+      mRating0s:mRating0s,
+      mRatingStrs:mRatingStrs,
+      LOIDsIDkeys:LOIDsIDkeys
+    }
   }
   
 module.exports = parseMastery
