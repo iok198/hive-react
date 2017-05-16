@@ -12,7 +12,7 @@ class MasteryHeadTR extends React.Component {
         {[0,1,2,3].map((id,index) => 
         {
         if(!!this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]]){
-        return <MasteryHeadTD key={this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]].courseStrLOID} mRecord={(!!this.props.masteryArrS[id+4*this.props.page]) ? this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0}} colOffset={id}/>
+        return <MasteryHeadTD key={this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]].courseStrLOID} mRecord={(!!this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]]) ? this.props.masteryArrS[Object.keys(this.props.masteryArrS)[id+4*this.props.page]] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0}} colOffset={id}/>
         }
             else return null
         })
