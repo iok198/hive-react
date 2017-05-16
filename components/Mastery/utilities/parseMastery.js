@@ -34,7 +34,7 @@ function parseMastery(mArr){
         mRatingStrs[obj.stuUDID] = ""
       }
       mRatingStrs[obj.stuUDID] += "m" + obj.LOID + ":" + obj.mRating0 + "n"
-      switch(obj.mRating){
+      switch(obj.mRating0){
         case 1:
           masteryArrS[cL].mcountN++
           masteryArrS[cL].mstudentsN.push(obj.stuUDID)
