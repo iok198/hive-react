@@ -5,9 +5,11 @@ function parseMastery(mArr){
     
     
     var columns = {}
+    var masteryArrS = {}
     
-    var LOs = masteryArr.map((mRecord) => {
+    var LOs = masteryArr.map((mRecord,id) => {
       columns[mRecord.courseStrLOID] = null
+      masteryArrS[mRecord.courseStrLOID] = Object.assign({masteryArrSKey:id},mRecord)
       return mRecord.courseStrLOID
     })
     var mRating0s = {}
@@ -20,6 +22,7 @@ function parseMastery(mArr){
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
       objC.mArrKey = id
+      
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
@@ -36,6 +39,7 @@ function parseMastery(mArr){
         rowsByStu[obj.stuUDID] = Object.assign({},columns)
       }
       rowsByStu[obj.stuUDID][cL] = Object.assign({},objC)
+      rowsByStu[obj.stuUDID][cL].masteryID = columns[cL]
     }
     
     sMasteryArr.forEach(sFit)
@@ -47,7 +51,8 @@ function parseMastery(mArr){
       LOs:LOs,
       mRating0s:mRating0s,
       mRatingStrs:mRatingStrs,
-      LOIDsIDkeys:LOIDsIDkeys
+      LOIDsIDkeys:LOIDsIDkeys,
+      masteryArrS:masteryArrS
     }
   }
   
