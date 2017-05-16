@@ -18,7 +18,7 @@ function parseMastery(mArr){
     var LOIDsIDkeys = {}
     
     function sFit(obj,id){
-      if(!!obj.courseStrLOIDsID){return}
+      if(!obj.courseStrLOIDsID){return}
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
