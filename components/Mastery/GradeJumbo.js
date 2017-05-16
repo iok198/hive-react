@@ -16,6 +16,7 @@ class GradeJumbo extends React.Component {
     }
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
+    this.changeMastery = this.changeMastery.bind(this)
     
   }
   
@@ -31,7 +32,7 @@ class GradeJumbo extends React.Component {
       <table id="" className="table table-bordered">
               <tbody>
               {(<MasteryHeadTR key={3813} masteryArr={this.state.parsedMastery.masteryArr} colOffset={0} page={this.state.page}/>)}
-              {Object.keys(this.state.parsedMastery.rowsByStu).slice(0,5).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} />))}
+              {Object.keys(this.state.parsedMastery.rowsByStu).slice(0,5).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
               </tbody>
 	    </table>
 	    </div> );
@@ -48,6 +49,9 @@ class GradeJumbo extends React.Component {
     
   }
   
+  changeMastery(stuUDID,mString){
+    console.log(stuUDID,mString)
+  }
   
   _getMastery(mObj){
     var sMasteryArr = mObj.sMasteryArr, 
