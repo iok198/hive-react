@@ -6,10 +6,16 @@ class MasteryStuTD extends React.Component {
       super(props)
       this.state = {mRating0: this.props.ratingData.mRating0}
       this.changeSelect = this.changeSelect.bind(this)
+      this.changeSelectState = this.changeSelectState.bind(this)
     }
     changeSelect(event){
-      this.setState((prevState, props) => {
-        return {mRating0: event.target.value}},this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.state.mRating0,this.props.mArrKey))
+      this.setState(this.changeSelectState(event.target.value),this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.state.mRating0,this.props.mArrKey))
+      
+    }
+    
+    changeSelectState(val){
+      return (prevState,props) =>
+      {return {mRating0: val}}
       
     }
     
