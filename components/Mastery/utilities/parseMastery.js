@@ -19,7 +19,7 @@ function parseMastery(mArr){
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
-      LOIDsIDkeys[obj.LOID + "-" + obj.stuUDID] = id
+      objC.mArrKey = id
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
