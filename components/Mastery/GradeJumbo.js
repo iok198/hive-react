@@ -63,7 +63,7 @@ class GradeJumbo extends React.Component {
   
   updateParse(mArrS){
     return function (){
-      this.setState({parsedMastery:parseMastery(mArrS)})
+      //this.setState({parsedMastery:parseMastery(mArrS)})
     }
   }
   
