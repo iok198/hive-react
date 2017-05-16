@@ -8,17 +8,19 @@ class MasteryStuTD extends React.Component {
       this.changeSelect = this.changeSelect.bind(this)
     }
     changeSelect(event){
+      return () => {
       this.setState((prevState, props) => {
         return {mRating0: event.target.value}},this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.state.mRating0,this.props.mArrKey))
-      
+      }
     }
+    
     //componentDidUpdate(){}
   
     render(){
         return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" >
                         <form>
                           <div className="form-group">
-                            <select className="form-control" id="sel1" defaultValue={ this.state.mRating0 } onChange={this.changeSelect}>
+                            <select className="form-control" id="sel1" defaultValue={ this.state.mRating0 } onChange={(e) => this.changeSelect(e)}>
                               <option value="1">Not Yet</option>
                               <option value="2">Approaching</option>
                               <option value="3">Meeting</option>
