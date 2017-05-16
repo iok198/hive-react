@@ -11,7 +11,7 @@ var parseMastery = require('./utilities/parseMastery.js')
 class GradeJumbo extends React.Component {
   constructor(props){
     super(props);
-    this.state = {parsedMastery: parseMastery(this.props.mArr),
+    this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
       page:0
     }
     this.prevPage = this.prevPage.bind(this)
@@ -50,7 +50,12 @@ class GradeJumbo extends React.Component {
   }
   
   changeMastery(stuUDID,mString,mRating0,mArrKey){
-    return () => {console.log(stuUDID,mString,mRating0,mArrKey)}
+    var mArrS = Object.assign({},this.state.mArrS)
+    mArrS[mArrKey].mRating0 = mRating0
+    return () => {
+      this.setState({parsedMastery:parseMastery(this.state.mArrS)})
+      console.log(stuUDID,mString,mRating0,mArrKey)
+    }
   }
   
   _getMastery(mObj){
