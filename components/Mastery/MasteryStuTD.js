@@ -4,7 +4,7 @@ import React from 'react'
 class MasteryStuTD extends React.Component {
     constructor(props){
       super(props)
-      this.state.mRating0 = this.props.ratingData.mRating0
+      this.state = {mRating0: this.props.ratingData.mRating0}
     }
   
   
