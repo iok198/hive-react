@@ -11,7 +11,7 @@ class MasteryStuTD extends React.Component {
       this.setState({mRating0: event.target.value})
       
     }
-    componentDidUpdate(){this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.state.mRating0)()}
+    componentDidUpdate(){this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.state.mRating0,this.props.mArrKey)()}
   
     render(){
         return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" >
