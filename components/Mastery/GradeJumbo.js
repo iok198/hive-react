@@ -56,7 +56,7 @@ class GradeJumbo extends React.Component {
       var mArrS = Object.assign({},this.state.mArrS)
       console.log(mArrS)
       mArrS[0][mArrKey].mRating0 = mRating0
-      this.setState((prevState,props) => ({mArrS:mArrS}), this.updateParse(mArrS))
+      this.setState((prevState,props) => {return {mArrS:mArrS}}, this.updateParse(mArrS))
       console.log(stuUDID,mString,mRating0,mArrKey)
     }
   }
