@@ -17,6 +17,7 @@ class GradeJumbo extends React.Component {
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.changeMastery = this.changeMastery.bind(this)
+    this.parseMastery = this.parseMastery.bind(this)
     
   }
   
@@ -55,7 +56,7 @@ class GradeJumbo extends React.Component {
       var mArrS = Object.assign({},this.state.mArrS)
       console.log(mArrS)
       mArrS[0][mArrKey].mRating0 = mRating0
-      this.setState((prevState,props)=>{return {parsedMastery:parseMastery(mArrS)}},function() {this.setState({mArrS:this.state.parsedMastery.mArrS})})
+      this.setState({parseMastery:this.parseMastery(mArrS)})
       console.log(stuUDID,mString,mRating0,mArrKey)
     }
   }
