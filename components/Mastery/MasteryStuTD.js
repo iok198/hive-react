@@ -12,7 +12,7 @@ class MasteryStuTD extends React.Component {
         return <td id={"mastery-col-" + this.props.ratingData.courseStrLOIDsID } className="mastery-column" >
                         <form>
                           <div className="form-group">
-                            <select className="form-control" id="sel1" value={ this.state.mRating0 } onChange={this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID + " " + this.state.mRating0)}>
+                            <select className="form-control" id="sel1" defaultValue={ this.state.mRating0 } onChange={this.props.changer(this.props.ratingData.stuUDID,this.props.ratingData.LOID, this.value)}>
                               <option value="1">Not Yet</option>
                               <option value="2">Approaching</option>
                               <option value="3">Meeting</option>
