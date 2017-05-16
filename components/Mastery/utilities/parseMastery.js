@@ -9,7 +9,7 @@ function parseMastery(mArr){
     
     var LOs = masteryArr.map((mRecord,id) => {
       columns[mRecord.courseStrLOID] = null
-      masteryArrS[mRecord.courseStrLOID] = Object.assign({masteryArrSKey:id},mRecord)
+      masteryArrS[mRecord.courseStrLOID] = {masteryArrSKey:id,LOID:mRecord.LOID,LOText:mRecord.LOText,courseStrLOID:mRecord.courseStrLOID,mcountA:0,mcountE:0,mcountM:0,mcountN:0,mstudentsA:[],mstudentsE:[],mstudentsM:[],mstudentsN:[]}
       return mRecord.courseStrLOID
     })
     var mRating0s = {}
@@ -34,6 +34,24 @@ function parseMastery(mArr){
         mRatingStrs[obj.stuUDID] = ""
       }
       mRatingStrs[obj.stuUDID] += "m" + obj.LOID + ":" + obj.mRating0 + "n"
+      switch(obj.mRating){
+        case 1:
+          masteryArrS[cL].mcountN++
+          masteryArrS[cL].mstudentsN.push(obj.stuUDID)
+          break
+        case 2:
+          masteryArrS[cL].mcountA++
+          masteryArrS[cL].mstudentsA.push(obj.stuUDID)
+          break
+        case 3:
+          masteryArrS[cL].mcountM++
+          masteryArrS[cL].mstudentsM.push(obj.stuUDID)
+          break
+        case 4:
+          masteryArrS[cL].mcountE++
+          masteryArrS[cL].mstudentsE.push(obj.stuUDID)
+          break
+      }
       
       if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
         rowsByStu[obj.stuUDID] = Object.assign({},columns)
