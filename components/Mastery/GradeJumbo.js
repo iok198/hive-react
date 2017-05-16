@@ -50,7 +50,7 @@ class GradeJumbo extends React.Component {
   }
   
   changeMastery(stuUDID,mString){
-    console.log("haha")
+    return () => {console.log(stuUDID,mString)}
   }
   
   _getMastery(mObj){
