@@ -11,6 +11,7 @@ function parseMastery(mArr){
       return mRecord.courseStrLOID
     })
     var mRating0s = {}
+    var mRatingStrs = {}
     var rowsByStu = {}
     
     function sFit(obj){
@@ -22,6 +23,12 @@ function parseMastery(mArr){
       }
       if(obj.mcountN + obj.mcountA + obj.mcountM + obj.mcountE > 0){mRating0s[obj.stuUDID][obj.mRating0]++}
       else{mRating0s[obj.stuUDID][0]++}
+      
+      if(!mRatingStrs.hasOwnProperty(obj.stuUDID)){
+        mRatingStrs[obj.stuUDID] = ""
+      }
+      mRatingStrs[obj.stuUDID] += "m" + obj.LOID + ":" + obj.mRating0 + "n"
+      
       if(!rowsByStu.hasOwnProperty(obj.stuUDID)){
         rowsByStu[obj.stuUDID] = Object.assign({},columns)
       }
@@ -30,7 +37,7 @@ function parseMastery(mArr){
     
     sMasteryArr.forEach(sFit)
     
-    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs,mRating0s:mRating0s}
+    return {sMasteryArr: sMasteryArr, masteryArr: masteryArr, courseStrArr: courseStrArr, rowsByStu:rowsByStu, LOs:LOs,mRating0s:mRating0s,mRatingStrs:mRatingStrs}
   }
   
 module.exports = parseMastery
