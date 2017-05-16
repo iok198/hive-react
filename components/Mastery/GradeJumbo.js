@@ -17,7 +17,7 @@ class GradeJumbo extends React.Component {
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.changeMastery = this.changeMastery.bind(this)
-    this.parseMastery = this.parseMastery.bind(this)
+    this.parseMastery = parseMastery.bind(this)
     
   }
   
