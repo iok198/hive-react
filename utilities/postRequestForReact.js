@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-function requestForReact(url,renderArgs,callback){
+function postRequestForReact(url,renderArgs,callback){
 
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
@@ -13,10 +13,10 @@ var xhttp = new XMLHttpRequest();
     }
   }
   
-  xhttp.open("GET", url, true);
+  xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send();
+  xhttp.send("fname=hola");
 
 }
 
-module.exports = requestForReact;
+module.exports = postRequestForReact;
