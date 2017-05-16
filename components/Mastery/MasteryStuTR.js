@@ -9,7 +9,7 @@ class MasteryStuTR extends React.Component {
     }
     render(){
         return <tr id={"mastery-row-" + this.props.stuUDID } className="mastery-row" >
-        <MasteryStuKeyTD key={"mKeyTD" + this.props.stuUDID} mRating0s={this.props.mRating0s} stuUDID={this.props.stuUDID}/>
+        <MasteryStuKeyTD key={"mKeyTD" + this.props.stuUDID} mRating0s={this.props.mRating0s} mStrs={this.props.mStrs} stuUDID={this.props.stuUDID}/>
         {[0,1,2,3].map((id,index) => {
         if(!!this.courseLOIDs[id+5*this.props.page]){
             return <MasteryStuTD key={this.courseLOIDs[id+5*this.props.page] + '-' + this.props.stuUDID} ratingData={(!!this.props.stuData[this.courseLOIDs[id+5*this.props.page]]) ? this.props.stuData[this.courseLOIDs[id+5*this.props.page]] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mRating0:1}} colOffset={id} changer={this.props.changer}/>
