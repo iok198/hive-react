@@ -99,7 +99,7 @@ app.get('/grades/:courseQueryStr',function(req,res){
 
 app.post("/sendgrades",function(req,res){
   
-    res.JSON(req.body)
+    res.json(req.body)
   
   }
 )
