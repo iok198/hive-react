@@ -14,7 +14,7 @@ var xhttp = new XMLHttpRequest();
   
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send({fname:'hallllloooo'});
+  xhttp.send("{fname:'hallllloooo'}");
 
 }
 
