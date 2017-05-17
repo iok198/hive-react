@@ -97,10 +97,7 @@ app.get('/grades/:courseQueryStr',function(req,res){
   'concat(courseStr,\'-\',LOID)',defaultQueryCallback(req,res))
 })
 
-app.post("/sendgrades/:courseQueryStr",function (req, res) {
-  res.send('POST request to the homepage')
-  
-})
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')

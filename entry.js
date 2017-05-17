@@ -22,7 +22,6 @@ getRequestForReact("/mastery/s7..........",(arr) => ( [
   
   ])) 
   
-postRequestForReact("/sendgrades/s7..........",function(arg){},(res)=>(console.log(res)))
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
