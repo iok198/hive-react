@@ -1,15 +1,14 @@
 import ReactDOM from 'react-dom';
 
-function postRequestForReact(url,renderArgs,callback){
+function postRequestForReact(url,callback){
 
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      var parsed = JSON.parse(this.responseText);
-      var arr = parsed.map((user) => user);
-      ReactDOM.render.apply(ReactDOM,renderArgs(arr));
+      var text = this.responseText;
+
       if(typeof callback == "function"){
-      callback(arr)}
+      callback(text)}
     }
   }
   
