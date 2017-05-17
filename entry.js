@@ -4,7 +4,7 @@ var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
 var GreetingJumbo = require('./components/Greeting/GreetingJumbo.js')
 var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
 var getRequestForReact = require('./utilities/getRequestForReact.js')
-var postRequestForReact = require('./utilities/getRequestForReact.js')
+var postRequestForReact = require('./utilities/postRequestForReact.js')
 
 getRequestForReact("/bdrs",(arr) => ( [
           <BDRJumbo bdrs={arr}/>,
