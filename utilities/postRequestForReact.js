@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-function postRequestForReact(url,callback){
+function postRequestForReact(url,bodyJSON,callback){
 
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
@@ -14,7 +14,7 @@ var xhttp = new XMLHttpRequest();
   
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("fname=4");
+  xhttp.send(JSON.stringify(bodyJSON));
 
 }
 

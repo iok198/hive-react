@@ -21,7 +21,7 @@ getRequestForReact("/mastery/s7..........",(arr) => ( [
           document.getElementById('content3')
   
   ])) 
-postRequestForReact("/sendgrades",console.log)
+postRequestForReact("/sendgrades",{goo:'gle'},console.log)
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
