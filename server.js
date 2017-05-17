@@ -98,7 +98,7 @@ app.get('/grades/:courseQueryStr',function(req,res){
 })
 
 app.post("/sendgrades/:courseQueryStr",function (req, res) {
-  defaultQueryCallback(req,res)
+  res.send('POST request to the homepage')
   
 })
 
