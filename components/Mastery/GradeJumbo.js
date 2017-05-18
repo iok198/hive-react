@@ -13,7 +13,7 @@ class GradeJumbo extends React.Component {
   constructor(props){
     super(props);
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
-      page:0
+      page:0,vpage:0
     }
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
@@ -35,7 +35,7 @@ class GradeJumbo extends React.Component {
       <table id="" className="table table-bordered">
               <tbody>
               {(<MasteryHeadTR key={3813} parsedMastery={this.state.parsedMastery} colOffset={0} page={this.state.page}/>)}
-              {Object.keys(this.state.parsedMastery.rowsByStu).slice(0,5).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.state.parsedMastery.mRatingStrs[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
+              {Object.keys(this.state.parsedMastery.rowsByStu).slice(0+5*(this.state.vpage),5+5*(this.state.vpage)).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.state.parsedMastery.mRatingStrs[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
               </tbody>
 	    </table>
 	    </div> );
