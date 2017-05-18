@@ -7,7 +7,7 @@ var MasteryHeadTD = require('./MasteryHeadTD.js')
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
 var parseMastery = require('./utilities/parseMastery.js')
-var postRequestForReact = require('./utilities/postRequestForReact.js')
+var postRequestForReact = require('../../utilities/postRequestForReact.js')
 
 class GradeJumbo extends React.Component {
   constructor(props){
