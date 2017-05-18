@@ -16,6 +16,7 @@ function parseMastery(mArr){
     var mRatingStrs = {}
     var rowsByStu = {}
     var LOIDsIDkeys = {}
+    var stuBios = {}
     
     function sFit(obj,id){
       if(!obj.courseStrLOIDsID){return}
@@ -24,6 +25,9 @@ function parseMastery(mArr){
       var objC = Object.assign({},obj)
       objC.mArrKey = id
       
+      if(!stuBios.hasOwnProperty(obj.stuUDID)){
+        stuBios[obj.stuUDID] = {name:obj.title + " " + obj.firstName}
+      }
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
