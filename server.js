@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
-var gradeQueries = require('./components/Mastery/utilities/gradeQueries.js')
+var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bodyParser = require('body-parser')
 
 app.use(bodyParser.json()) // for parsing application/json
