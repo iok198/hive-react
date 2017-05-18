@@ -32,9 +32,9 @@ function parseMastery(mArr){
       else{mRating0s[obj.stuUDID][0]++}
       
       if(!mRatingStrs.hasOwnProperty(obj.stuUDID)){
-        mRatingStrs[obj.stuUDID] = ""
+        mRatingStrs[obj.stuUDID] = {assessRatingID:obj.maxID,string:""}
       }
-      mRatingStrs[obj.stuUDID] += "m" + obj.LOID + ":" + obj.mRating0 + "n"
+      mRatingStrs[obj.stuUDID].string += "m" + obj.LOID + ":" + obj.mRating0 + "n"
       switch(obj.mRating0){
         case 1:
           masteryArrS[cL].mcountN++
