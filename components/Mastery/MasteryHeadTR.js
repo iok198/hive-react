@@ -10,8 +10,8 @@ class MasteryHeadTR extends React.Component {
         return <tr id={"mastery-row-head" } className="mastery-row" >
         <td>{"Student / Learning Outcome"}
             <div className="btn-group-vertical" role="group" aria-label="...">
-              <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-arrow-up" ></span></button>
-              <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-arrow-down" ></span></button>
+              <button type="button" className="btn btn-default" onClick={this.props.upVPage}><span className="glyphicon glyphicon-arrow-up" ></span></button>
+              <button type="button" className="btn btn-default" onClick={this.props.downVPage}><span className="glyphicon glyphicon-arrow-down" ></span></button>
             </div>
         </td>
         {[0,1,2,3].map((id,index) => 

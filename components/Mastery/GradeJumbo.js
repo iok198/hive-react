@@ -17,6 +17,8 @@ class GradeJumbo extends React.Component {
     }
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
+    this.upVPage = this.upVPage.bind(this)
+    this.downVPage = this.downVPage.bind(this)
     this.changeMastery = this.changeMastery.bind(this)
     //this.parseMastery = parseMastery.bind(this)
     this.parseMastery = parseMastery.bind(this)
@@ -34,7 +36,7 @@ class GradeJumbo extends React.Component {
       </ul>
       <table id="" className="table table-bordered">
               <tbody>
-              {(<MasteryHeadTR key={3813} parsedMastery={this.state.parsedMastery} colOffset={0} page={this.state.page}/>)}
+              {(<MasteryHeadTR key={3813} parsedMastery={this.state.parsedMastery} colOffset={0} page={this.state.page} upVPage={this.upVPage} downVPage={this.downVPage}/>)}
               {Object.keys(this.state.parsedMastery.rowsByStu).slice(0+5*(this.state.vpage),5+5*(this.state.vpage)).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.state.parsedMastery.mRatingStrs[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
               </tbody>
 	    </table>
@@ -46,6 +48,13 @@ class GradeJumbo extends React.Component {
   }
   nextPage(){
     this.setState({page:this.state.page + 1})
+  }
+  
+  upVPage(){
+    this.setState({vpage:this.state.vpage - 1})
+  }
+  downVPage(){
+    this.setState({vpage:this.state.vpage + 1})
   }
   
   getStudentRows(rowsByStu){
