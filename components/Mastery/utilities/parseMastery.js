@@ -26,7 +26,7 @@ function parseMastery(mArr){
       objC.mArrKey = id
       
       if(!stuBios.hasOwnProperty(obj.stuUDID)){
-        stuBios[obj.stuUDID] = {name:obj.title + " " + obj.firstName}
+        stuBios[obj.stuUDID] = {name:obj.title + " " + obj.lastName}
       }
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){

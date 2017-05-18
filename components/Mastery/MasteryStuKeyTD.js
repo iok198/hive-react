@@ -3,7 +3,7 @@ import React from 'react'
 class MasteryStuKeyTD extends React.Component {
     render(){
         return <td id={"mastery-col-key" + this.props.stuUDID } className="mastery-column" >
-                      <span>{this.props.stuUDID}</span>
+                      <span>{this.props.stuBio.name}</span>
                       <br />
                       
                       <span id="" className="badge badgeNY" >{this.props.mRating0s[1]}</span>
