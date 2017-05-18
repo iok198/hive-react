@@ -75,7 +75,8 @@ function parseMastery(mArr){
       mRating0s:mRating0s,
       mRatingStrs:mRatingStrs,
       LOIDsIDkeys:LOIDsIDkeys,
-      masteryArrS:masteryArrS
+      masteryArrS:masteryArrS,
+      stuBios:stuBios
     }
   }
   
