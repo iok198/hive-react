@@ -7,6 +7,7 @@ var MasteryHeadTD = require('./MasteryHeadTD.js')
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
 var parseMastery = require('./utilities/parseMastery.js')
+var postRequestForReact = require('./utilities/postRequestForReact.js')
 
 class GradeJumbo extends React.Component {
   constructor(props){
@@ -57,8 +58,11 @@ class GradeJumbo extends React.Component {
       var mArrS = {}
       for(var ki in this.state.mArrS){mArrS[ki] = this.state.mArrS[ki]}
       console.log(mArrS)
+      var newState = (mArrC) => ((prevState,props) => ({mArrS:mArrC,parsedMastery:parseMastery(mArrC)}))
+      //this.setState({changedRows:Object.assign(,this.state.changedRowsstuUDID})
       mArrS[0][mArrKey].mRating0 = parseInt(mRating0)
-      this.setState({mArrS:mArrS,parsedMastery: parseMastery(mArrS)})
+      //this.setState({mArrS:mArrS,parsedMastery: parseMastery(mArrS)})
+      this.setState(newState(mArrS),postRequestForReact("/sendgrades",mArrS,console.log))
     }
   }
   
