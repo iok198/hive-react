@@ -62,7 +62,7 @@ class GradeJumbo extends React.Component {
       //this.setState({changedRows:Object.assign(,this.state.changedRowsstuUDID})
       mArrS[0][mArrKey].mRating0 = parseInt(mRating0)
       //this.setState({mArrS:mArrS,parsedMastery: parseMastery(mArrS)})
-      this.setState(newState(mArrS),postRequestForReact("/sendgrades",mArrS,console.log))
+      this.setState(newState(mArrS),postRequestForReact("/sendgrades",this.state.parsedMastery.mRatingStrs[stuUDID],console.log))
     }
   }
   
