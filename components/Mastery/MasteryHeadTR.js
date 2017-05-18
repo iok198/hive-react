@@ -8,7 +8,12 @@ class MasteryHeadTR extends React.Component {
     }
     render(){
         return <tr id={"mastery-row-head" } className="mastery-row" >
-        <td>{"Student / Learning Outcome"}</td>
+        <td>{"Student / Learning Outcome"}
+            <div className="btn-group-vertical" role="group" aria-label="...">
+              <button type="button" className="btn btn-default"><span class="glyphicon glyphicon-arrow-up" ></span></button>
+              <button type="button" className="btn btn-default"><span class="glyphicon glyphicon-arrow-down" ></span></button>
+            </div>
+        </td>
         {[0,1,2,3].map((id,index) => 
         {
         if(!!this.props.parsedMastery.masteryArrS[Object.keys(this.props.parsedMastery.masteryArrS)[id+4*this.props.page]]){
