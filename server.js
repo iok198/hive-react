@@ -103,6 +103,11 @@ app.get('/grades/:courseQueryStr',function(req,res){
 
 app.post("/sendgrades",function(req,res){
     console.log(req.body)
+    var reqjson = JSON.parse(req.body)
+    connection.query('UPDATE hive1617.assessmentRatings SET ratings = ? WHERE entryID = ?', [reqjson.string,reqjson.assessRatingID], function (error, results, fields) {
+    if (error) throw error;
+    
+    })
     res.send(JSON.stringify(req.body))
   
   }
