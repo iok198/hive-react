@@ -134,5 +134,5 @@ passport.use(new GoogleStrategy(googPassCred,
   }
 ))
 
-app.get('/auth/google',
+app.get('/authd',
   passport.authenticate('google', { scope: ['profile'] }));
