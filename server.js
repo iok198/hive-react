@@ -5,6 +5,12 @@ var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bodyParser = require('body-parser')
 
+var passport = require('passport')
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+var googPassCred = require('./googPassCred.js')
+
+
+
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -117,3 +123,16 @@ app.post("/sendgrades",function(req,res){
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+
+// Use the GoogleStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Google
+//   profile), and invoke a callback with a user object.
+passport.use(new GoogleStrategy(googPassCred,
+  function(accessToken, refreshToken, profile, done) {
+       console.log(profile.id)
+  }
+))
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
