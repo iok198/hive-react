@@ -155,6 +155,14 @@ app.get('/authd/callback',
     res.redirect('/');
   })
   
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+  
 app.get('/login', function (req, res) {
   res.send('Hello World!')
 })
