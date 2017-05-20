@@ -126,7 +126,7 @@ app.listen(3000, function () {
 
 
 function extractProfile (profile) {
-  let imageUrl = '';
+  var imageUrl = '';
   if (profile.image && profile.image.url) {
     imageUrl = profile.image.url;
   }
