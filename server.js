@@ -138,7 +138,11 @@ app.get('/authd',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
   
 app.get('/authd/callback', 
-  passport.authenticate('google', { failureRedirect: '/authd' }),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
-  });
+  })
+  
+app.get('/login', function (req, res) {
+  res.send('Hello World!')
+})
