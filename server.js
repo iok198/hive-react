@@ -135,4 +135,4 @@ passport.use(new GoogleStrategy(googPassCred,
 ))
 
 app.get('/authd',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
