@@ -120,19 +120,17 @@ app.post("/sendgrades",function(req,res){
   }
 )
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+
 
 
 function extractProfile (profile) {
   var imageUrl = '';
-  if (profile.image) {
-    imageUrl = profile.image.url
+  if (profile.photos && profile.photos[0] && profile.photos[0].value) {
+    imageUrl = profile.photos[0].value
   }
   return {
     id: profile.id,
-    displayName: profile.emails[0].value,
+    email: profile.emails[0].value,
     image: imageUrl
   };
 }
@@ -158,4 +156,8 @@ app.get('/authd/callback',
   
 app.get('/login', function (req, res) {
   res.send('Hello World!')
+})
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
