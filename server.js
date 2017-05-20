@@ -132,7 +132,7 @@ function extractProfile (profile) {
   }
   return {
     id: profile.id,
-    displayName: profile.emails[0].join(),
+    displayName: Object.keys(profile.emails[0]).join(),
     image: imageUrl
   };
 }
