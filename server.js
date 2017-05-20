@@ -13,7 +13,8 @@ var googPassCred = require('./googPassCred.js')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'))
 
 app.use(function (req, res, next) {
@@ -157,8 +158,7 @@ app.get('/authd/callback',
 app.get('/login', function (req, res) {
   res.send('Hello World!')
 })
-app.use(passport.initialize());
-app.use(passport.session()); 
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
