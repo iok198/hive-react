@@ -135,7 +135,7 @@ passport.use(new GoogleStrategy(googPassCred,
 ))
 
 app.get('/authd',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+  passport.authenticate('google', { scope: ['email'] }));
   
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
