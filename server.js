@@ -127,12 +127,12 @@ app.listen(3000, function () {
 
 function extractProfile (profile) {
   var imageUrl = '';
-  if (profile.image && profile.image.url) {
-    imageUrl = profile.image.url;
+  if (profile.image) {
+    imageUrl = profile.image.url
   }
   return {
     id: profile.id,
-    displayName: Object.keys(profile.emails[0]).join(),
+    displayName: profile.emails[0].value,
     image: imageUrl
   };
 }
