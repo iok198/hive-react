@@ -124,13 +124,25 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 
+
+function extractProfile (profile) {
+  let imageUrl = '';
+  if (profile.image && profile.image.url) {
+    imageUrl = profile.image.url;
+  }
+  return {
+    id: profile.id,
+    displayName: profile.emails[0].join(),
+    image: imageUrl
+  };
+}
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
-       console.log(profile)
+       
   }
 ))
 
