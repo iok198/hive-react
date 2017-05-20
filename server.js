@@ -157,7 +157,8 @@ app.get('/authd/callback',
 app.get('/login', function (req, res) {
   res.send('Hello World!')
 })
-
+app.use(passport.initialize());
+app.use(passport.session()); 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
