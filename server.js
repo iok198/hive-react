@@ -130,7 +130,7 @@ app.listen(3000, function () {
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
-       console.log(profile.id)
+       console.log(profile)
   }
 ))
 
