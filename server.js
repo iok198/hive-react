@@ -142,7 +142,8 @@ function extractProfile (profile) {
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
-       
+       console.log(extractProfile(profile))
+       done(null,extractProfile(profile))
   }
 ))
 
