@@ -77,6 +77,7 @@ app.get('/bdrs',function(req, res) {
 })
 
 app.get('/users',function(req, res){
+  if(req.user){console.log(req.user)}
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
@@ -152,16 +153,17 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/')
   })
   
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.email)
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.deserializeUser(function(email, done) {
+  
+  done(null, email)
+})
   
 app.get('/login', function (req, res) {
   res.send('Hello World!')
