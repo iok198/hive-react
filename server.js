@@ -37,6 +37,8 @@ app.use(function (req, res, next) {
 });
 
 app.get('/herble', function (req, res) {
+    if(req.user){console.log('got a user')
+    console.log(req.user)}
   res.send('Hello World!')
 })
 
