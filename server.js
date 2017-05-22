@@ -13,7 +13,8 @@ var googPassCred = require('./googPassCred.js')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'))
 
 app.use(function (req, res, next) {
@@ -35,7 +36,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
+app.get('/herble', function (req, res) {
+    if(req.user){console.log('got a user')
+    console.log(req.user)}
   res.send('Hello World!')
 })
 
@@ -76,6 +79,8 @@ app.get('/bdrs',function(req, res) {
 })
 
 app.get('/users',function(req, res){
+  if(req.user){console.log('got a user')
+    console.log(req.user)}
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
@@ -120,19 +125,53 @@ app.post("/sendgrades",function(req,res){
   }
 )
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
 
+
+
+function extractProfile (profile) {
+  var imageUrl = '';
+  if (profile.photos && profile.photos[0] && profile.photos[0].value) {
+    imageUrl = profile.photos[0].value
+  }
+  return {
+    id: profile.id,
+    email: profile.emails[0].value,
+    image: imageUrl
+  };
+}
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
-       console.log(profile.id)
+       console.log(extractProfile(profile))
+       done(null,extractProfile(profile))
   }
 ))
 
 app.get('/authd',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['email'] }));
+  
+app.get('/authd/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/herble')
+  })
+  
+passport.serializeUser(function(user, done) {
+  done(null, user.email)
+});
+
+passport.deserializeUser(function(email, done) {
+  
+  done(null, email)
+})
+  
+app.get('/login', function (req, res) {
+  res.send('Hello World!')
+})
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
