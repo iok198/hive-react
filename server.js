@@ -1,4 +1,5 @@
 var express = require('express')
+var session = require('express-session')
 var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
@@ -13,6 +14,7 @@ var googPassCred = require('./googPassCred.js')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(session({ secret: 'anything' }))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public'))
