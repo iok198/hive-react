@@ -166,7 +166,7 @@ passport.deserializeUser(function(email, done) {
   done(null, email)
 })
   
-app.get('/login',passport.authenticate('google'), function (req, res) {
+app.get('/login',passport.authenticate('google', { failureRedirect: '/login' }), function (req, res) {
   res.send('Hello World!')
 })
 
