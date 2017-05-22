@@ -1,4 +1,5 @@
 var express = require('express')
+var session = require('express-session')
 var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
@@ -13,9 +14,10 @@ var googPassCred = require('./googPassCred.js')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(session({ secret: 'anything' }))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('public'))
+app.use('/public',express.static('public'))
 
 app.use(function (req, res, next) {
 
@@ -36,10 +38,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/herble', function (req, res) {
+app.get('/', function (req, res) {
     if(req.user){console.log('got a user')
-    console.log(req.user)}
-  res.send('Hello World!')
+    console.log(req.user)
+      res.send(req.user)
+    }
+    else{res.send("Please login.")}
 })
 
 function defaultQueryCallback(req,res){
@@ -156,7 +160,7 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/herble')
+    res.redirect('/')
   })
   
 passport.serializeUser(function(user, done) {
