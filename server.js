@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
+app.get('/herble', function (req, res) {
   res.send('Hello World!')
 })
 
@@ -154,7 +154,7 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/')
+    res.redirect('/herble')
   })
   
 passport.serializeUser(function(user, done) {
