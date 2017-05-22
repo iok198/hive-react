@@ -77,8 +77,8 @@ app.get('/bdrs',function(req, res) {
 })
 
 app.get('/users',function(req, res){
-  if(req){console.log('got a user')
-    console.log(req)}
+  if(req.user){console.log('got a user')
+    console.log(req.user)}
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
@@ -166,7 +166,7 @@ passport.deserializeUser(function(email, done) {
   done(null, email)
 })
   
-app.get('/login', function (req, res) {
+app.get('/login',passport.authenticate('google'), function (req, res) {
   res.send('Hello World!')
 })
 
