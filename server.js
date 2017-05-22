@@ -77,8 +77,8 @@ app.get('/bdrs',function(req, res) {
 })
 
 app.get('/users',function(req, res){
-  if(req.user){console.log('got a user')
-    console.log(req.user)}
+  if(req){console.log('got a user')
+    console.log(req)}
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
 })
 
