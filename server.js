@@ -152,9 +152,14 @@ passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
        console.log(extractProfile(profile))
        
-       connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "'",function (err,rsl,fds){done(err,rsl[0])})
+       connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "'",
+       function (err,rsl,fds){
+         //done(err,rsl[0])
+         if(err) throw err
+         console.log(rsl)
+       })
        
-       //done(null,extractProfile(profile))
+       done(null,extractProfile(profile))
   }
 ))
 
