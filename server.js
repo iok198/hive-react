@@ -180,8 +180,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(entryID, done) {
-  
-  done(null, entryID)
+  connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
+    if(err) throw err
+    done(null,userArr[0])
+    
+  })
 })
   
 app.get('/login', function (req, res) {
