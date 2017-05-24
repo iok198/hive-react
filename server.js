@@ -102,11 +102,14 @@ app.get('/mymastery',function(req,res){
     var queries = gradeQueries(connection.escape(courseStr))
     console.log(queries)
     connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
-  }  else(res.send("[,,,]"))
+  }  else{res.send("[,,,]")}
 })
 
 app.get('/mybdrs',function(req, res) {
-  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(req,res))
+  if(req.user){
+    console.log(req.user)
+    connection.query(bdrQueries(req.user.entryID.split("n")).query,defaultQueryCallback(req,res))
+  } else {res.send("[]")}
 }
 )
 
