@@ -10,7 +10,7 @@ class MasteryJumbo extends React.Component {
     super(props);
     
     this.state = {
-      mArr:[,,,]
+      mArr:[]
     }
     
   }
@@ -26,7 +26,7 @@ class MasteryJumbo extends React.Component {
       //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
-        {(this.state.mArr[0].length > 0) ? <MasteryContainer mArr={this.state.mArr} /> : null}
+        {(this.state.mArr.length > 0) ? <MasteryContainer mArr={this.state.mArr} /> : null}
 	    </div> );
   }
 
