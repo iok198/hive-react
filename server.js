@@ -108,7 +108,7 @@ app.get('/mymastery',function(req,res){
 app.get('/mybdrs',function(req, res) {
   if(req.user){
     console.log(req.user)
-    connection.query(bdrQueries(req.user.entryID.split("n")).query,defaultQueryCallback(req,res))
+    connection.query(bdrQueries(req.user.entryID.toString().split("n")).query,defaultQueryCallback(req,res))
   } else {res.send("[]")}
 }
 )

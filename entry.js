@@ -6,7 +6,7 @@ var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
 var getRequestForReact = require('./utilities/getRequestForReact.js')
 var postRequestForReact = require('./utilities/postRequestForReact.js')
 
-getRequestForReact("/bdrs/1",(arr) => ( [
+getRequestForReact("/mybdrs",(arr) => ( [
           <BDRJumbo bdrs={arr}/>,
         document.getElementById('content')]))
 
