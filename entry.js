@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
 var GreetingJumbo = require('./components/Greeting/GreetingJumbo.js')
 var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
+var GradeJumbo = require('./components/Mastery/MasteryJumbo.js')
 var getRequestForReact = require('./utilities/getRequestForReact.js')
 var postRequestForReact = require('./utilities/postRequestForReact.js')
 
@@ -16,12 +17,14 @@ getRequestForReact("/users",(arr) => ( [
   
   ]))
   
-getRequestForReact("/mymastery",(arr) => ( [
+/*getRequestForReact("/mymastery",(arr) => ( [
           <GradeJumbo mArr={arr} />,
           document.getElementById('content3')
   
-  ])) 
-postRequestForReact("/sendgrades",{goo:'gle'},console.log)
+  ])) */
+  ReactDOM.render(<MasteryJumbo />,
+          document.getElementById('content3'))
+//postRequestForReact("/sendgrades",{goo:'gle'},console.log)
 /*
 var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {

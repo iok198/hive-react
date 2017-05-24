@@ -113,7 +113,7 @@ app.get('/mybdrs',function(req, res) {
 }
 )
 
-app.get('/mymastery',function(req,res){
+/*app.get('/mymastery',function(req,res){
   if(req.user){
     console.log(req.user)
     var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
@@ -121,7 +121,7 @@ app.get('/mymastery',function(req,res){
     console.log(queries)
     connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
   }  else(res.send("[,,,]"))
-})
+})*/
 
 
 app.get('/los/:courseQueryStr',function(req, res){
