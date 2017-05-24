@@ -12,6 +12,7 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class GradeJumbo extends React.Component {
   constructor(props){
     super(props);
+    console.log(this.props.mArr)
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
       page:0,vpage:0
     }
