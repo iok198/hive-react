@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
 
 app.get('/', function (req, res) {
     if(req.user){console.log('got a user')
-    console.log(req.user)
+    console.log(req.user.emailID)
       res.send(req.user)
     }
     else{res.send("Please login.")}
