@@ -4,6 +4,7 @@ var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
+var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var bodyParser = require('body-parser')
 
 var passport = require('passport')
@@ -78,11 +79,11 @@ function usersQueryCallback(req,res){
 }
 }
 
-app.get('/bdrs',function(req, res) {
-  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(req,res))
+app.get('/bdrs/:queryStr',function(req, res) {
+  connection.query(bdrQueries(req.params.queryStr.split("n")).query,defaultQueryCallback(req,res))
 })
 
-app.get('/users',function(req, res){
+app.get('/users/',function(req, res){
   if(req.user){console.log('got a user')
     console.log(req.user)}
   connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
@@ -104,28 +105,28 @@ app.get('/mymastery',function(req,res){
   }  else(res.send("[,,,]"))
 })
 
+app.get('/mybdrs',function(req, res) {
+  connection.query('SELECT b.*, CONCAT(u.firstName, " ", u.lastName) as studentName, CONCAT(u2.title, " ", u2.lastName) as staffName FROM bdrs b JOIN userDirectory u ON b.studentUDID=u.entryID JOIN userDirectory u2 ON b.staffUDID=u2.entryID WHERE (b.staffUDID IN ( 1 ) )',defaultQueryCallback(req,res))
+}
+)
+
+app.get('/mymastery',function(req,res){
+  if(req.user){
+    console.log(req.user)
+    var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
+    var queries = gradeQueries(connection.escape(courseStr))
+    console.log(queries)
+    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
+  }  else(res.send("[,,,]"))
+})
+
+
 app.get('/los/:courseQueryStr',function(req, res){
   console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
   connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(req,res))
 })
 
-app.get('/grades/:courseQueryStr',function(req,res){
-  console.log(req.params.courseQueryStr.toString())
-  connection.query('select concat(courseStr,\'-\',LOID) as courseStrLOID, group_concat(distinct LOText) as LOText, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':1n\'), stuUDID, null) ' + 
-  'separator \', \') as mstudentsN, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':2n\'), stuUDID, null) separator \', \') ' + 
-  'as mstudentsA, group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':3n\'), stuUDID, null) separator \', \') as mstudentsM, ' +
-  'group_concat(if(recentrating REGEXP concat(\'m\', LOID, \':4n\'), stuUDID, null) separator \', \') as mstudentsE, ' + 
-  'sum(recentrating REGEXP concat(\'m\', LOID, \':1n\')) as mcountN, sum(recentrating REGEXP concat(\'m\', LOID, \':2n\')) as mcountA, ' +
-  'sum(recentrating REGEXP concat(\'m\', LOID, \':3n\')) as mcountM, sum(recentrating REGEXP concat(\'m\', LOID, \':4n\')) as mcountE from ' +
-  '(select * from (select entryID as LOID, LOText from hive1617.LOs where courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\') L ' +
-  'left join (select courseStr, recentrating, stuUDID, assessID from (select * from (select * from (select * from hive1617.assessments ' +
-  'where courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\') a RIGHT JOIN (select max(entryID) as maxID, ' + 
-  'group_concat(distinct studentUDID) as stuUDID, group_concat(distinct assessmentID) as assessID, ' + 
-  'substring_index(group_concat(ratings order by entryID desc SEPARATOR \'|\'), \'|\', 1) as recentrating from hive1617.assessmentRatings ' + 
-  'group by concat(studentUDID, \':\', assessmentID) order by group_concat(entryID separator \' \')) aR on a.entryID=aR.assessID) aRJ ' +
-  'where MRatings=\'y\') aRC) aRC2 on aRC2.recentrating REGEXP concat(\'m\', L.LOID, \':.n\')) aRC3 group by ' + 
-  'concat(courseStr,\'-\',LOID)',defaultQueryCallback(req,res))
-})
+
 
 app.post("/sendgrades",function(req,res){
     console.log(req.body)
