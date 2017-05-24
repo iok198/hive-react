@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
 var GreetingJumbo = require('./components/Greeting/GreetingJumbo.js')
 var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
-var GradeJumbo = require('./components/Mastery/MasteryJumbo.js')
+var MasteryJumbo = require('./components/Mastery/MasteryJumbo.js')
 var getRequestForReact = require('./utilities/getRequestForReact.js')
 var postRequestForReact = require('./utilities/postRequestForReact.js')
 
