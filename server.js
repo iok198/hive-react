@@ -176,12 +176,12 @@ app.get('/authd/callback',
   })
   
 passport.serializeUser(function(user, done) {
-  done(null, user.email)
+  done(null, user.entryID)
 });
 
-passport.deserializeUser(function(email, done) {
+passport.deserializeUser(function(entryID, done) {
   
-  done(null, email)
+  done(null, entryID)
 })
   
 app.get('/login', function (req, res) {
