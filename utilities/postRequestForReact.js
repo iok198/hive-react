@@ -1,5 +1,3 @@
-import ReactDOM from 'react-dom';
-
 function postRequestForReact(url,bodyJSON,callback){
 
 var xhttp = new XMLHttpRequest(); 
