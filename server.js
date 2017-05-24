@@ -90,8 +90,15 @@ app.get('/users',function(req, res){
 })
 
 app.get('/mastery/:courseStr',function(req,res){
-  var queries = gradeQueries(connection.escape(req.params.courseStr));
+  var queries = gradeQueries(connection.escape(req.params.courseStr))
   connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
+})
+
+app.get('/mymastery',function(req,res){
+  if(req.user){
+    var queries = gradeQueries(connection.escape(req.user.courseStr))
+    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
+  }  else(res.send("[,,,]"))
 })
 
 app.get('/los/:courseQueryStr',function(req, res){
