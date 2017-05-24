@@ -156,10 +156,13 @@ passport.use(new GoogleStrategy(googPassCred,
        function (err,rsl,fds){
          //done(err,rsl[0])
          if(err) throw err
+         if(rsl.length > 0){
          console.log(rsl)
+         done(null,rsl[0])} else { done(null,extractProfile(profile))}
+         
        })
        
-       done(null,extractProfile(profile))
+       
   }
 ))
 
