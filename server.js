@@ -53,10 +53,10 @@ function defaultQueryCallback(req,res){
 }
 }
 
-function masteryQueryCallback(req,res){
+function masteryQueryCallback(req,res,courseStr){
   return function (err,rsl,fds){
     if(err){console.log(err)}
-    rsl.push(req.params.courseStr)
+    rsl.push(courseStr)
     res.send(JSON.stringify(rsl))
 }
 }
@@ -91,15 +91,16 @@ app.get('/users',function(req, res){
 
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
-  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
+  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,req.params.courseStr))
 })
 
 app.get('/mymastery',function(req,res){
   if(req.user){
     console.log(req.user)
-    var queries = gradeQueries(connection.escape(req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")))
+    var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
+    var queries = gradeQueries(connection.escape(courseStr))
     console.log(queries)
-    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
+    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
   }  else(res.send("[,,,]"))
 })
 
