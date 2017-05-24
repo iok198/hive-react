@@ -97,7 +97,7 @@ app.get('/mastery/:courseStr',function(req,res){
 app.get('/mymastery',function(req,res){
   if(req.user){
     console.log(req.user)
-    var queries = gradeQueries(connection.escape(req.user.courseStr.replace(/[at]/,"s").replace("0",".")))
+    var queries = gradeQueries(connection.escape(req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")))
     console.log(queries)
     connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res))
   }  else(res.send("[,,,]"))
