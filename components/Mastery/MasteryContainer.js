@@ -26,6 +26,11 @@ class MasteryContainer extends React.Component {
     
   }
   
+  componentWillReceiveProps(nextProps) {
+  this.setState({
+    mArrS : nextProps.mArr
+  });
+}
   
   render(){
       //let list = this._getMastery(this.state.parsedMastery);
