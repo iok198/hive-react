@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-var MasteryPanel = require('./MasteryPanel.js')
+var MasteryTable = require('./MasteryTable.js')
 var MasteryHeadTR = require('./MasteryHeadTR.js')
 var MasteryHeadTD = require('./MasteryHeadTD.js')
 
@@ -42,12 +42,14 @@ class MasteryContainer extends React.Component {
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>
+      <MasteryTable upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
+      {/*
       <table id="" className="table table-bordered">
               <tbody>
               {(<MasteryHeadTR key={3813} parsedMastery={this.state.parsedMastery} colOffset={0} page={this.state.page} upVPage={this.upVPage} downVPage={this.downVPage}/>)}
               {Object.keys(this.state.parsedMastery.rowsByStu).slice(0+5*(this.state.vpage),5+5*(this.state.vpage)).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.state.parsedMastery.mRatingStrs[stuUDID]} stuBio={this.state.parsedMastery.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
               </tbody>
-	    </table>
+	    </table> */}
 	    </div> );
   }
   
