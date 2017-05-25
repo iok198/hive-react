@@ -27,7 +27,7 @@ class MasteryJumbo extends React.Component {
     
     return( <div className="jumbotron">
         <ul className="nav nav-pills">
-            {Object.keys(this.props.user.stuCourseQuObj.strObj).map((key,id)=> (<li><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.user.stuCourseQuObj.strObj[key]}</a></li>))}
+            {Object.keys(this.props.user.stuCourseQuObj.strObj).map((key,id)=> (<li key={"masterynav" + key}><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.user.stuCourseQuObj.strObj[key]}</a></li>))}
         </ul>
         {(this.state.mArr.length > 0) ? <MasteryContainer mArr={this.state.mArr} /> : null}
 	    </div> );
