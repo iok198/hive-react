@@ -13,14 +13,16 @@ class MasteryJumbo extends React.Component {
       mArr:[]
     }
     this.getMasteryForCourse = this.getMasteryForCourse.bind(this)
+    this.changeMArrState = this.changeMArrState.bind(this)
+  }
+  
+  changeMArrState(arr){ 
+    this.setState({mArr:arr})
   }
   
   getMasteryForCourse(courseStr){
     return function(){
-  getRequestToArr("/mastery/" + courseStr,(arr) => ( 
-          this.setState({mArr:arr})
-  
-  ))}
+      getRequestToArr("/mastery/" + courseStr,this.changeMArrState)}
   }
   
   render(){
