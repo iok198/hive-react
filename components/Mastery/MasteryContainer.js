@@ -42,7 +42,7 @@ class MasteryContainer extends React.Component {
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>
-      <MasteryTable upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
+      <MasteryTable page={this.state.page} upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
       {/*
       <table id="" className="table table-bordered">
               <tbody>
