@@ -21,8 +21,9 @@ class MasteryJumbo extends React.Component {
   }
   
   getMasteryForCourse(courseStr){
+    var changeMArrState = this.changeMArrState.bind(this)
     return function(){
-      getRequestToArr("/mastery/" + courseStr,this.changeMArrState)}
+      getRequestToArr("/mastery/" + courseStr,changeMArrState)}
   }
   
   render(){
