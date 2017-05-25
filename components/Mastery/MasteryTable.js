@@ -12,14 +12,14 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class MasteryTable extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props.mArr)
+    console.log(this.props.mArrS)
     this.state = {
     }
-    this.upVPage = this.props.upVPage.bind(this)
-    this.downVPage = this.props.downVPage.bind(this)
-    this.changeMastery = this.props.changeMastery.bind(this)
+    //this.upVPage = this.props.upVPage.bind(this)
+    //this.downVPage = this.props.downVPage.bind(this)
+    //this.changeMastery = this.props.changeMastery.bind(this)
     //this.parseMastery = parseMastery.bind(this)
-    this.parseMastery = parseMastery.bind(this)
+    //this.parseMastery = parseMastery.bind(this)
     
   }
   
