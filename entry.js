@@ -15,15 +15,16 @@ getRequestForReact("/users",(arr) => ( [
           <GreetingJumbo user={arr[0]} />,
           document.getElementById('content2')
   
-  ]))
+  ]),function(arr) {ReactDOM.render(<MasteryJumbo user={arr[0]}/>,
+          document.getElementById('content3'))})
   
 /*getRequestForReact("/mymastery",(arr) => ( [
           <GradeJumbo mArr={arr} />,
           document.getElementById('content3')
   
   ])) */
-  ReactDOM.render(<MasteryJumbo />,
-          document.getElementById('content3'))
+/*  ReactDOM.render(<MasteryJumbo />,
+          document.getElementById('content3'))*/
 //postRequestForReact("/sendgrades",{goo:'gle'},console.log)
 /*
 var xhttp = new XMLHttpRequest(); 
