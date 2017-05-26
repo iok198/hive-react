@@ -40,6 +40,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
+    console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
       res.sendFile(__dirname + "/public/index.html")
@@ -186,7 +187,7 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log(req.user, 'who')
+    //console.log(req.user, 'who')
     res.redirect('/')
   })
   
