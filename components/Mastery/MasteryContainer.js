@@ -12,7 +12,7 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class MasteryContainer extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props.mArr)
+    //console.log(this.props.mArr)
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
       page:0,vpage:0
     }
@@ -42,7 +42,7 @@ class MasteryContainer extends React.Component {
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>
-      {console.log(this.state.parsedMastery)}
+      {/*console.log(this.state.parsedMastery)*/}
       <MasteryTable page={this.state.page} vpage={this.state.vpage} upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
       {/*
       <table id="" className="table table-bordered">
