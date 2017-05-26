@@ -186,6 +186,7 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log(req.user, 'who')
     res.redirect('/')
   })
   
