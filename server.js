@@ -12,7 +12,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 var googPassCred = require('./googPassCred.js')
 
 
-app.configure(function() {
+(function() {
 
   // some code ...
 
@@ -49,7 +49,7 @@ app.configure(function() {
 
   // more code ...
 
-});
+})
 
 
 // Use the GoogleStrategy within Passport.
