@@ -14,6 +14,21 @@ function extractProfile (profile) {
   };
 }
 
+function queryUD(connection,email,done,extracted){
+    return function(){
+    connection.query("SELECT * FROM hive1617.userDirectory WHERE " +
+                            "emailID REGEXP " + "'" + email + 
+                            "' OR altEmailStr REGEXP '" + email + "'",
+                    function (err,rsl,fds){
+                        if(err) throw err
+                        if(rsl.length > 0){
+                            console.log('rsl: ')
+                            console.log(rsl)
+                            done(null,rsl[0])
+                        } else { done(null,extracted)}
+                    })}
+}
+
 function strategyConfig(connection){
     passport.use(
         new GoogleStrategy(googPassCred,
@@ -22,21 +37,10 @@ function strategyConfig(connection){
                 console.log("SELECT * FROM hive1617.userDirectory " +
                             "WHERE emailID REGEXP " + "'" + profile.emails[0].value + 
                             "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-                connection.query("SELECT * FROM hive1617.userDirectory WHERE " +
-                            "emailID REGEXP " + "'" + profile.emails[0].value + 
-                            "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'",
-                    function (err,rsl,fds){
-                        if(err) throw err
-                        if(rsl.length > 0){
-                            console.log('rsl: ')
-                            console.log(rsl)
-                            done(null,rsl[0])
-                        } else { done(null,extractProfile(profile))}
-                    }
-                )
+                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))
             }
         )
     )
 }
 
-module.exports = {strategyConfig:strategyConfig, passport:passport}
+module.exports = {strategyConfig:strategyConfig, passport:passport, queryUD:queryUD}

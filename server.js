@@ -40,7 +40,14 @@ app.use(function (req, res, next) {
   app.use('/public',express.static('public'))
 
 passportConfig.strategyConfig(connection)
-
+passport.serializeUser(function(user, done) {
+    done(null, user.email)
+  }
+)
+passport.deserializeUser(function(emailID,done){
+    passportConfig.queryUD(connection,emailID,done,{})
+  }
+)
   
 
 
