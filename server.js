@@ -20,9 +20,7 @@ var googPassCred = require('./googPassCred.js')
   app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use('/public',express.static('public', {
-    //etag: false
-  }))
+  app.use('/public',express.static('public'))
   // passport session middleware 
   
   app.use(function (req, res, next) {
@@ -95,10 +93,8 @@ app.get('/', function (req, res) {
     //console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
-      //app.use(express.static(__dirname + '/public'))
       res.sendFile(__dirname + "/public/index.html")
     }
-    //else{res.send("Please login.")}
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
 })
 
@@ -171,16 +167,6 @@ app.get('/mybdrs',function(req, res) {
   } else {res.send("[]")}
 }
 )
-
-/*app.get('/mymastery',function(req,res){
-  if(req.user){
-    console.log(req.user)
-    var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
-    var queries = gradeQueries(connection.escape(courseStr))
-    console.log(queries)
-    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
-  }  else(res.send("[,,,]"))
-})*/
 
 
 app.get('/los/:courseQueryStr',function(req, res){
