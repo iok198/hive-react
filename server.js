@@ -52,6 +52,8 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(entryID, done) {
+  console.log('deserializing')
+  console.log(entryID)
   connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
     if(err) throw err
     
