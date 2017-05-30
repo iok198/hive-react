@@ -85,7 +85,7 @@ app.get('/bdrs/:queryStr',function(req, res) {
   connection.query(bdrQueries(req.params.queryStr.split("n")).query,defaultQueryCallback(req,res))
 })
 
-app.get('/users/',function(req, res){
+app.get('/users',function(req, res){
   if(req.user){console.log('got a user')
     console.log(req.user)
     res.send(JSON.stringify([req.user]))
