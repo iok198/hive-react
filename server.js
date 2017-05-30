@@ -188,7 +188,7 @@ app.get('/authd',
   passport.authenticate('google', { scope: ['email'] }));
   
 app.get('/authd/callback', 
-  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login' })/*,
+  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true })/*,
   function(req, res) {
     //console.log(req.user, 'who')
     res.redirect('/')
