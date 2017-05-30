@@ -88,8 +88,8 @@ app.get('/', function (req, res) {
     //console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
-      app.use(express.static(__dirname + '/public'))
-      //res.sendFile(__dirname + "/public/index.html")
+      //app.use(express.static(__dirname + '/public'))
+      res.sendFile(__dirname + "/public/index.html")
     }
     //else{res.send("Please login.")}
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
