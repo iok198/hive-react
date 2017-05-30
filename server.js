@@ -8,9 +8,8 @@ var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
-var passport = require('passport')
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-var googPassCred = require('./googPassCred.js')
+var passportConfig = require('./utilities/passportConfig.js')
+var passport = passportConfig.passport
 
 
 
@@ -40,43 +39,12 @@ var googPassCred = require('./googPassCred.js')
     // Pass to next layer of middleware
     next()
   })
-/*
-passport.use(new GoogleStrategy(googPassCred,
-  function(accessToken, refreshToken, profile, done) {
-       console.log(extractProfile(profile))
-       console.log("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-       connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'",
-       function (err,rsl,fds){
-         if(err) throw err
-         if(rsl.length > 0){
-           console.log('rsl: ')
-         console.log(rsl)
-         done(null,rsl[0])} else { done(null,extractProfile(profile))}
-         
-       })
-  }
-))
+
+
   
-passport.serializeUser(function(user, done) {
-  console.log('serializing')
-  console.log(user)
-  done(null, user.entryID)
-});
 
-passport.deserializeUser(function(entryID, done) {
-  console.log('deserializing')
-  console.log(entryID)
-  connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
-    if(err) throw err
-    
-    userArr[0].stuCourseQuObj = courseQueryPrepare(userArr[0])
-    console.log(userArr[0])
-    done(null,userArr[0])
-    
-  })
-})
 
-*/
+
 
 app.get('/', function (req, res) {
     console.log(req)
@@ -150,28 +118,14 @@ app.post("/sendgrades",function(req,res){
 
 
 
-function extractProfile (profile) {
-  var imageUrl = '';
-  if (profile.photos && profile.photos[0] && profile.photos[0].value) {
-    imageUrl = profile.photos[0].value
-  }
-  return {
-    id: profile.id,
-    email: profile.emails[0].value,
-    image: imageUrl
-  };
-}
+
 
 
 app.get('/authd',
   passport.authenticate('google', { scope: ['email'] }));
   
 app.get('/authd/callback', 
-  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true })/*,
-  function(req, res) {
-    //console.log(req.user, 'who')
-    res.redirect('/')
-  }*/)
+  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true }))
   
 
   
