@@ -17,7 +17,7 @@ var googPassCred = require('./googPassCred.js')
   // some code ...
 
   app.use(bodyParser.json()) // for parsing application/json
-  app.use(require('cookie-parser')())
+  app.use(require('cookie-parser'))
   //app.use(express.logger())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
