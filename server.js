@@ -6,18 +6,15 @@ var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var bodyParser = require('body-parser')
-
+var cookieParser = require('cookie-parser')
 var passport = require('passport')
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 var googPassCred = require('./googPassCred.js')
 
 
-(function() {
-
-  // some code ...
 
   app.use(bodyParser.json()) // for parsing application/json
-  app.use(require('cookie-parser'))
+  app.use(cookieParser)
   //app.use(express.logger())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
@@ -47,9 +44,7 @@ var googPassCred = require('./googPassCred.js')
     next();
   });
 
-  // more code ...
-
-})
+  
 
 
 // Use the GoogleStrategy within Passport.
