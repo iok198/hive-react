@@ -19,8 +19,44 @@ app.use(session({ secret: 'anything' }))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/public',express.static('public', {
-  etag: false
+  //etag: false
 }))
+
+// Use the GoogleStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Google
+//   profile), and invoke a callback with a user object.
+passport.use(new GoogleStrategy(googPassCred,
+  function(accessToken, refreshToken, profile, done) {
+       console.log(extractProfile(profile))
+       console.log("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
+       connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'",
+       function (err,rsl,fds){
+         //done(err,rsl[0])
+         if(err) throw err
+         if(rsl.length > 0){
+         console.log(rsl)
+         done(null,rsl[0])} else { done(null,extractProfile(profile))}
+         
+       })
+       
+       
+  }
+))
+  
+passport.serializeUser(function(user, done) {
+  done(null, user.entryID)
+});
+
+passport.deserializeUser(function(entryID, done) {
+  connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
+    if(err) throw err
+    var user = Object.assign({},userArr[0])
+    user.stuCourseQuObj = courseQueryPrepare(user)
+    done(null,user)
+    
+  })
+})
 
 app.use(function (req, res, next) {
 
@@ -176,41 +212,7 @@ app.get('/authd/callback',
     res.redirect('/')
   }*/)
   
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
-passport.use(new GoogleStrategy(googPassCred,
-  function(accessToken, refreshToken, profile, done) {
-       console.log(extractProfile(profile))
-       console.log("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-       connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'",
-       function (err,rsl,fds){
-         //done(err,rsl[0])
-         if(err) throw err
-         if(rsl.length > 0){
-         console.log(rsl)
-         done(null,rsl[0])} else { done(null,extractProfile(profile))}
-         
-       })
-       
-       
-  }
-))
-  
-passport.serializeUser(function(user, done) {
-  done(null, user.entryID)
-});
 
-passport.deserializeUser(function(entryID, done) {
-  connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
-    if(err) throw err
-    var user = Object.assign({},userArr[0])
-    user.stuCourseQuObj = courseQueryPrepare(user)
-    done(null,user)
-    
-  })
-})
   
 app.get('/login', function (req, res) {
   res.send('Hello World!')
