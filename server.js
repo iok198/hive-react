@@ -188,11 +188,11 @@ app.get('/authd',
   passport.authenticate('google', { scope: ['email'] }));
   
 app.get('/authd/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login' })/*,
   function(req, res) {
     //console.log(req.user, 'who')
     res.redirect('/')
-  })
+  }*/)
   
 passport.serializeUser(function(user, done) {
   done(null, user.entryID)
