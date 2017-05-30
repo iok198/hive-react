@@ -51,9 +51,9 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(entryID, done) {
   connection.query('SELECT * FROM userDirectory where entryID=' + entryID,function (err,userArr) {
     if(err) throw err
-    var user = Object.assign({},userArr[0])
-    user.stuCourseQuObj = courseQueryPrepare(user)
-    done(null,user)
+    
+    userArr[0].stuCourseQuObj = courseQueryPrepare(userArr[0])
+    done(null,userArr[0])
     
   })
 })
