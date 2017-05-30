@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    console.log(req)
+    //console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
       res.sendFile(__dirname + "/public/index.html")
