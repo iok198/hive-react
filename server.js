@@ -129,7 +129,7 @@ app.get('/bdrs/:queryStr',function(req, res) {
 })
 
 app.get('/users',function(req, res){
-  if(req.user){console.log('got a user')
+  if(req.user){console.log('user request from:')
     console.log(req.user)
     res.send(JSON.stringify([req.user]))
   }
@@ -144,6 +144,7 @@ app.get('/mastery/:courseStr',function(req,res){
 
 app.get('/mymastery',function(req,res){
   if(req.user){
+    console.log('mastery request from:')
     console.log(req.user)
     var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
     var queries = gradeQueries(connection.escape(courseStr))
@@ -154,6 +155,7 @@ app.get('/mymastery',function(req,res){
 
 app.get('/mybdrs',function(req, res) {
   if(req.user){
+    console.log('bdr request from:')
     console.log(req.user)
     connection.query(bdrQueries(req.user.entryID.toString().split("n")).query,defaultQueryCallback(req,res))
   } else {res.send("[]")}
