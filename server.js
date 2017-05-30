@@ -12,17 +12,45 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 var googPassCred = require('./googPassCred.js')
 
 
+app.configure(function() {
 
-app.use(bodyParser.json()) // for parsing application/json
-app.use(require('cookie-parser')())
-//app.use(express.logger())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use('/public',express.static('public', {
-  //etag: false
-}))
+  // some code ...
+
+  app.use(bodyParser.json()) // for parsing application/json
+  app.use(require('cookie-parser')())
+  //app.use(express.logger())
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
+  app.use(passport.initialize())
+  app.use(passport.session())
+  app.use('/public',express.static('public', {
+    //etag: false
+  }))
+  // passport session middleware 
+  
+  app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://jaredasutton.com:3000');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+  });
+
+  // more code ...
+
+});
+
 
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
@@ -66,24 +94,7 @@ passport.deserializeUser(function(entryID, done) {
   })
 })
 
-app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://jaredasutton.com:3000');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
 
 app.get('/', function (req, res) {
     //console.log(req)
