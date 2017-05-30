@@ -203,7 +203,7 @@ passport.deserializeUser(function(entryID, done) {
     if(err) throw err
     var user = Object.assign({},userArr[0])
     user.stuCourseQuObj = courseQueryPrepare(user)
-    done(null,userArr[0])
+    done(null,user)
     
   })
 })
