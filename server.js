@@ -18,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(session({ secret: 'anything' }))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/public',express.static('public'))
+app.use('/public',express.static('public', {
+  etag: false
+}))
 
 app.use(function (req, res, next) {
 
