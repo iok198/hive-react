@@ -40,7 +40,7 @@ var googPassCred = require('./googPassCred.js')
     // Pass to next layer of middleware
     next()
   })
-
+/*
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
        console.log(extractProfile(profile))
@@ -76,7 +76,7 @@ passport.deserializeUser(function(entryID, done) {
   })
 })
 
-
+*/
 
 app.get('/', function (req, res) {
     console.log(req)
