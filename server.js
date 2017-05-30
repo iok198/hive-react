@@ -59,6 +59,7 @@ passport.deserializeUser(function(entryID, done) {
     if(err) throw err
     
     userArr[0].stuCourseQuObj = courseQueryPrepare(userArr[0])
+    console.log(userArr[0])
     done(null,userArr[0])
     
   })
