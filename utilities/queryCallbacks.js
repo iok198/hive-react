@@ -30,6 +30,6 @@ function usersQueryCallback(req,res){
 }
 }
 
-module.exports = {defaultQueryCallback: defaultQueryCallback,masteryQueryCallback:masteryQueryCallback,
-    usersQueryCallback:usersQueryCallback
+module.exports = {default: defaultQueryCallback,mastery:masteryQueryCallback,
+    users:usersQueryCallback
 }
