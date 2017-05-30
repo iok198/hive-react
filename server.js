@@ -36,6 +36,7 @@ passport.use(new GoogleStrategy(googPassCred,
          //done(err,rsl[0])
          if(err) throw err
          if(rsl.length > 0){
+           console.log('rsl: ')
          console.log(rsl)
          done(null,rsl[0])} else { done(null,extractProfile(profile))}
          
