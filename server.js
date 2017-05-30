@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
   app.use(passport.session())
   app.use('/public',express.static('public'))
 
-  app.use(passportConfig.strategyConfig(connection))
+passportConfig.strategyConfig(connection)
 
   
 
