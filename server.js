@@ -3,6 +3,7 @@ var session = require('express-session')
 var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
+var queryCallbacks = require('./utilities/queryCallbacks.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var bodyParser = require('body-parser')
@@ -13,49 +14,39 @@ var googPassCred = require('./googPassCred.js')
 
 
 
-  app.use(bodyParser.json()) // for parsing application/json
+  app.use(bodyParser.json())
   app.use(cookieParser)
-  //app.use(express.logger())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({ secret: Math.random().toString(), resave: true, saveUninitialized: true }))
   app.use(passport.initialize())
   app.use(passport.session())
   app.use('/public',express.static('public'))
-  // passport session middleware 
   
   app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://jaredasutton.com:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://jaredasutton.com:3000')
 
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Credentials', true)
 
     // Pass to next layer of middleware
-    next();
-  });
+    next()
+  })
 
-  
-
-
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
 passport.use(new GoogleStrategy(googPassCred,
   function(accessToken, refreshToken, profile, done) {
        console.log(extractProfile(profile))
        console.log("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
        connection.query("SELECT * FROM hive1617.userDirectory WHERE emailID REGEXP " + "'" + profile.emails[0].value + "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'",
        function (err,rsl,fds){
-         //done(err,rsl[0])
          if(err) throw err
          if(rsl.length > 0){
            console.log('rsl: ')
@@ -63,8 +54,6 @@ passport.use(new GoogleStrategy(googPassCred,
          done(null,rsl[0])} else { done(null,extractProfile(profile))}
          
        })
-       
-       
   }
 ))
   
@@ -90,7 +79,7 @@ passport.deserializeUser(function(entryID, done) {
 
 
 app.get('/', function (req, res) {
-    //console.log(req)
+    console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
       res.sendFile(__dirname + "/public/index.html")
@@ -98,40 +87,9 @@ app.get('/', function (req, res) {
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
 })
 
-function defaultQueryCallback(req,res){
-  return function (err,rsl,fds){
-    if(err){console.log(err)}
-    res.send(JSON.stringify(rsl))
-}
-}
-
-function masteryQueryCallback(req,res,courseStr){
-  return function (err,rsl,fds){
-    if(err){console.log(err)}
-    rsl.push(courseStr)
-    res.send(JSON.stringify(rsl))
-}
-}
-
-function usersQueryCallback(req,res){
-  return function (err,rsl,fds){
-    if(err) console.log(err);
-    rsl[0].stuCourseQuObj = courseQueryPrepare(rsl[0])
-    var courseQuery = JSON.stringify(rsl[0].stuCourseObj)
-    
-    var rslStr = JSON.stringify(rsl)
-    res.writeHead(200, {
-    'Content-Length': Buffer.byteLength(rslStr),
-    'Content-Type': 'text/plain' })
-    res.write(rslStr)
-    /* res.write(courseQuery) */
-
-  res.end()
-}
-}
 
 app.get('/bdrs/:queryStr',function(req, res) {
-  connection.query(bdrQueries(req.params.queryStr.split("n")).query,defaultQueryCallback(req,res))
+  connection.query(bdrQueries(req.params.queryStr.split("n")).query,queryCallbacks.default(req,res))
 })
 
 app.get('/users',function(req, res){
@@ -145,7 +103,7 @@ app.get('/users',function(req, res){
 
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
-  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,req.params.courseStr))
+  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
 })
 
 app.get('/mymastery',function(req,res){
@@ -155,7 +113,7 @@ app.get('/mymastery',function(req,res){
     var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
     var queries = gradeQueries(connection.escape(courseStr))
     console.log(queries)
-    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),masteryQueryCallback(req,res,courseStr))
+    connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,courseStr))
   }  else{res.send("[,,,]")}
 })
 
@@ -163,7 +121,7 @@ app.get('/mybdrs',function(req, res) {
   if(req.user){
     console.log('bdr request from:')
     console.log(req.user)
-    connection.query(bdrQueries(req.user.entryID.toString().split("n")).query,defaultQueryCallback(req,res))
+    connection.query(bdrQueries(req.user.entryID.toString().split("n")).query,queryCallbacks.default(req,res))
   } else {res.send("[]")}
 }
 )
@@ -171,7 +129,7 @@ app.get('/mybdrs',function(req, res) {
 
 app.get('/los/:courseQueryStr',function(req, res){
   console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
-  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', defaultQueryCallback(req,res))
+  connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', queryCallbacks.default(req,res))
 })
 
 
