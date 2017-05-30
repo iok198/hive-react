@@ -162,6 +162,18 @@ function extractProfile (profile) {
     image: imageUrl
   };
 }
+
+
+app.get('/authd',
+  passport.authenticate('google', { scope: ['email'] }));
+  
+app.get('/authd/callback', 
+  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true })/*,
+  function(req, res) {
+    //console.log(req.user, 'who')
+    res.redirect('/')
+  }*/)
+  
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
@@ -183,16 +195,6 @@ passport.use(new GoogleStrategy(googPassCred,
        
   }
 ))
-
-app.get('/authd',
-  passport.authenticate('google', { scope: ['email'] }));
-  
-app.get('/authd/callback', 
-  passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true })/*,
-  function(req, res) {
-    //console.log(req.user, 'who')
-    res.redirect('/')
-  }*/)
   
 passport.serializeUser(function(user, done) {
   done(null, user.entryID)
