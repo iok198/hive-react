@@ -32,6 +32,7 @@ class BDRPanel extends React.Component {
   createRestoreDialog(bdrID){
     return <div className="form-group">
       <textarea className="form-control" rows="5" id={"restore" +  bdrID}></textarea>
+      <button type="button" className=".btn-success">{"Restore"}</button>
     </div> 
   }
   
