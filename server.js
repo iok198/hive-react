@@ -41,6 +41,8 @@ app.use(function (req, res, next) {
 
 passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
+    console.log(user)
+    console.log('userrrr')
     done(null, user.email)
   }
 )
