@@ -43,7 +43,7 @@ passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
     console.log(user)
     console.log('userrrr')
-    done(null, user.email)
+    done(null, user.emailID)
   }
 )
 passport.deserializeUser(function(emailID,done){
