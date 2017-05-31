@@ -47,7 +47,7 @@ passport.serializeUser(function(user, done) {
   }
 )
 passport.deserializeUser(function(emailID,done){
-    passportConfig.queryUD(connection,emailID,done,{})
+    passportConfig.queryUD(connection,emailID,done,{})()
   }
 )
   
