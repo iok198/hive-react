@@ -17,7 +17,7 @@ class BDRPanel extends React.Component {
 		    {"Restore Anecdote"}
 		  </div>
 		  <div className="panel-body">
-		    {this.props.bdr.restoreAnecdote}
+		    {!!this.props.bdr.restoreAnecdote ? this.props.bdr.restoreAnecdote : "[Unrestored]"}
 		  </div>
 		</div>
 		</div>
