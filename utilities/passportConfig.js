@@ -37,7 +37,7 @@ function strategyConfig(connection){
                 console.log("SELECT * FROM hive1617.userDirectory " +
                             "WHERE emailID REGEXP " + "'" + profile.emails[0].value + 
                             "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))
+                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()
             }
         )
     )
