@@ -19,14 +19,16 @@ function queryUD(connection,email,done,extracted){
     connection.query("SELECT * FROM hive1617.userDirectory WHERE " +
                             "emailID REGEXP " + "'" + email + 
                             "' OR altEmailStr REGEXP '" + email + "'",
-                    function (err,rsl,fds){
-                        if(err) throw err
-                        if(rsl.length > 0){
-                            console.log('rsl: ')
-                            console.log(rsl)
-                            done(null,rsl[0])
-                        } else { done(null,extracted)}
-                    })}
+                        function (err,rsl,fds){
+                            if(err) throw err
+                            if(rsl.length > 0){
+                                console.log('rsl: ')
+                                console.log(rsl)
+                                done(null,rsl[0])
+                            } else { done(null,extracted)}
+                        }
+                    )
+    }
 }
 
 function strategyConfig(connection){
