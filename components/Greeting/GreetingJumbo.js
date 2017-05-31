@@ -6,6 +6,7 @@ class GreetingJumbo extends React.Component {
       let name = this.props.user.title;
     
     return( <div id="" className="jumbotron">
+              <div><img src="./public/img/hivelogofixed.png"/></div>
               <h1>Hello {name}</h1>
 	    </div> );
   }
