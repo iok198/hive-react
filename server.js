@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
   app.use(passport.initialize())
   app.use(passport.session())
   app.use('/public',express.static('public'))
-  app.use('/public/img',express.static('public/img'))
+  app.use('/public/img',express.static(__dirname +  'public/img'))
 
 passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
