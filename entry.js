@@ -16,5 +16,5 @@ getRequestForReact("/users",(arr) => ( [
           <GreetingJumbo user={arr[0]} />,
           document.getElementById('content2')
   
-  ]),function(arr) {ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0].courseStr)}/>,
+  ]),function(arr) {ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
           document.getElementById('content3'))})
