@@ -2,6 +2,10 @@ import React from 'react';
 var BDRPanelTable = require('./BDRPanelTable.js');
 
 class BDRPanel extends React.Component {
+  constructor(props){
+      super(props)
+      this.createRestoreDialog = this.createRestoreDialog.bind(this)
+  }
   render() {
     return <div id="" className="panel panel-default">
               <div id="" className="panel-body">
@@ -17,13 +21,21 @@ class BDRPanel extends React.Component {
 		    {"Restore Anecdote"}
 		  </div>
 		  <div className="panel-body">
-		    {this.props.bdr.restoreAnecdote}
+		    {!!this.props.bdr.restoreAnecdote ? this.props.bdr.restoreAnecdote : this.createRestoreDialog(this.props.bdr.entryID)}
 		  </div>
 		</div>
 		</div>
               </div>
             </div>;
   }
+  
+  createRestoreDialog(bdrID){
+    return <div className="form-group">
+      <textarea className="form-control" rows="5" id={"restore" +  bdrID}></textarea>
+      <button type="button" className="btn btn-success">{"Restore"}</button>
+    </div> 
+  }
+  
 }
 
 module.exports = BDRPanel;

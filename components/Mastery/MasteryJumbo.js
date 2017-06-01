@@ -12,20 +12,27 @@ class MasteryJumbo extends React.Component {
     this.state = {
       mArr:[]
     }
-    
+    this.getMasteryForCourse = this.getMasteryForCourse.bind(this)
+    this.changeMArrState = this.changeMArrState.bind(this)
   }
   
-  componentWillMount(){
-  getRequestToArr("/mastery/s7..........",(arr) => ( 
-          this.setState({mArr:arr})
+  changeMArrState(arr){ 
+    this.setState({mArr:arr})
+  }
   
-  ))
+  getMasteryForCourse(courseStr){
+    var changeMArrState = this.changeMArrState.bind(this)
+    return function(){
+      getRequestToArr("/mastery/" + courseStr,changeMArrState)}
   }
   
   render(){
       //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
+        <ul className="nav nav-pills">
+            {Object.keys(this.props.stuCourseQuObj.strObj).map((key,id)=> (<li key={"masterynav" + key} onClick={this.getMasteryForCourse(key)}><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.stuCourseQuObj.strObj[key]}</a></li>))}
+        </ul>
         {(this.state.mArr.length > 0) ? <MasteryContainer mArr={this.state.mArr} /> : null}
 	    </div> );
   }

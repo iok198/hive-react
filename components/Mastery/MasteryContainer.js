@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-var MasteryPanel = require('./MasteryPanel.js')
+var MasteryTable = require('./MasteryTable.js')
 var MasteryHeadTR = require('./MasteryHeadTR.js')
 var MasteryHeadTD = require('./MasteryHeadTD.js')
 
@@ -12,7 +12,7 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class MasteryContainer extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props.mArr)
+    //console.log(this.props.mArr)
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
       page:0,vpage:0
     }
@@ -26,6 +26,13 @@ class MasteryContainer extends React.Component {
     
   }
   
+  componentWillReceiveProps(nextProps) {
+  this.setState({
+    mArrS : nextProps.mArr,
+    parsedMastery: parseMastery(nextProps.mArr),
+    page:0,vpage:0
+  });
+}
   
   render(){
       //let list = this._getMastery(this.state.parsedMastery);
@@ -35,12 +42,15 @@ class MasteryContainer extends React.Component {
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>
+      {/*console.log(this.state.parsedMastery)*/}
+      <MasteryTable page={this.state.page} vpage={this.state.vpage} upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
+      {/*
       <table id="" className="table table-bordered">
               <tbody>
               {(<MasteryHeadTR key={3813} parsedMastery={this.state.parsedMastery} colOffset={0} page={this.state.page} upVPage={this.upVPage} downVPage={this.downVPage}/>)}
               {Object.keys(this.state.parsedMastery.rowsByStu).slice(0+5*(this.state.vpage),5+5*(this.state.vpage)).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.state.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.state.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.state.parsedMastery.mRatingStrs[stuUDID]} stuBio={this.state.parsedMastery.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.state.page} changer={this.changeMastery} />))}
               </tbody>
-	    </table>
+	    </table> */}
 	    </div> );
   }
   

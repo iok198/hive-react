@@ -1,4 +1,5 @@
 function parseMastery(mArr){
+    console.log(mArr)
     const sMasteryArr = mArr[0]
     const masteryArr = mArr[1]
     const courseStrArr = mArr[2].split('|')
