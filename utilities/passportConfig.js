@@ -3,6 +3,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 var googPassCred = require('../googPassCred.js')
 
 function extractProfile (profile) {
+    console.log(profile);
   var imageUrl = '';
   if (profile.photos && profile.photos[0] && profile.photos[0].value) {
     imageUrl = profile.photos[0].value
