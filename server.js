@@ -64,8 +64,8 @@ app.get('/', function (req, res) {
     //console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
-      res.send(req.session)
-      //res.redirect('/users')
+      //res.send(req.session)
+      res.redirect('/users')
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
 })
