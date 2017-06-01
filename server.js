@@ -32,7 +32,7 @@ app.use(function (req, res, next) {
 
 
   app.use(bodyParser.json())
-  //app.use(cookieParser)
+  app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({
   secret: 'cris1s',
