@@ -34,7 +34,11 @@ app.use(function (req, res, next) {
   app.use(bodyParser.json())
   //app.use(cookieParser)
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(session({ secret: "reoer000", resave: true, saveUninitialized: true }))
+  app.use(session({
+  secret: 'cris1s',
+  resave: false,
+  saveUninitialized: true
+}))
   app.use(passport.initialize())
   app.use(passport.session())
   app.use('/public',express.static('public'))
