@@ -32,9 +32,13 @@ app.use(function (req, res, next) {
 
 
   app.use(bodyParser.json())
-  //app.use(cookieParser)
+  app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(session({ secret: "reoer000", resave: true, saveUninitialized: true }))
+  app.use(session({
+  secret: 'cris1s',
+  resave: false,
+  saveUninitialized: false
+}))
   app.use(passport.initialize())
   app.use(passport.session())
   app.use('/public',express.static('public'))
@@ -60,7 +64,8 @@ app.get('/', function (req, res) {
     //console.log(req)
     if(req.user){console.log('got a user')
     console.log(req.user.emailID)
-      res.sendFile(__dirname + "/public/index.html")
+      res.send(req.session)
+      //res.redirect('/users')
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
 })
