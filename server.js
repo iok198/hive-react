@@ -85,7 +85,7 @@ app.get('/mastery/:courseStr',function(req,res){
 })
 
 app.get('/mymastery',function(req,res){
-  if(req.user){
+  if(req.user && !!(req.user.courseStr.indexOf('s') + 1)){
     console.log('mastery request from:')
     console.log(req.user)
     var courseStr = req.user.courseStr.replace(/[at]/,"s").replace(/[0]/g,".")
