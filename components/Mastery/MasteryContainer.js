@@ -9,7 +9,7 @@ var MasteryStuTD = require('./MasteryStuTD.js')
 var parseMastery = require('./utilities/parseMastery.js')
 var postRequestForReact = require('../../utilities/postRequestForReact.js')
 
-class GradeJumbo extends React.Component {
+class MasteryContainer extends React.Component {
   constructor(props){
     super(props);
     console.log(this.props.mArr)
@@ -30,7 +30,7 @@ class GradeJumbo extends React.Component {
   render(){
       //let list = this._getMastery(this.state.parsedMastery);
     
-    return( <div className="jumbotron">
+    return( <div className="container">
       <ul className="pager">
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
@@ -91,4 +91,4 @@ class GradeJumbo extends React.Component {
 
 }
 
-module.exports = GradeJumbo;
+module.exports = MasteryContainer;
