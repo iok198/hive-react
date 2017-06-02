@@ -9,7 +9,7 @@ class SWIPContainer extends React.Component {
    }
 
   render(){
-      return ("Hello World")
+      return <span >"Hello World"</span>
   }
 }
 
