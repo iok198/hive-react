@@ -18,7 +18,7 @@ class SWIPContainer extends React.Component {
       </tr>
     </thead>
     <tbody>
-      {Object.keys(this.props.swipRows).map((swipRow) => (<tr>
+      {Object.keys(this.props.swipRows).map((swipRow) => (<tr key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
         </tr>))}
     </tbody>
