@@ -5,9 +5,17 @@ class SWIPContainer extends React.Component {
   constructor(props){
     super(props);
 
-     
+    //this.changeSelect = this.changeSelect.bind(this)
+    //this.changeSelectState = this.changeSelectState.bind(this)
    }
-
+    
+  compare = {
+    "lt": (x,y) => (x<y),
+    "le": (x,y) => (x<=y),
+    "ee": (x,y) => (x==y),
+    "ge": (x,y) => (x>=y),
+    "gt": (x,y) => (x>y)
+  }
   render(){
       return <table className="table">
     <thead>
@@ -18,9 +26,9 @@ class SWIPContainer extends React.Component {
       </tr>
     </thead>
     <tbody>
-      {this.props.swipRows.map((swipRow,id) => (<tr key={swipRow.stuUDID}>
+      {this.props.swipRows.map((swipRow,id) => (this.compare[this.props.swipThreshold.substring(0,2)](swipRow.swips,parseInt(this.props.swipThreshold.substring(2))) ? <tr key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
-        </tr>))}
+        </tr> : null))}
     </tbody>
   </table>
   }
