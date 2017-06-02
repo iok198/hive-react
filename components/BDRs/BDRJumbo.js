@@ -17,12 +17,18 @@ class BDRJumbo extends React.Component {
       buttonText = 'Hide BDRs';
       list = this._getBDRs();
     }
-    
+    if(this.props.bdrs === []) {
+      return( <div id="" className="jumbotron">
+              No BDRS
+      </div> );
+    }
+    else {
     return( <div id="" className="jumbotron">
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
               <br />
               {list}
 	    </div> );
+    }
 }
 
   _handleClick(){
