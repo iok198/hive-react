@@ -9,8 +9,10 @@ var postRequestForReact = require('./utilities/postRequestForReact.js')
 var stuCourseQuObj = require('./utilities/courseQueryPrepare')
 
 getRequestForReact("/mybdrs",(arr) => ( [
+	if(arr !=== "[]") {
           <BDRJumbo bdrs={arr}/>,
         document.getElementById('content2')]))
+}
 
 getRequestForReact("/users",(arr) => ( [
           <GreetingJumbo user={arr[0]} />,
