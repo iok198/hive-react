@@ -2,14 +2,28 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 var BDRPanel = require('./BDRPanel.js')
 var SWIPContainer = require('./SWIPTables/SWIPTable.js')
+var getRequestToArr = require('../../utilities/getRequestToArr.js')
 
 class BDRJumbo extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
-    this.state = {showBDRs: false};  
+    this.state = {showBDRs: false,swipArr:[]}
+    this.getSWIPsForThreshold = this.getSWIPsForThreshold.bind(this)
    }
-
+  
+  getSWIPsForThreshold(swipThreshold){
+    var changeSWIPArrState = this.changeSWIPArrState.bind(this)
+    return function(){
+      getRequestToArr("/swips/" + swipThreshold,changeSWIPArrState)}
+  }
+  
+  changeSWIPArrState(arr){
+    this.setState({swipArr:arr})
+  }
+  
+  componentWillMount(){this.getSWIPsForThreshold("le20")}
+  
   render(){
     let list;
     let buttonText = 'Show BDRs';
@@ -19,10 +33,11 @@ class BDRJumbo extends React.Component {
       list = this._getBDRs();
     }
     
+    
     return( <div id="" className="jumbotron">
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
               <br />
-              <SWIPContainer swipRows={[{name:"jared",classNo:383,swips:13,stuUDID:34}]}/>
+              <SWIPContainer swipRows={this.state.swipArr}/>
               {list}
 	    </div> );
 }
