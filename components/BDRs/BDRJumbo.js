@@ -22,7 +22,7 @@ class BDRJumbo extends React.Component {
     return( <div id="" className="jumbotron">
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
               <br />
-              <SWIPContainer swipRows={[{name:"jared",classNo:383,swips:13}]}/>
+              <SWIPContainer swipRows={[{name:"jared",classNo:383,swips:13,stuUDID:34}]}/>
               {list}
 	    </div> );
 }
