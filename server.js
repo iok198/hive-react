@@ -82,7 +82,7 @@ app.get('/swips/:threshold',function(req,res){
   var num = req.params.threshold.substring(2)
   var threshold = ops[op] + num
   var addlcon = ""
-  connection.query('SELECT concat(u.title," ",u.lastName) name, u.classNo classNo, IF(s.SWIPS,s.SWIPS,20) AS swips, u.stuUDID stuUDID '
+  connection.query('SELECT concat(u.title," ",u.lastName) name, u.classNo classNo, IF(s.SWIPS,s.SWIPS,20) AS swips, u.entryID stuUDID '
         + 'FROM userDirectory AS u '
         + 'LEFT JOIN ( SELECT studentUDID, (20 - SUM(CASE WHEN ((swipCode >= 1)) THEN swipCode ELSE 0 END)) as SWIPS FROM bdrs GROUP BY bdrs.studentUDID ) as s '
         + 'ON u.entryID=s.studentUDID '
