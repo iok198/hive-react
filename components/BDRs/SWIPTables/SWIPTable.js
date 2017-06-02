@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom'
 class SWIPContainer extends React.Component {
   constructor(props){
     super(props);
-
-    //this.changeSelect = this.changeSelect.bind(this)
-    //this.changeSelectState = this.changeSelectState.bind(this)
-   }
-    
-  compare = {
+    this.compare = {
     "lt": (x,y) => (x<y),
     "le": (x,y) => (x<=y),
     "ee": (x,y) => (x==y),
     "ge": (x,y) => (x>=y),
     "gt": (x,y) => (x>y)
-  }
+    }
+    //this.changeSelect = this.changeSelect.bind(this)
+    //this.changeSelectState = this.changeSelectState.bind(this)
+   }
+    
+  
   render(){
       return <table className="table">
     <thead>
