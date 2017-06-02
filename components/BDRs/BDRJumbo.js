@@ -22,7 +22,7 @@ class BDRJumbo extends React.Component {
     this.setState({swipArr:arr})
   }
   
-  componentWillMount(){this.getSWIPsForThreshold("le20")}
+  componentWillMount(){this.getSWIPsForThreshold("le20")()}
   
   render(){
     let list;
