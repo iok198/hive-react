@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 var BDRPanel = require('./BDRPanel.js')
-var SWIPContainer = require('./SWIPTables/SWIPContainer.js')
+var SWIPContainer = require('./SWIPTables/SWIPTable.js')
 
 class BDRJumbo extends React.Component {
   constructor(){
@@ -22,7 +22,7 @@ class BDRJumbo extends React.Component {
     return( <div id="" className="jumbotron">
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
               <br />
-              <SWIPContainer/>
+              <SWIPContainer swipRows={[{name:"jared",classNo:383,swips:13}]}/>
               {list}
 	    </div> );
 }
