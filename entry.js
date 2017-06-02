@@ -8,8 +8,8 @@ var getRequestForReact = require('./utilities/getRequestForReact.js')
 var postRequestForReact = require('./utilities/postRequestForReact.js')
 var stuCourseQuObj = require('./utilities/courseQueryPrepare')
 
-getRequestForReact("/mybdrs",(arr) => ( [
-	if(arr !=== "[]") {
+getRequestForReact("/mybdrs",(arr) => ( if(arr !=== "[]") {[
+
           <BDRJumbo bdrs={arr}/>,
         document.getElementById('content2')]))
 }
