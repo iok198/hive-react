@@ -57,7 +57,7 @@ class BDRJumbo extends React.Component {
                 <option value={"gt12"}>{">12"}</option>
               </select>
               <br />
-              <SWIPContainer swipRows={this.state.swipArr} threshold={this.state.swipThreshold}/>
+              <SWIPContainer swipRows={this.state.swipArr} swipThreshold={this.state.swipThreshold}/>
               {list}
 	    </div> );
 }
