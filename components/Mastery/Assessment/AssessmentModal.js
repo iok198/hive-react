@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var AssessmentTable = require('./MasteryTable.js')
 
-class AssessmentTable extends React.Component{
+class AssessmentModal extends React.Component{
     render(){
         return (<div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div className="modal-dialog" role="document">
