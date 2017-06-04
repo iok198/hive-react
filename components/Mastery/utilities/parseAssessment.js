@@ -1,4 +1,4 @@
-function parseMastery(mArr){
+function parseAssessment(mArr){
     var studentRows = mArr[0]
     var LOs = mArr[1]
     var assessmentModel = mArr[2][0]
@@ -17,4 +17,4 @@ function parseMastery(mArr){
     console.log({rowsByStu:rowsByStu,alignModel:alignModel})
     return {rowsByStu:rowsByStu,alignModel:alignModel}
 }
-module.exports = parseMastery
+module.exports = parseAssessment

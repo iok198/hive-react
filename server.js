@@ -107,7 +107,7 @@ app.get('/mastery/:courseStr',function(req,res){
 
 app.get('/assessments/:courseStr/:assessID',function(req,res){
   var queries = assessGradeQueries({courseStr:connection.escape(req.params.courseStr),assessID:connection.escape(req.params.assessID)})
-  connection.query([queries.studentRatingQuery, queries.LOQuery].join("; "),queryCallbacks.default(req,res,req.params.courseStr))
+  connection.query([queries.studentRatingQuery, queries.LOQuery, queries.assessQuery].join("; "),queryCallbacks.default(req,res,req.params.courseStr))
 })
 
 app.get('/mymastery',function(req,res){
