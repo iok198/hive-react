@@ -10,17 +10,17 @@ function parseAssessment(mArr){
     var rowsByStu = {}
     
     studentRows.forEach((row,id) => {
-        if(!rowsByStu.hasOwnProperty(row.stuUDID)){rowsByStu[row.stuUDID] = {ratings:Object.assign({},alignModel),studentRowsId:id,recentrating:''}
-        Object.keys(rowsByStu[row.stuUDID].ratings).forEach((key,id)=>{
+        if(!rowsByStu.hasOwnProperty(row.uEntryID)){rowsByStu[row.uEntryID] = {ratings:Object.assign({},alignModel),studentRowsId:id,recentrating:''}
+        Object.keys(rowsByStu[row.uEntryID].ratings).forEach((key,id)=>{
             var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n')
             if(ratingsREGEXP.exec(row.recentrating)){
                 var regmatch = ratingsREGEXP.exec(row.recentrating)[0]
-                rowsByStu[row.stuUDID].recentrating += regmatch
-                rowsByStu[row.stuUDID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
+                rowsByStu[row.uEntryID].recentrating += regmatch
+                rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
             
             } else{
-                rowsByStu[row.stuUDID].recentRating += 'm' + key + ':0n'
-                rowsByStu[row.stuUDID].ratings[key] = 0
+                rowsByStu[row.uEntryID].recentRating += 'm' + key + ':0n'
+                rowsByStu[row.uEntryID].ratings[key] = 0
             }
             
         })
