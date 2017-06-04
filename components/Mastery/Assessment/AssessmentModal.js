@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-var AssessmentTable = require('./MasteryTable.js')
+var AssessmentTable = require('./AssessmentTable.js')
 
 class AssessmentModal extends React.Component{
     render(){
