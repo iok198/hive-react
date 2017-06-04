@@ -10,7 +10,7 @@ function parseAssessment(mArr){
     var rowsByStu = {}
     
     studentRows.forEach((row,id) => {
-        if(!rowsByStu.hasOwnProperty(row.stuUDID)){rowsByStu[row.stuUDID] = {ratings:alignModel,studentRowsId:id,recentrating:''}
+        if(!rowsByStu.hasOwnProperty(row.stuUDID)){rowsByStu[row.stuUDID] = {ratings:Object.assign({},alignModel),studentRowsId:id,recentrating:''}
         Object.keys(rowsByStu[row.stuUDID].ratings).forEach((key,id)=>{
             var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n')
             if(ratingsREGEXP.exec(row.recentrating)){
