@@ -19,7 +19,7 @@ function parseAssessment(mArr){
                 rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
             
             } else{
-                rowsByStu[row.uEntryID].recentRating += 'm' + key + ':0n'
+                rowsByStu[row.uEntryID].recentrating += 'm' + key + ':0n'
                 rowsByStu[row.uEntryID].ratings[key] = 0
             }
             
