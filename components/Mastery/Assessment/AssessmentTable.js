@@ -5,7 +5,7 @@ var AssessmentHeadTD = require('./AssessmentHeadTD.js')
 
 var AssessmentStuTR = require('./AssessmentStuTR.js')
 var AssessmentStuTD = require('./AssessmentStuTD.js')
-//var parseAssessment = require('./utilities/parseAssessment.js')
+var parseAssessment = require('../utilities/parseAssessment.js')
 var postRequestForReact = require('../../../utilities/postRequestForReact.js')
 
 class AssessmentTable extends React.Component {

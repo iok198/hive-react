@@ -6,6 +6,7 @@ var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var queryCallbacks = require('./utilities/queryCallbacks.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
+var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQueries.js')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var passportConfig = require('./utilities/passportConfig.js')
@@ -101,6 +102,11 @@ app.get('/users',function(req, res){
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
   connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+})
+
+app.get('/assessments/:courseStr/:assessID',function(req,res){
+  var queries = assessGradeQueries({courseStr:connection.escape(req.params.courseStr),assessID:connection.escape(req.params.assessID)})
+  connection.query([queries.studentRatingQuery, queries.LOQuery].join("; "),queryCallbacks.default(req,res,req.params.courseStr))
 })
 
 app.get('/mymastery',function(req,res){
