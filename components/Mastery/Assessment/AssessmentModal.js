@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var AssessmentTable = require('./AssessmentTable.js')
+var parseAssessment = require('../utilities/parseAssessment.js')
+var getRequestToArr = require('../../../utilities/getRequestToArr.js')
 
 class AssessmentModal extends React.Component{
     render(){
+        getRequestToArr('/assessments/s7/257',parseAssessment)
         return (<div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
