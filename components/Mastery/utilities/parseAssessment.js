@@ -2,7 +2,7 @@ function parseAssessment(mArr){
     var studentRows = mArr[0]
     var LOs = mArr[1]
     var assessmentModel = mArr[2][0]
-    
+    console.log(mArr)
     
     var alignModel = {}
     assessmentModel.LOAlign.split("n").forEach((str)=>{if(!!str){ alignModel[str.substring(1)] = {}}})
