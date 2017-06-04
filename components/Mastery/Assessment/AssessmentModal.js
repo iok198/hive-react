@@ -4,7 +4,7 @@ var AssessmentTable = require('./AssessmentTable.js')
 
 class AssessmentModal extends React.Component{
     render(){
-        return (<div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        return (<div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
