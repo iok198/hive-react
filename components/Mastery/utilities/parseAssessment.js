@@ -5,7 +5,7 @@ function parseAssessment(mArr){
     
     
     var alignModel = {}
-    assessmentModel.LOAlign.split("n").forEach((str)=>{alignModel[str.substring(1)] = {}})
+    assessmentModel.LOAlign.split("n").forEach((str)=>{if(!!str){ alignModel[str.substring(1)] = {}}})
     var columnHeads = Object.assign({},alignModel)
     var rowsByStu = {}
     
