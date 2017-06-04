@@ -3,13 +3,27 @@ function parseAssessment(mArr){
     var LOs = mArr[1]
     var assessmentModel = mArr[2][0]
     
-    var columnHeads = {}
+    
     var alignModel = {}
     assessmentModel.LOAlign.split("n").forEach((str)=>{alignModel[str.substring(1)] = {}})
+    var columnHeads = Object.assign({},alignModel)
     var rowsByStu = {}
     
-    studentRows.forEach((row) => {
-        if(!rowsByStu.hasOwnProperty(row.stuUDID)){rowsByStu[row.stuUDID] = {ratings:alignModel}
+    studentRows.forEach((row,id) => {
+        if(!rowsByStu.hasOwnProperty(row.stuUDID)){rowsByStu[row.stuUDID] = {ratings:alignModel,studentRowsId:id,recentrating:''}
+        Object.keys(rowsByStu[row.stuUDID].ratings).forEach((key,id)=>{
+            var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n')
+            if(ratingsREGEXP.exec(row.recentrating)){
+                var regmatch = ratingsREGEXP.exec(row.recentrating)[0]
+                rowsByStu[row.stuUDID].recentrating += regmatch
+                rowsByStu[row.stuUDID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
+            
+            } else{
+                rowsByStu[row.stuUDID].recentRating += 'm' + key + ':0n'
+                rowsByStu[row.stuUDID].ratings[key] = 0
+            }
+            
+        })
         
             
         }
