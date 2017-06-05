@@ -9,7 +9,7 @@ class AssessmentModal extends React.Component{
       super(props)
       
       this.state={mArrS:[],page:0,vpage:0,parsedMastery:{}}
-      this.parseAssessment = this.parseAssessment.bind(this)
+      this.parseAssessment = parseAssessment.bind(this)
       this.prevPage = this.prevPage.bind(this)
       this.nextPage = this.nextPage.bind(this)
       this.upVPage = this.upVPage.bind(this)
