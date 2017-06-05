@@ -5,7 +5,7 @@ function parseAssessment(mArr){
     console.log(mArr)
     
     var LOsByID = {}
-    LOs.forEach((LO)=>{LOsByID[LO.entryID] = LO})
+    LOs.forEach((LO)=>{LOsByID[LO.LOID] = LO})
     console.log("LOs")
     console.log(LOsByID)
     var alignModel = {}
@@ -14,7 +14,7 @@ function parseAssessment(mArr){
     var columnHeads = Object.assign({},alignModel)
     var AssessmentArrS = Object.assign({},alignModel)
     Object.keys(AssessmentArrS).forEach((LOID,id)=>{
-        AssessmentArrS[LOID] = {mcountN:0,mcountA:0,mcountM:0,mcountE:0,mcountU:0, LOText:LOsByID[parseInt(LOID)].LOText}
+        AssessmentArrS[LOID] = {mcountN:0,mcountA:0,mcountM:0,mcountE:0,mcountU:0, LOText:LOsByID[LOID].LOText}
     })
     var rowsByStu = {}
     
