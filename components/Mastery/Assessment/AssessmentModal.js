@@ -8,7 +8,7 @@ class AssessmentModal extends React.Component{
     constructor(props){
       super(props)
       
-      this.state={mArrS:[],page:0,vpage:0,parsedMastery:{}}
+      this.state={mArrS:[],page:0,vpage:0,parsedAssessment:parseAssessment(this.props.mArr)}
       this.parseAssessment = parseAssessment.bind(this)
       this.prevPage = this.prevPage.bind(this)
       this.nextPage = this.nextPage.bind(this)
@@ -16,7 +16,6 @@ class AssessmentModal extends React.Component{
       this.downVPage = this.downVPage.bind(this)
     }
     render(){
-        this.setState({parsedAssessment:parseAssessment(this.props.mArr)})
       
         return (<div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div className="modal-dialog" role="document">
