@@ -17,7 +17,7 @@ class AssessmentHeadTR extends React.Component {
         {[0,1,2,3].map((id,index) => 
         {
         if(!!this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]]){
-        return <AssessmentHeadTD key={this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]].courseStrLOID} mRecord={(!!this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]]) ? this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0}} colOffset={id}/>
+        return <AssessmentHeadTD key={Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]} mRecord={(!!this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]]) ? this.props.parsedAssessment.AssessmentArrS[Object.keys(this.props.parsedAssessment.AssessmentArrS)[id+4*this.props.page]] : {mcountN:0, mcountA:0, mcountM:0, mcountE:0, mcountU:'All'}} colOffset={id}/>
         }
             else return null
         })

@@ -4,9 +4,16 @@ function parseAssessment(mArr){
     var assessmentModel = mArr[2][0]
     console.log(mArr)
     
+    var LOsByID = {}
+    LOs.forEach((LO)=>{LOsByID[LO.entryID] = LO})
     var alignModel = {}
     assessmentModel.LOAlign.split("n").forEach((str)=>{if(!!str){ alignModel[str.substring(1)] = {}}})
+    
     var columnHeads = Object.assign({},alignModel)
+    var AssessmentArrS = Object.assign({},alignModel)
+    Object.keys(AssessmentArrS).forEach((LOID,id)=>{
+        AssessmentArrS[LOID] = {mcountN:0,mcountA:0,mcountM:0,mcountE:0,mcountU:0, LOText:LOsByID[LOID].LOText}
+    })
     var rowsByStu = {}
     
     studentRows.forEach((row,id) => {
@@ -17,10 +24,25 @@ function parseAssessment(mArr){
                 var regmatch = ratingsREGEXP.exec(row.recentrating)[0]
                 rowsByStu[row.uEntryID].recentrating += regmatch
                 rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
+                switch(regmatch.split(":")[1].substring(0,1)){
+                    case "1":
+                        AssessmentArrS[key].mcountN++
+                        break
+                    case "2":
+                        AssessmentArrS[key].mcountA++
+                        break
+                    case "3":
+                        AssessmentArrS[key].mcountM++
+                        break
+                    case "4":
+                        AssessmentArrS[key].mcountE++
+                        break
+                }
             
             } else{
                 rowsByStu[row.uEntryID].recentrating += 'm' + key + ':0n'
                 rowsByStu[row.uEntryID].ratings[key] = 0
+                AssessmentArrS[key].mcountU++
             }
             
         })
@@ -28,7 +50,7 @@ function parseAssessment(mArr){
             
         }
     })
-    console.log({rowsByStu:rowsByStu,alignModel:alignModel})
-    return {rowsByStu:rowsByStu,alignModel:alignModel}
+    console.log({rowsByStu:rowsByStu,alignModel:alignModel,AssessmentArrS:AssessmentArrS})
+    return {rowsByStu:rowsByStu,alignModel:alignModel,AssessmentArrS:AssessmentArrS}
 }
 module.exports = parseAssessment
