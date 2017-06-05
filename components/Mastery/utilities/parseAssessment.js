@@ -6,13 +6,15 @@ function parseAssessment(mArr){
     
     var LOsByID = {}
     LOs.forEach((LO)=>{LOsByID[LO.entryID] = LO})
+    console.log("LOs")
+    console.log(LOs)
     var alignModel = {}
     assessmentModel.LOAlign.split("n").forEach((str)=>{if(!!str){ alignModel[str.substring(1)] = {}}})
     
     var columnHeads = Object.assign({},alignModel)
     var AssessmentArrS = Object.assign({},alignModel)
     Object.keys(AssessmentArrS).forEach((LOID,id)=>{
-        AssessmentArrS[LOID] = {mcountN:0,mcountA:0,mcountM:0,mcountE:0,mcountU:0, LOText:LOsByID[LOID].LOText}
+        AssessmentArrS[LOID] = {mcountN:0,mcountA:0,mcountM:0,mcountE:0,mcountU:0, LOText:LOsByID[parseInt(LOID)].LOText}
     })
     var rowsByStu = {}
     
