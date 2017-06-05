@@ -7,7 +7,7 @@ function parseAssessment(mArr){
     var LOsByID = {}
     LOs.forEach((LO)=>{LOsByID[LO.entryID] = LO})
     console.log("LOs")
-    console.log(LOs)
+    console.log(LOsByID)
     var alignModel = {}
     assessmentModel.LOAlign.split("n").forEach((str)=>{if(!!str){ alignModel[str.substring(1)] = {}}})
     
