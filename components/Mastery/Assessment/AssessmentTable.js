@@ -11,7 +11,7 @@ var postRequestForReact = require('../../../utilities/postRequestForReact.js')
 class AssessmentTable extends React.Component {
   constructor(props){
     super(props);
-    //console.log(this.props.mArrS)
+    console.log(this.props.parsedAssessment)
     this.state = {
     }
     //this.upVPage = this.props.upVPage.bind(this)

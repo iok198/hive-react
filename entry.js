@@ -19,5 +19,7 @@ getRequestForReact("/users",(arr) => ( [
   
   ]),function(arr) {ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
           document.getElementById('content3'))})
-          
-ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))
+
+//ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))
+
+getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
