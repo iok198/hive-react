@@ -23,4 +23,4 @@ function courseQueryPrep(obj) {
 
 }
 
-module.exports = courseQueryPrep;
+export default courseQueryPrep

@@ -20,4 +20,6 @@ var xhttp = new XMLHttpRequest();
 
 }
 
-module.exports = getRequestForReact;
+
+
+export default getRequestForReact
