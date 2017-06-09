@@ -101,8 +101,15 @@ app.get('/users',function(req, res){
 })
 
 app.get('/mastery/:courseStr',function(req,res){
+    if(req.user && !(req.user.courseStr.indexOf('s') + 1)){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
   connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+}
+else if(req.user.entryID == "109"){
+  var queries = gradeQueries(connection.escape(req.params.courseStr))
+  connection.query([queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+}
+else{res.send("[,,,]")}
 })
 
 app.get('/assessments/:courseStr/:assessID',function(req,res){
