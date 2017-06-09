@@ -69,17 +69,17 @@ function parseMastery(mArr) {
   sMasteryArr.forEach(sFit)
 
   return {
-    sMasteryArr,
-    masteryArr,
-    courseStrArr,
-    rowsByStu,
-    LOs,
-    mRating0s,
-    mRatingStrs,
-    LOIDsIDkeys,
-    masteryArrS,
-    stuBios
+    sMasteryArr: sMasteryArr,
+    masteryArr: masteryArr,
+    courseStrArr: courseStrArr,
+    rowsByStu: rowsByStu,
+    LOs: LOs,
+    mRating0s: mRating0s,
+    mRatingStrs: mRatingStrs,
+    LOIDsIDkeys: LOIDsIDkeys,
+    masteryArrS: masteryArrS,
+    stuBios: stuBios
   }
 }
 
-export default parseMastery;
+module.exports = parseMastery
