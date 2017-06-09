@@ -22,4 +22,4 @@ var xhttp = new XMLHttpRequest();
 
 
 
-export default getRequestForReact
+module.exports = getRequestForReact

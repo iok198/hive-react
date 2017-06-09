@@ -16,4 +16,4 @@ var xhttp = new XMLHttpRequest();
 
 }
 
-export default postRequestForReact
+module.exports = postRequestForReact
