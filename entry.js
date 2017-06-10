@@ -9,7 +9,7 @@ var getRequestForReact = require('./utilities/getRequestForReact.js')
 var postRequestForReact = require('./utilities/postRequestForReact.js')
 var stuCourseQuObj = require('./utilities/courseQueryPrepare')
 
-getRequestForReact("/mybdrs",(arr) => ( [(<BDRJumbo bdrs={arr}/>),
+getRequestForReact("/mybdrs",(arr) => ( [<BDRJumbo bdrs={arr}/>,
         document.getElementById('content2')]))
 
 getRequestForReact("/users",(arr) => ( [
