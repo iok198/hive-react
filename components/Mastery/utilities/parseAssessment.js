@@ -5,6 +5,7 @@ function parseAssessment(mArr){
     console.log(mArr)
     
     var mRating0s={}
+    var mRatingStrs={}
     var stuBios={}
     var LOsByID = {}
     LOs.forEach((LO)=>{LOsByID[LO.LOID] = LO})
@@ -23,12 +24,14 @@ function parseAssessment(mArr){
     studentRows.forEach((row,id) => {
         stuBios[row.uEntryID] = row.title + " " + row.lastName
         mRating0s[row.uEntryID] = {0:0,1:0,2:0,3:0,4:0}
+        mRatingStrs[row.uEntryID] = ""
         if(!rowsByStu.hasOwnProperty(row.uEntryID)){rowsByStu[row.uEntryID] = {ratings:Object.assign({},alignModel),studentRowsId:id,recentrating:''}
         Object.keys(rowsByStu[row.uEntryID].ratings).forEach((key,id)=>{
             var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n')
             if(ratingsREGEXP.exec(row.recentrating)){
                 var regmatch = ratingsREGEXP.exec(row.recentrating)[0]
                 rowsByStu[row.uEntryID].recentrating += regmatch
+                mRatingStrs[row.uEntryID] += regmatch
                 //mRating0s[row.uEntryID] = 
                 rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
                 switch(regmatch.split(":")[1].substring(0,1)){
@@ -56,6 +59,8 @@ function parseAssessment(mArr){
             
             } else{
                 rowsByStu[row.uEntryID].recentrating += 'm' + key + ':0n'
+                mRatingStrs[row.uEntryID] += 'm' + key + ':0n'
+                mRating0s[row.uEntryID][0]++
                 rowsByStu[row.uEntryID].ratings[key] = 0
                 AssessmentArrS[key].mcountU++
             }
