@@ -14,6 +14,11 @@ var passportConfig = require('./utilities/passportConfig.js')
 var passport = passportConfig.passport
 
 app.use(function (req, res, next) {
+  console.log(req.originalUrl)
+  next()
+})
+
+app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'http://jaredasutton.com:3000')
