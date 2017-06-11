@@ -112,6 +112,8 @@ app.get('/mastery/:courseStr',function(req,res){
 
 app.get('/assessments/:courseStr/:assessID',function(req,res){
   var queries = assessGradeQueries({courseStr:connection.escape(req.params.courseStr),assessID:connection.escape(req.params.assessID)})
+  console.log("assess query:")
+  console.log(queries)
   connection.query([queries.studentRatingQuery, queries.LOQuery, queries.assessQuery].join("; "),queryCallbacks.default(req,res,req.params.courseStr))
 })
 
