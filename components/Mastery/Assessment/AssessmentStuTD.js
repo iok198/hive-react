@@ -25,7 +25,7 @@ class AssessmentStuTD extends React.Component {
         return <td id={"Assessment-col-" + this.props.ratingData.courseStrLOIDsID } className={"Assessment-column mback" + this.state.mRating0} >
                         <form>
                           <div className="form-group">
-                            <select className="form-control" id="sel1" defaultValue={ this.state.mRating0 } onChange={this.changeSelect} disabled={this.props.mArrKey < 0}>
+                            <select className="form-control" id="sel1" defaultValue={ this.state.ratingData } onChange={this.changeSelect} disabled={this.props.mArrKey < 0}>
                               <option value="1">Not Yet</option>
                               <option value="2">Approaching</option>
                               <option value="3">Meeting</option>
