@@ -33,12 +33,6 @@ class AssessmentStuTD extends React.Component {
                             </select>
                           </div>
                         </form>
-                      
-                      <span id="" className="badge badgeNY" >{this.props.ratingData.mcountN}</span>
-                      <span id="" className="badge badgeA">{this.props.ratingData.mcountA}</span>
-                      <span id="" className="badge badgeM">{this.props.ratingData.mcountM}</span>
-                      <span id="" className="badge badgeE">{this.props.ratingData.mcountE}</span>
-
                </td>
     }
 }

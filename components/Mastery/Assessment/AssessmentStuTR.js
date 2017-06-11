@@ -17,7 +17,7 @@ class AssessmentStuTR extends React.Component {
         <AssessmentStuKeyTD key={"mKeyTD" + this.props.stuUDID} mRating0s={this.props.mRating0s} mRatingStr={this.props.mRatingStr} stuUDID={this.props.stuUDID} stuBio={this.props.stuBio}/>
         {[0,1,2,3].map((id,index) => {
         if(!!this.state.courseLOIDs[id+4*this.props.page] ){
-            return <AssessmentStuTD key={this.state.courseLOIDs[id+4*this.props.page] + '-' + this.props.stuUDID} mArrKey={!!this.props.stuData[this.state.courseLOIDs[id+4*this.props.page]] ? this.props.stuData[this.state.courseLOIDs[id+4*this.props.page]].mArrKey : -1} ratingData={!!this.props.stuData.ratings[this.state.courseLOIDs[id+4*this.props.page]] ? this.props.stuData.ratings[this.state.courseLOIDs[id+4*this.props.page]] : {mcountA:0,mcountE:0,mcountM:0,mcountN:0,mRating0:1}} colOffset={id} changer={this.props.changer}/>
+            return <AssessmentStuTD key={this.state.courseLOIDs[id+4*this.props.page] + '-' + this.props.stuUDID} mArrKey={(this.props.stuData.studentRowsId >= 0) ? this.props.stuData.studentRowsId : -1} ratingData={!!this.props.stuData.ratings[this.state.courseLOIDs[id+4*this.props.page]] ? this.props.stuData.ratings[this.state.courseLOIDs[id+4*this.props.page]] : {mcountA:0,mcountE:0,mcountM:0,mcountN:0,mRating0:1}} colOffset={id} changer={this.props.changer}/>
             } else return null
         })}
         </tr>
