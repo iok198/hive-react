@@ -21,4 +21,4 @@ getRequestForReact("/users",(arr) => ( [
 
 //ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))
 
-getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
+//getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
