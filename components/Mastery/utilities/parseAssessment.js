@@ -71,6 +71,6 @@ function parseAssessment(mArr){
         }
     })
     console.log({rowsByStu:rowsByStu,alignModel:alignModel,AssessmentArrS:AssessmentArrS})
-    return {rowsByStu:rowsByStu,alignModel:alignModel,AssessmentArrS:AssessmentArrS,mRating0s:mRating0s}
+    return {rowsByStu:rowsByStu,alignModel:alignModel,AssessmentArrS:AssessmentArrS,mRating0s:mRating0s,mRatingStrs:mRatingStrs}
 }
 module.exports = parseAssessment
