@@ -29,7 +29,7 @@ function parseAssessment(mArr){
             if(ratingsREGEXP.exec(row.recentrating)){
                 var regmatch = ratingsREGEXP.exec(row.recentrating)[0]
                 rowsByStu[row.uEntryID].recentrating += regmatch
-                mRating0s[row.uEntryID] = 
+                //mRating0s[row.uEntryID] = 
                 rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0,1) 
                 switch(regmatch.split(":")[1].substring(0,1)){
                     case "0":
