@@ -34,14 +34,13 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
-        console.log(this)
-        this[mRow.stuUDID][loid].mRatingO = rating
+        console.log(studentRows[mRow.stuUDID])
       }
     }
   
   
   
-  mRatingsY.forEach(mRatingItemizer,studentRows
+  mRatingsY.forEach(mRatingItemizer
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
