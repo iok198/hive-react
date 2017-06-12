@@ -26,18 +26,20 @@ function parseMastery2(mArr){
   )
   
   var mRatingItemizer = (mRow) => {
+    return () => {
     var myRe = /\d{1,}:\d/g;
       var str = mRow.recentrating;
-      var myArray;
+      var myArray = [];
       while ((myArray = myRe.exec(str)) !== null) {
         var ratArr = myArray[0].split(":")
         var loid = ratArr[0]
         var rating = ratArr[1]
         studentRows[mRow.stuUDID][loid].mRatingO = rating
+      }
     }
   }
   
-  mRatingsY.forEach(mRatingItemizer
+  mRatingsY.forEach((mRow,id) => mRatingItemizer(mRow)()
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
