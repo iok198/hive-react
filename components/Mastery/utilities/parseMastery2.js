@@ -26,7 +26,6 @@ function parseMastery2(mArr){
   )
   
   var mRatingItemizer = (mRow) => {
-    return () => {
     var myRe = /\d{1,}:\d/g;
       var str = mRow.recentRating;
       var myArray;
@@ -35,7 +34,6 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         studentRows[mRow.stuUDID][loid].mRatingO = rating
-      }
     }
   }
   
