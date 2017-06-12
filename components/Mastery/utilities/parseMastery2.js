@@ -40,7 +40,7 @@ function parseMastery2(mArr){
   }
   
   mRatingsY.forEach((mRow,id) => {
-        mRatingItemizer(mRow.recentrating,mRow)
+        mRatingItemizer(mRow.recentrating,mRow)()
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
