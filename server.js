@@ -5,6 +5,7 @@ var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var queryCallbacks = require('./utilities/queryCallbacks.js')
 var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
+var gradeQueries3 = require('./components/Mastery/utilities/gradeQueries3.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQueries.js')
 //var parseAssessment = require('./components/Mastery/utilities/parseAssessment.js')
@@ -143,6 +144,10 @@ app.get('/los/:courseQueryStr',function(req, res){
   connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', queryCallbacks.default(req,res))
 })
 
+app.get('/grades3/:courseQueryStr',function(req, res){
+  
+  connection.query(gradeQueries3(connection.escape(req.params.courseQueryStr.toString())).joined, queryCallbacks.default(req,res))
+})
 
 
 app.post("/sendgrades",function(req,res){
