@@ -6,7 +6,8 @@ function parseMastery2(mArr){
   
   var LOtemplate = {}
   LOs.forEach((LOrow,id) => {
-        var LOel = {courseStr:LOrow.courseStr,LOCode:LOrow.LOCode,LOText:LOrow.LOText,
+        var LOel = {courseStr:LOrow.courseStr,LOCode:LOrow.LOCode,LOText:LOrow.LOText,LOID:LOrow.entryID,
+        mRatingO:0,
         mCountU:0,
         mCountN:0,
         mCountA:0,
@@ -21,6 +22,22 @@ function parseMastery2(mArr){
   students.forEach((stuRow,id) => {
     var stuEl = Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
     studentRows[stuRow.entryID] = stuEl
+    }
+  )
+  
+  mRatingsY.forEach((mRow,id) => {
+      var myRe = /\d{1,}:\d/g;
+      var str = mRow.recentrating;
+      var myArray;
+      while ((myArray = myRe.exec(str)) !== null) {
+        var ratArr = myArray[0].split(":")
+        var loid = ratArr[0]
+        var rating = ratArr[1]
+        studentRows[mRow.stuUDID][loid].mRatingO = rating
+        //var msg = 'Found ' + myArray[0] + '. ';
+        //msg += 'Next match starts at ' + myRe.lastIndex;
+        //console.log(msg);
+      }
     }
   )
   return studentRows
