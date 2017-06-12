@@ -18,16 +18,14 @@ function parseMastery2(mArr){
     }
   )
   
-  var studentRows = {sTRs:{}}
-  studentRows.updateRow = (stuUDID,loid,property,value) => {studentRows.sTRs[stuUDID][property] = value}
+  var studentRows = {}
   students.forEach((stuRow,id) => {
     var stuEl = Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
-    studentRows.sTRs[stuRow.entryID] = stuEl
+    studentRows[stuRow.entryID] = stuEl
     }
   )
   
-  var mRatingItemizer = (obj) => {
-    return (mRow)=>{
+  var mRatingItemizer = (mRow)=>{
     var myRe = /\d{1,}:\d/g;
       var str = mRow.recentrating;
       var myArray = [];
@@ -36,15 +34,13 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
-        obj.updateRow(mRow.stuUDID,loid,"mRatingO",rating)
-        //obj[mRow.stuUDID][loid].mRatingO = rating
+        this[mRow.stuUDID][loid].mRatingO = rating
       }
     }
-  }
   
   
   
-  mRatingsY.forEach(mRatingItemizer(studentRows)
+  mRatingsY.forEach(mRatingItemizer,studentRows
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
