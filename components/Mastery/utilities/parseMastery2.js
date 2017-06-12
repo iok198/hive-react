@@ -34,9 +34,11 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
-        studentRows[mRow.stuUDID][loid].mRatingO = rating
+        this[mRow.stuUDID][loid].mRatingO = rating
     }
   }
+  
+  mRatingItemizer.bind(studentRows)
   
   mRatingsY.forEach(mRatingItemizer
         //var msg = 'Found ' + myArray[0] + '. ';
