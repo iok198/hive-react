@@ -25,7 +25,8 @@ function parseMastery2(mArr){
     }
   )
   
-  var mRatingItemizer = (mRow) => {
+  var mRatingItemizer = (obj) => {
+    return (mRow)=>{
     var myRe = /\d{1,}:\d/g;
       var str = mRow.recentrating;
       var myArray = [];
@@ -34,13 +35,14 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
-        this[mRow.stuUDID][loid].mRatingO = rating
+        obj[mRow.stuUDID][loid].mRatingO = rating
+      }
     }
   }
   
   
   
-  mRatingsY.forEach(mRatingItemizer.bind(studentRows)
+  mRatingsY.forEach(mRatingItemizer(studentRows)
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
