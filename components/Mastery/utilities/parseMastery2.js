@@ -27,7 +27,7 @@ function parseMastery2(mArr){
   
   var mRatingItemizer = (mRow) => {
     var myRe = /\d{1,}:\d/g;
-      var str = mRow.recentRating;
+      var str = mRow.recentrating;
       var myArray;
       while ((myArray = myRe.exec(str)) !== null) {
         var ratArr = myArray[0].split(":")
