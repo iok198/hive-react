@@ -34,6 +34,7 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
+        console.log(this)
         this[mRow.stuUDID][loid].mRatingO = rating
       }
     }
