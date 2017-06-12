@@ -38,9 +38,9 @@ function parseMastery2(mArr){
     }
   }
   
-  mRatingItemizer.bind(studentRows)
   
-  mRatingsY.forEach(mRatingItemizer
+  
+  mRatingsY.forEach(mRatingItemizer.bind(studentRows)
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
