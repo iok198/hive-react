@@ -25,10 +25,10 @@ function parseMastery2(mArr){
     }
   )
   
-  var mRatingItemizer = (mStr,mRow) => {
+  var mRatingItemizer = (mRow) => {
     return () => {
     var myRe = /\d{1,}:\d/g;
-      var str = mStr;
+      var str = mRow.recentRating;
       var myArray;
       while ((myArray = myRe.exec(str)) !== null) {
         var ratArr = myArray[0].split(":")
@@ -39,12 +39,10 @@ function parseMastery2(mArr){
     }
   }
   
-  mRatingsY.forEach((mRow,id) => {
-        mRatingItemizer(mRow.recentrating,mRow)()
+  mRatingsY.forEach(mRatingItemizer
         //var msg = 'Found ' + myArray[0] + '. ';
         //msg += 'Next match starts at ' + myRe.lastIndex;
         //console.log(msg);
-      }
   )
   return studentRows
 }
