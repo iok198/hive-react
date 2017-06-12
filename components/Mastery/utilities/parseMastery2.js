@@ -6,16 +6,22 @@ function parseMastery2(mArr){
   
   var LOtemplate = {}
   LOs.forEach((LOrow,id) => {
-      var LOel = Object.assign({},LOrow)
-      LOel.mCountU = 0
-      LOel.mCountN = 0
-      LOel.mCountA = 0
-      LOel.mCountM = 0
-      LOel.mCountE = 0
+        var LOel = {courseStr:LOrow.courseStr,LOCode:LOrow.LOCode,LOText:LOrow.LOText,
+        mCountU:0,
+        mCountN:0,
+        mCountA:0,
+        mCountM:0,
+        mCountE:0, LORowsID: id}
+
       LOtemplate[LOrow.entryID] = LOel
-    })
+    }
+  )
   
-  //var studentRows = students.map(() => ())
-  return LOtemplate
+  var studentRows = students.map((stuRow,id) => {
+    Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
+    
+    }
+  )
+  return studentRows
 }
 module.exports = parseMastery2

@@ -145,7 +145,6 @@ app.get('/los/:courseQueryStr',function(req, res){
 })
 
 app.get('/grades3/:courseQueryStr',function(req, res){
-  
   connection.query(gradeQueries3(connection.escape(req.params.courseQueryStr.toString())).joined, queryCallbacks.default(req,res))
 })
 
