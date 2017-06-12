@@ -18,10 +18,11 @@ function parseMastery2(mArr){
     }
   )
   
-  var studentRows = {}
+  var studentRows = {sTRs:{}}
+  studentRows.updateRow = (stuUDID,loid,property,value) => {studentRows.sTRs[stuUDID][property] = value}
   students.forEach((stuRow,id) => {
     var stuEl = Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
-    studentRows[stuRow.entryID] = stuEl
+    studentRows.sTRs[stuRow.entryID] = stuEl
     }
   )
   
@@ -35,7 +36,8 @@ function parseMastery2(mArr){
         var loid = ratArr[0]
         var rating = ratArr[1]
         console.log('stu: ' + mRow.stuUDID + ' loid: ' + loid + ' rating: ' + rating)
-        obj[mRow.stuUDID][loid].mRatingO = rating
+        obj.updateRow(mRow.stuUDID,loid,"mRatingO",rating)
+        //obj[mRow.stuUDID][loid].mRatingO = rating
       }
     }
   }
