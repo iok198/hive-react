@@ -17,9 +17,10 @@ function parseMastery2(mArr){
     }
   )
   
-  var studentRows = students.map((stuRow,id) => {
-    Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
-    
+  var studentRows = {}
+  students.forEach((stuRow,id) => {
+    var stuEl = Object.assign({stuRowsID: id,stuUDID:stuRow.entryID,name:stuRow.title + ' ' + stuRow.lastName},LOtemplate)
+    studentRows[stuRow.entryID] = stuEl
     }
   )
   return studentRows
