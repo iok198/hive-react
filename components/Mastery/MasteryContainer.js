@@ -38,11 +38,11 @@ class MasteryContainer extends React.Component {
       //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="container">
-      <ul className="pager">
+      {/*<ul className="pager">
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
-      </ul>
-      <MasteryTable page={this.state.page} vpage={this.state.vpage} upVPage={this.upVPage} downVPage={this.downVPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
+      </ul>*/}
+      <MasteryTable page={this.state.page} vpage={this.state.vpage} upVPage={this.upVPage} downVPage={this.downVPage} prevPage={this.prevPage} nextPage={this.nextPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
 	    </div> );
   }
   
