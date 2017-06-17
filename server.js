@@ -108,7 +108,7 @@ app.get('/users',function(req, res){
 
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
-  connection.query(["SET @@group_concat_max_len = 8000;",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+  connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
 })
 
 app.get('/assessments/:courseStr/:assessID',function(req,res){
