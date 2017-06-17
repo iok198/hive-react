@@ -10,7 +10,7 @@ function parseMastery(mArr){
     
     var LOs = masteryArr.map((mRecord,id) => {
       columns[mRecord.courseStrLOID] = null
-      masteryArrS[mRecord.courseStrLOID] = {masteryArrSKey:id,LOID:mRecord.LOID,LOText:mRecord.LOText,courseStrLOID:mRecord.courseStrLOID,mcountA:0,mcountE:0,mcountM:0,mcountN:0,mstudentsA:[],mstudentsE:[],mstudentsM:[],mstudentsN:[]}
+      masteryArrS[mRecord.courseStrLOID] = {masteryArrSKey:id,LOID:mRecord.LOID,LOText:mRecord.LOText,courseStrLOID:mRecord.courseStrLOID,mcountA:0,mcountE:0,mcountM:0,mcountN:0,mcountU:0,mstudentsA:[],mstudentsE:[],mstudentsM:[],mstudentsN:[],mstudentsU:[]}
       return mRecord.courseStrLOID
     })
     var mRating0s = {}
@@ -41,6 +41,10 @@ function parseMastery(mArr){
       }
       mRatingStrs[obj.stuUDID].string += "m" + obj.LOID + ":" + obj.mRating0 + "n"
       switch(obj.mRating0){
+        case 0:
+          masteryArrS[cL].mcountU++
+          masteryArrS[cL].mstudentsU.push(obj.stuUDID)
+          break
         case 1:
           masteryArrS[cL].mcountN++
           masteryArrS[cL].mstudentsN.push(obj.stuUDID)
