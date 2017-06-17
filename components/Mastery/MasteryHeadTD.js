@@ -5,6 +5,8 @@ class MasteryHeadTD extends React.Component {
         return <td id={"mastery-col-head-" + this.props.mRecord.courseStrLOID } className="mastery-column" style={{left: (40 + this.props.colOffset*140) + 'px'}}>
                       <span className="badge" ># Assessment(s)</span>
                       <span className="lo-text-span">{this.props.mRecord.LOText}</span>
+                      <br/>
+                      <span className="small">({this.props.mRecord.courseStrLOID})</span>
                       <br />
                       <span id="" className="badge badgeNY">{this.props.mRecord.mcountN}</span>
                       <span id="" className="badge badgeA">{this.props.mRecord.mcountA}</span>
