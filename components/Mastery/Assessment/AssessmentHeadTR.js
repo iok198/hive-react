@@ -8,11 +8,11 @@ class AssessmentHeadTR extends React.Component {
     }
     render(){
         return <tr id={"Assessment-row-head" } className="Assessment-row" >
-        <td><div className="panel panel-default">{"Student / Learning Outcome"}
+        <td><div className="panel panel-default"><div className="panel-body">{"Student / Learning Outcome"}
             <div className="btn-group-vertical" role="group" aria-label="...">
               <button type="button" className="btn btn-default" onClick={this.props.upVPage}><span className="glyphicon glyphicon-arrow-up" ></span></button>
               <button type="button" className="btn btn-default" onClick={this.props.downVPage}><span className="glyphicon glyphicon-arrow-down" ></span></button>
-            </div></div>
+            </div></div></div>
         </td>
         {[0,1,2,3].map((id,index) => 
         {
