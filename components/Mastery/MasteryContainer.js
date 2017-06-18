@@ -71,7 +71,9 @@ class MasteryContainer extends React.Component {
   }
   
   filterMasteryStu(text){
-    console.log(text)
+    var mArrC = this.state.mArrS.slice(0,3)
+    if(text != '') mArrC.push(text)
+    this.setState({mArrS:mArrC,parsedMastery:parseMastery(mArrC)})
   }
   
   changeMastery(stuUDID,mString,mRating0,mArrKey){
