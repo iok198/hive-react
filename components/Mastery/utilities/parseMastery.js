@@ -32,7 +32,7 @@ function parseMastery(mArr){
         stuBios[obj.stuUDID] = {name:obj.title + " " + obj.lastName}
       }
       
-      if(!classNos.indexOf(obj.classNo) < 0){ classNos.push(obj.classNo)}
+      if(classNos.indexOf(obj.classNo) < 0){ classNos.push(obj.classNo)}
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
