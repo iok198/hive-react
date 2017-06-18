@@ -13,14 +13,18 @@ class MasteryHeadTR extends React.Component {
                       <button type="button" className="btn btn-default" onClick={this.props.upVPage}><span className="glyphicon glyphicon-arrow-up" ></span></button>
                       <button type="button" className="btn btn-default" onClick={this.props.downVPage}><span className="glyphicon glyphicon-arrow-down" ></span></button>
                     </div>
-                    <div className="input-group">
-                      <span className="input-group-addon" id="basic-addon3">Name:</span>
-                      <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.props.filterMasteryStu(e.target.value)}.bind(this)} />
-                    </div>
-                      <select className="form-control" id="selClassNo" onChange={function(e){this.props.filterMasteryClassNo(e.target.value)}.bind(this)}>
-                      <option value={""}>All</option>
-                      {this.props.parsedMastery.classNos.map(item => (<option key={'cNo' + item} value={item}>{item}</option>))}
-                      </select>
+                    <div className="form-inline">
+                        <div className="form-group">
+                            <div className="input-group">
+                              <span className="input-group-addon" id="basic-addon3">Name:</span>
+                              <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.props.filterMasteryStu(e.target.value)}.bind(this)} />
+                            </div>
+                              <select className="form-control" id="selClassNo" onChange={function(e){this.props.filterMasteryClassNo(e.target.value)}.bind(this)}>
+                              <option value={""}>All</option>
+                              {this.props.parsedMastery.classNos.map(item => (<option key={'cNo' + item} value={item}>{item}</option>))}
+                              </select>
+                        <div>
+                      </div>
                 </div>
             </div>
             <div className="btn-group pager">
