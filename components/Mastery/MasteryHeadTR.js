@@ -17,6 +17,9 @@ class MasteryHeadTR extends React.Component {
                       <span className="input-group-addon" id="basic-addon3">Name:</span>
                       <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.props.filterMasteryStu(e.target.value)}.bind(this)} />
                     </div>
+                      <select className="form-control" id="selClassNo">
+                      {this.props.parsedMastery.classNos.map(item => (<option>{item}</option>))}
+                      </select>
                 </div>
             </div>
             <div className="btn-group pager">
