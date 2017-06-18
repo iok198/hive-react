@@ -12,7 +12,7 @@ class BDRJumbo extends React.Component {
     this.getSWIPsForThreshold = this.getSWIPsForThreshold.bind(this)
     this.changeSWIPThreshold = this.changeSWIPThreshold.bind(this)
     this.changeSelectState = this.changeSelectState.bind(this)
-    this.filterSWIPStu = this.filterSwipStu.bind(this)
+    this.filterSWIPStu = this.filterSWIPStu.bind(this)
    }
   
   getSWIPsForThreshold(swipThreshold){
