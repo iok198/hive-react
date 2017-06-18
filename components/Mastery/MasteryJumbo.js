@@ -30,8 +30,7 @@ class MasteryJumbo extends React.Component {
       //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
-        <div><img height="100" src="./public/img/MasteryGraph.png"/></div>
-              <h1>Mastery</h1>
+              <h1><img height="100" src="./public/img/MasteryGraph.png"/> Mastery</h1>
         <ul className="nav nav-pills">
             {Object.keys(this.props.stuCourseQuObj.strObj).map((key,id)=> (<li key={"masterynav" + key} onClick={this.getMasteryForCourse(key)}><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.stuCourseQuObj.strObj[key]}</a></li>))}
         </ul>
