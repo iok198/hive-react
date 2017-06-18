@@ -18,7 +18,8 @@ class MasteryHeadTR extends React.Component {
                       <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.props.filterMasteryStu(e.target.value)}.bind(this)} />
                     </div>
                       <select className="form-control" id="selClassNo" onChange={function(e){this.props.filterMasteryClassNo(e.target.value)}.bind(this)}>
-                      {this.props.parsedMastery.classNos.map(item => (<option value={item}>{item}</option>))}
+                      <option value={""}>All</option>
+                      {this.props.parsedMastery.classNos.map(item => (<option key={'cNo' + item} value={item}>{item}</option>))}
                       </select>
                 </div>
             </div>

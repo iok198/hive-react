@@ -24,6 +24,7 @@ class MasteryContainer extends React.Component {
     //this.parseMastery = parseMastery.bind(this)
     this.parseMastery = parseMastery.bind(this)
     this.filterMasteryStu = this.filterMasteryStu.bind(this)
+    this.filterMasteryClassNo = this.filterMasteryClassNo.bind(this)
     
   }
   
@@ -48,6 +49,7 @@ class MasteryContainer extends React.Component {
           prevPage={this.prevPage} nextPage={this.nextPage}
           changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} 
           mArrS={this.state.mArrS} filterMasteryStu={this.filterMasteryStu}
+          filterMasteryClassNo={this.filterMasteryClassNo}
       />
 	    </div> );
   }
@@ -76,7 +78,7 @@ class MasteryContainer extends React.Component {
     this.setState({mArrS:mArrC,parsedMastery:parseMastery(mArrC)})
   }
   
-  filterMasteryStu(text){
+  filterMasteryClassNo(text){
     var mArrC = this.state.mArrS.slice(0,4)
     if(text != '') mArrC.push(text)
     this.setState({mArrS:mArrC,parsedMastery:parseMastery(mArrC)})
