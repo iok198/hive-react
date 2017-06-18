@@ -59,27 +59,31 @@ class BDRJumbo extends React.Component {
     return( <div id="" className="jumbotron">
              <h1><img height="100" src="./public/img/SWIPSGraph.png"/> SWIPs</h1>
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
-              <select className="form-control" id="sel1" onChange={this.changeSWIPThreshold}>
-                <option value={"le20"}>{"All"}</option>
-                <option value={"le13"}>{"<=13"}</option>
-                <option value={"ee15"}>{"15"}</option>
-                <option value={"gt12"}>{">12"}</option>
-              </select>
-              <select className="form-control" id="sel2" onChange={function(e){this.filterSWIPClass(e.target.value)}.bind(this)}>
-                <option value={""}>{"All"}</option>
-                <option value={"601"}>601</option>
-                <option value={"602"}>602</option>
-                <option value={"603"}>603</option>
-                <option value={"701"}>701</option>
-                <option value={"702"}>702</option>
-                <option value={"703"}>703</option>
-                <option value={"801"}>801</option>
-                <option value={"802"}>802</option>
-                <option value={"803"}>803</option>
-              </select>
-              <div className="input-group">
-                <span className="input-group-addon" id="basic-addon3">Name:</span>
-                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.filterSWIPStu(e.target.value)}.bind(this)} />
+              <div className="form-inline">
+                <div className="form-group">
+                  <select className="form-control" id="sel1" onChange={this.changeSWIPThreshold}>
+                    <option value={"le20"}>{"All"}</option>
+                    <option value={"le13"}>{"<=13"}</option>
+                    <option value={"ee15"}>{"15"}</option>
+                    <option value={"gt12"}>{">12"}</option>
+                  </select>
+                  <select className="form-control" id="sel2" onChange={function(e){this.filterSWIPClass(e.target.value)}.bind(this)}>
+                    <option value={""}>{"All"}</option>
+                    <option value={"601"}>601</option>
+                    <option value={"602"}>602</option>
+                    <option value={"603"}>603</option>
+                    <option value={"701"}>701</option>
+                    <option value={"702"}>702</option>
+                    <option value={"703"}>703</option>
+                    <option value={"801"}>801</option>
+                    <option value={"802"}>802</option>
+                    <option value={"803"}>803</option>
+                  </select>
+                  <div className="input-group">
+                    <span className="input-group-addon" id="basic-addon3">Name:</span>
+                    <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.filterSWIPStu(e.target.value)}.bind(this)} />
+                  </div>
+                </div>
               </div>
               <br />
               <SWIPContainer swipRows={this.state.swipArr} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter} classFilter={this.state.classFilter}/>
