@@ -23,6 +23,7 @@ class MasteryContainer extends React.Component {
     this.changeMastery = this.changeMastery.bind(this)
     //this.parseMastery = parseMastery.bind(this)
     this.parseMastery = parseMastery.bind(this)
+    this.filterMasteryStu = this.filterMasteryStu.bind(this)
     
   }
   
@@ -42,7 +43,12 @@ class MasteryContainer extends React.Component {
         <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
         <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
       </ul>*/}
-      <MasteryTable page={this.state.page} vpage={this.state.vpage} upVPage={this.upVPage} downVPage={this.downVPage} prevPage={this.prevPage} nextPage={this.nextPage} changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} mArrS={this.state.mArrS} />
+      <MasteryTable page={this.state.page} vpage={this.state.vpage} 
+          upVPage={this.upVPage} downVPage={this.downVPage}
+          prevPage={this.prevPage} nextPage={this.nextPage}
+          changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} 
+          mArrS={this.state.mArrS} filterMasteryStu={this.filterMasteryStu}
+      />
 	    </div> );
   }
   
@@ -62,6 +68,10 @@ class MasteryContainer extends React.Component {
   
   getStudentRows(rowsByStu){
     
+  }
+  
+  filterMasteryStu(text){
+    console.log(text)
   }
   
   changeMastery(stuUDID,mString,mRating0,mArrKey){

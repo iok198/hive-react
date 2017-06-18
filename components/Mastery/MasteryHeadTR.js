@@ -15,7 +15,7 @@ class MasteryHeadTR extends React.Component {
                     </div>
                     <div className="input-group">
                       <span className="input-group-addon" id="basic-addon3">Name:</span>
-                      <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" />
+                      <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onClick={function(e){this.props.filterMasteryStu(e.target.value)}} />
                     </div>
                 </div>
             </div>

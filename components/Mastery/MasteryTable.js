@@ -29,7 +29,7 @@ class MasteryTable extends React.Component {
     return( 
       <table id="" className="table table-bordered">
               <tbody>
-              {(<MasteryHeadTR key={3813} parsedMastery={this.props.parsedMastery} colOffset={0} page={this.props.page} upVPage={this.props.upVPage} downVPage={this.props.downVPage} prevPage={this.props.prevPage} nextPage={this.props.nextPage}/>)}
+              {(<MasteryHeadTR key={3813} parsedMastery={this.props.parsedMastery} colOffset={0} page={this.props.page} upVPage={this.props.upVPage} downVPage={this.props.downVPage} prevPage={this.props.prevPage} nextPage={this.props.nextPage} filterMasteryStu={this.props.filterMasteryStu}/>)}
               {/*console.log(this.props.parsedMastery.rowsByStu)*/}
               {Object.keys(this.props.parsedMastery.rowsByStu).slice(0+5*(this.props.vpage),5+5*(this.props.vpage)).map((stuUDID,id1) => (<MasteryStuTR key={stuUDID} stuData={this.props.parsedMastery.rowsByStu[stuUDID]} mRating0s={this.props.parsedMastery.mRating0s[stuUDID]} mRatingStr={this.props.parsedMastery.mRatingStrs[stuUDID]} stuBio={this.props.parsedMastery.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.props.page} changer={this.props.changeMastery} />))}
               </tbody>
