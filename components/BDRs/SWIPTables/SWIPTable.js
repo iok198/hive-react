@@ -11,8 +11,16 @@ class SWIPContainer extends React.Component {
     "ge": (x,y) => (x>=y),
     "gt": (x,y) => (x>y)
     }
+    
+    this.avg = 0
+    this.countArr = []
     //this.changeSelect = this.changeSelect.bind(this)
     //this.changeSelectState = this.changeSelectState.bind(this)
+   }
+   
+   componentWillReceiveProps(){
+     this.avg = 0
+     this.countArr = []
    }
     
   
@@ -32,6 +40,8 @@ class SWIPContainer extends React.Component {
       && (this.props.classFilter == "" || swipRow.classNo == this.props.classFilter) ? 
       <tr key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
+            {this.countArr.push(swipRow.swips)}
+              {console.log(this.countArr)}
       </tr> 
       : null))}
     </tbody>
