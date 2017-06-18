@@ -26,9 +26,13 @@ class SWIPContainer extends React.Component {
       </tr>
     </thead>
     <tbody>
-      {this.props.swipRows.map((swipRow,id) => (this.compare[this.props.swipThreshold.substring(0,2)](swipRow.swips,parseInt(this.props.swipThreshold.substring(2))) ? <tr key={swipRow.stuUDID}>
+      {this.props.swipRows.map((swipRow,id) =>
+      (this.compare[this.props.swipThreshold.substring(0,2)](swipRow.swips,parseInt(this.props.swipThreshold.substring(2))) 
+      && (swipRow.name.toLowerCase().indexOf(this.props.nameFilter.toLowerCase()) > -1) ? 
+      <tr key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
-        </tr> : null))}
+      </tr> 
+      : null))}
     </tbody>
   </table>
   }

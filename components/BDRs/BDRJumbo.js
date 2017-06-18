@@ -8,10 +8,11 @@ class BDRJumbo extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {showBDRs: false,swipArr:[],swipThreshold:"le20"}
+    this.state = {showBDRs: false,swipArr:[],swipThreshold:"le20",nameFilter:''}
     this.getSWIPsForThreshold = this.getSWIPsForThreshold.bind(this)
     this.changeSWIPThreshold = this.changeSWIPThreshold.bind(this)
     this.changeSelectState = this.changeSelectState.bind(this)
+    this.filterSwipStu = this.filterSwipStu.bind(this)
    }
   
   getSWIPsForThreshold(swipThreshold){
@@ -35,6 +36,9 @@ class BDRJumbo extends React.Component {
       
     }
   
+  filterSwipStu(text){
+    this.setState({nameFilter:text})
+  }
   
   componentWillMount(){this.getSWIPsForThreshold("le20")()}
   
@@ -56,8 +60,12 @@ class BDRJumbo extends React.Component {
                 <option value={"ee15"}>{"15"}</option>
                 <option value={"gt12"}>{">12"}</option>
               </select>
+              <div className="input-group">
+                <span className="input-group-addon" id="basic-addon3">Name:</span>
+                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.filterSWIPStu(e.target.value)}.bind(this)} />
+              </div>
               <br />
-              <SWIPContainer swipRows={this.state.swipArr} swipThreshold={this.state.swipThreshold}/>
+              <SWIPContainer swipRows={this.state.swipArr} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter}/>
               {list}
 	    </div> );
 }
