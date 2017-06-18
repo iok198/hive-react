@@ -19,6 +19,7 @@ function parseMastery(mArr){
     var rowsByStu = {}
     var LOIDsIDkeys = {}
     var stuBios = {}
+    var classNos = []
     
     function sFit(obj,id){
       if(!obj.courseStrLOIDsID || (studentName && (obj.title + " " + obj.lastName).toLowerCase().indexOf(studentName.toLowerCase()) == -1)){return}
@@ -30,6 +31,8 @@ function parseMastery(mArr){
       if(!stuBios.hasOwnProperty(obj.stuUDID)){
         stuBios[obj.stuUDID] = {name:obj.title + " " + obj.lastName}
       }
+      
+      if(!classNos.indexOf(obj.classNo) < 0){ classNos.push(obj.classNo)}
       
       if(!mRating0s.hasOwnProperty(obj.stuUDID)){
         mRating0s[obj.stuUDID] = [0,0,0,0,0]
@@ -82,7 +85,8 @@ function parseMastery(mArr){
       mRatingStrs:mRatingStrs,
       LOIDsIDkeys:LOIDsIDkeys,
       masteryArrS:masteryArrS,
-      stuBios:stuBios
+      stuBios:stuBios,
+      classNos:classNos
     }
   }
   
