@@ -57,6 +57,7 @@ class BDRJumbo extends React.Component {
     
     
     return( <div id="" className="jumbotron">
+             <h1><img height="100" src="./public/img/SWIPSGraph.png"/> Mastery</h1>
               <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
               <select className="form-control" id="sel1" onChange={this.changeSWIPThreshold}>
                 <option value={"le20"}>{"All"}</option>
