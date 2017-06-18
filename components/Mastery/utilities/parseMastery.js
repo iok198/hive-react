@@ -3,6 +3,7 @@ function parseMastery(mArr){
     const sMasteryArr = mArr[0]
     const masteryArr = mArr[1]
     const courseStrArr = mArr[2].split('|')
+    const studentName = (mArr.length < 4) ? (false) : mArr[3]
     
     
     var columns = {}
@@ -20,7 +21,7 @@ function parseMastery(mArr){
     var stuBios = {}
     
     function sFit(obj,id){
-      if(!obj.courseStrLOIDsID){return}
+      if(!obj.courseStrLOIDsID || (studentName && (obj.title + " " + obj.lastName).toLowerCase().indexOf(studentName.toLowerCase()) > -1)){return}
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       var objC = Object.assign({},obj)
