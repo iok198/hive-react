@@ -40,8 +40,6 @@ class SWIPContainer extends React.Component {
       && (this.props.classFilter == "" || swipRow.classNo == this.props.classFilter) ? 
       <tr key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
-            {this.countArr.push(swipRow.swips)}
-              {console.log(this.countArr)}
       </tr> 
       : null))}
     </tbody>
