@@ -95,6 +95,21 @@ class BDRJumbo extends React.Component {
     this.setState({showBDRs: !this.state.showBDRs});
   }
   
+  _getBDRs2(){
+    const bdrArr = this.props.bdrs;
+    return (<table className="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Class</th>
+        <th>SWIPS</th>
+      </tr>
+    </thead>
+    <tbody>
+    {bdrArr.map((bdr) => (<tr key={bdr.entryID} bdr={bdr} ></tr>))}
+    </tbody>
+    </table>
+    )}
 
   _getBDRs(){
     const bdrArr = this.props.bdrs;
