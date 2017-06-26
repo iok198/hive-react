@@ -11,14 +11,17 @@ var postRequestForReact = require('./utilities/postRequestForReact.js')
 var stuCourseQuObj = require('./utilities/courseQueryPrepare')
 var parseMastery2 = require('./components/Mastery/utilities/parseMastery2.js')
 
-getRequestForReact("/mybdrs",(arr) => ( [<BDRJumbo bdrs={arr}/>,
-        document.getElementById('content2')]))
+/*getRequestForReact("/mybdrs",(arr) => ( [<BDRJumbo bdrs={arr}/>,
+        document.getElementById('content2')]))*/
 
 getRequestForReact("/users",(arr) => ( [
           <GreetingJumbo user={arr[0]} />,
           document.getElementById('content')
   
-  ]),function(arr) {ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
+  ]),function(arr) {
+	getRequestForReact("/bdrs/" + arr[0].entryID, (arr) => ( [<BDRJumbo bdrs={arr}/>,
+        document.getElementById('content2')]))
+	ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
           document.getElementById('content3'))})
 
 //ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))

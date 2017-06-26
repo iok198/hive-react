@@ -8,19 +8,32 @@ class BDRJumbo extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {showBDRs: false,swipArr:[],swipThreshold:"le20",nameFilter:'',classFilter:''}
+    this.state = {bdrArr: this.props.bdrs,showBDRs: false,swipArr:[],swipThreshold:"le20",nameFilter:'',classFilter:''}
     this.getSWIPsForThreshold = this.getSWIPsForThreshold.bind(this)
     this.changeSWIPThreshold = this.changeSWIPThreshold.bind(this)
     this.changeSelectState = this.changeSelectState.bind(this)
     this.filterSWIPStu = this.filterSWIPStu.bind(this)
+    this.getBDRsByUDID = this.getBDRsByUDID.bind(this)
+
    }
   
+  getBDRsByUDID(udid){
+    var changeBDRArrState = this.changeBDRArrState.bind(this)
+    return function(){
+      getRequestToArr("/bdrs/" + udid,changeBDRArrState)
+    }
+  }
+
   getSWIPsForThreshold(swipThreshold){
     var changeSWIPArrState = this.changeSWIPArrState.bind(this)
     return function(){
       getRequestToArr("/swips/" + swipThreshold,changeSWIPArrState)}
   }
   
+  changeBDRArrState(arr){
+    console.log(arr)
+    this.setState({bdrArr:arr})
+  }
   
   changeSWIPArrState(arr){
     this.setState({swipArr:arr})
@@ -86,7 +99,7 @@ class BDRJumbo extends React.Component {
                 </div>
               </div>
               <br />
-              <SWIPContainer swipRows={this.state.swipArr} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter} classFilter={this.state.classFilter}/>
+              <SWIPContainer swipRows={this.state.swipArr} getBDRsByUDID={this.getBDRsByUDID} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter} classFilter={this.state.classFilter}/>
               {list}
 	    </div> );
 }
@@ -112,7 +125,7 @@ class BDRJumbo extends React.Component {
     )}
 
   _getBDRs(){
-    const bdrArr = this.props.bdrs;
+    const bdrArr = this.state.bdrArr;
     return bdrArr.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
   }
 }

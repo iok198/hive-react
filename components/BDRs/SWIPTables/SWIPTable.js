@@ -38,7 +38,7 @@ class SWIPContainer extends React.Component {
       (this.compare[this.props.swipThreshold.substring(0,2)](swipRow.swips,parseInt(this.props.swipThreshold.substring(2))) 
       && (swipRow.name.toLowerCase().indexOf(this.props.nameFilter.toLowerCase()) > -1)
       && (this.props.classFilter == "" || swipRow.classNo == this.props.classFilter) ? 
-      <tr key={swipRow.stuUDID}>
+      <tr onClick={this.props.getBDRsByUDID(swipRow.stuUDID)} key={swipRow.stuUDID}>
             <td>{swipRow.name}</td><td>{swipRow.classNo}</td><td>{swipRow.swips}</td>
       </tr> 
       : null))}
