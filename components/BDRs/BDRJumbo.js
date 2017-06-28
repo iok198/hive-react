@@ -2,18 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 var BDRPanel = require('./BDRPanel.js')
 var SWIPContainer = require('./SWIPTables/SWIPTable.js')
+var SWIPFilter = require('./SWIPTables/SWIPFilter.js')
 var getRequestToArr = require('../../utilities/getRequestToArr.js')
 
 class BDRJumbo extends React.Component {
   constructor(props){
-    super(props);
+    super(props)
 
-    this.state = {bdrArr: this.props.bdrs,showBDRs: false,swipArr:[],swipThreshold:"le20",nameFilter:'',classFilter:''}
+    this.state = {bdrArr: this.props.bdrs,
+      showBDRs: false,
+      swipArr:[],
+      swipThreshold:"le20",
+      nameFilter:'',
+      classFilter:'',
+      udidFilter:0,
+      viewOption:''
+    }
     this.getSWIPsForThreshold = this.getSWIPsForThreshold.bind(this)
     this.changeSWIPThreshold = this.changeSWIPThreshold.bind(this)
     this.changeSelectState = this.changeSelectState.bind(this)
     this.filterSWIPStu = this.filterSWIPStu.bind(this)
+    this.filterSWIPClass = this.filterSWIPClass.bind(this)
     this.getBDRsByUDID = this.getBDRsByUDID.bind(this)
+    this.setSWIPTableFilterByUDID = this.setSWIPTableFilterByUDID.bind(this)
 
    }
   
@@ -29,9 +40,20 @@ class BDRJumbo extends React.Component {
     return function(){
       getRequestToArr("/swips/" + swipThreshold,changeSWIPArrState)}
   }
-  
+
+  setSWIPTableFilterByUDID(udid){
+    var changeUDIDFilterState = this.changeUDIDFilterState.bind(this)
+    return function(){
+      changeUDIDFilterState(udid)
+    }
+  }
+
+  changeUDIDFilterState(udid){
+    this.setState({udidFilter:udid,viewOption:'stulookup'})
+  }
+
   changeBDRArrState(arr){
-    console.log(arr)
+    //console.log(arr)
     this.setState({bdrArr:arr})
   }
   
@@ -60,52 +82,44 @@ class BDRJumbo extends React.Component {
   componentWillMount(){this.getSWIPsForThreshold("le20")()}
   
   render(){
-    let list;
-    let buttonText = 'Show BDRs';
+    let list
     
-    if (this.state.showBDRs){
-      buttonText = 'Hide BDRs';
+    if (this.state.viewOption == "bdr"){
       list = this._getBDRs();
-    }
+    } else if (this.state.viewOption == "swipTable"){
+      list = <div><SWIPFilter setSWIPTableFilterByUDID={this.setSWIPTableFilterByUDID} changeSWIPThreshold={this.changeSWIPThreshold} filterSWIPClass={this.filterSWIPClass} filterSWIPStu={this.filterSWIPStu}/>
+      <SWIPContainer setSWIPTableFilterByUDID={this.setSWIPTableFilterByUDID} swipRows={this.state.swipArr} getBDRsByUDID={this.getBDRsByUDID} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter} classFilter={this.state.classFilter} udidFilter={this.state.udidFilter}/></div>
+    } else if (this.state.viewOption == "stulookup") {
+      list = <div><SWIPContainer setSWIPTableFilterByUDID={this.setSWIPTableFilterByUDID} swipRows={this.state.swipArr} getBDRsByUDID={function(){return null}} swipThreshold={"le20"} nameFilter={""} classFilter={""} udidFilter={this.state.udidFilter} /> {this._getBDRs()}</div>
+    } 
+    else list = null
     
     
     return( <div id="" className="jumbotron">
              <h1><img height="100" src="./public/img/SWIPSGraph.png"/> SWIPs</h1>
-              <button type="button" className="btn btn-primary" onClick={this._handleClick.bind(this)}>{buttonText}</button>
-              <div className="form-inline">
-                <div className="form-group">
-                  <select className="form-control" id="sel1" onChange={this.changeSWIPThreshold}>
-                    <option value={"le20"}>{"All"}</option>
-                    <option value={"le13"}>{"<=13"}</option>
-                    <option value={"ee15"}>{"15"}</option>
-                    <option value={"gt12"}>{">12"}</option>
-                  </select>
-                  <select className="form-control" id="sel2" onChange={function(e){this.filterSWIPClass(e.target.value)}.bind(this)}>
-                    <option value={""}>{"All"}</option>
-                    <option value={"601"}>601</option>
-                    <option value={"602"}>602</option>
-                    <option value={"603"}>603</option>
-                    <option value={"701"}>701</option>
-                    <option value={"702"}>702</option>
-                    <option value={"703"}>703</option>
-                    <option value={"801"}>801</option>
-                    <option value={"802"}>802</option>
-                    <option value={"803"}>803</option>
-                  </select>
-                  <div className="input-group">
-                    <span className="input-group-addon" id="basic-addon3">Name:</span>
-                    <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={function(e){this.filterSWIPStu(e.target.value)}.bind(this)} />
-                  </div>
-                </div>
-              </div>
+              <button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('bdr')}.bind(this)}>My BDRs</button>
+              <button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('swipTable')}.bind(this)}>SWIP Table</button>
+              
               <br />
-              <SWIPContainer swipRows={this.state.swipArr} getBDRsByUDID={this.getBDRsByUDID} swipThreshold={this.state.swipThreshold} nameFilter={this.state.nameFilter} classFilter={this.state.classFilter}/>
               {list}
 	    </div> );
 }
 
-  _handleClick(){
+  _toggleBDRs(){
     this.setState({showBDRs: !this.state.showBDRs});
+  }
+
+  _viewOptionSelect(arg){
+    switch(arg){
+      case "bdr":
+        this.setState({viewOption:"bdr"})
+        break
+      case "swipTable":
+        this.setState({viewOption:"swipTable",udidFilter:0})
+        break
+      default:
+        return
+    }
   }
   
   _getBDRs2(){
