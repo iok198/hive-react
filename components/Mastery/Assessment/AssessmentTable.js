@@ -6,7 +6,7 @@ var AssessmentHeadTD = require('./AssessmentHeadTD.js')
 var AssessmentStuTR = require('./AssessmentStuTR.js')
 var AssessmentStuTD = require('./AssessmentStuTD.js')
 var parseAssessment = require('../utilities/parseAssessment.js')
-var postRequestForReact = require('../../../utilities/postRequestForReact.js')
+//var postRequestForReact = require('../../../utilities/postRequestForReact.js')
 
 class AssessmentTable extends React.Component {
   constructor(props){
@@ -16,17 +16,17 @@ class AssessmentTable extends React.Component {
     }
     //this.upVPage = this.props.upVPage.bind(this)
     //this.downVPage = this.props.downVPage.bind(this)
-    this.changeAssessment = this.changeAssessment.bind(this)
+    //this.changeAssessment = this.changeAssessment.bind(this)
     //this.parseAssessment = parseAssessment.bind(this)
     //this.parseAssessment = parseAssessment.bind(this)
     
   }
   
-  changeAssessment(changeObj){
+  /*changeAssessment(changeObj){
     return function(){
       console.log(changeObj)
     }
-  }
+  }*/
   
   render(){
       //let list = this._getAssessment(this.state.parsedAssessment);
@@ -36,7 +36,7 @@ class AssessmentTable extends React.Component {
               <tbody>
               {(<AssessmentHeadTR key={3813} parsedAssessment={this.props.parsedAssessment} colOffset={0} page={this.props.page} upVPage={this.props.upVPage} downVPage={this.props.downVPage}/>)}
               {/*console.log(this.props.parsedAssessment.rowsByStu)*/}
-              {Object.keys(this.props.parsedAssessment.rowsByStu).slice(0+5*(this.props.vpage),5+5*(this.props.vpage)).map((stuUDID,id1) => (<AssessmentStuTR key={stuUDID} stuData={this.props.parsedAssessment.rowsByStu[stuUDID]} mRating0s={this.props.parsedAssessment.mRating0s[stuUDID]} mRatingStr={this.props.parsedAssessment.mRatingStrs[stuUDID]} stuBio={this.props.parsedAssessment.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.props.page} courseLOIDs={Object.keys(this.props.parsedAssessment.alignModel)} changer={this.changeAssessment} />))}
+              {Object.keys(this.props.parsedAssessment.rowsByStu).slice(0+5*(this.props.vpage),5+5*(this.props.vpage)).map((stuUDID,id1) => (<AssessmentStuTR key={stuUDID} stuData={this.props.parsedAssessment.rowsByStu[stuUDID]} mRating0s={this.props.parsedAssessment.mRating0s[stuUDID]} mRatingStr={this.props.parsedAssessment.mRatingStrs[stuUDID]} stuBio={this.props.parsedAssessment.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.props.page} courseLOIDs={Object.keys(this.props.parsedAssessment.alignModel)} changer={this.props.changeAssessment} />))}
               </tbody>
 	    </table> );
   }

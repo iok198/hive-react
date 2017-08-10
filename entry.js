@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var BDRJumbo = require('./components/BDRs/BDRJumbo.js');
 var GreetingJumbo = require('./components/Greeting/GreetingJumbo.js')
-var GradeJumbo = require('./components/Mastery/GradeJumbo.js')
 var MasteryJumbo = require('./components/Mastery/MasteryJumbo.js')
 var AssessmentModal = require('./components/Mastery/Assessment/AssessmentModal.js')
 var getRequestForReact = require('./utilities/getRequestForReact.js')
@@ -26,5 +25,5 @@ getRequestForReact("/users",(arr) => ( [
 
 //ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))
 
-getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
-getRequestToArr("/grades3/s6",(arr)=>{console.log(parseMastery2(arr))})
+//getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
+//getRequestToArr("/grades3/s6",(arr)=>{console.log(parseMastery2(arr))})

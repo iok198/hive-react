@@ -6,15 +6,20 @@ var MasteryHeadTD = require('./MasteryHeadTD.js')
 
 var MasteryStuTR = require('./MasteryStuTR.js')
 var MasteryStuTD = require('./MasteryStuTD.js')
+var AssessmentContainer = require('./Assessment/AssessmentContainer.js')
+var AssessmentsList = require('./AssessmentsList/AssessmentsList.js')
+var NewLOView = require('./newMasteryForms/NewLOView.js')
+var NewAssessView = require('./newMasteryForms/NewAssessView.js')
 var parseMastery = require('./utilities/parseMastery.js')
 var postRequestForReact = require('../../utilities/postRequestForReact.js')
+var getRequestToArr = require('../../utilities/getRequestToArr.js')
 
 class MasteryContainer extends React.Component {
   constructor(props){
     super(props);
     //console.log(this.props.mArr)
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
-      page:0,vpage:0
+      page:0,vpage:0,viewOption:'mRatings',assessMArr:null
     }
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
@@ -25,6 +30,7 @@ class MasteryContainer extends React.Component {
     this.parseMastery = parseMastery.bind(this)
     this.filterMasteryStu = this.filterMasteryStu.bind(this)
     this.filterMasteryClassNo = this.filterMasteryClassNo.bind(this)
+    this._getAssessmentGrades = this._getAssessmentGrades.bind(this)
     
   }
   
@@ -32,28 +38,58 @@ class MasteryContainer extends React.Component {
   this.setState({
     mArrS : nextProps.mArr,
     parsedMastery: parseMastery(nextProps.mArr),
-    page:0,vpage:0
+    page:0,vpage:0,
+    viewOption:'mRatings',
+    assessMArr: null,
+    assessmentsArr: null
   });
 }
   
   render(){
       //let list = this._getMastery(this.state.parsedMastery);
-    
-    return( <div className="container">
-      {/*<ul className="pager">
-        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
-        <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
-      </ul>*/}
+      let view;
+
+    if(this.state.viewOption == 'mRatings'){
+        view = (<div><button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('newLO')}.bind(this)}>New Learning Outcome</button>
+      <button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('newAssessment')}.bind(this)}>New Assessment</button>
+      <button type="button" className="btn btn-primary" onClick={function(){this._getAssessmentGrades('s7',257)}.bind(this)}> Grade Assessment </button>
+      <button type="button" className="btn btn-primary" onClick={function(){this._getAssessments(this.state.mArrS[2])}.bind(this)}> View Assessments </button>
       <MasteryTable page={this.state.page} vpage={this.state.vpage} 
           upVPage={this.upVPage} downVPage={this.downVPage}
           prevPage={this.prevPage} nextPage={this.nextPage}
           changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} 
           mArrS={this.state.mArrS} filterMasteryStu={this.filterMasteryStu}
           filterMasteryClassNo={this.filterMasteryClassNo}
-      />
+        /></div>)
+      } else if (this.state.viewOption == 'newLO') {
+        view = (<NewLOView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]} />)
+      } else if (this.state.viewOption == 'newAssessment') {
+        view = (<NewAssessView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]}/>)
+      } else if (this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null){
+        view = (<AssessmentContainer mArr={this.state.assessMArr}/>)
+      } else if (this.state.viewOption == 'viewAssessments' && this.state.assessmentsArr != null){
+        view = (<AssessmentsList LOs={this.state.mArrS[1]} getAssessmentGrades={this._getAssessmentGrades} assessmentsArr={this.state.assessmentsArr}/>)
+      }
+    
+    return( <div className="container">
+      {/*<ul className="pager">
+        <li className={"previous" + ((this.state.page == 0) ? " disabled" : "") } onClick={this.prevPage}><a href="#" onClick={function(event){event.preventDefault();}}>Previous</a></li>
+        <li className="next" onClick={this.nextPage}><a href="#" onClick={function(event){event.preventDefault();}}>Next</a></li>
+      </ul>*/}
+      {view}
 	    </div> );
   }
   
+
+
+  _viewOptionSelect(view){
+    var newState =  {viewOption:view}
+    if(view != 'gradeAssessment'){
+      newState.assessMArr = null
+    } else if (view !='viewAssessments'){ newState.assessmentsArr = null}
+    this.setState(newState)
+  }
+
   prevPage(){
     this.setState({page:this.state.page - 1})
   }
@@ -105,6 +141,16 @@ class MasteryContainer extends React.Component {
     rowsByStu = mObj.rowsByStu,
     LOs = mObj.LOs
   }
+
+  _getAssessmentGrades(courseStr,assessID){
+    getRequestToArr('/assessments/' + courseStr + '/' + assessID, function(arr){this.setState({assessMArr:arr,viewOption:'gradeAssessment'})}.bind(this))
+  }
+
+  _getAssessments(courseStr){
+    getRequestToArr('/assessments/' + courseStr,function(arr){this.setState({assessmentsArr:arr,viewOption:'viewAssessments'})}.bind(this))
+  }
+  //getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
+//getRequestToArr("/grades3/s6",(arr)=>{console.log(parseMastery2(arr))})
 
 }
 
