@@ -3,7 +3,6 @@ import React from 'react'
 class AssessmentHeadTD extends React.Component {
     render(){
         return <td id={"Assessment-col-head-" + this.props.mRecord.courseStrLOID } className="Assessment-column" style={{left: (40 + this.props.colOffset*140) + 'px'}}>
-                      <span className="badge" ># Assessment(s)</span>
                       <span className="lo-text-span">{this.props.mRecord.LOText}</span>
                       <br />
                       <span id="" className="badge badgeNY">{this.props.mRecord.mcountN}</span>
