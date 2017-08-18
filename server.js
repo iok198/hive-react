@@ -81,6 +81,7 @@ app.get('/', function (req, res) {
 
 
 app.get('/bdrs/:queryStr',function(req, res) {
+  console.log(bdrQueries(req.params.queryStr.split("n")))
   connection.query(bdrQueries(req.params.queryStr.split("n")).query,queryCallbacks.default(req,res))
 })
 
@@ -117,6 +118,35 @@ app.get('/assessments/:courseStr/:assessID',function(req,res){
   console.log([queries.studentRatingQuery, queries.LOQuery, queries.assessQuery].join("; "))
   connection.query([queries.studentRatingQuery, queries.LOQuery, queries.assessQuery].join("; "),queryCallbacks.default(req,res,req.params.courseStr))
 })
+
+app.get('/assessments/:courseStr',function(req,res){
+  var queries = "select * from hive1617.assessments where courseStr regexp " + connection.escape(req.params.courseStr)
+  connection.query(queries, queryCallbacks.default(req,res,req.params.courseStr))
+})
+
+app.post("/newassessment",function(req,res){
+    console.log(req.body)
+    var reqjson = req.body
+    if(reqjson.hasOwnProperty("courseStr") && reqjson.hasOwnProperty("LOAlign")){
+      connection.query('insert into hive1617.assessments (courseStr,LOAlign,AssessTitle,MRatings,AssessDate,AssessDesc,AssessLink) values (?,?,?,?,?,?,?)', [reqjson.courseStr,reqjson.LOAlign,reqjson.AssessTitle,"",reqjson.AssessDate,reqjson.AssessDesc,reqjson.AssessLink], queryCallbacks.insert(req,res))
+    }
+    //res.send(JSON.stringify(req.body))
+  
+  }
+)
+
+app.post("/newlo",function(req,res){
+    console.log(req.body)
+    var reqjson = req.body
+    /*if(reqjson.hasOwnProperty("courseStr") && reqjson.hasOwnProperty("LOAlign")){
+    connection.query('insert into hive1617.assessments (courseStr,LOAlign,AssessTitle,MRatings,AssessDate,AssessDesc,AssessLink) values (?,?,?,?,?,?,?)', [reqjson.string,reqjson.assessRatingID], function (error, results, fields) {
+    if (error) throw error;
+    
+    })}*/
+    res.send(JSON.stringify(req.body))
+  
+  }
+)
 
 app.get('/mymastery',function(req,res){
   if(req.user && !(req.user.courseStr.indexOf('s') + 1)){
