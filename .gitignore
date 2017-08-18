@@ -1,0 +1,6 @@
+#Webpack'd
+./public/bundle.js
+
+#credentials
+./googlePassCred.js
+./hive-sql.js

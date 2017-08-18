@@ -559,7 +559,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 var _prodInvariant = __webpack_require__(3);
 
 var DOMProperty = __webpack_require__(15);
-var ReactDOMComponentFlags = __webpack_require__(65);
+var ReactDOMComponentFlags = __webpack_require__(63);
 
 var invariant = __webpack_require__(1);
 
@@ -783,6 +783,16 @@ module.exports = ExecutionEnvironment;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(110);
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1167,16 +1177,6 @@ module.exports = ReactComponentTreeHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(110);
-
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1304,9 +1304,9 @@ module.exports = ReactCurrentOwner;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
-var CallbackQueue = __webpack_require__(69);
+var CallbackQueue = __webpack_require__(67);
 var PooledClass = __webpack_require__(17);
-var ReactFeatureFlags = __webpack_require__(70);
+var ReactFeatureFlags = __webpack_require__(68);
 var ReactReconciler = __webpack_require__(20);
 var Transaction = __webpack_require__(30);
 
@@ -2053,7 +2053,7 @@ var warning = __webpack_require__(2);
 var canDefineProperty = __webpack_require__(27);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-var REACT_ELEMENT_TYPE = __webpack_require__(60);
+var REACT_ELEMENT_TYPE = __webpack_require__(58);
 
 var RESERVED_PROPS = {
   key: true,
@@ -2512,7 +2512,7 @@ module.exports = PooledClass;
 
 var _assign = __webpack_require__(5);
 
-var ReactBaseClasses = __webpack_require__(58);
+var ReactBaseClasses = __webpack_require__(56);
 var ReactChildren = __webpack_require__(95);
 var ReactDOMFactories = __webpack_require__(99);
 var ReactElement = __webpack_require__(16);
@@ -2527,9 +2527,9 @@ var createFactory = ReactElement.createFactory;
 var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
-  var lowPriorityWarning = __webpack_require__(38);
+  var lowPriorityWarning = __webpack_require__(36);
   var canDefineProperty = __webpack_require__(27);
-  var ReactElementValidator = __webpack_require__(62);
+  var ReactElementValidator = __webpack_require__(60);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
   createFactory = ReactElementValidator.createFactory;
@@ -2864,11 +2864,11 @@ module.exports = ReactReconciler;
 
 
 
-var DOMNamespaces = __webpack_require__(45);
+var DOMNamespaces = __webpack_require__(43);
 var setInnerHTML = __webpack_require__(32);
 
-var createMicrosoftUnsafeLocalFunction = __webpack_require__(46);
-var setTextContent = __webpack_require__(74);
+var createMicrosoftUnsafeLocalFunction = __webpack_require__(44);
+var setTextContent = __webpack_require__(72);
 
 var ELEMENT_NODE_TYPE = 1;
 var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
@@ -2975,6 +2975,41 @@ module.exports = DOMLazyTree;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getRequest(url, callback) {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var parsed = JSON.parse(this.responseText);
+      var arr = parsed.map(function (data) {
+        return data;
+      });
+      if (typeof callback == "function") {
+        callback(arr);
+      }
+    }
+  };
+
+  xhttp.open("GET", url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+}
+
+module.exports = getRequest;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -2987,11 +3022,11 @@ module.exports = DOMLazyTree;
 
 
 
-var EventPluginHub = __webpack_require__(23);
-var EventPluginUtils = __webpack_require__(39);
+var EventPluginHub = __webpack_require__(24);
+var EventPluginUtils = __webpack_require__(37);
 
-var accumulateInto = __webpack_require__(66);
-var forEachAccumulated = __webpack_require__(67);
+var accumulateInto = __webpack_require__(64);
+var forEachAccumulated = __webpack_require__(65);
 var warning = __webpack_require__(2);
 
 var getListener = EventPluginHub.getListener;
@@ -3111,7 +3146,7 @@ module.exports = EventPropagators;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3130,11 +3165,11 @@ module.exports = EventPropagators;
 var _prodInvariant = __webpack_require__(3);
 
 var EventPluginRegistry = __webpack_require__(29);
-var EventPluginUtils = __webpack_require__(39);
-var ReactErrorUtils = __webpack_require__(40);
+var EventPluginUtils = __webpack_require__(37);
+var ReactErrorUtils = __webpack_require__(38);
 
-var accumulateInto = __webpack_require__(66);
-var forEachAccumulated = __webpack_require__(67);
+var accumulateInto = __webpack_require__(64);
+var forEachAccumulated = __webpack_require__(65);
 var invariant = __webpack_require__(1);
 
 /**
@@ -3391,7 +3426,7 @@ module.exports = EventPluginHub;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3409,7 +3444,7 @@ module.exports = EventPluginHub;
 
 var SyntheticEvent = __webpack_require__(14);
 
-var getEventTarget = __webpack_require__(41);
+var getEventTarget = __webpack_require__(39);
 
 /**
  * @interface UIEvent
@@ -3455,7 +3490,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 module.exports = SyntheticUIEvent;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3504,33 +3539,6 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function postRequestForReact(url, bodyJSON, callback) {
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var text = this.responseText;
-      console.log(text);
-      if (typeof callback == "function") {
-        callback(text);
-      }
-    }
-  };
-
-  xhttp.open("POST", url, true);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(JSON.stringify(bodyJSON));
-}
-
-module.exports = postRequestForReact;
 
 /***/ }),
 /* 27 */
@@ -4100,10 +4108,10 @@ module.exports = TransactionImpl;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
-var ViewportMetrics = __webpack_require__(73);
+var SyntheticUIEvent = __webpack_require__(25);
+var ViewportMetrics = __webpack_require__(71);
 
-var getEventModifierState = __webpack_require__(43);
+var getEventModifierState = __webpack_require__(41);
 
 /**
  * @interface MouseEvent
@@ -4178,12 +4186,12 @@ module.exports = SyntheticMouseEvent;
 
 
 var ExecutionEnvironment = __webpack_require__(7);
-var DOMNamespaces = __webpack_require__(45);
+var DOMNamespaces = __webpack_require__(43);
 
 var WHITESPACE_TEST = /^[ \r\n\t\f]/;
 var NONVISIBLE_TEST = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/;
 
-var createMicrosoftUnsafeLocalFunction = __webpack_require__(46);
+var createMicrosoftUnsafeLocalFunction = __webpack_require__(44);
 
 // SVG temp container for IE lacking innerHTML
 var reusableSVGContainer;
@@ -4411,10 +4419,10 @@ var _assign = __webpack_require__(5);
 
 var EventPluginRegistry = __webpack_require__(29);
 var ReactEventEmitterMixin = __webpack_require__(144);
-var ViewportMetrics = __webpack_require__(73);
+var ViewportMetrics = __webpack_require__(71);
 
 var getVendorPrefixedEventName = __webpack_require__(145);
-var isEventSupported = __webpack_require__(42);
+var isEventSupported = __webpack_require__(40);
 
 /**
  * Summary of `ReactBrowserEventEmitter` event handling:
@@ -4726,239 +4734,28 @@ module.exports = ReactBrowserEventEmitter;
 "use strict";
 
 
-var _reactDom = __webpack_require__(9);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getRequest(url, callback) {
+function postRequestForReact(url, bodyJSON, callback) {
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      var parsed = JSON.parse(this.responseText);
-      var arr = parsed.map(function (data) {
-        return data;
-      });
+      var text = this.responseText;
+      console.log(text);
       if (typeof callback == "function") {
-        callback(arr);
+        callback(text);
       }
     }
   };
 
-  xhttp.open("GET", url, true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send();
+  xhttp.open("POST", url, true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify(bodyJSON));
 }
 
-module.exports = getRequest;
+module.exports = postRequestForReact;
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MasteryHeadTD = function (_React$Component) {
-    _inherits(MasteryHeadTD, _React$Component);
-
-    function MasteryHeadTD() {
-        _classCallCheck(this, MasteryHeadTD);
-
-        return _possibleConstructorReturn(this, (MasteryHeadTD.__proto__ || Object.getPrototypeOf(MasteryHeadTD)).apply(this, arguments));
-    }
-
-    _createClass(MasteryHeadTD, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "td",
-                { id: "mastery-col-head-" + this.props.mRecord.courseStrLOID, className: "mastery-column", style: { left: 40 + this.props.colOffset * 140 + 'px' } },
-                _react2.default.createElement(
-                    "span",
-                    { className: "badge" },
-                    "# Assessment(s)"
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "lo-text-span" },
-                    this.props.mRecord.LOText
-                ),
-                _react2.default.createElement("br", null),
-                _react2.default.createElement(
-                    "span",
-                    { className: "small" },
-                    "(",
-                    this.props.mRecord.courseStrLOID,
-                    ")"
-                ),
-                _react2.default.createElement("br", null),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeNY" },
-                    this.props.mRecord.mcountN
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeA" },
-                    this.props.mRecord.mcountA
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeM" },
-                    this.props.mRecord.mcountM
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeE" },
-                    this.props.mRecord.mcountE
-                )
-            );
-        }
-    }]);
-
-    return MasteryHeadTD;
-}(_react2.default.Component);
-
-module.exports = MasteryHeadTD;
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//possible parent: MasteryStuRow.js
-
-var MasteryStuTD = function (_React$Component) {
-  _inherits(MasteryStuTD, _React$Component);
-
-  function MasteryStuTD(props) {
-    _classCallCheck(this, MasteryStuTD);
-
-    var _this = _possibleConstructorReturn(this, (MasteryStuTD.__proto__ || Object.getPrototypeOf(MasteryStuTD)).call(this, props));
-
-    _this.state = { mRating0: _this.props.ratingData.mRating0 };
-    _this.changeSelect = _this.changeSelect.bind(_this);
-    _this.changeSelectState = _this.changeSelectState.bind(_this);
-    return _this;
-  }
-
-  _createClass(MasteryStuTD, [{
-    key: "changeSelect",
-    value: function changeSelect(event) {
-      this.setState(this.changeSelectState(event.target.value), this.props.changer(this.props.ratingData.stuUDID, this.props.ratingData.LOID, event.target.value, this.props.mArrKey));
-    }
-  }, {
-    key: "changeSelectState",
-    value: function changeSelectState(val) {
-      return function (prevState, props) {
-        return { mRating0: val };
-      };
-    }
-
-    //componentDidUpdate(){}
-
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "td",
-        { id: "mastery-col-" + this.props.ratingData.courseStrLOIDsID, className: "mastery-column mback" + this.state.mRating0 },
-        _react2.default.createElement(
-          "form",
-          null,
-          _react2.default.createElement(
-            "div",
-            { className: "form-group" },
-            _react2.default.createElement(
-              "select",
-              { className: "form-control", id: "sel1", defaultValue: this.state.mRating0, onChange: this.changeSelect, disabled: this.props.mArrKey < 0 },
-              _react2.default.createElement(
-                "option",
-                { value: "1" },
-                "Not Yet"
-              ),
-              _react2.default.createElement(
-                "option",
-                { value: "2" },
-                "Approaching"
-              ),
-              _react2.default.createElement(
-                "option",
-                { value: "3" },
-                "Meeting"
-              ),
-              _react2.default.createElement(
-                "option",
-                { value: "4" },
-                "Exceeding"
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "span",
-          { id: "", className: "badge badgeNY" },
-          this.props.ratingData.mcountN
-        ),
-        _react2.default.createElement(
-          "span",
-          { id: "", className: "badge badgeA" },
-          this.props.ratingData.mcountA
-        ),
-        _react2.default.createElement(
-          "span",
-          { id: "", className: "badge badgeM" },
-          this.props.ratingData.mcountM
-        ),
-        _react2.default.createElement(
-          "span",
-          { id: "", className: "badge badgeE" },
-          this.props.ratingData.mcountE
-        )
-      );
-    }
-  }]);
-
-  return MasteryStuTD;
-}(_react2.default.Component);
-
-module.exports = MasteryStuTD;
-
-/***/ }),
-/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5029,7 +4826,7 @@ module.exports = lowPriorityWarning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5047,7 +4844,7 @@ module.exports = lowPriorityWarning;
 
 var _prodInvariant = __webpack_require__(3);
 
-var ReactErrorUtils = __webpack_require__(40);
+var ReactErrorUtils = __webpack_require__(38);
 
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
@@ -5261,7 +5058,7 @@ module.exports = EventPluginUtils;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5343,7 +5140,7 @@ module.exports = ReactErrorUtils;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5383,7 +5180,7 @@ function getEventTarget(nativeEvent) {
 module.exports = getEventTarget;
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5448,7 +5245,7 @@ function isEventSupported(eventNameSuffix, capture) {
 module.exports = isEventSupported;
 
 /***/ }),
-/* 43 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5496,7 +5293,7 @@ function getEventModifierState(nativeEvent) {
 module.exports = getEventModifierState;
 
 /***/ }),
-/* 44 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5517,9 +5314,9 @@ var Danger = __webpack_require__(129);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactInstrumentation = __webpack_require__(10);
 
-var createMicrosoftUnsafeLocalFunction = __webpack_require__(46);
+var createMicrosoftUnsafeLocalFunction = __webpack_require__(44);
 var setInnerHTML = __webpack_require__(32);
-var setTextContent = __webpack_require__(74);
+var setTextContent = __webpack_require__(72);
 
 function getNodeAfter(parentNode, node) {
   // Special case for text components, which return [open, close] comments
@@ -5728,7 +5525,7 @@ module.exports = DOMChildrenOperations;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 45 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5753,7 +5550,7 @@ var DOMNamespaces = {
 module.exports = DOMNamespaces;
 
 /***/ }),
-/* 46 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5790,7 +5587,7 @@ var createMicrosoftUnsafeLocalFunction = function (func) {
 module.exports = createMicrosoftUnsafeLocalFunction;
 
 /***/ }),
-/* 47 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5808,8 +5605,8 @@ module.exports = createMicrosoftUnsafeLocalFunction;
 
 var _prodInvariant = __webpack_require__(3);
 
-var ReactPropTypesSecret = __webpack_require__(78);
-var propTypesFactory = __webpack_require__(63);
+var ReactPropTypesSecret = __webpack_require__(76);
+var propTypesFactory = __webpack_require__(61);
 
 var React = __webpack_require__(18);
 var PropTypes = propTypesFactory(React.isValidElement);
@@ -5934,7 +5731,7 @@ module.exports = LinkedValueUtils;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 48 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5984,7 +5781,7 @@ module.exports = ReactComponentEnvironment;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 49 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6057,7 +5854,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 50 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6104,7 +5901,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 module.exports = shouldUpdateReactComponent;
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6168,7 +5965,7 @@ var KeyEscapeUtils = {
 module.exports = KeyEscapeUtils;
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6187,7 +5984,7 @@ module.exports = KeyEscapeUtils;
 var _prodInvariant = __webpack_require__(3);
 
 var ReactCurrentOwner = __webpack_require__(12);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(10);
 var ReactUpdates = __webpack_require__(13);
 
@@ -6408,7 +6205,7 @@ module.exports = ReactUpdateQueue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6785,7 +6582,7 @@ module.exports = validateDOMNesting;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6840,317 +6637,297 @@ function getEventCharCode(nativeEvent) {
 module.exports = getEventCharCode;
 
 /***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MasteryHeadTD = function (_React$Component) {
+    _inherits(MasteryHeadTD, _React$Component);
+
+    function MasteryHeadTD() {
+        _classCallCheck(this, MasteryHeadTD);
+
+        return _possibleConstructorReturn(this, (MasteryHeadTD.__proto__ || Object.getPrototypeOf(MasteryHeadTD)).apply(this, arguments));
+    }
+
+    _createClass(MasteryHeadTD, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "td",
+                { id: "mastery-col-head-" + this.props.mRecord.courseStrLOID, className: "mastery-column", style: { left: 40 + this.props.colOffset * 140 + 'px' } },
+                _react2.default.createElement(
+                    "span",
+                    { className: "badge" },
+                    "# Assessment(s)"
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { className: "lo-text-span" },
+                    this.props.mRecord.LOText
+                ),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "span",
+                    { className: "small" },
+                    "(",
+                    this.props.mRecord.courseStrLOID,
+                    ")"
+                ),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeNY" },
+                    this.props.mRecord.mcountN
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeA" },
+                    this.props.mRecord.mcountA
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeM" },
+                    this.props.mRecord.mcountM
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeE" },
+                    this.props.mRecord.mcountE
+                )
+            );
+        }
+    }]);
+
+    return MasteryHeadTD;
+}(_react2.default.Component);
+
+module.exports = MasteryHeadTD;
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//possible parent: MasteryStuRow.js
+
+var MasteryStuTD = function (_React$Component) {
+  _inherits(MasteryStuTD, _React$Component);
+
+  function MasteryStuTD(props) {
+    _classCallCheck(this, MasteryStuTD);
+
+    var _this = _possibleConstructorReturn(this, (MasteryStuTD.__proto__ || Object.getPrototypeOf(MasteryStuTD)).call(this, props));
+
+    _this.state = { mRating0: _this.props.ratingData.mRating0 };
+    _this.changeSelect = _this.changeSelect.bind(_this);
+    _this.changeSelectState = _this.changeSelectState.bind(_this);
+    return _this;
+  }
+
+  _createClass(MasteryStuTD, [{
+    key: "changeSelect",
+    value: function changeSelect(event) {
+      this.setState(this.changeSelectState(event.target.value), this.props.changer(this.props.ratingData.stuUDID, this.props.ratingData.LOID, event.target.value, this.props.mArrKey));
+    }
+  }, {
+    key: "changeSelectState",
+    value: function changeSelectState(val) {
+      return function (prevState, props) {
+        return { mRating0: val };
+      };
+    }
+
+    //componentDidUpdate(){}
+
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "td",
+        { id: "mastery-col-" + this.props.ratingData.courseStrLOIDsID, className: "mastery-column mback" + this.state.mRating0 },
+        _react2.default.createElement(
+          "form",
+          null,
+          _react2.default.createElement(
+            "div",
+            { className: "form-group" },
+            _react2.default.createElement(
+              "select",
+              { className: "form-control", id: "sel1", defaultValue: this.state.mRating0, onChange: this.changeSelect, disabled: this.props.mArrKey < 0 },
+              _react2.default.createElement(
+                "option",
+                { value: "1" },
+                "Not Yet"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "2" },
+                "Approaching"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "3" },
+                "Meeting"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "4" },
+                "Exceeding"
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "span",
+          { id: "", className: "badge badgeNY" },
+          this.props.ratingData.mcountN
+        ),
+        _react2.default.createElement(
+          "span",
+          { id: "", className: "badge badgeA" },
+          this.props.ratingData.mcountA
+        ),
+        _react2.default.createElement(
+          "span",
+          { id: "", className: "badge badgeM" },
+          this.props.ratingData.mcountM
+        ),
+        _react2.default.createElement(
+          "span",
+          { id: "", className: "badge badgeE" },
+          this.props.ratingData.mcountE
+        )
+      );
+    }
+  }]);
+
+  return MasteryStuTD;
+}(_react2.default.Component);
+
+module.exports = MasteryStuTD;
+
+/***/ }),
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function parseAssessment(mArr) {
+    var studentRows = mArr[0];
+    var LOs = mArr[1];
+    var assessmentModel = mArr[2][0];
+    console.log(mArr);
 
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MasteryHeadTD = __webpack_require__(36);
-//possible parents: GradeJumbo.js
-
-var MasteryHeadTR = function (_React$Component) {
-    _inherits(MasteryHeadTR, _React$Component);
-
-    function MasteryHeadTR(props) {
-        _classCallCheck(this, MasteryHeadTR);
-
-        return _possibleConstructorReturn(this, (MasteryHeadTR.__proto__ || Object.getPrototypeOf(MasteryHeadTR)).call(this, props));
-    }
-
-    _createClass(MasteryHeadTR, [{
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'tr',
-                { id: "mastery-row-head", className: 'mastery-row' },
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'panel panel-default' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'panel-body' },
-                            "Student",
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'btn-group-vertical', role: 'group', 'aria-label': '...' },
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-default', onClick: this.props.upVPage },
-                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
-                                ),
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-default', onClick: this.props.downVPage },
-                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-inline' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'form-group' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'input-group' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'input-group-addon', id: 'basic-addon3' },
-                                            'Name:'
-                                        ),
-                                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'basic-url', 'aria-describedby': 'basic-addon3', onChange: function (e) {
-                                                this.props.filterMasteryStu(e.target.value);
-                                            }.bind(this) })
-                                    ),
-                                    _react2.default.createElement(
-                                        'select',
-                                        { className: 'form-control', id: 'selClassNo', onChange: function (e) {
-                                                this.props.filterMasteryClassNo(e.target.value);
-                                            }.bind(this) },
-                                        _react2.default.createElement(
-                                            'option',
-                                            { value: "" },
-                                            'All'
-                                        ),
-                                        this.props.parsedMastery.classNos.map(function (item) {
-                                            return _react2.default.createElement(
-                                                'option',
-                                                { key: 'cNo' + item, value: item },
-                                                item
-                                            );
-                                        })
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'btn-group pager' },
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'button', className: 'btn btn-default', onClick: this.props.prevPage },
-                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-left' })
-                        ),
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'button', className: 'btn btn-default', onClick: this.props.nextPage },
-                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-right' })
-                        )
-                    )
-                ),
-                [0, 1, 2, 3].map(function (id, index) {
-                    if (!!_this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]]) {
-                        return _react2.default.createElement(MasteryHeadTD, { key: _this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]].courseStrLOID, mRecord: !!_this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]] ? _this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]] : { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0 }, colOffset: id });
-                    } else return null;
-                })
-            );
+    var mRating0s = {};
+    var mRatingStrs = {};
+    var stuBios = {};
+    var LOsByID = {};
+    LOs.forEach(function (LO) {
+        LOsByID[LO.LOID] = LO;
+    });
+    console.log("LOs");
+    console.log(LOsByID);
+    var alignModel = {};
+    assessmentModel.LOAlign.split("n").forEach(function (str) {
+        if (!!str) {
+            alignModel[str.substring(1)] = {};
         }
-    }]);
+    });
 
-    return MasteryHeadTR;
-}(_react2.default.Component);
+    var columnHeads = Object.assign({}, alignModel);
+    var AssessmentArrS = Object.assign({}, alignModel);
+    Object.keys(AssessmentArrS).forEach(function (LOID, id) {
+        AssessmentArrS[LOID] = { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0, mcountU: 0, LOText: LOsByID[LOID].LOText };
+    });
+    var rowsByStu = {};
 
-module.exports = MasteryHeadTR;
+    studentRows.forEach(function (row, id) {
+        stuBios[row.uEntryID] = row.title + " " + row.lastName;
+        mRating0s[row.uEntryID] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+        mRatingStrs[row.uEntryID] = "";
+        if (!rowsByStu.hasOwnProperty(row.uEntryID)) {
+            rowsByStu[row.uEntryID] = { ratings: Object.assign({}, alignModel), studentRowsId: id, recentrating: '' };
+            Object.keys(rowsByStu[row.uEntryID].ratings).forEach(function (key, id) {
+                var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n');
+                if (ratingsREGEXP.exec(row.recentrating)) {
+                    var regmatch = ratingsREGEXP.exec(row.recentrating)[0];
+                    rowsByStu[row.uEntryID].recentrating += regmatch;
+                    mRatingStrs[row.uEntryID] += regmatch;
+                    //mRating0s[row.uEntryID] = 
+                    rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0, 1);
+                    switch (regmatch.split(":")[1].substring(0, 1)) {
+                        case "0":
+                            AssessmentArrS[key].mcountU++;
+                            mRating0s[row.uEntryID][0]++;
+                            break;
+                        case "1":
+                            AssessmentArrS[key].mcountN++;
+                            mRating0s[row.uEntryID][1]++;
+                            break;
+                        case "2":
+                            AssessmentArrS[key].mcountA++;
+                            mRating0s[row.uEntryID][2]++;
+                            break;
+                        case "3":
+                            AssessmentArrS[key].mcountM++;
+                            mRating0s[row.uEntryID][3]++;
+                            break;
+                        case "4":
+                            AssessmentArrS[key].mcountE++;
+                            mRating0s[row.uEntryID][4]++;
+                            break;
+                    }
+                } else {
+                    rowsByStu[row.uEntryID].recentrating += 'm' + key + ':0n';
+                    mRatingStrs[row.uEntryID] += 'm' + key + ':0n';
+                    mRating0s[row.uEntryID][0]++;
+                    rowsByStu[row.uEntryID].ratings[key] = 0;
+                    AssessmentArrS[key].mcountU++;
+                }
+            });
+        }
+    });
+    console.log({ rowsByStu: rowsByStu, alignModel: alignModel, AssessmentArrS: AssessmentArrS });
+    return { rowsByStu: rowsByStu, alignModel: alignModel, AssessmentArrS: AssessmentArrS, mRating0s: mRating0s, mRatingStrs: mRatingStrs, stuBios: stuBios };
+}
+module.exports = parseAssessment;
 
 /***/ }),
 /* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MasteryStuTD = __webpack_require__(37);
-var MasteryStuKeyTD = __webpack_require__(202);
-//possible parents: GradeJumbo.js
-
-var MasteryStuTR = function (_React$Component) {
-    _inherits(MasteryStuTR, _React$Component);
-
-    function MasteryStuTR(props) {
-        _classCallCheck(this, MasteryStuTR);
-
-        var _this = _possibleConstructorReturn(this, (MasteryStuTR.__proto__ || Object.getPrototypeOf(MasteryStuTR)).call(this, props));
-
-        _this.state = { courseLOIDs: Object.keys(_this.props.stuData) };
-        return _this;
-    }
-
-    _createClass(MasteryStuTR, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({ courseLOIDs: Object.keys(nextProps.stuData) });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'tr',
-                { id: "mastery-row-" + this.props.stuUDID, className: 'mastery-row' },
-                _react2.default.createElement(MasteryStuKeyTD, { key: "mKeyTD" + this.props.stuUDID, mRating0s: this.props.mRating0s, mRatingStr: this.props.mRatingStr, stuUDID: this.props.stuUDID, stuBio: this.props.stuBio }),
-                [0, 1, 2, 3].map(function (id, index) {
-                    if (!!_this2.state.courseLOIDs[id + 4 * _this2.props.page]) {
-                        //console.log(this.props.stuData)
-                        //console.log(this.state.courseLOIDs[id+4*this.props.page])
-                        //console.log(id+4*this.props.page)
-                        return _react2.default.createElement(MasteryStuTD, { key: _this2.state.courseLOIDs[id + 4 * _this2.props.page] + '-' + _this2.props.stuUDID, mArrKey: !!_this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]].mArrKey : -1, ratingData: !!_this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] : { mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mRating0: 1 }, colOffset: id, changer: _this2.props.changer });
-                    } else return null;
-                })
-            );
-        }
-    }]);
-
-    return MasteryStuTR;
-}(_react2.default.Component);
-
-module.exports = MasteryStuTR;
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function parseMastery(mArr) {
-  console.log(mArr);
-  var sMasteryArr = mArr[0];
-  var masteryArr = mArr[1];
-  var courseStrArr = mArr[2].split('|');
-  var studentName = mArr.length < 4 ? false : mArr[3];
-  var classNoF = mArr.length < 5 ? false : mArr[4];
-
-  var columns = {};
-  var masteryArrS = {};
-
-  var LOs = masteryArr.map(function (mRecord, id) {
-    columns[mRecord.courseStrLOID] = null;
-    masteryArrS[mRecord.courseStrLOID] = { masteryArrSKey: id, LOID: mRecord.LOID, LOText: mRecord.LOText, courseStrLOID: mRecord.courseStrLOID, mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mcountU: 0, mstudentsA: [], mstudentsE: [], mstudentsM: [], mstudentsN: [], mstudentsU: [] };
-    return mRecord.courseStrLOID;
-  });
-  var mRating0s = {};
-  var mRatingStrs = {};
-  var rowsByStu = {};
-  var LOIDsIDkeys = {};
-  var stuBios = {};
-  var classNos = [];
-
-  function sFit(obj, id) {
-    if (!obj.courseStrLOIDsID || studentName && (obj.title + " " + obj.lastName).toLowerCase().indexOf(studentName.toLowerCase()) == -1 || classNoF && obj.classNo != classNoF) {
-      return;
-    }
-    var cLstr = obj.courseStrLOIDsID.split('-');
-    var cL = cLstr[0] + '-' + cLstr[1];
-    var objC = Object.assign({}, obj);
-    objC.mArrKey = id;
-
-    if (!stuBios.hasOwnProperty(obj.stuUDID)) {
-      stuBios[obj.stuUDID] = { name: obj.title + " " + obj.lastName };
-    }
-
-    if (classNos.indexOf(obj.classNo) < 0) {
-      classNos.push(obj.classNo);
-    }
-
-    if (!mRating0s.hasOwnProperty(obj.stuUDID)) {
-      mRating0s[obj.stuUDID] = [0, 0, 0, 0, 0];
-    }
-    if (obj.mcountN + obj.mcountA + obj.mcountM + obj.mcountE > 0) {
-      mRating0s[obj.stuUDID][obj.mRating0]++;
-    } else {
-      mRating0s[obj.stuUDID][0]++;
-    }
-
-    if (!mRatingStrs.hasOwnProperty(obj.stuUDID)) {
-      mRatingStrs[obj.stuUDID] = { assessRatingID: obj.maxID, string: "" };
-    }
-    mRatingStrs[obj.stuUDID].string += "m" + obj.LOID + ":" + obj.mRating0 + "n";
-    switch (obj.mRating0) {
-      case 0:
-        masteryArrS[cL].mcountU++;
-        masteryArrS[cL].mstudentsU.push(obj.stuUDID);
-        break;
-      case 1:
-        masteryArrS[cL].mcountN++;
-        masteryArrS[cL].mstudentsN.push(obj.stuUDID);
-        break;
-      case 2:
-        masteryArrS[cL].mcountA++;
-        masteryArrS[cL].mstudentsA.push(obj.stuUDID);
-        break;
-      case 3:
-        masteryArrS[cL].mcountM++;
-        masteryArrS[cL].mstudentsM.push(obj.stuUDID);
-        break;
-      case 4:
-        masteryArrS[cL].mcountE++;
-        masteryArrS[cL].mstudentsE.push(obj.stuUDID);
-        break;
-    }
-
-    if (!rowsByStu.hasOwnProperty(obj.stuUDID)) {
-      rowsByStu[obj.stuUDID] = Object.assign({}, columns);
-    }
-    rowsByStu[obj.stuUDID][cL] = Object.assign({}, objC);
-    rowsByStu[obj.stuUDID][cL].masteryID = columns[cL];
-  }
-
-  sMasteryArr.forEach(sFit);
-
-  return { sMasteryArr: sMasteryArr,
-    masteryArr: masteryArr,
-    courseStrArr: courseStrArr,
-    rowsByStu: rowsByStu,
-    LOs: LOs,
-    mRating0s: mRating0s,
-    mRatingStrs: mRatingStrs,
-    LOIDsIDkeys: LOIDsIDkeys,
-    masteryArrS: masteryArrS,
-    stuBios: stuBios,
-    classNos: classNos
-  };
-}
-
-module.exports = parseMastery;
-
-/***/ }),
-/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7169,12 +6946,12 @@ module.exports = parseMastery;
 var _prodInvariant = __webpack_require__(19),
     _assign = __webpack_require__(5);
 
-var ReactNoopUpdateQueue = __webpack_require__(59);
+var ReactNoopUpdateQueue = __webpack_require__(57);
 
 var canDefineProperty = __webpack_require__(27);
 var emptyObject = __webpack_require__(28);
 var invariant = __webpack_require__(1);
-var lowPriorityWarning = __webpack_require__(38);
+var lowPriorityWarning = __webpack_require__(36);
 
 /**
  * Base class helpers for the updating state of a component.
@@ -7299,7 +7076,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7400,7 +7177,7 @@ module.exports = ReactNoopUpdateQueue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7425,7 +7202,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
 
 /***/ }),
-/* 61 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7471,7 +7248,7 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 62 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7495,15 +7272,15 @@ module.exports = getIteratorFn;
 
 
 var ReactCurrentOwner = __webpack_require__(12);
-var ReactComponentTreeHook = __webpack_require__(8);
+var ReactComponentTreeHook = __webpack_require__(9);
 var ReactElement = __webpack_require__(16);
 
 var checkReactTypeSpec = __webpack_require__(100);
 
 var canDefineProperty = __webpack_require__(27);
-var getIteratorFn = __webpack_require__(61);
+var getIteratorFn = __webpack_require__(59);
 var warning = __webpack_require__(2);
-var lowPriorityWarning = __webpack_require__(38);
+var lowPriorityWarning = __webpack_require__(36);
 
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner.current) {
@@ -7732,7 +7509,7 @@ module.exports = ReactElementValidator;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 63 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7760,7 +7537,7 @@ module.exports = function(isValidElement) {
 
 
 /***/ }),
-/* 64 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7781,7 +7558,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 65 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7804,7 +7581,7 @@ var ReactDOMComponentFlags = {
 module.exports = ReactDOMComponentFlags;
 
 /***/ }),
-/* 66 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7868,7 +7645,7 @@ module.exports = accumulateInto;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 67 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7904,7 +7681,7 @@ function forEachAccumulated(arr, cb, scope) {
 module.exports = forEachAccumulated;
 
 /***/ }),
-/* 68 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7942,7 +7719,7 @@ function getTextContentAccessor() {
 module.exports = getTextContentAccessor;
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8067,7 +7844,7 @@ module.exports = PooledClass.addPoolingTo(CallbackQueue);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8094,7 +7871,7 @@ var ReactFeatureFlags = {
 module.exports = ReactFeatureFlags;
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8222,7 +7999,7 @@ var inputValueTracking = {
 module.exports = inputValueTracking;
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8278,7 +8055,7 @@ function isTextInputElement(elem) {
 module.exports = isTextInputElement;
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8308,7 +8085,7 @@ var ViewportMetrics = {
 module.exports = ViewportMetrics;
 
 /***/ }),
-/* 74 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8365,7 +8142,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setTextContent;
 
 /***/ }),
-/* 75 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8397,7 +8174,7 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 76 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8556,7 +8333,7 @@ var CSSProperty = {
 module.exports = CSSProperty;
 
 /***/ }),
-/* 77 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8797,7 +8574,7 @@ module.exports = DOMPropertyOperations;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 78 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8819,7 +8596,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 79 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8837,7 +8614,7 @@ module.exports = ReactPropTypesSecret;
 
 var _assign = __webpack_require__(5);
 
-var LinkedValueUtils = __webpack_require__(47);
+var LinkedValueUtils = __webpack_require__(45);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
 
@@ -9025,7 +8802,7 @@ module.exports = ReactDOMSelect;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 80 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9045,8 +8822,8 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
 var ReactCompositeComponent = __webpack_require__(151);
-var ReactEmptyComponent = __webpack_require__(82);
-var ReactHostComponent = __webpack_require__(83);
+var ReactEmptyComponent = __webpack_require__(80);
+var ReactHostComponent = __webpack_require__(81);
 
 var getNextDebugID = __webpack_require__(154);
 var invariant = __webpack_require__(1);
@@ -9160,7 +8937,7 @@ module.exports = instantiateReactComponent;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 81 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9206,7 +8983,7 @@ module.exports = ReactNodeTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9241,7 +9018,7 @@ ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 module.exports = ReactEmptyComponent;
 
 /***/ }),
-/* 83 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9315,7 +9092,7 @@ module.exports = ReactHostComponent;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 84 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9338,7 +9115,7 @@ var REACT_ELEMENT_TYPE = __webpack_require__(155);
 
 var getIteratorFn = __webpack_require__(156);
 var invariant = __webpack_require__(1);
-var KeyEscapeUtils = __webpack_require__(51);
+var KeyEscapeUtils = __webpack_require__(49);
 var warning = __webpack_require__(2);
 
 var SEPARATOR = '.';
@@ -9497,7 +9274,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 85 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9587,7 +9364,7 @@ module.exports = EventListener;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 86 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9606,8 +9383,8 @@ module.exports = EventListener;
 var ReactDOMSelection = __webpack_require__(168);
 
 var containsNode = __webpack_require__(170);
-var focusNode = __webpack_require__(75);
-var getActiveElement = __webpack_require__(87);
+var focusNode = __webpack_require__(73);
+var getActiveElement = __webpack_require__(85);
 
 function isInDocument(node) {
   return containsNode(document.documentElement, node);
@@ -9715,7 +9492,7 @@ var ReactInputSelection = {
 module.exports = ReactInputSelection;
 
 /***/ }),
-/* 87 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9759,7 +9536,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 88 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9785,19 +9562,19 @@ var ReactCurrentOwner = __webpack_require__(12);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMContainerInfo = __webpack_require__(185);
 var ReactDOMFeatureFlags = __webpack_require__(186);
-var ReactFeatureFlags = __webpack_require__(70);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactFeatureFlags = __webpack_require__(68);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(10);
 var ReactMarkupChecksum = __webpack_require__(187);
 var ReactReconciler = __webpack_require__(20);
-var ReactUpdateQueue = __webpack_require__(52);
+var ReactUpdateQueue = __webpack_require__(50);
 var ReactUpdates = __webpack_require__(13);
 
 var emptyObject = __webpack_require__(28);
-var instantiateReactComponent = __webpack_require__(80);
+var instantiateReactComponent = __webpack_require__(78);
 var invariant = __webpack_require__(1);
 var setInnerHTML = __webpack_require__(32);
-var shouldUpdateReactComponent = __webpack_require__(50);
+var shouldUpdateReactComponent = __webpack_require__(48);
 var warning = __webpack_require__(2);
 
 var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
@@ -10303,7 +10080,7 @@ module.exports = ReactMount;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 89 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10319,7 +10096,7 @@ module.exports = ReactMount;
 
 
 
-var ReactNodeTypes = __webpack_require__(81);
+var ReactNodeTypes = __webpack_require__(79);
 
 function getHostComponentFromComposite(inst) {
   var type;
@@ -10338,7 +10115,7 @@ function getHostComponentFromComposite(inst) {
 module.exports = getHostComponentFromComposite;
 
 /***/ }),
-/* 90 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10358,71 +10135,382 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MasteryPanel = function (_React$Component) {
-  _inherits(MasteryPanel, _React$Component);
+var MasteryHeadTD = __webpack_require__(53);
+//possible parents: GradeJumbo.js
 
-  function MasteryPanel() {
-    _classCallCheck(this, MasteryPanel);
+var MasteryHeadTR = function (_React$Component) {
+    _inherits(MasteryHeadTR, _React$Component);
 
-    return _possibleConstructorReturn(this, (MasteryPanel.__proto__ || Object.getPrototypeOf(MasteryPanel)).apply(this, arguments));
+    function MasteryHeadTR(props) {
+        _classCallCheck(this, MasteryHeadTR);
+
+        return _possibleConstructorReturn(this, (MasteryHeadTR.__proto__ || Object.getPrototypeOf(MasteryHeadTR)).call(this, props));
+    }
+
+    _createClass(MasteryHeadTR, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'tr',
+                { id: "mastery-row-head", className: 'mastery-row' },
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'panel panel-default' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'panel-body' },
+                            "Student",
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'btn-group-vertical', role: 'group', 'aria-label': '...' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-default', onClick: this.props.upVPage },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
+                                ),
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-default', onClick: this.props.downVPage },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'form-inline' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'form-group' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'input-group' },
+                                        _react2.default.createElement(
+                                            'span',
+                                            { className: 'input-group-addon', id: 'basic-addon3' },
+                                            'Name:'
+                                        ),
+                                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'basic-url', 'aria-describedby': 'basic-addon3', onChange: function (e) {
+                                                this.props.filterMasteryStu(e.target.value);
+                                            }.bind(this) })
+                                    ),
+                                    _react2.default.createElement(
+                                        'select',
+                                        { className: 'form-control', id: 'selClassNo', onChange: function (e) {
+                                                this.props.filterMasteryClassNo(e.target.value);
+                                            }.bind(this) },
+                                        _react2.default.createElement(
+                                            'option',
+                                            { value: "" },
+                                            'All'
+                                        ),
+                                        this.props.parsedMastery.classNos.map(function (item) {
+                                            return _react2.default.createElement(
+                                                'option',
+                                                { key: 'cNo' + item, value: item },
+                                                item
+                                            );
+                                        })
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'btn-group pager' },
+                        _react2.default.createElement(
+                            'button',
+                            { type: 'button', className: 'btn btn-default', onClick: this.props.prevPage },
+                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-left' })
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { type: 'button', className: 'btn btn-default', onClick: this.props.nextPage },
+                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-right' })
+                        )
+                    )
+                ),
+                [0, 1, 2, 3].map(function (id, index) {
+                    if (!!_this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]]) {
+                        return _react2.default.createElement(MasteryHeadTD, { key: _this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]].courseStrLOID, mRecord: !!_this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]] ? _this2.props.parsedMastery.masteryArrS[Object.keys(_this2.props.parsedMastery.masteryArrS)[id + 4 * _this2.props.page]] : { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0 }, colOffset: id });
+                    } else return null;
+                })
+            );
+        }
+    }]);
+
+    return MasteryHeadTR;
+}(_react2.default.Component);
+
+module.exports = MasteryHeadTR;
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MasteryStuTD = __webpack_require__(54);
+var MasteryStuKeyTD = __webpack_require__(205);
+//possible parents: GradeJumbo.js
+
+var MasteryStuTR = function (_React$Component) {
+    _inherits(MasteryStuTR, _React$Component);
+
+    function MasteryStuTR(props) {
+        _classCallCheck(this, MasteryStuTR);
+
+        var _this = _possibleConstructorReturn(this, (MasteryStuTR.__proto__ || Object.getPrototypeOf(MasteryStuTR)).call(this, props));
+
+        _this.state = { courseLOIDs: Object.keys(_this.props.stuData) };
+        return _this;
+    }
+
+    _createClass(MasteryStuTR, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ courseLOIDs: Object.keys(nextProps.stuData) });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'tr',
+                { id: "mastery-row-" + this.props.stuUDID, className: 'mastery-row' },
+                _react2.default.createElement(MasteryStuKeyTD, { key: "mKeyTD" + this.props.stuUDID, mRating0s: this.props.mRating0s, mRatingStr: this.props.mRatingStr, stuUDID: this.props.stuUDID, stuBio: this.props.stuBio }),
+                [0, 1, 2, 3].map(function (id, index) {
+                    if (!!_this2.state.courseLOIDs[id + 4 * _this2.props.page]) {
+                        //console.log(this.props.stuData)
+                        //console.log(this.state.courseLOIDs[id+4*this.props.page])
+                        //console.log(id+4*this.props.page)
+                        return _react2.default.createElement(MasteryStuTD, { key: _this2.state.courseLOIDs[id + 4 * _this2.props.page] + '-' + _this2.props.stuUDID, mArrKey: !!_this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]].mArrKey : -1, ratingData: !!_this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] : { mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mRating0: 1 }, colOffset: id, changer: _this2.props.changer });
+                    } else return null;
+                })
+            );
+        }
+    }]);
+
+    return MasteryStuTR;
+}(_react2.default.Component);
+
+module.exports = MasteryStuTR;
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function parseMastery(mArr) {
+  console.log(mArr);
+  var sMasteryArr = mArr[0];
+  var masteryArr = mArr[1];
+  var courseStrArr = mArr[2].split('|');
+  var studentName = mArr.length < 4 ? false : mArr[3];
+  var classNoF = mArr.length < 5 ? false : mArr[4];
+
+  var columns = {};
+  var masteryArrS = {};
+
+  var LOs = masteryArr.map(function (mRecord, id) {
+    columns[mRecord.courseStrLOID] = null;
+    masteryArrS[mRecord.courseStrLOID] = { masteryArrSKey: id, LOID: mRecord.LOID, LOText: mRecord.LOText, courseStrLOID: mRecord.courseStrLOID, mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mcountU: 0, mstudentsA: [], mstudentsE: [], mstudentsM: [], mstudentsN: [], mstudentsU: [] };
+    return mRecord.courseStrLOID;
+  });
+  var mRating0s = {};
+  var mRatingStrs = {};
+  var rowsByStu = {};
+  var LOIDsIDkeys = {};
+  var stuBios = {};
+  var classNos = [];
+
+  function sFit(obj, id) {
+    if (!obj.courseStrLOIDsID || studentName && (obj.title + " " + obj.lastName).toLowerCase().indexOf(studentName.toLowerCase()) == -1 || classNoF && obj.classNo != classNoF) {
+      return;
+    }
+    var cLstr = obj.courseStrLOIDsID.split('-');
+    var cL = cLstr[0] + '-' + cLstr[1];
+    var objC = Object.assign({}, obj);
+    objC.mArrKey = id;
+
+    if (!stuBios.hasOwnProperty(obj.stuUDID)) {
+      stuBios[obj.stuUDID] = { name: obj.title + " " + obj.lastName };
+    }
+
+    if (classNos.indexOf(obj.classNo) < 0) {
+      classNos.push(obj.classNo);
+    }
+
+    if (!mRating0s.hasOwnProperty(obj.stuUDID)) {
+      mRating0s[obj.stuUDID] = [0, 0, 0, 0, 0];
+    }
+    if (obj.mcountN + obj.mcountA + obj.mcountM + obj.mcountE > 0) {
+      mRating0s[obj.stuUDID][obj.mRating0]++;
+    } else {
+      mRating0s[obj.stuUDID][0]++;
+    }
+
+    if (!mRatingStrs.hasOwnProperty(obj.stuUDID)) {
+      mRatingStrs[obj.stuUDID] = { assessRatingID: obj.maxID, string: "" };
+    }
+    mRatingStrs[obj.stuUDID].string += "m" + obj.LOID + ":" + obj.mRating0 + "n";
+    switch (obj.mRating0) {
+      case 0:
+        masteryArrS[cL].mcountU++;
+        masteryArrS[cL].mstudentsU.push(obj.stuUDID);
+        break;
+      case 1:
+        masteryArrS[cL].mcountN++;
+        masteryArrS[cL].mstudentsN.push(obj.stuUDID);
+        break;
+      case 2:
+        masteryArrS[cL].mcountA++;
+        masteryArrS[cL].mstudentsA.push(obj.stuUDID);
+        break;
+      case 3:
+        masteryArrS[cL].mcountM++;
+        masteryArrS[cL].mstudentsM.push(obj.stuUDID);
+        break;
+      case 4:
+        masteryArrS[cL].mcountE++;
+        masteryArrS[cL].mstudentsE.push(obj.stuUDID);
+        break;
+    }
+
+    if (!rowsByStu.hasOwnProperty(obj.stuUDID)) {
+      rowsByStu[obj.stuUDID] = Object.assign({}, columns);
+    }
+    rowsByStu[obj.stuUDID][cL] = Object.assign({}, objC);
+    rowsByStu[obj.stuUDID][cL].masteryID = columns[cL];
   }
 
-  _createClass(MasteryPanel, [{
-    key: "render",
+  sMasteryArr.forEach(sFit);
+
+  return { sMasteryArr: sMasteryArr,
+    masteryArr: masteryArr,
+    courseStrArr: courseStrArr,
+    rowsByStu: rowsByStu,
+    LOs: LOs,
+    mRating0s: mRating0s,
+    mRatingStrs: mRatingStrs,
+    LOIDsIDkeys: LOIDsIDkeys,
+    masteryArrS: masteryArrS,
+    stuBios: stuBios,
+    classNos: classNos
+  };
+}
+
+module.exports = parseMastery;
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AssessmentHeadTR = __webpack_require__(207);
+var AssessmentHeadTD = __webpack_require__(92);
+
+var AssessmentStuTR = __webpack_require__(208);
+var AssessmentStuTD = __webpack_require__(93);
+var parseAssessment = __webpack_require__(55);
+//var postRequestForReact = require('../../../utilities/postRequestForReact.js')
+
+var AssessmentTable = function (_React$Component) {
+  _inherits(AssessmentTable, _React$Component);
+
+  function AssessmentTable(props) {
+    _classCallCheck(this, AssessmentTable);
+
+    var _this = _possibleConstructorReturn(this, (AssessmentTable.__proto__ || Object.getPrototypeOf(AssessmentTable)).call(this, props));
+
+    console.log(_this.props.parsedAssessment);
+    _this.state = {};
+    //this.upVPage = this.props.upVPage.bind(this)
+    //this.downVPage = this.props.downVPage.bind(this)
+    //this.changeAssessment = this.changeAssessment.bind(this)
+    //this.parseAssessment = parseAssessment.bind(this)
+    //this.parseAssessment = parseAssessment.bind(this)
+
+    return _this;
+  }
+
+  /*changeAssessment(changeObj){
+    return function(){
+      console.log(changeObj)
+    }
+  }*/
+
+  _createClass(AssessmentTable, [{
+    key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      //let list = this._getAssessment(this.state.parsedAssessment);
+
       return _react2.default.createElement(
-        "div",
-        { id: "mastery-col-head-" + this.props.mRecord.courseStrLOID, className: "mastery-column", style: { left: 40 + this.props.colOffset * 140 + 'px' } },
+        'table',
+        { id: '', className: 'table table-bordered' },
         _react2.default.createElement(
-          "div",
-          { className: "panel panel-default" },
-          _react2.default.createElement(
-            "div",
-            { id: "", className: "panel-body" },
-            _react2.default.createElement(
-              "span",
-              { className: "badge" },
-              "# Assessment(s)"
-            ),
-            _react2.default.createElement(
-              "span",
-              { className: "lo-text-span" },
-              this.props.mRecord.LOText
-            ),
-            _react2.default.createElement("br", null),
-            _react2.default.createElement(
-              "span",
-              { id: "", className: "badge badgeNY" },
-              this.props.mRecord.mcountN
-            ),
-            _react2.default.createElement(
-              "span",
-              { id: "", className: "badge badgeA" },
-              this.props.mRecord.mcountA
-            ),
-            _react2.default.createElement(
-              "span",
-              { id: "", className: "badge badgeM" },
-              this.props.mRecord.mcountM
-            ),
-            _react2.default.createElement(
-              "span",
-              { id: "", className: "badge badgeE" },
-              this.props.mRecord.mcountE
-            )
-          )
+          'tbody',
+          null,
+          _react2.default.createElement(AssessmentHeadTR, { key: 3813, parsedAssessment: this.props.parsedAssessment, colOffset: 0, page: this.props.page, upVPage: this.props.upVPage, downVPage: this.props.downVPage }),
+          Object.keys(this.props.parsedAssessment.rowsByStu).slice(0 + 5 * this.props.vpage, 5 + 5 * this.props.vpage).map(function (stuUDID, id1) {
+            return _react2.default.createElement(AssessmentStuTR, { key: stuUDID, stuData: _this2.props.parsedAssessment.rowsByStu[stuUDID], mRating0s: _this2.props.parsedAssessment.mRating0s[stuUDID], mRatingStr: _this2.props.parsedAssessment.mRatingStrs[stuUDID], stuBio: _this2.props.parsedAssessment.stuBios[stuUDID], stuUDID: stuUDID, colOffset: id1, page: _this2.props.page, courseLOIDs: Object.keys(_this2.props.parsedAssessment.alignModel), changer: _this2.props.changeAssessment });
+          })
         )
       );
     }
   }]);
 
-  return MasteryPanel;
+  return AssessmentTable;
 }(_react2.default.Component);
 
-module.exports = MasteryPanel;
+module.exports = AssessmentTable;
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10459,11 +10547,6 @@ var AssessmentHeadTD = function (_React$Component) {
                 { id: "Assessment-col-head-" + this.props.mRecord.courseStrLOID, className: "Assessment-column", style: { left: 40 + this.props.colOffset * 140 + 'px' } },
                 _react2.default.createElement(
                     "span",
-                    { className: "badge" },
-                    "# Assessment(s)"
-                ),
-                _react2.default.createElement(
-                    "span",
                     { className: "lo-text-span" },
                     this.props.mRecord.LOText
                 ),
@@ -10498,7 +10581,7 @@ var AssessmentHeadTD = function (_React$Component) {
 module.exports = AssessmentHeadTD;
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10537,7 +10620,7 @@ var AssessmentStuTD = function (_React$Component) {
   _createClass(AssessmentStuTD, [{
     key: "changeSelect",
     value: function changeSelect(event) {
-      this.setState(this.changeSelectState(event.target.value), this.props.changer([this.props.stuUDID, this.props.LOID, event.target.value, this.props.mArrKey]));
+      this.setState(this.changeSelectState(event.target.value), this.props.changer(this.props.stuUDID, this.props.LOID, event.target.value, this.props.mArrKey));
     }
   }, {
     key: "changeSelectState",
@@ -10602,93 +10685,6 @@ var AssessmentStuTD = function (_React$Component) {
 module.exports = AssessmentStuTD;
 
 /***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function parseAssessment(mArr) {
-    var studentRows = mArr[0];
-    var LOs = mArr[1];
-    var assessmentModel = mArr[2][0];
-    console.log(mArr);
-
-    var mRating0s = {};
-    var mRatingStrs = {};
-    var stuBios = {};
-    var LOsByID = {};
-    LOs.forEach(function (LO) {
-        LOsByID[LO.LOID] = LO;
-    });
-    console.log("LOs");
-    console.log(LOsByID);
-    var alignModel = {};
-    assessmentModel.LOAlign.split("n").forEach(function (str) {
-        if (!!str) {
-            alignModel[str.substring(1)] = {};
-        }
-    });
-
-    var columnHeads = Object.assign({}, alignModel);
-    var AssessmentArrS = Object.assign({}, alignModel);
-    Object.keys(AssessmentArrS).forEach(function (LOID, id) {
-        AssessmentArrS[LOID] = { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0, mcountU: 0, LOText: LOsByID[LOID].LOText };
-    });
-    var rowsByStu = {};
-
-    studentRows.forEach(function (row, id) {
-        stuBios[row.uEntryID] = row.title + " " + row.lastName;
-        mRating0s[row.uEntryID] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
-        mRatingStrs[row.uEntryID] = "";
-        if (!rowsByStu.hasOwnProperty(row.uEntryID)) {
-            rowsByStu[row.uEntryID] = { ratings: Object.assign({}, alignModel), studentRowsId: id, recentrating: '' };
-            Object.keys(rowsByStu[row.uEntryID].ratings).forEach(function (key, id) {
-                var ratingsREGEXP = new RegExp('m' + key + ':[0-4]n');
-                if (ratingsREGEXP.exec(row.recentrating)) {
-                    var regmatch = ratingsREGEXP.exec(row.recentrating)[0];
-                    rowsByStu[row.uEntryID].recentrating += regmatch;
-                    mRatingStrs[row.uEntryID] += regmatch;
-                    //mRating0s[row.uEntryID] = 
-                    rowsByStu[row.uEntryID].ratings[key] = regmatch.split(":")[1].substring(0, 1);
-                    switch (regmatch.split(":")[1].substring(0, 1)) {
-                        case "0":
-                            AssessmentArrS[key].mcountU++;
-                            mRating0s[row.uEntryID][0]++;
-                            break;
-                        case "1":
-                            AssessmentArrS[key].mcountN++;
-                            mRating0s[row.uEntryID][1]++;
-                            break;
-                        case "2":
-                            AssessmentArrS[key].mcountA++;
-                            mRating0s[row.uEntryID][2]++;
-                            break;
-                        case "3":
-                            AssessmentArrS[key].mcountM++;
-                            mRating0s[row.uEntryID][3]++;
-                            break;
-                        case "4":
-                            AssessmentArrS[key].mcountE++;
-                            mRating0s[row.uEntryID][4]++;
-                            break;
-                    }
-                } else {
-                    rowsByStu[row.uEntryID].recentrating += 'm' + key + ':0n';
-                    mRatingStrs[row.uEntryID] += 'm' + key + ':0n';
-                    mRating0s[row.uEntryID][0]++;
-                    rowsByStu[row.uEntryID].ratings[key] = 0;
-                    AssessmentArrS[key].mcountU++;
-                }
-            });
-        }
-    });
-    console.log({ rowsByStu: rowsByStu, alignModel: alignModel, AssessmentArrS: AssessmentArrS });
-    return { rowsByStu: rowsByStu, alignModel: alignModel, AssessmentArrS: AssessmentArrS, mRating0s: mRating0s, mRatingStrs: mRatingStrs, stuBios: stuBios };
-}
-module.exports = parseAssessment;
-
-/***/ }),
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10699,7 +10695,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -10707,14 +10703,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var BDRJumbo = __webpack_require__(195);
 var GreetingJumbo = __webpack_require__(200);
-var GradeJumbo = __webpack_require__(201);
-var MasteryJumbo = __webpack_require__(203);
-var AssessmentModal = __webpack_require__(206);
-var getRequestForReact = __webpack_require__(211);
-var getRequestToArr = __webpack_require__(35);
-var postRequestForReact = __webpack_require__(26);
-var stuCourseQuObj = __webpack_require__(212);
-var parseMastery2 = __webpack_require__(213);
+var MasteryJumbo = __webpack_require__(201);
+var AssessmentModal = __webpack_require__(213);
+var getRequestForReact = __webpack_require__(214);
+var getRequestToArr = __webpack_require__(22);
+var postRequestForReact = __webpack_require__(35);
+var stuCourseQuObj = __webpack_require__(215);
+var parseMastery2 = __webpack_require__(216);
 
 /*getRequestForReact("/mybdrs",(arr) => ( [<BDRJumbo bdrs={arr}/>,
         document.getElementById('content2')]))*/
@@ -10730,12 +10725,8 @@ getRequestForReact("/users", function (arr) {
 
 //ReactDOM.render(<AssessmentModal />,document.getElementById('content4'))
 
-getRequestForReact("/assessments/s7/257", function (arr) {
-        return [_react2.default.createElement(AssessmentModal, { mArr: arr }), document.getElementById('content4')];
-});
-getRequestToArr("/grades3/s6", function (arr) {
-        console.log(parseMastery2(arr));
-});
+//getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
+//getRequestToArr("/grades3/s6",(arr)=>{console.log(parseMastery2(arr))})
 
 /***/ }),
 /* 95 */
@@ -11071,9 +11062,9 @@ module.exports = PooledClass;
 var _prodInvariant = __webpack_require__(19);
 
 var ReactCurrentOwner = __webpack_require__(12);
-var REACT_ELEMENT_TYPE = __webpack_require__(60);
+var REACT_ELEMENT_TYPE = __webpack_require__(58);
 
-var getIteratorFn = __webpack_require__(61);
+var getIteratorFn = __webpack_require__(59);
 var invariant = __webpack_require__(1);
 var KeyEscapeUtils = __webpack_require__(98);
 var warning = __webpack_require__(2);
@@ -11323,7 +11314,7 @@ var ReactElement = __webpack_require__(16);
  */
 var createDOMFactory = ReactElement.createFactory;
 if (process.env.NODE_ENV !== 'production') {
-  var ReactElementValidator = __webpack_require__(62);
+  var ReactElementValidator = __webpack_require__(60);
   createDOMFactory = ReactElementValidator.createFactory;
 }
 
@@ -11505,7 +11496,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(8);
+  ReactComponentTreeHook = __webpack_require__(9);
 }
 
 var loggedTypeFailures = {};
@@ -11547,7 +11538,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(8);
+            ReactComponentTreeHook = __webpack_require__(9);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -11638,7 +11629,7 @@ module.exports = ReactPropTypesSecret;
 var _require = __webpack_require__(16),
     isValidElement = _require.isValidElement;
 
-var factory = __webpack_require__(63);
+var factory = __webpack_require__(61);
 
 module.exports = factory(isValidElement);
 
@@ -11662,7 +11653,7 @@ var emptyFunction = __webpack_require__(11);
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
 
-var ReactPropTypesSecret = __webpack_require__(64);
+var ReactPropTypesSecret = __webpack_require__(62);
 var checkPropTypes = __webpack_require__(105);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
@@ -12181,7 +12172,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(1);
   var warning = __webpack_require__(2);
-  var ReactPropTypesSecret = __webpack_require__(64);
+  var ReactPropTypesSecret = __webpack_require__(62);
   var loggedTypeFailures = {};
 }
 
@@ -12267,13 +12258,13 @@ module.exports = '15.6.1';
 
 
 
-var _require = __webpack_require__(58),
+var _require = __webpack_require__(56),
     Component = _require.Component;
 
 var _require2 = __webpack_require__(16),
     isValidElement = _require2.isValidElement;
 
-var ReactNoopUpdateQueue = __webpack_require__(59);
+var ReactNoopUpdateQueue = __webpack_require__(57);
 var factory = __webpack_require__(108);
 
 module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
@@ -13223,13 +13214,13 @@ module.exports = onlyChild;
 
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDefaultInjection = __webpack_require__(111);
-var ReactMount = __webpack_require__(88);
+var ReactMount = __webpack_require__(86);
 var ReactReconciler = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(13);
 var ReactVersion = __webpack_require__(189);
 
 var findDOMNode = __webpack_require__(190);
-var getHostComponentFromComposite = __webpack_require__(89);
+var getHostComponentFromComposite = __webpack_require__(87);
 var renderSubtreeIntoContainer = __webpack_require__(191);
 var warning = __webpack_require__(2);
 
@@ -13506,7 +13497,7 @@ module.exports = ARIADOMPropertyConfig;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(7);
 var FallbackCompositionState = __webpack_require__(114);
 var SyntheticCompositionEvent = __webpack_require__(115);
@@ -13899,7 +13890,7 @@ var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(17);
 
-var getTextContentAccessor = __webpack_require__(68);
+var getTextContentAccessor = __webpack_require__(66);
 
 /**
  * This helper class stores information about text content of a target node,
@@ -14078,17 +14069,17 @@ module.exports = SyntheticInputEvent;
 
 
 
-var EventPluginHub = __webpack_require__(23);
-var EventPropagators = __webpack_require__(22);
+var EventPluginHub = __webpack_require__(24);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(7);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
 var SyntheticEvent = __webpack_require__(14);
 
-var inputValueTracking = __webpack_require__(71);
-var getEventTarget = __webpack_require__(41);
-var isEventSupported = __webpack_require__(42);
-var isTextInputElement = __webpack_require__(72);
+var inputValueTracking = __webpack_require__(69);
+var getEventTarget = __webpack_require__(39);
+var isEventSupported = __webpack_require__(40);
+var isTextInputElement = __webpack_require__(70);
 
 var eventTypes = {
   change: {
@@ -14591,7 +14582,7 @@ module.exports = ReactOwner;
 
 var ReactInvalidSetStateWarningHook = __webpack_require__(121);
 var ReactHostOperationHistoryHook = __webpack_require__(122);
-var ReactComponentTreeHook = __webpack_require__(8);
+var ReactComponentTreeHook = __webpack_require__(9);
 var ExecutionEnvironment = __webpack_require__(7);
 
 var performanceNow = __webpack_require__(123);
@@ -15135,7 +15126,7 @@ module.exports = DefaultEventPluginOrder;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(6);
 var SyntheticMouseEvent = __webpack_require__(31);
 
@@ -15479,7 +15470,7 @@ module.exports = HTMLDOMPropertyConfig;
 
 
 
-var DOMChildrenOperations = __webpack_require__(44);
+var DOMChildrenOperations = __webpack_require__(42);
 var ReactDOMIDOperations = __webpack_require__(133);
 
 /**
@@ -15888,7 +15879,7 @@ module.exports = getMarkupWrap;
 
 
 
-var DOMChildrenOperations = __webpack_require__(44);
+var DOMChildrenOperations = __webpack_require__(42);
 var ReactDOMComponentTree = __webpack_require__(6);
 
 /**
@@ -15934,17 +15925,17 @@ var _prodInvariant = __webpack_require__(3),
 var AutoFocusUtils = __webpack_require__(135);
 var CSSPropertyOperations = __webpack_require__(136);
 var DOMLazyTree = __webpack_require__(21);
-var DOMNamespaces = __webpack_require__(45);
+var DOMNamespaces = __webpack_require__(43);
 var DOMProperty = __webpack_require__(15);
-var DOMPropertyOperations = __webpack_require__(77);
-var EventPluginHub = __webpack_require__(23);
+var DOMPropertyOperations = __webpack_require__(75);
+var EventPluginHub = __webpack_require__(24);
 var EventPluginRegistry = __webpack_require__(29);
 var ReactBrowserEventEmitter = __webpack_require__(34);
-var ReactDOMComponentFlags = __webpack_require__(65);
+var ReactDOMComponentFlags = __webpack_require__(63);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMInput = __webpack_require__(146);
 var ReactDOMOption = __webpack_require__(147);
-var ReactDOMSelect = __webpack_require__(79);
+var ReactDOMSelect = __webpack_require__(77);
 var ReactDOMTextarea = __webpack_require__(148);
 var ReactInstrumentation = __webpack_require__(10);
 var ReactMultiChild = __webpack_require__(149);
@@ -15953,10 +15944,10 @@ var ReactServerRenderingTransaction = __webpack_require__(158);
 var emptyFunction = __webpack_require__(11);
 var escapeTextContentForBrowser = __webpack_require__(33);
 var invariant = __webpack_require__(1);
-var isEventSupported = __webpack_require__(42);
-var shallowEqual = __webpack_require__(49);
-var inputValueTracking = __webpack_require__(71);
-var validateDOMNesting = __webpack_require__(53);
+var isEventSupported = __webpack_require__(40);
+var shallowEqual = __webpack_require__(47);
+var inputValueTracking = __webpack_require__(69);
+var validateDOMNesting = __webpack_require__(51);
 var warning = __webpack_require__(2);
 
 var Flags = ReactDOMComponentFlags;
@@ -16944,7 +16935,7 @@ module.exports = ReactDOMComponent;
 
 var ReactDOMComponentTree = __webpack_require__(6);
 
-var focusNode = __webpack_require__(75);
+var focusNode = __webpack_require__(73);
 
 var AutoFocusUtils = {
   focusDOMComponent: function () {
@@ -16971,7 +16962,7 @@ module.exports = AutoFocusUtils;
 
 
 
-var CSSProperty = __webpack_require__(76);
+var CSSProperty = __webpack_require__(74);
 var ExecutionEnvironment = __webpack_require__(7);
 var ReactInstrumentation = __webpack_require__(10);
 
@@ -17274,7 +17265,7 @@ module.exports = camelize;
 
 
 
-var CSSProperty = __webpack_require__(76);
+var CSSProperty = __webpack_require__(74);
 var warning = __webpack_require__(2);
 
 var isUnitlessNumber = CSSProperty.isUnitlessNumber;
@@ -17507,7 +17498,7 @@ module.exports = quoteAttributeValueForBrowser;
 
 
 
-var EventPluginHub = __webpack_require__(23);
+var EventPluginHub = __webpack_require__(24);
 
 function runEventQueueInBatch(events) {
   EventPluginHub.enqueueEvents(events);
@@ -17653,8 +17644,8 @@ module.exports = getVendorPrefixedEventName;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
-var DOMPropertyOperations = __webpack_require__(77);
-var LinkedValueUtils = __webpack_require__(47);
+var DOMPropertyOperations = __webpack_require__(75);
+var LinkedValueUtils = __webpack_require__(45);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
 
@@ -17947,7 +17938,7 @@ var _assign = __webpack_require__(5);
 
 var React = __webpack_require__(18);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactDOMSelect = __webpack_require__(79);
+var ReactDOMSelect = __webpack_require__(77);
 
 var warning = __webpack_require__(2);
 var didWarnInvalidOptionChildren = false;
@@ -18074,7 +18065,7 @@ module.exports = ReactDOMOption;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
-var LinkedValueUtils = __webpack_require__(47);
+var LinkedValueUtils = __webpack_require__(45);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
 
@@ -18239,8 +18230,8 @@ module.exports = ReactDOMTextarea;
 
 var _prodInvariant = __webpack_require__(3);
 
-var ReactComponentEnvironment = __webpack_require__(48);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactComponentEnvironment = __webpack_require__(46);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(10);
 
 var ReactCurrentOwner = __webpack_require__(12);
@@ -18691,10 +18682,10 @@ module.exports = ReactMultiChild;
 
 var ReactReconciler = __webpack_require__(20);
 
-var instantiateReactComponent = __webpack_require__(80);
-var KeyEscapeUtils = __webpack_require__(51);
-var shouldUpdateReactComponent = __webpack_require__(50);
-var traverseAllChildren = __webpack_require__(84);
+var instantiateReactComponent = __webpack_require__(78);
+var KeyEscapeUtils = __webpack_require__(49);
+var shouldUpdateReactComponent = __webpack_require__(48);
+var traverseAllChildren = __webpack_require__(82);
 var warning = __webpack_require__(2);
 
 var ReactComponentTreeHook;
@@ -18705,7 +18696,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(8);
+  ReactComponentTreeHook = __webpack_require__(9);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -18713,7 +18704,7 @@ function instantiateChild(childInstances, child, name, selfDebugID) {
   var keyUnique = childInstances[name] === undefined;
   if (process.env.NODE_ENV !== 'production') {
     if (!ReactComponentTreeHook) {
-      ReactComponentTreeHook = __webpack_require__(8);
+      ReactComponentTreeHook = __webpack_require__(9);
     }
     if (!keyUnique) {
       process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -18852,12 +18843,12 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
 var React = __webpack_require__(18);
-var ReactComponentEnvironment = __webpack_require__(48);
+var ReactComponentEnvironment = __webpack_require__(46);
 var ReactCurrentOwner = __webpack_require__(12);
-var ReactErrorUtils = __webpack_require__(40);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactErrorUtils = __webpack_require__(38);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(10);
-var ReactNodeTypes = __webpack_require__(81);
+var ReactNodeTypes = __webpack_require__(79);
 var ReactReconciler = __webpack_require__(20);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -18866,8 +18857,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 var emptyObject = __webpack_require__(28);
 var invariant = __webpack_require__(1);
-var shallowEqual = __webpack_require__(49);
-var shouldUpdateReactComponent = __webpack_require__(50);
+var shallowEqual = __webpack_require__(47);
+var shouldUpdateReactComponent = __webpack_require__(48);
 var warning = __webpack_require__(2);
 
 var CompositeTypes = {
@@ -19757,7 +19748,7 @@ module.exports = ReactCompositeComponent;
 var _prodInvariant = __webpack_require__(3);
 
 var ReactPropTypeLocationNames = __webpack_require__(153);
-var ReactPropTypesSecret = __webpack_require__(78);
+var ReactPropTypesSecret = __webpack_require__(76);
 
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
@@ -19770,7 +19761,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(8);
+  ReactComponentTreeHook = __webpack_require__(9);
 }
 
 var loggedTypeFailures = {};
@@ -19812,7 +19803,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(8);
+            ReactComponentTreeHook = __webpack_require__(9);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -19976,8 +19967,8 @@ module.exports = getIteratorFn;
 
 
 
-var KeyEscapeUtils = __webpack_require__(51);
-var traverseAllChildren = __webpack_require__(84);
+var KeyEscapeUtils = __webpack_require__(49);
+var traverseAllChildren = __webpack_require__(82);
 var warning = __webpack_require__(2);
 
 var ReactComponentTreeHook;
@@ -19988,7 +19979,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(8);
+  ReactComponentTreeHook = __webpack_require__(9);
 }
 
 /**
@@ -20004,7 +19995,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(8);
+        ReactComponentTreeHook = __webpack_require__(9);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -20156,7 +20147,7 @@ module.exports = ReactServerRenderingTransaction;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ReactUpdateQueue = __webpack_require__(52);
+var ReactUpdateQueue = __webpack_require__(50);
 
 var warning = __webpack_require__(2);
 
@@ -20508,13 +20499,13 @@ module.exports = {
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(5);
 
-var DOMChildrenOperations = __webpack_require__(44);
+var DOMChildrenOperations = __webpack_require__(42);
 var DOMLazyTree = __webpack_require__(21);
 var ReactDOMComponentTree = __webpack_require__(6);
 
 var escapeTextContentForBrowser = __webpack_require__(33);
 var invariant = __webpack_require__(1);
-var validateDOMNesting = __webpack_require__(53);
+var validateDOMNesting = __webpack_require__(51);
 
 /**
  * Text nodes violate a couple assumptions that React makes about components:
@@ -20748,13 +20739,13 @@ module.exports = ReactDefaultBatchingStrategy;
 
 var _assign = __webpack_require__(5);
 
-var EventListener = __webpack_require__(85);
+var EventListener = __webpack_require__(83);
 var ExecutionEnvironment = __webpack_require__(7);
 var PooledClass = __webpack_require__(17);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
 
-var getEventTarget = __webpack_require__(41);
+var getEventTarget = __webpack_require__(39);
 var getUnboundedScrollPosition = __webpack_require__(165);
 
 /**
@@ -20951,12 +20942,12 @@ module.exports = getUnboundedScrollPosition;
 
 
 var DOMProperty = __webpack_require__(15);
-var EventPluginHub = __webpack_require__(23);
-var EventPluginUtils = __webpack_require__(39);
-var ReactComponentEnvironment = __webpack_require__(48);
-var ReactEmptyComponent = __webpack_require__(82);
+var EventPluginHub = __webpack_require__(24);
+var EventPluginUtils = __webpack_require__(37);
+var ReactComponentEnvironment = __webpack_require__(46);
+var ReactEmptyComponent = __webpack_require__(80);
 var ReactBrowserEventEmitter = __webpack_require__(34);
-var ReactHostComponent = __webpack_require__(83);
+var ReactHostComponent = __webpack_require__(81);
 var ReactUpdates = __webpack_require__(13);
 
 var ReactInjection = {
@@ -20991,13 +20982,13 @@ module.exports = ReactInjection;
 
 var _assign = __webpack_require__(5);
 
-var CallbackQueue = __webpack_require__(69);
+var CallbackQueue = __webpack_require__(67);
 var PooledClass = __webpack_require__(17);
 var ReactBrowserEventEmitter = __webpack_require__(34);
-var ReactInputSelection = __webpack_require__(86);
+var ReactInputSelection = __webpack_require__(84);
 var ReactInstrumentation = __webpack_require__(10);
 var Transaction = __webpack_require__(30);
-var ReactUpdateQueue = __webpack_require__(52);
+var ReactUpdateQueue = __webpack_require__(50);
 
 /**
  * Ensures that, when possible, the selection range (currently selected text
@@ -21176,7 +21167,7 @@ module.exports = ReactReconcileTransaction;
 var ExecutionEnvironment = __webpack_require__(7);
 
 var getNodeForCharacterOffset = __webpack_require__(169);
-var getTextContentAccessor = __webpack_require__(68);
+var getTextContentAccessor = __webpack_require__(66);
 
 /**
  * While `isCollapsed` is available on the Selection object and `collapsed`
@@ -21881,15 +21872,15 @@ module.exports = SVGDOMPropertyConfig;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(7);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInputSelection = __webpack_require__(86);
+var ReactInputSelection = __webpack_require__(84);
 var SyntheticEvent = __webpack_require__(14);
 
-var getActiveElement = __webpack_require__(87);
-var isTextInputElement = __webpack_require__(72);
-var shallowEqual = __webpack_require__(49);
+var getActiveElement = __webpack_require__(85);
+var isTextInputElement = __webpack_require__(70);
+var shallowEqual = __webpack_require__(47);
 
 var skipSelectionChangeEvent = ExecutionEnvironment.canUseDOM && 'documentMode' in document && document.documentMode <= 11;
 
@@ -22077,8 +22068,8 @@ module.exports = SelectEventPlugin;
 
 var _prodInvariant = __webpack_require__(3);
 
-var EventListener = __webpack_require__(85);
-var EventPropagators = __webpack_require__(22);
+var EventListener = __webpack_require__(83);
+var EventPropagators = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(6);
 var SyntheticAnimationEvent = __webpack_require__(176);
 var SyntheticClipboardEvent = __webpack_require__(177);
@@ -22089,11 +22080,11 @@ var SyntheticMouseEvent = __webpack_require__(31);
 var SyntheticDragEvent = __webpack_require__(181);
 var SyntheticTouchEvent = __webpack_require__(182);
 var SyntheticTransitionEvent = __webpack_require__(183);
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 var SyntheticWheelEvent = __webpack_require__(184);
 
 var emptyFunction = __webpack_require__(11);
-var getEventCharCode = __webpack_require__(54);
+var getEventCharCode = __webpack_require__(52);
 var invariant = __webpack_require__(1);
 
 /**
@@ -22393,7 +22384,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
 /**
  * @interface FocusEvent
@@ -22434,11 +22425,11 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
-var getEventCharCode = __webpack_require__(54);
+var getEventCharCode = __webpack_require__(52);
 var getEventKey = __webpack_require__(180);
-var getEventModifierState = __webpack_require__(43);
+var getEventModifierState = __webpack_require__(41);
 
 /**
  * @interface KeyboardEvent
@@ -22523,7 +22514,7 @@ module.exports = SyntheticKeyboardEvent;
 
 
 
-var getEventCharCode = __webpack_require__(54);
+var getEventCharCode = __webpack_require__(52);
 
 /**
  * Normalization of deprecated HTML5 `key` values
@@ -22681,9 +22672,9 @@ module.exports = SyntheticDragEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
-var getEventModifierState = __webpack_require__(43);
+var getEventModifierState = __webpack_require__(41);
 
 /**
  * @interface TouchEvent
@@ -22831,7 +22822,7 @@ module.exports = SyntheticWheelEvent;
 
 
 
-var validateDOMNesting = __webpack_require__(53);
+var validateDOMNesting = __webpack_require__(51);
 
 var DOC_NODE_TYPE = 9;
 
@@ -23021,9 +23012,9 @@ var _prodInvariant = __webpack_require__(3);
 
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 
-var getHostComponentFromComposite = __webpack_require__(89);
+var getHostComponentFromComposite = __webpack_require__(87);
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
 
@@ -23083,7 +23074,7 @@ module.exports = findDOMNode;
 
 
 
-var ReactMount = __webpack_require__(88);
+var ReactMount = __webpack_require__(86);
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
 
@@ -23106,7 +23097,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 var DOMProperty = __webpack_require__(15);
 var EventPluginRegistry = __webpack_require__(29);
-var ReactComponentTreeHook = __webpack_require__(8);
+var ReactComponentTreeHook = __webpack_require__(9);
 
 var warning = __webpack_require__(2);
 
@@ -23222,7 +23213,7 @@ module.exports = ReactDOMUnknownPropertyHook;
 
 
 
-var ReactComponentTreeHook = __webpack_require__(8);
+var ReactComponentTreeHook = __webpack_require__(9);
 
 var warning = __webpack_require__(2);
 
@@ -23272,7 +23263,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 
 var DOMProperty = __webpack_require__(15);
-var ReactComponentTreeHook = __webpack_require__(8);
+var ReactComponentTreeHook = __webpack_require__(9);
 
 var warning = __webpack_require__(2);
 
@@ -23366,7 +23357,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -23381,7 +23372,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var BDRPanel = __webpack_require__(196);
 var SWIPContainer = __webpack_require__(198);
 var SWIPFilter = __webpack_require__(199);
-var getRequestToArr = __webpack_require__(35);
+var getRequestToArr = __webpack_require__(22);
 
 var BDRJumbo = function (_React$Component) {
   _inherits(BDRJumbo, _React$Component);
@@ -23876,7 +23867,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24008,7 +23999,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24154,7 +24145,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24216,7 +24207,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24228,39 +24219,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MasteryPanel = __webpack_require__(90);
-var MasteryHeadTR = __webpack_require__(55);
-var MasteryHeadTD = __webpack_require__(36);
+var MasteryContainer = __webpack_require__(202);
 
-var MasteryStuTR = __webpack_require__(56);
-var MasteryStuTD = __webpack_require__(37);
-var parseMastery = __webpack_require__(57);
-var postRequestForReact = __webpack_require__(26);
+var getRequestToArr = __webpack_require__(22);
 
-var GradeJumbo = function (_React$Component) {
-  _inherits(GradeJumbo, _React$Component);
+var MasteryJumbo = function (_React$Component) {
+  _inherits(MasteryJumbo, _React$Component);
 
-  function GradeJumbo(props) {
-    _classCallCheck(this, GradeJumbo);
+  function MasteryJumbo(props) {
+    _classCallCheck(this, MasteryJumbo);
 
-    var _this = _possibleConstructorReturn(this, (GradeJumbo.__proto__ || Object.getPrototypeOf(GradeJumbo)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MasteryJumbo.__proto__ || Object.getPrototypeOf(MasteryJumbo)).call(this, props));
 
-    console.log(_this.props.mArr);
-    _this.state = { mArrS: _this.props.mArr, parsedMastery: parseMastery(_this.props.mArr),
-      page: 0, vpage: 0
+    _this.state = {
+      mArr: [],
+      activeCourse: { courseStr: '', courseTitle: '' }
     };
-    _this.prevPage = _this.prevPage.bind(_this);
-    _this.nextPage = _this.nextPage.bind(_this);
-    _this.upVPage = _this.upVPage.bind(_this);
-    _this.downVPage = _this.downVPage.bind(_this);
-    _this.changeMastery = _this.changeMastery.bind(_this);
-    //this.parseMastery = parseMastery.bind(this)
-    _this.parseMastery = parseMastery.bind(_this);
-
+    _this.getMasteryForCourse = _this.getMasteryForCourse.bind(_this);
+    _this.changeMArrState = _this.changeMArrState.bind(_this);
+    _this.changeActiveCourseState = _this.changeActiveCourseState.bind(_this);
+    _this.resetState = _this.resetState.bind(_this);
     return _this;
   }
 
-  _createClass(GradeJumbo, [{
+  _createClass(MasteryJumbo, [{
+    key: 'resetState',
+    value: function resetState() {
+      this.setState({
+        mArr: [],
+        activeCourse: { courseStr: '', courseTitle: '' }
+      });
+    }
+  }, {
+    key: 'changeMArrState',
+    value: function changeMArrState(arr) {
+      this.setState({ mArr: arr });
+    }
+  }, {
+    key: 'changeActiveCourseState',
+    value: function changeActiveCourseState(course) {
+      this.setState({ activeCourse: course });
+    }
+  }, {
+    key: 'getMasteryForCourse',
+    value: function getMasteryForCourse(course) {
+      var changeMArrState = this.changeMArrState.bind(this);
+      var changeActiveCourseState = this.changeActiveCourseState;
+      return function () {
+        changeActiveCourseState(course);
+        getRequestToArr("/mastery/" + course.courseStr, changeMArrState);
+      };
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -24271,44 +24281,196 @@ var GradeJumbo = function (_React$Component) {
         'div',
         { className: 'jumbotron' },
         _react2.default.createElement(
-          'ul',
-          { className: 'pager' },
+          'h1',
+          null,
           _react2.default.createElement(
-            'li',
-            { className: "previous" + (this.state.page == 0 ? " disabled" : ""), onClick: this.prevPage },
-            _react2.default.createElement(
-              'a',
-              { href: '#', onClick: function onClick(event) {
-                  event.preventDefault();
-                } },
-              'Previous'
-            )
+            'span',
+            { onClick: this.resetState, className: 'home-header' },
+            _react2.default.createElement('img', { height: '100', src: './public/img/MasteryGraph.png' }),
+            'Mastery'
+          ),
+          this.state.activeCourse.courseTitle != '' ? ": " + this.state.activeCourse.courseTitle : ""
+        ),
+        this.state.activeCourse.courseTitle == '' ? _react2.default.createElement(
+          'ul',
+          { className: 'nav nav-pills' },
+          Object.keys(this.props.stuCourseQuObj.strObj).map(function (key, id) {
+            return _react2.default.createElement(
+              'li',
+              { className: _this2.state.activeCourse.courseStr == key ? 'active' : '', key: "masterynav" + key, onClick: _this2.getMasteryForCourse({ courseStr: key, courseTitle: _this2.props.stuCourseQuObj.strObj[key] }) },
+              _react2.default.createElement(
+                'a',
+                { href: '#', onClick: function onClick(event) {
+                    event.preventDefault();
+                  } },
+                _this2.props.stuCourseQuObj.strObj[key]
+              )
+            );
+          })
+        ) : null,
+        this.state.mArr.length > 0 ? _react2.default.createElement(MasteryContainer, { getMasteryForCourse: this.getMasteryForCourse, course: this.state.activeCourse, mArr: this.state.mArr }) : null
+      );
+    }
+  }]);
+
+  return MasteryJumbo;
+}(_react2.default.Component);
+
+module.exports = MasteryJumbo;
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MasteryTable = __webpack_require__(203);
+var MasteryHeadTR = __webpack_require__(88);
+var MasteryHeadTD = __webpack_require__(53);
+
+var MasteryStuTR = __webpack_require__(89);
+var MasteryStuTD = __webpack_require__(54);
+var AssessmentContainer = __webpack_require__(206);
+var AssessmentsList = __webpack_require__(210);
+var NewLOView = __webpack_require__(211);
+var NewAssessView = __webpack_require__(212);
+var parseMastery = __webpack_require__(90);
+var postRequestForReact = __webpack_require__(35);
+var getRequestToArr = __webpack_require__(22);
+
+var MasteryContainer = function (_React$Component) {
+  _inherits(MasteryContainer, _React$Component);
+
+  function MasteryContainer(props) {
+    _classCallCheck(this, MasteryContainer);
+
+    //console.log(this.props.mArr)
+    var _this = _possibleConstructorReturn(this, (MasteryContainer.__proto__ || Object.getPrototypeOf(MasteryContainer)).call(this, props));
+
+    _this.state = { mArrS: _this.props.mArr, parsedMastery: parseMastery(_this.props.mArr),
+      page: 0, vpage: 0, viewOption: 'mRatings', assessMArr: null
+    };
+    _this.prevPage = _this.prevPage.bind(_this);
+    _this.nextPage = _this.nextPage.bind(_this);
+    _this.upVPage = _this.upVPage.bind(_this);
+    _this.downVPage = _this.downVPage.bind(_this);
+    _this.changeMastery = _this.changeMastery.bind(_this);
+    //this.parseMastery = parseMastery.bind(this)
+    _this.parseMastery = parseMastery.bind(_this);
+    _this.filterMasteryStu = _this.filterMasteryStu.bind(_this);
+    _this.filterMasteryClassNo = _this.filterMasteryClassNo.bind(_this);
+    _this._getAssessmentGrades = _this._getAssessmentGrades.bind(_this);
+
+    return _this;
+  }
+
+  _createClass(MasteryContainer, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({
+        mArrS: nextProps.mArr,
+        parsedMastery: parseMastery(nextProps.mArr),
+        page: 0, vpage: 0,
+        viewOption: 'mRatings',
+        assessMArr: null,
+        assessmentsArr: null
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      //let list = this._getMastery(this.state.parsedMastery);
+      var view = void 0;
+
+      if (this.state.viewOption == 'mRatings') {
+        view = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'btn btn-primary', onClick: function () {
+                this._viewOptionSelect('newLO');
+              }.bind(this) },
+            'New Learning Outcome'
           ),
           _react2.default.createElement(
-            'li',
-            { className: 'next', onClick: this.nextPage },
-            _react2.default.createElement(
-              'a',
-              { href: '#', onClick: function onClick(event) {
-                  event.preventDefault();
-                } },
-              'Next'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'table',
-          { id: '', className: 'table table-bordered' },
+            'button',
+            { type: 'button', className: 'btn btn-primary', onClick: function () {
+                this._viewOptionSelect('newAssessment');
+              }.bind(this) },
+            'New Assessment'
+          ),
           _react2.default.createElement(
-            'tbody',
-            null,
-            _react2.default.createElement(MasteryHeadTR, { key: 3813, parsedMastery: this.state.parsedMastery, colOffset: 0, page: this.state.page, upVPage: this.upVPage, downVPage: this.downVPage }),
-            Object.keys(this.state.parsedMastery.rowsByStu).slice(0 + 5 * this.state.vpage, 5 + 5 * this.state.vpage).map(function (stuUDID, id1) {
-              return _react2.default.createElement(MasteryStuTR, { key: stuUDID, stuData: _this2.state.parsedMastery.rowsByStu[stuUDID], mRating0s: _this2.state.parsedMastery.mRating0s[stuUDID], mRatingStr: _this2.state.parsedMastery.mRatingStrs[stuUDID], stuBio: _this2.state.parsedMastery.stuBios[stuUDID], stuUDID: stuUDID, colOffset: id1, page: _this2.state.page, changer: _this2.changeMastery });
-            })
-          )
-        )
+            'button',
+            { type: 'button', className: 'btn btn-primary', onClick: function () {
+                this._getAssessmentGrades('s7', 257);
+              }.bind(this) },
+            ' Grade Assessment '
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'btn btn-primary', onClick: function () {
+                this._getAssessments(this.state.mArrS[2]);
+              }.bind(this) },
+            ' View Assessments '
+          ),
+          _react2.default.createElement(MasteryTable, { page: this.state.page, vpage: this.state.vpage,
+            upVPage: this.upVPage, downVPage: this.downVPage,
+            prevPage: this.prevPage, nextPage: this.nextPage,
+            changeMastery: this.changeMastery, parsedMastery: this.state.parsedMastery,
+            mArrS: this.state.mArrS, filterMasteryStu: this.filterMasteryStu,
+            filterMasteryClassNo: this.filterMasteryClassNo
+          })
+        );
+      } else if (this.state.viewOption == 'newLO') {
+        view = _react2.default.createElement(NewLOView, { postRequestForReact: postRequestForReact, cancel: function () {
+            this._viewOptionSelect('mRatings');
+          }.bind(this), submitter: this.props.getMasteryForCourse(this.props.course), courseStr: this.state.mArrS[2], LOs: this.state.mArrS[1] });
+      } else if (this.state.viewOption == 'newAssessment') {
+        view = _react2.default.createElement(NewAssessView, { postRequestForReact: postRequestForReact, cancel: function () {
+            this._viewOptionSelect('mRatings');
+          }.bind(this), submitter: this.props.getMasteryForCourse(this.props.course), courseStr: this.state.mArrS[2], LOs: this.state.mArrS[1] });
+      } else if (this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null) {
+        view = _react2.default.createElement(AssessmentContainer, { mArr: this.state.assessMArr });
+      } else if (this.state.viewOption == 'viewAssessments' && this.state.assessmentsArr != null) {
+        view = _react2.default.createElement(AssessmentsList, { LOs: this.state.mArrS[1], getAssessmentGrades: this._getAssessmentGrades, assessmentsArr: this.state.assessmentsArr });
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        view
       );
+    }
+  }, {
+    key: '_viewOptionSelect',
+    value: function _viewOptionSelect(view) {
+      var newState = { viewOption: view };
+      if (view != 'gradeAssessment') {
+        newState.assessMArr = null;
+      } else if (view != 'viewAssessments') {
+        newState.assessmentsArr = null;
+      }
+      this.setState(newState);
     }
   }, {
     key: 'prevPage',
@@ -24334,26 +24496,39 @@ var GradeJumbo = function (_React$Component) {
     key: 'getStudentRows',
     value: function getStudentRows(rowsByStu) {}
   }, {
+    key: 'filterMasteryStu',
+    value: function filterMasteryStu(text) {
+      var mArrC = this.state.mArrS.slice(0, 3);
+      if (text != '') mArrC.push(text);
+      this.setState({ mArrS: mArrC, parsedMastery: parseMastery(mArrC) });
+    }
+  }, {
+    key: 'filterMasteryClassNo',
+    value: function filterMasteryClassNo(text) {
+      var mArrC = this.state.mArrS.slice(0, 3);
+      mArrC.push('');
+      if (text != '') mArrC.push(text);
+      this.setState({ mArrS: mArrC, parsedMastery: parseMastery(mArrC) });
+    }
+  }, {
     key: 'changeMastery',
     value: function changeMastery(stuUDID, mString, mRating0, mArrKey) {
-      var _this3 = this;
+      var _this2 = this;
 
       return function () {
         var mArrS = {};
-        for (var ki in _this3.state.mArrS) {
-          mArrS[ki] = _this3.state.mArrS[ki];
+        for (var ki in _this2.state.mArrS) {
+          mArrS[ki] = _this2.state.mArrS[ki];
         }
         console.log(mArrS);
-        console.log(_this3.state.parsedMastery.mRatingStrs[stuUDID]);
+        console.log(_this2.state.parsedMastery.mRatingStrs[stuUDID]);
         var newState = function newState(mArrC) {
           return function (prevState, props) {
             return { mArrS: mArrC, parsedMastery: parseMastery(mArrC) };
           };
         };
-        //this.setState({changedRows:Object.assign(,this.state.changedRowsstuUDID})
         mArrS[0][mArrKey].mRating0 = parseInt(mRating0);
-        //this.setState({mArrS:mArrS,parsedMastery: parseMastery(mArrS)})
-        _this3.setState(newState(mArrS), postRequestForReact("/sendgrades", parseMastery(mArrS).mRatingStrs[stuUDID], console.log));
+        _this2.setState(newState(mArrS), postRequestForReact("/sendgrades", parseMastery(mArrS).mRatingStrs[stuUDID], console.log));
       };
     }
   }, {
@@ -24364,20 +24539,197 @@ var GradeJumbo = function (_React$Component) {
           courseStrArr = mObj.courseStrArr,
           rowsByStu = mObj.rowsByStu,
           LOs = mObj.LOs;
+    }
+  }, {
+    key: '_getAssessmentGrades',
+    value: function _getAssessmentGrades(courseStr, assessID) {
+      getRequestToArr('/assessments/' + courseStr + '/' + assessID, function (arr) {
+        this.setState({ assessMArr: arr, viewOption: 'gradeAssessment' });
+      }.bind(this));
+    }
+  }, {
+    key: '_getAssessments',
+    value: function _getAssessments(courseStr) {
+      getRequestToArr('/assessments/' + courseStr, function (arr) {
+        this.setState({ assessmentsArr: arr, viewOption: 'viewAssessments' });
+      }.bind(this));
+    }
+    //getRequestForReact("/assessments/s7/257",(arr) => ([<AssessmentModal mArr={arr}/>,document.getElementById('content4')]))
+    //getRequestToArr("/grades3/s6",(arr)=>{console.log(parseMastery2(arr))})
 
-      //var studentRows = 
-      //var headerRow = (<MasteryHeadTR key={3813} masteryArr={masteryArr} colOffset={0} page={this.state.page}/>)
-      //return {header: headerRow, body: studentRows};
+  }]);
+
+  return MasteryContainer;
+}(_react2.default.Component);
+
+module.exports = MasteryContainer;
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MasteryPanel = __webpack_require__(204);
+var MasteryHeadTR = __webpack_require__(88);
+var MasteryHeadTD = __webpack_require__(53);
+
+var MasteryStuTR = __webpack_require__(89);
+var MasteryStuTD = __webpack_require__(54);
+var parseMastery = __webpack_require__(90);
+var postRequestForReact = __webpack_require__(35);
+
+var MasteryTable = function (_React$Component) {
+  _inherits(MasteryTable, _React$Component);
+
+  function MasteryTable(props) {
+    _classCallCheck(this, MasteryTable);
+
+    //console.log(this.props.mArrS)
+    var _this = _possibleConstructorReturn(this, (MasteryTable.__proto__ || Object.getPrototypeOf(MasteryTable)).call(this, props));
+
+    _this.state = {};
+    //this.upVPage = this.props.upVPage.bind(this)
+    //this.downVPage = this.props.downVPage.bind(this)
+    //this.changeMastery = this.props.changeMastery.bind(this)
+    //this.parseMastery = parseMastery.bind(this)
+    //this.parseMastery = parseMastery.bind(this)
+
+    return _this;
+  }
+
+  _createClass(MasteryTable, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      //let list = this._getMastery(this.state.parsedMastery);
+
+      return _react2.default.createElement(
+        'table',
+        { id: '', className: 'table table-bordered' },
+        _react2.default.createElement(
+          'tbody',
+          null,
+          _react2.default.createElement(MasteryHeadTR, { key: 3813, parsedMastery: this.props.parsedMastery, colOffset: 0, page: this.props.page, upVPage: this.props.upVPage, downVPage: this.props.downVPage, prevPage: this.props.prevPage, nextPage: this.props.nextPage, filterMasteryStu: this.props.filterMasteryStu, filterMasteryClassNo: this.props.filterMasteryClassNo }),
+          Object.keys(this.props.parsedMastery.rowsByStu).slice(0 + 5 * this.props.vpage, 5 + 5 * this.props.vpage).map(function (stuUDID, id1) {
+            return _react2.default.createElement(MasteryStuTR, { key: stuUDID, stuData: _this2.props.parsedMastery.rowsByStu[stuUDID], mRating0s: _this2.props.parsedMastery.mRating0s[stuUDID], mRatingStr: _this2.props.parsedMastery.mRatingStrs[stuUDID], stuBio: _this2.props.parsedMastery.stuBios[stuUDID], stuUDID: stuUDID, colOffset: id1, page: _this2.props.page, changer: _this2.props.changeMastery });
+          })
+        )
+      );
     }
   }]);
 
-  return GradeJumbo;
+  return MasteryTable;
 }(_react2.default.Component);
 
-module.exports = GradeJumbo;
+module.exports = MasteryTable;
 
 /***/ }),
-/* 202 */
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MasteryPanel = function (_React$Component) {
+  _inherits(MasteryPanel, _React$Component);
+
+  function MasteryPanel() {
+    _classCallCheck(this, MasteryPanel);
+
+    return _possibleConstructorReturn(this, (MasteryPanel.__proto__ || Object.getPrototypeOf(MasteryPanel)).apply(this, arguments));
+  }
+
+  _createClass(MasteryPanel, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { id: "mastery-col-head-" + this.props.mRecord.courseStrLOID, className: "mastery-column", style: { left: 40 + this.props.colOffset * 140 + 'px' } },
+        _react2.default.createElement(
+          "div",
+          { className: "panel panel-default" },
+          _react2.default.createElement(
+            "div",
+            { id: "", className: "panel-body" },
+            _react2.default.createElement(
+              "span",
+              { className: "badge" },
+              "# Assessment(s)"
+            ),
+            _react2.default.createElement(
+              "span",
+              { className: "lo-text-span" },
+              this.props.mRecord.LOText
+            ),
+            _react2.default.createElement("br", null),
+            _react2.default.createElement(
+              "span",
+              { id: "", className: "badge badgeNY" },
+              this.props.mRecord.mcountN
+            ),
+            _react2.default.createElement(
+              "span",
+              { id: "", className: "badge badgeA" },
+              this.props.mRecord.mcountA
+            ),
+            _react2.default.createElement(
+              "span",
+              { id: "", className: "badge badgeM" },
+              this.props.mRecord.mcountM
+            ),
+            _react2.default.createElement(
+              "span",
+              { id: "", className: "badge badgeE" },
+              this.props.mRecord.mcountE
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return MasteryPanel;
+}(_react2.default.Component);
+
+module.exports = MasteryPanel;
+
+/***/ }),
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24460,7 +24812,7 @@ var MasteryStuKeyTD = function (_React$Component) {
 module.exports = MasteryStuKeyTD;
 
 /***/ }),
-/* 203 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24472,7 +24824,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24484,165 +24836,62 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MasteryContainer = __webpack_require__(204);
+var AssessmentTable = __webpack_require__(91);
+var parseAssessment = __webpack_require__(55);
+var getRequestToArr = __webpack_require__(22);
+var postRequestForReact = __webpack_require__(35);
 
-var getRequestToArr = __webpack_require__(35);
+var AssessmentContainer = function (_React$Component) {
+  _inherits(AssessmentContainer, _React$Component);
 
-var MasteryJumbo = function (_React$Component) {
-  _inherits(MasteryJumbo, _React$Component);
+  function AssessmentContainer(props) {
+    _classCallCheck(this, AssessmentContainer);
 
-  function MasteryJumbo(props) {
-    _classCallCheck(this, MasteryJumbo);
+    var _this = _possibleConstructorReturn(this, (AssessmentContainer.__proto__ || Object.getPrototypeOf(AssessmentContainer)).call(this, props));
 
-    var _this = _possibleConstructorReturn(this, (MasteryJumbo.__proto__ || Object.getPrototypeOf(MasteryJumbo)).call(this, props));
-
-    _this.state = {
-      mArr: []
-    };
-    _this.getMasteryForCourse = _this.getMasteryForCourse.bind(_this);
-    _this.changeMArrState = _this.changeMArrState.bind(_this);
-    return _this;
-  }
-
-  _createClass(MasteryJumbo, [{
-    key: 'changeMArrState',
-    value: function changeMArrState(arr) {
-      this.setState({ mArr: arr });
-    }
-  }, {
-    key: 'getMasteryForCourse',
-    value: function getMasteryForCourse(courseStr) {
-      var changeMArrState = this.changeMArrState.bind(this);
-      return function () {
-        getRequestToArr("/mastery/" + courseStr, changeMArrState);
-      };
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      //let list = this._getMastery(this.state.parsedMastery);
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'jumbotron' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          _react2.default.createElement('img', { height: '100', src: './public/img/MasteryGraph.png' }),
-          ' Mastery'
-        ),
-        _react2.default.createElement(
-          'ul',
-          { className: 'nav nav-pills' },
-          Object.keys(this.props.stuCourseQuObj.strObj).map(function (key, id) {
-            return _react2.default.createElement(
-              'li',
-              { key: "masterynav" + key, onClick: _this2.getMasteryForCourse(key) },
-              _react2.default.createElement(
-                'a',
-                { href: '#', onClick: function onClick(event) {
-                    event.preventDefault();
-                  } },
-                _this2.props.stuCourseQuObj.strObj[key]
-              )
-            );
-          })
-        ),
-        this.state.mArr.length > 0 ? _react2.default.createElement(MasteryContainer, { mArr: this.state.mArr }) : null
-      );
-    }
-  }]);
-
-  return MasteryJumbo;
-}(_react2.default.Component);
-
-module.exports = MasteryJumbo;
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(9);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MasteryTable = __webpack_require__(205);
-var MasteryHeadTR = __webpack_require__(55);
-var MasteryHeadTD = __webpack_require__(36);
-
-var MasteryStuTR = __webpack_require__(56);
-var MasteryStuTD = __webpack_require__(37);
-var parseMastery = __webpack_require__(57);
-var postRequestForReact = __webpack_require__(26);
-
-var MasteryContainer = function (_React$Component) {
-  _inherits(MasteryContainer, _React$Component);
-
-  function MasteryContainer(props) {
-    _classCallCheck(this, MasteryContainer);
-
-    //console.log(this.props.mArr)
-    var _this = _possibleConstructorReturn(this, (MasteryContainer.__proto__ || Object.getPrototypeOf(MasteryContainer)).call(this, props));
-
-    _this.state = { mArrS: _this.props.mArr, parsedMastery: parseMastery(_this.props.mArr),
-      page: 0, vpage: 0
-    };
+    _this.state = { mArrS: _this.props.mArr, page: 0, vpage: 0, parsedAssessment: parseAssessment(_this.props.mArr) };
+    _this.parseAssessment = parseAssessment.bind(_this);
     _this.prevPage = _this.prevPage.bind(_this);
     _this.nextPage = _this.nextPage.bind(_this);
     _this.upVPage = _this.upVPage.bind(_this);
     _this.downVPage = _this.downVPage.bind(_this);
-    _this.changeMastery = _this.changeMastery.bind(_this);
-    //this.parseMastery = parseMastery.bind(this)
-    _this.parseMastery = parseMastery.bind(_this);
-    _this.filterMasteryStu = _this.filterMasteryStu.bind(_this);
-    _this.filterMasteryClassNo = _this.filterMasteryClassNo.bind(_this);
-
+    _this.changeAssessment = _this.changeAssessment.bind(_this);
     return _this;
   }
 
-  _createClass(MasteryContainer, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({
-        mArrS: nextProps.mArr,
-        parsedMastery: parseMastery(nextProps.mArr),
-        page: 0, vpage: 0
-      });
-    }
-  }, {
+  _createClass(AssessmentContainer, [{
     key: 'render',
     value: function render() {
-      //let list = this._getMastery(this.state.parsedMastery);
 
       return _react2.default.createElement(
         'div',
-        { className: 'container' },
-        _react2.default.createElement(MasteryTable, { page: this.state.page, vpage: this.state.vpage,
-          upVPage: this.upVPage, downVPage: this.downVPage,
-          prevPage: this.prevPage, nextPage: this.nextPage,
-          changeMastery: this.changeMastery, parsedMastery: this.state.parsedMastery,
-          mArrS: this.state.mArrS, filterMasteryStu: this.filterMasteryStu,
-          filterMasteryClassNo: this.filterMasteryClassNo
-        })
+        { className: 'panel panel-default' },
+        _react2.default.createElement(
+          'div',
+          { className: 'panel-heading' },
+          _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'close' },
+            '\xD7'
+          ),
+          _react2.default.createElement(
+            'h4',
+            { className: 'panel-title', id: 'mypanelLabel' },
+            "Assessment Ratings for ",
+            _react2.default.createElement(
+              'strong',
+              null,
+              this.state.mArrS[2][0].AssessTitle
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'panel-body' },
+          _react2.default.createElement(AssessmentTable, { parsedAssessment: this.state.parsedAssessment, page: this.state.page, vpage: this.state.vpage,
+            upVPage: this.upVPage, downVPage: this.downVPage, nextPage: this.nextPage, prevPage: this.prevPage,
+            changeAssessment: this.changeAssessment })
+        )
       );
     }
   }, {
@@ -24666,26 +24915,8 @@ var MasteryContainer = function (_React$Component) {
       this.setState({ vpage: this.state.vpage + 1 });
     }
   }, {
-    key: 'getStudentRows',
-    value: function getStudentRows(rowsByStu) {}
-  }, {
-    key: 'filterMasteryStu',
-    value: function filterMasteryStu(text) {
-      var mArrC = this.state.mArrS.slice(0, 3);
-      if (text != '') mArrC.push(text);
-      this.setState({ mArrS: mArrC, parsedMastery: parseMastery(mArrC) });
-    }
-  }, {
-    key: 'filterMasteryClassNo',
-    value: function filterMasteryClassNo(text) {
-      var mArrC = this.state.mArrS.slice(0, 3);
-      mArrC.push('');
-      if (text != '') mArrC.push(text);
-      this.setState({ mArrS: mArrC, parsedMastery: parseMastery(mArrC) });
-    }
-  }, {
-    key: 'changeMastery',
-    value: function changeMastery(stuUDID, mString, mRating0, mArrKey) {
+    key: 'changeAssessment',
+    value: function changeAssessment(stuUDID, loid, mRating0, mArrKey) {
       var _this2 = this;
 
       return function () {
@@ -24694,34 +24925,27 @@ var MasteryContainer = function (_React$Component) {
           mArrS[ki] = _this2.state.mArrS[ki];
         }
         console.log(mArrS);
-        console.log(_this2.state.parsedMastery.mRatingStrs[stuUDID]);
+        console.log(_this2.state.parsedAssessment);
         var newState = function newState(mArrC) {
           return function (prevState, props) {
-            return { mArrS: mArrC, parsedMastery: parseMastery(mArrC) };
+            return { mArrS: mArrC, parsedAssessment: parseAssessment(mArrC) };
           };
         };
-        mArrS[0][mArrKey].mRating0 = parseInt(mRating0);
-        _this2.setState(newState(mArrS), postRequestForReact("/sendgrades", parseMastery(mArrS).mRatingStrs[stuUDID], console.log));
+        var re = new RegExp('m' + loid + ":" + "(\\d)*" + 'n');
+        mArrS[0][mArrKey].recentrating = mArrS[0][mArrKey].recentrating.replace(re, 'm' + loid + ':' + mRating0 + 'n');
+        var reqbody = { assessRatingID: mArrS[0][mArrKey].maxID, string: mArrS[0][mArrKey].recentrating };
+        _this2.setState(newState(mArrS), postRequestForReact("/sendgrades", reqbody, console.log));
       };
     }
-  }, {
-    key: '_getMastery',
-    value: function _getMastery(mObj) {
-      var sMasteryArr = mObj.sMasteryArr,
-          masteryArr = mObj.masteryArr,
-          courseStrArr = mObj.courseStrArr,
-          rowsByStu = mObj.rowsByStu,
-          LOs = mObj.LOs;
-    }
   }]);
 
-  return MasteryContainer;
+  return AssessmentContainer;
 }(_react2.default.Component);
 
-module.exports = MasteryContainer;
+module.exports = AssessmentContainer;
 
 /***/ }),
-/* 205 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24733,10 +24957,6 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24745,63 +24965,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MasteryPanel = __webpack_require__(90);
-var MasteryHeadTR = __webpack_require__(55);
-var MasteryHeadTD = __webpack_require__(36);
+var AssessmentHeadTD = __webpack_require__(92);
+//possible parents: GradeJumbo.js
 
-var MasteryStuTR = __webpack_require__(56);
-var MasteryStuTD = __webpack_require__(37);
-var parseMastery = __webpack_require__(57);
-var postRequestForReact = __webpack_require__(26);
+var AssessmentHeadTR = function (_React$Component) {
+    _inherits(AssessmentHeadTR, _React$Component);
 
-var MasteryTable = function (_React$Component) {
-  _inherits(MasteryTable, _React$Component);
+    function AssessmentHeadTR(props) {
+        _classCallCheck(this, AssessmentHeadTR);
 
-  function MasteryTable(props) {
-    _classCallCheck(this, MasteryTable);
-
-    //console.log(this.props.mArrS)
-    var _this = _possibleConstructorReturn(this, (MasteryTable.__proto__ || Object.getPrototypeOf(MasteryTable)).call(this, props));
-
-    _this.state = {};
-    //this.upVPage = this.props.upVPage.bind(this)
-    //this.downVPage = this.props.downVPage.bind(this)
-    //this.changeMastery = this.props.changeMastery.bind(this)
-    //this.parseMastery = parseMastery.bind(this)
-    //this.parseMastery = parseMastery.bind(this)
-
-    return _this;
-  }
-
-  _createClass(MasteryTable, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      //let list = this._getMastery(this.state.parsedMastery);
-
-      return _react2.default.createElement(
-        'table',
-        { id: '', className: 'table table-bordered' },
-        _react2.default.createElement(
-          'tbody',
-          null,
-          _react2.default.createElement(MasteryHeadTR, { key: 3813, parsedMastery: this.props.parsedMastery, colOffset: 0, page: this.props.page, upVPage: this.props.upVPage, downVPage: this.props.downVPage, prevPage: this.props.prevPage, nextPage: this.props.nextPage, filterMasteryStu: this.props.filterMasteryStu, filterMasteryClassNo: this.props.filterMasteryClassNo }),
-          Object.keys(this.props.parsedMastery.rowsByStu).slice(0 + 5 * this.props.vpage, 5 + 5 * this.props.vpage).map(function (stuUDID, id1) {
-            return _react2.default.createElement(MasteryStuTR, { key: stuUDID, stuData: _this2.props.parsedMastery.rowsByStu[stuUDID], mRating0s: _this2.props.parsedMastery.mRating0s[stuUDID], mRatingStr: _this2.props.parsedMastery.mRatingStrs[stuUDID], stuBio: _this2.props.parsedMastery.stuBios[stuUDID], stuUDID: stuUDID, colOffset: id1, page: _this2.props.page, changer: _this2.props.changeMastery });
-          })
-        )
-      );
+        return _possibleConstructorReturn(this, (AssessmentHeadTR.__proto__ || Object.getPrototypeOf(AssessmentHeadTR)).call(this, props));
     }
-  }]);
 
-  return MasteryTable;
+    _createClass(AssessmentHeadTR, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'tr',
+                { id: "Assessment-row-head", className: 'Assessment-row' },
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'panel panel-default' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'panel-body' },
+                            "Student / Learning Outcome",
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'btn-group-vertical', role: 'group', 'aria-label': '...' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-default', onClick: this.props.upVPage },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
+                                ),
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-default', onClick: this.props.downVPage },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
+                                )
+                            )
+                        )
+                    )
+                ),
+                [0, 1, 2, 3].map(function (id, index) {
+                    if (!!_this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]]) {
+                        return _react2.default.createElement(AssessmentHeadTD, { key: Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page], mRecord: !!_this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]] ? _this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]] : { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0, mcountU: 'All' }, colOffset: id });
+                    } else return null;
+                })
+            );
+        }
+    }]);
+
+    return AssessmentHeadTR;
 }(_react2.default.Component);
 
-module.exports = MasteryTable;
+module.exports = AssessmentHeadTR;
 
 /***/ }),
-/* 206 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24813,7 +25039,144 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(9);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AssessmentStuTD = __webpack_require__(93);
+var AssessmentStuKeyTD = __webpack_require__(209);
+//possible parents: GradeJumbo.js
+
+var AssessmentStuTR = function (_React$Component) {
+    _inherits(AssessmentStuTR, _React$Component);
+
+    function AssessmentStuTR(props) {
+        _classCallCheck(this, AssessmentStuTR);
+
+        var _this = _possibleConstructorReturn(this, (AssessmentStuTR.__proto__ || Object.getPrototypeOf(AssessmentStuTR)).call(this, props));
+
+        _this.state = { courseLOIDs: _this.props.courseLOIDs };
+        return _this;
+    }
+
+    _createClass(AssessmentStuTR, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ courseLOIDs: nextProps.courseLOIDs });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'tr',
+                { id: "Assessment-row-" + this.props.stuUDID, className: 'Assessment-row' },
+                _react2.default.createElement(AssessmentStuKeyTD, { key: "mKeyTD" + this.props.stuUDID, mRating0s: this.props.mRating0s, mRatingStr: this.props.mRatingStr, stuUDID: this.props.stuUDID, stuBio: this.props.stuBio }),
+                [0, 1, 2, 3].map(function (id, index) {
+                    if (!!_this2.state.courseLOIDs[id + 4 * _this2.props.page]) {
+                        return _react2.default.createElement(AssessmentStuTD, { key: _this2.state.courseLOIDs[id + 4 * _this2.props.page] + '-' + _this2.props.stuUDID, stuUDID: _this2.props.stuUDID, LOID: _this2.state.courseLOIDs[id + 4 * _this2.props.page], mArrKey: _this2.props.stuData.studentRowsId >= 0 ? _this2.props.stuData.studentRowsId : -1, ratingData: !!_this2.props.stuData.ratings[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData.ratings[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] : { mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mRating0: 1 }, colOffset: id, changer: _this2.props.changer });
+                    } else return null;
+                })
+            );
+        }
+    }]);
+
+    return AssessmentStuTR;
+}(_react2.default.Component);
+
+module.exports = AssessmentStuTR;
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//possible parent: AssessmentStuRow.js
+var AssessmentStuKeyTD = function (_React$Component) {
+    _inherits(AssessmentStuKeyTD, _React$Component);
+
+    function AssessmentStuKeyTD() {
+        _classCallCheck(this, AssessmentStuKeyTD);
+
+        return _possibleConstructorReturn(this, (AssessmentStuKeyTD.__proto__ || Object.getPrototypeOf(AssessmentStuKeyTD)).apply(this, arguments));
+    }
+
+    _createClass(AssessmentStuKeyTD, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "td",
+                { id: "Assessment-col-key" + this.props.stuUDID, className: "Assessment-column" },
+                _react2.default.createElement(
+                    "span",
+                    null,
+                    this.props.stuBio
+                ),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeNY" },
+                    this.props.mRating0s[1]
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeA" },
+                    this.props.mRating0s[2]
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeM" },
+                    this.props.mRating0s[3]
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { id: "", className: "badge badgeE" },
+                    this.props.mRating0s[4]
+                )
+            );
+        }
+    }]);
+
+    return AssessmentStuKeyTD;
+}(_react2.default.Component);
+
+module.exports = AssessmentStuKeyTD;
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -24825,9 +25188,558 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AssessmentTable = __webpack_require__(207);
-var parseAssessment = __webpack_require__(93);
-var getRequestToArr = __webpack_require__(35);
+var AssessmentsList = function (_React$Component) {
+	_inherits(AssessmentsList, _React$Component);
+
+	function AssessmentsList(props) {
+		_classCallCheck(this, AssessmentsList);
+
+		return _possibleConstructorReturn(this, (AssessmentsList.__proto__ || Object.getPrototypeOf(AssessmentsList)).call(this, props));
+	}
+
+	_createClass(AssessmentsList, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-xs-6' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel panel-default ' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-heading' },
+							'Learning Outcomes'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-body' },
+							_react2.default.createElement(
+								'table',
+								{ className: 'table table-hover' },
+								_react2.default.createElement(
+									'tbody',
+									null,
+									this.props.LOs.map(function (lo, id) {
+										return _react2.default.createElement(
+											'tr',
+											{ key: lo.LOID, className: '' },
+											_react2.default.createElement(
+												'td',
+												null,
+												_react2.default.createElement(
+													'h3',
+													null,
+													lo.LOText
+												),
+												_react2.default.createElement(
+													'p',
+													null,
+													lo.courseStrLOID
+												),
+												_react2.default.createElement(
+													'p',
+													null,
+													_react2.default.createElement(
+														'button',
+														{ className: 'btn' },
+														_react2.default.createElement('span', { className: 'glyphicon glyphicon-pencil pointer' })
+													)
+												)
+											)
+										);
+									})
+								)
+							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-xs-6' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel panel-default col-6-xs' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-heading' },
+							'Assessments '
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-body' },
+							_react2.default.createElement(
+								'table',
+								{ className: 'table table-hover' },
+								_react2.default.createElement(
+									'tbody',
+									null,
+									this.props.assessmentsArr.map(function (a, id) {
+										return _react2.default.createElement(
+											'tr',
+											{ key: a.entryID, className: '' },
+											_react2.default.createElement(
+												'td',
+												null,
+												_react2.default.createElement(
+													'h3',
+													null,
+													a.AssessTitle
+												),
+												_react2.default.createElement(
+													'p',
+													null,
+													_react2.default.createElement(
+														'strong',
+														null,
+														'Date: '
+													),
+													a.AssessDate.substring(0, 10)
+												),
+												_react2.default.createElement(
+													'p',
+													null,
+													_react2.default.createElement(
+														'button',
+														{ className: 'btn btn-default pointer', onClick: function () {
+																this.props.getAssessmentGrades(a.courseStr, a.entryID);
+															}.bind(_this2) },
+														'Grades'
+													),
+													' ',
+													_react2.default.createElement(
+														'button',
+														{ className: 'btn' },
+														_react2.default.createElement('span', { className: 'glyphicon glyphicon-pencil pointer' })
+													)
+												)
+											)
+										);
+									})
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return AssessmentsList;
+}(_react2.default.Component);
+
+module.exports = AssessmentsList;
+
+/***/ }),
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var newLOView = function (_React$Component) {
+	_inherits(newLOView, _React$Component);
+
+	function newLOView(props) {
+		_classCallCheck(this, newLOView);
+
+		var _this = _possibleConstructorReturn(this, (newLOView.__proto__ || Object.getPrototypeOf(newLOView)).call(this, props));
+
+		_this.state = { LOCode: '', LOText: '', LOs: _this.props.LOs };
+		return _this;
+	}
+
+	_createClass(newLOView, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'panel panel-default' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel-heading' },
+						'New LO ',
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-success', 'aria-label': 'Submit', onClick: this._submitNewLO.bind(this) },
+							'Submit'
+						),
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-danger', 'aria-label': 'Close', onClick: this.props.cancel },
+							'Cancel'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'LOCode' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-comment' }),
+								' LO Code:'
+							),
+							_react2.default.createElement('input', { className: 'form-control', value: this.state.LOCode, id: 'LOCode', onChange: function (e) {
+									this.changeInput({ LOCode: e.target.value });
+								}.bind(this) }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'LOText' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-comment' }),
+								' LOText'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'input-group' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'input-group-addon', id: 'basic-addon3' },
+									'I can'
+								),
+								_react2.default.createElement('input', { className: 'form-control', value: this.state.LOText, id: 'LOText', rows: '5', onChange: function (e) {
+										this.changeInput({ LOText: e.target.value });
+									}.bind(this) })
+							),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'LOSelect' },
+								this.state.LOs.length,
+								' Current LOs: '
+							),
+							_react2.default.createElement(
+								'div',
+								{ id: 'LOSelect', className: 'container' },
+								_react2.default.createElement(
+									'table',
+									{ className: 'table' },
+									_react2.default.createElement(
+										'tbody',
+										null,
+										this.state.LOs.map(function (LO, id) {
+											return _react2.default.createElement(
+												'tr',
+												{ key: LO.LOID },
+												_react2.default.createElement(
+													'td',
+													null,
+													LO.LOText
+												)
+											);
+										})
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}, {
+		key: 'changeInput',
+		value: function changeInput(obj) {
+			this.setState(obj);
+		}
+	}, {
+		key: '_submitNewLO',
+		value: function _submitNewLO() {
+			this.props.postRequestForReact("/newlo", { LOCode: this.state.LOCode,
+				LOText: "I can " + this.state.LOText,
+				courseStr: this.props.courseStr
+			}, function () {
+				var LOsC = this.state.LOs.slice();
+				LOsC.push({ LOCode: this.state.LOCode,
+					LOText: "I can " + this.state.LOText,
+					courseStr: this.props.courseStr, LOID: Math.random()
+				});
+				this.setState({ LOCode: '', LOText: '', LOs: LOsC });
+			}.bind(this));
+		}
+	}]);
+
+	return newLOView;
+}(_react2.default.Component);
+
+module.exports = newLOView;
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var newAssessView = function (_React$Component) {
+	_inherits(newAssessView, _React$Component);
+
+	function newAssessView(props) {
+		_classCallCheck(this, newAssessView);
+
+		var _this = _possibleConstructorReturn(this, (newAssessView.__proto__ || Object.getPrototypeOf(newAssessView)).call(this, props));
+
+		_this.state = {
+			loalign: [],
+			AssessTitle: "",
+			AssessDesc: "",
+			AssessLink: "",
+			AssessDate: "2017-07-01",
+			LOAlign: "mn"
+			//this.changeInput = this.changeInput.bind(this)
+		};return _this;
+	}
+
+	_createClass(newAssessView, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'panel panel-default' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel-heading' },
+						'New Assessment ',
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-success', 'aria-label': 'Submit', onClick: this._submitNewAssess.bind(this) },
+							'Submit'
+						),
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-danger', 'aria-label': 'Close', onClick: this.props.cancel },
+							'Cancel'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'AssessTitle' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-comment' }),
+								' Assessment Title:'
+							),
+							_react2.default.createElement('input', { className: 'form-control', value: this.state.AssessTitle, id: 'AssessTitle', onChange: function (e) {
+									this.changeInput({ AssessTitle: e.target.value });
+								}.bind(this) }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'AssessDesc' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-comment' }),
+								' Assessment Description:'
+							),
+							_react2.default.createElement('textarea', { className: 'form-control', value: this.state.AssessDesc, id: 'AssessDesc', rows: '5', onChange: function (e) {
+									this.changeInput({ AssessDesc: e.target.value });
+								}.bind(this) }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'AssessLink' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-comment' }),
+								' Assessment Link:'
+							),
+							_react2.default.createElement('input', { className: 'form-control', value: this.state.AssessLink, id: 'AssessLink', onChange: function (e) {
+									this.changeInput({ AssessLink: e.target.value });
+								}.bind(this) }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'assessSelDate' },
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-calendar' }),
+								' Date:'
+							),
+							_react2.default.createElement(
+								'select',
+								{ className: 'form-control', value: this.state.AssessDate, id: 'assessSelDate', onChange: function (e) {
+										this.changeInput({ AssessDate: e.target.value });
+									}.bind(this) },
+								_react2.default.createElement(
+									'option',
+									{ value: '2017-07-01' },
+									'07/01/2017'
+								)
+							),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'LOSelect' },
+								this.state.loalign.length,
+								' Learning Outcome(s) Assessed: ',
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-success', onClick: function () {
+											this._handleLOClick('all');
+										}.bind(this) },
+									'Select All'
+								),
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-default', onClick: function () {
+											this._handleLOClick('none');
+										}.bind(this) },
+									'Select None'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ id: 'LOSelect', className: 'container' },
+								_react2.default.createElement(
+									'table',
+									{ className: 'table table-hover' },
+									_react2.default.createElement(
+										'tbody',
+										null,
+										this.props.LOs.map(function (LO, id) {
+											return _react2.default.createElement(
+												'tr',
+												{ key: LO.LOID, onClick: function () {
+														this._handleLOClick(LO.LOID);
+													}.bind(_this2), className: "pointer " + (_this2.state.loalign.indexOf(LO.LOID) > -1 ? 'success' : '') },
+												_react2.default.createElement(
+													'td',
+													null,
+													LO.LOText
+												)
+											);
+										})
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}, {
+		key: 'changeInput',
+		value: function changeInput(obj) {
+			this.setState(obj);
+		}
+	}, {
+		key: '_handleLOClick',
+		value: function _handleLOClick(loid) {
+			var loalignC;
+			if (loid == 'all') {
+				loalignC = this.props.LOs.map(function (LO, id) {
+					return LO.LOID;
+				});
+			} else if (loid == 'none') {
+				loalignC = [];
+			} else {
+				loalignC = this.state.loalign.slice();
+				var index = loalignC.indexOf(loid);
+				if (index > -1) {
+					loalignC.splice(index, 1);
+				} else {
+					loalignC.push(loid);
+				}
+			}
+			this.setState({ loalign: loalignC, LOAlign: "m" + loalignC.join("nm") + "n" });
+		}
+	}, {
+		key: '_submitNewAssess',
+		value: function _submitNewAssess() {
+			this.props.postRequestForReact("/newassessment", { AssessTitle: this.state.AssessTitle,
+				AssessDesc: this.state.AssessDesc,
+				AssessLink: this.state.AssessLink,
+				AssessDate: this.state.AssessDate,
+				LOAlign: this.state.LOAlign,
+				courseStr: this.props.courseStr
+			}, this.props.submitter);
+		}
+	}]);
+
+	return newAssessView;
+}(_react2.default.Component);
+
+module.exports = newAssessView;
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AssessmentTable = __webpack_require__(91);
+var parseAssessment = __webpack_require__(55);
+var getRequestToArr = __webpack_require__(22);
 
 var AssessmentModal = function (_React$Component) {
   _inherits(AssessmentModal, _React$Component);
@@ -24928,318 +25840,13 @@ var AssessmentModal = function (_React$Component) {
 module.exports = AssessmentModal;
 
 /***/ }),
-/* 207 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(9);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AssessmentHeadTR = __webpack_require__(208);
-var AssessmentHeadTD = __webpack_require__(91);
-
-var AssessmentStuTR = __webpack_require__(209);
-var AssessmentStuTD = __webpack_require__(92);
-var parseAssessment = __webpack_require__(93);
-var postRequestForReact = __webpack_require__(26);
-
-var AssessmentTable = function (_React$Component) {
-  _inherits(AssessmentTable, _React$Component);
-
-  function AssessmentTable(props) {
-    _classCallCheck(this, AssessmentTable);
-
-    var _this = _possibleConstructorReturn(this, (AssessmentTable.__proto__ || Object.getPrototypeOf(AssessmentTable)).call(this, props));
-
-    console.log(_this.props.parsedAssessment);
-    _this.state = {};
-    //this.upVPage = this.props.upVPage.bind(this)
-    //this.downVPage = this.props.downVPage.bind(this)
-    _this.changeAssessment = _this.changeAssessment.bind(_this);
-    //this.parseAssessment = parseAssessment.bind(this)
-    //this.parseAssessment = parseAssessment.bind(this)
-
-    return _this;
-  }
-
-  _createClass(AssessmentTable, [{
-    key: 'changeAssessment',
-    value: function changeAssessment(changeObj) {
-      return function () {
-        console.log(changeObj);
-      };
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      //let list = this._getAssessment(this.state.parsedAssessment);
-
-      return _react2.default.createElement(
-        'table',
-        { id: '', className: 'table table-bordered' },
-        _react2.default.createElement(
-          'tbody',
-          null,
-          _react2.default.createElement(AssessmentHeadTR, { key: 3813, parsedAssessment: this.props.parsedAssessment, colOffset: 0, page: this.props.page, upVPage: this.props.upVPage, downVPage: this.props.downVPage }),
-          Object.keys(this.props.parsedAssessment.rowsByStu).slice(0 + 5 * this.props.vpage, 5 + 5 * this.props.vpage).map(function (stuUDID, id1) {
-            return _react2.default.createElement(AssessmentStuTR, { key: stuUDID, stuData: _this2.props.parsedAssessment.rowsByStu[stuUDID], mRating0s: _this2.props.parsedAssessment.mRating0s[stuUDID], mRatingStr: _this2.props.parsedAssessment.mRatingStrs[stuUDID], stuBio: _this2.props.parsedAssessment.stuBios[stuUDID], stuUDID: stuUDID, colOffset: id1, page: _this2.props.page, courseLOIDs: Object.keys(_this2.props.parsedAssessment.alignModel), changer: _this2.changeAssessment });
-          })
-        )
-      );
-    }
-  }]);
-
-  return AssessmentTable;
-}(_react2.default.Component);
-
-module.exports = AssessmentTable;
-
-/***/ }),
-/* 208 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AssessmentHeadTD = __webpack_require__(91);
-//possible parents: GradeJumbo.js
-
-var AssessmentHeadTR = function (_React$Component) {
-    _inherits(AssessmentHeadTR, _React$Component);
-
-    function AssessmentHeadTR(props) {
-        _classCallCheck(this, AssessmentHeadTR);
-
-        return _possibleConstructorReturn(this, (AssessmentHeadTR.__proto__ || Object.getPrototypeOf(AssessmentHeadTR)).call(this, props));
-    }
-
-    _createClass(AssessmentHeadTR, [{
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'tr',
-                { id: "Assessment-row-head", className: 'Assessment-row' },
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'panel panel-default' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'panel-body' },
-                            "Student / Learning Outcome",
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'btn-group-vertical', role: 'group', 'aria-label': '...' },
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-default', onClick: this.props.upVPage },
-                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
-                                ),
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-default', onClick: this.props.downVPage },
-                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
-                                )
-                            )
-                        )
-                    )
-                ),
-                [0, 1, 2, 3].map(function (id, index) {
-                    if (!!_this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]]) {
-                        return _react2.default.createElement(AssessmentHeadTD, { key: Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page], mRecord: !!_this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]] ? _this2.props.parsedAssessment.AssessmentArrS[Object.keys(_this2.props.parsedAssessment.AssessmentArrS)[id + 4 * _this2.props.page]] : { mcountN: 0, mcountA: 0, mcountM: 0, mcountE: 0, mcountU: 'All' }, colOffset: id });
-                    } else return null;
-                })
-            );
-        }
-    }]);
-
-    return AssessmentHeadTR;
-}(_react2.default.Component);
-
-module.exports = AssessmentHeadTR;
-
-/***/ }),
-/* 209 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AssessmentStuTD = __webpack_require__(92);
-var AssessmentStuKeyTD = __webpack_require__(210);
-//possible parents: GradeJumbo.js
-
-var AssessmentStuTR = function (_React$Component) {
-    _inherits(AssessmentStuTR, _React$Component);
-
-    function AssessmentStuTR(props) {
-        _classCallCheck(this, AssessmentStuTR);
-
-        var _this = _possibleConstructorReturn(this, (AssessmentStuTR.__proto__ || Object.getPrototypeOf(AssessmentStuTR)).call(this, props));
-
-        _this.state = { courseLOIDs: _this.props.courseLOIDs };
-        return _this;
-    }
-
-    _createClass(AssessmentStuTR, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({ courseLOIDs: nextProps.courseLOIDs });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'tr',
-                { id: "Assessment-row-" + this.props.stuUDID, className: 'Assessment-row' },
-                _react2.default.createElement(AssessmentStuKeyTD, { key: "mKeyTD" + this.props.stuUDID, mRating0s: this.props.mRating0s, mRatingStr: this.props.mRatingStr, stuUDID: this.props.stuUDID, stuBio: this.props.stuBio }),
-                [0, 1, 2, 3].map(function (id, index) {
-                    if (!!_this2.state.courseLOIDs[id + 4 * _this2.props.page]) {
-                        return _react2.default.createElement(AssessmentStuTD, { key: _this2.state.courseLOIDs[id + 4 * _this2.props.page] + '-' + _this2.props.stuUDID, stuUDID: _this2.props.stuUDID, LOID: _this2.state.courseLOIDs[id + 4 * _this2.props.page], mArrKey: _this2.props.stuData.studentRowsId >= 0 ? _this2.props.stuData.studentRowsId : -1, ratingData: !!_this2.props.stuData.ratings[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] ? _this2.props.stuData.ratings[_this2.state.courseLOIDs[id + 4 * _this2.props.page]] : { mcountA: 0, mcountE: 0, mcountM: 0, mcountN: 0, mRating0: 1 }, colOffset: id, changer: _this2.props.changer });
-                    } else return null;
-                })
-            );
-        }
-    }]);
-
-    return AssessmentStuTR;
-}(_react2.default.Component);
-
-module.exports = AssessmentStuTR;
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//possible parent: AssessmentStuRow.js
-var AssessmentStuKeyTD = function (_React$Component) {
-    _inherits(AssessmentStuKeyTD, _React$Component);
-
-    function AssessmentStuKeyTD() {
-        _classCallCheck(this, AssessmentStuKeyTD);
-
-        return _possibleConstructorReturn(this, (AssessmentStuKeyTD.__proto__ || Object.getPrototypeOf(AssessmentStuKeyTD)).apply(this, arguments));
-    }
-
-    _createClass(AssessmentStuKeyTD, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "td",
-                { id: "Assessment-col-key" + this.props.stuUDID, className: "Assessment-column" },
-                _react2.default.createElement(
-                    "span",
-                    null,
-                    this.props.stuBio
-                ),
-                _react2.default.createElement("br", null),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeNY" },
-                    this.props.mRating0s[1]
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeA" },
-                    this.props.mRating0s[2]
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeM" },
-                    this.props.mRating0s[3]
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { id: "", className: "badge badgeE" },
-                    this.props.mRating0s[4]
-                )
-            );
-        }
-    }]);
-
-    return AssessmentStuKeyTD;
-}(_react2.default.Component);
-
-module.exports = AssessmentStuKeyTD;
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _reactDom = __webpack_require__(9);
+var _reactDom = __webpack_require__(8);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -25270,7 +25877,7 @@ function getRequestForReact(url, renderArgs, callback) {
 module.exports = getRequestForReact;
 
 /***/ }),
-/* 212 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25299,7 +25906,7 @@ function courseQueryPrep(obj) {
 module.exports = courseQueryPrep;
 
 /***/ }),
-/* 213 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
