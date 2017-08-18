@@ -1,10 +1,10 @@
 #Webpack'd
-./public/bundle.js
+#./public/bundle.js
 
 #credentials
-./googlePassCred.js
-./hive-sql.js
+#./googlePassCred.js
+#./hive-sql.js
 
 #node modules and yarn
-./node_modules
-./yarn.lock
+#./node_modules
+#./yarn.lock
