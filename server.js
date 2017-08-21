@@ -79,6 +79,10 @@ app.get('/', function (req, res) {
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
 })
 
+app.get('/bdrsplusc/:queryStr',function(req, res) {
+  console.log([bdrQueries(req.params.queryStr.split("n")).query,'select * from hive1617.bdrComments where bdrID in (select entryID from hive1617.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; "))
+  connection.query([bdrQueries(req.params.queryStr.split("n")).query,'select * from hive1617.bdrComments where bdrID in (select entryID from hive1617.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; "),queryCallbacks.default(req,res))
+})
 
 app.get('/bdrs/:queryStr',function(req, res) {
   console.log(bdrQueries(req.params.queryStr.split("n")))

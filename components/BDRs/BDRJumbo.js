@@ -30,9 +30,23 @@ class BDRJumbo extends React.Component {
   
   getBDRsByUDID(udid){
     var changeBDRArrState = this.changeBDRArrState.bind(this)
+    var mergeBDRsToComments = this.mergeBDRsToComments.bind(this)
     return function(){
-      getRequestToArr("/bdrs/" + udid,changeBDRArrState)
+      //getRequestToArr("/bdrs/" + udid,changeBDRArrState)
+      getRequestToArr("/bdrsplusc/" + udid,mergeBDRsToComments)
     }
+  }
+
+  mergeBDRsToComments(bdrArr){
+    var mergedObj = {}
+    bdrArr[0].forEach((item)=>{
+      mergedObj[item.entryID] = item
+      mergedObj[item.entryID].comments = []}
+      )
+    bdrArr[1].forEach((comment)=>{mergedObj[comment.bdrID].comments.push(comment)})
+    var mergedArr = Object.keys(mergedObj).map((item)=>mergedObj[item])
+    //console.log(mergedArr)
+    this.changeBDRArrState.bind(this)(mergedArr)
   }
 
   getSWIPsForThreshold(swipThreshold){
@@ -54,6 +68,8 @@ class BDRJumbo extends React.Component {
 
   changeBDRArrState(arr){
     //console.log(arr)
+    console.log("changing bdrArr")
+    console.log(arr)
     this.setState({bdrArr:arr})
   }
   
@@ -139,8 +155,15 @@ class BDRJumbo extends React.Component {
     )}
 
   _getBDRs(){
-    const bdrArr = this.state.bdrArr;
-    return bdrArr.map((bdr) => (<BDRPanel key={bdr.entryID} bdr={bdr} />));
+    console.log('__getBDRs')
+    console.log(this.state.bdrArr)
+    var bdrArr = this.state.bdrArr;
+    return bdrArr.map((bdr) => {
+        if(!bdr.hasOwnProperty('comments')){bdr.comments = []}
+      return (<BDRPanel key={bdr.entryID} bdr={bdr} />)
+    }
+
+      );
   }
 }
 

@@ -1,9 +1,12 @@
 import React from 'react';
 var BDRPanelTable = require('./BDRPanelTable.js');
+var BDRComments = require('./BDRComments.js')
 
 class BDRPanel extends React.Component {
   constructor(props){
       super(props)
+      console.log('bdrpanel props')
+      console.log(this.props)
       this.createRestoreDialog = this.createRestoreDialog.bind(this)
   }
   render() {
@@ -16,13 +19,18 @@ class BDRPanel extends React.Component {
                   </div>
 		<BDRPanelTable bdr={this.props.bdr} />
 		<div className="col-sm-12">
-		<div className="panel panel-success">
+		<div className="panel panel-default">
 		  <div className="panel-heading">
-		    {"Restore Anecdote"}
+		    {"Comments"}
 		  </div>
 		  <div className="panel-body">
 		    {!!this.props.bdr.restoreAnecdote ? this.props.bdr.restoreAnecdote : this.createRestoreDialog(this.props.bdr.entryID)}
 		  </div>
+      <BDRComments comments={this.props.bdr.comments} bdr={this.props.bdr} />
+      {/*<ul className="list-group">
+        {this.props.bdr.comments.map((comment)=>(<li key={comment.entryID} className="list-group-item">{comment.commentText}</li>))}
+      </ul>*/}
+      {/*this.props.bdr.comments.map((comment)=>(<p key={comment.entryID}>{comment.commentText}</p>))*/}
 		</div>
 		</div>
               </div>
