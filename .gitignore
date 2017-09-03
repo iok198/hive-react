@@ -8,3 +8,6 @@ hive-sql.js
 #node modules and yarn
 node_modules
 yarn.lock
+
+#react component builder
+devutil

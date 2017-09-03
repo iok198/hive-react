@@ -111,6 +111,47 @@ app.get('/users',function(req, res){
   //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
 })
 
+app.get('/users/:udid',function(req, res){
+  if(req.user){console.log('user request from:')
+    console.log(req.user)
+    connection.query('SELECT * FROM hive1617.userDirectory where entryID in (' + req.params.udid.replace(/n/g,',') + ')',queryCallbacks.default(req,res,req.params.udid))
+  }
+  //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
+  //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
+})
+
+app.get('/allstudents',function(req, res){
+  if(req.user){console.log('user request from:')
+    console.log(req.user)
+    connection.query('SELECT concat(title,\' \',lastName) as name, entryID, concat(emailID,\', \',IFNULL(altEmailStr,\'\')) as emails FROM hive1617.userDirectory where courseStr REGEXP \'s\'',queryCallbacks.default(req,res,req.params.udid))
+  }
+  //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
+  //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
+})
+
+app.get('/mentees/:udid',function(req, res){
+  if(req.user){console.log('mentee request from:')
+    console.log(req.user)
+    connection.query('SELECT * FROM hive1617.userDirectory where mentoringStr=' + req.params.udid,queryCallbacks.default(req,res,req.params.udid))
+  }
+  //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
+  //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
+})
+
+app.get('/goals/:udid',function(req,res){
+  if(req.user){console.log('goal request from:')
+    console.log(req.user.emailID)
+    connection.query('SELECT * FROM hive1617.goals where studentUDID=' + req.params.udid,queryCallbacks.default(req,res,req.params.udid))
+  }
+})
+
+app.get('/goalsplusc/:udid',function(req,res){
+  if(req.user){console.log('goal & comments request from:')
+    console.log(req.user.emailID)
+    connection.query('SELECT * FROM hive1617.goals where studentUDID=' + req.params.udid + ' order by entryID desc; SELECT gc.*, u.title,u.lastName FROM hive1617.goalComments gc left join hive1617.userDirectory u on gc.commenterUDID=u.entryID where gc.goalID in (SELECT entryID from hive1617.goals where studentUDID=' + req.params.udid+ ' order by entryID desc);',queryCallbacks.default(req,res,req.params.udid))
+  }
+})
+
 app.get('/mastery/:courseStr',function(req,res){
   var queries = gradeQueries(connection.escape(req.params.courseStr))
   connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
@@ -196,7 +237,37 @@ app.post("/sendgrades",function(req,res){
   }
 )
 
+app.post("/sendgoalcomment",function(req,res){
+    var reqjson =req.body
+    var commenterUDID = req.user.entryID
+    if(req.user){
+      console.log('goalComment')
+      console.log(commenterUDID)
+      console.log(reqjson)
+      connection.query('INSERT INTO hive1617.goalComments (commenterUDID,goalID,submissionDateTime,commentText,goalMR) values (' + [commenterUDID,reqjson.goalID,"NOW()","'" + reqjson.commentText + "'","'" + reqjson.goalMR + "'"].join(", ") + ')',function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
+    })
+      //res.send('goal commented')
+    }
+  }
+)
 
+app.post("/sendgoal",function(req,res){
+    var reqjson =req.body
+    var goalerUDID = req.user.entryID
+    if(req.user){
+      console.log('goal')
+      console.log(goalerUDID)
+      console.log(reqjson)
+      connection.query('INSERT INTO hive1617.goals (studentUDID,goalText,submissionDateTime,masteryReflection,behaviorReflection,personalReflection,goalStrategy) values (' + [reqjson.studentUDID,"'" + reqjson.goalText + "'","NOW()","'" + reqjson.masteryReflection + "'","'" + reqjson.behaviorReflection + "'","'" + reqjson.personalReflection + "'","'" + reqjson.goalStrategy + "'"].join(", ") + ')',function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
+    })
+      //res.send('goal commented')
+    }
+  }
+)
 
 
 

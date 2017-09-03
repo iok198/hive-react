@@ -23,4 +23,6 @@ getRequestForReact("/users",(arr) => ( [
         document.getElementById('content2')]))
 	ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
           document.getElementById('content3'))
-	ReactDOM.render(<MentoringJumbo user={arr[0]} mentoringStr={arr[0].mentoringStr}/>,document.getElementById('content5'))})
+	//ReactDOM.render(<MentoringJumbo user={arr[0]} mentoringStr={arr[0].mentoringStr}/>,document.getElementById('content5'))
+	getRequestForReact("/mentees/" + arr[0].entryID, (mentArr) => ( [<MentoringJumbo mentees={mentArr}/>,document.getElementById('content5')]))
+})

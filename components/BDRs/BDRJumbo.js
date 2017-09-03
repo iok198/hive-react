@@ -4,12 +4,13 @@ var BDRPanel = require('./BDRPanel.js')
 var SWIPContainer = require('./SWIPTables/SWIPTable.js')
 var SWIPFilter = require('./SWIPTables/SWIPFilter.js')
 var getRequestToArr = require('../../utilities/getRequestToArr.js')
+var NewBDRPanel = require('./NewBDRPanel.js')
 
 class BDRJumbo extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {bdrArr: this.props.bdrs,
+    this.state = {bdrArr: this.mergeBDRsToComments(this.props.bdrs),
       showBDRs: false,
       swipArr:[],
       swipThreshold:"le20",
@@ -25,6 +26,7 @@ class BDRJumbo extends React.Component {
     this.filterSWIPClass = this.filterSWIPClass.bind(this)
     this.getBDRsByUDID = this.getBDRsByUDID.bind(this)
     this.setSWIPTableFilterByUDID = this.setSWIPTableFilterByUDID.bind(this)
+    this.mergeBDRsToComments = this.mergeBDRsToComments.bind(this)
 
    }
   
@@ -33,7 +35,8 @@ class BDRJumbo extends React.Component {
     var mergeBDRsToComments = this.mergeBDRsToComments.bind(this)
     return function(){
       //getRequestToArr("/bdrs/" + udid,changeBDRArrState)
-      getRequestToArr("/bdrsplusc/" + udid,mergeBDRsToComments)
+      //getRequestToArr("/bdrsplusc/" + udid,mergeBDRsToComments)
+      getRequestToArr("/bdrsplusc/" + udid,changeBDRArrState)
     }
   }
 
@@ -46,7 +49,8 @@ class BDRJumbo extends React.Component {
     bdrArr[1].forEach((comment)=>{mergedObj[comment.bdrID].comments.push(comment)})
     var mergedArr = Object.keys(mergedObj).map((item)=>mergedObj[item])
     //console.log(mergedArr)
-    this.changeBDRArrState.bind(this)(mergedArr)
+    //this.changeBDRArrState.bind(this)(mergedArr)
+    return mergedArr
   }
 
   getSWIPsForThreshold(swipThreshold){
@@ -70,7 +74,7 @@ class BDRJumbo extends React.Component {
     //console.log(arr)
     console.log("changing bdrArr")
     console.log(arr)
-    this.setState({bdrArr:arr})
+    this.setState({bdrArr:this.mergeBDRsToComments(arr)})
   }
   
   changeSWIPArrState(arr){
@@ -158,12 +162,12 @@ class BDRJumbo extends React.Component {
     console.log('__getBDRs')
     console.log(this.state.bdrArr)
     var bdrArr = this.state.bdrArr;
-    return bdrArr.map((bdr) => {
+    var bdrMap = bdrArr.map((bdr) => {
         if(!bdr.hasOwnProperty('comments')){bdr.comments = []}
       return (<BDRPanel key={bdr.entryID} bdr={bdr} />)
-    }
-
-      );
+    })
+    bdrMap.splice(0,0,<NewBDRPanel key={0}/>)
+    return bdrMap
   }
 }
 
