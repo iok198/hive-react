@@ -113,3 +113,5 @@ margin-top:0px;}
 .selected-lo {background:green;}
 
 .pointer {cursor:pointer;}
+
+.bdr-panel-table {z-index:600; background:white;}

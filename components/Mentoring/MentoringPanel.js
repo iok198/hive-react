@@ -11,7 +11,7 @@ class MentoringPanel extends React.Component {
               		<div id="" className="panel-body">
               			<p>{this.props.goal.personalReflection + '. ' + this.props.goal.masteryReflection + '. ' + this.props.goal.behaviorReflection + '. '} <br/><strong>{"New Goal: " + this.props.goal.goalText}</strong>
               			</p>
-              			<div className="col-sm-12">
+              			<div className="col-xs-12">
 							<div className="panel panel-default">
 							  <div className="panel-heading">
 							    {"Comments"}
@@ -19,7 +19,7 @@ class MentoringPanel extends React.Component {
 							  {/*<div className="panel-body">
 							    {!!this.props.bdr.restoreAnecdote ? this.props.bdr.restoreAnecdote : this.createRestoreDialog(this.props.bdr.entryID)}
 							  </div>*/}
-					      <MentoringComments comments={this.props.goal.comments} goalID={this.props.goal.entryID} studentUDID={this.props.goal.studentUDID}/>
+					      <MentoringComments comments={this.props.goal.comments} goalID={this.props.goal.entryID} studentUDID={this.props.goal.studentUDID} updateGoalComments={this.props.updateGoalComments} viewer={this.props.viewer}/>
 						</div>
 							</div>
               		</div>

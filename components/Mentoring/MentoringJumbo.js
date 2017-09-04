@@ -13,6 +13,7 @@ class MentoringJumbo extends React.Component {
   	this.setGoalsState = this.setGoalsState.bind(this)
   	this.getRequestToArr = getRequestToArr.bind(this)
   	this.mergeGoalsToComments = this.mergeGoalsToComments.bind(this)
+  	this.updateGoalComments = this.updateGoalComments.bind(this)
   }
   render(){
       //let name = this.props.user.title;
@@ -22,7 +23,7 @@ class MentoringJumbo extends React.Component {
               {(this.state.activeMentoring == '') ? (<ul className="nav nav-pills">
             {this.props.mentees.map((mentee,id)=> (<li className={(this.state.activeMentoring.entryID == mentee.entryID) ? 'active' : ''} key={"mentoringnav" + mentee.entryID} onClick={this.getMentee(mentee)}><a href="#" onClick={function(event){event.preventDefault();}}>{mentee.title}</a></li>))}
         </ul>) : null}
-        {(this.state.activeMentoring != '') ? (<MentoringContainer goals={this.state.activeGoals} mentee={this.state.activeMentoring} />) : null}
+        {(this.state.activeMentoring != '') ? (<MentoringContainer goals={this.state.activeGoals} mentee={this.state.activeMentoring} updateGoalComments={this.updateGoalComments} viewer={this.props.viewer}/>) : null}
 	    </div> );
   }
 
@@ -64,6 +65,12 @@ class MentoringJumbo extends React.Component {
     var mergedArr = Object.keys(mergedObj).map((item)=>mergedObj[item])
     //console.log(mergedArr)
     this.setGoalsState.bind(this)(mergedArr)
+  }
+
+  updateGoalComments(goalArrID,comment){
+  	var goalState = this.state.activeGoals.slice()
+  	goalState[goalArrID].comments.push(comment)
+  	this.setGoalsState.bind(this)(goalState)
   }
 
 }

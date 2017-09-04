@@ -13,7 +13,7 @@ class MentoringContainer extends React.Component {
 	render(){
 		return (<div className="container">
 					<NewGoalPanel menteeUDID={this.props.mentee.entryID}/>
-					 {(!!this.props.goals.length) ? this.props.goals.map((goal)=>(<MentoringPanel goal={goal} key={goal.entryID}/>)) : 'No mentoring goals yet.'}</div>)
+					 {(!!this.props.goals.length) ? this.props.goals.map((goal,id)=>(<MentoringPanel goal={goal} key={goal.entryID} updateGoalComments={function(comment){this.props.updateGoalComments(id,comment)}.bind(this)} goalArrID={id} viewer={this.props.viewer}/>)) : 'No mentoring goals yet.'}</div>)
 	}
 }
 

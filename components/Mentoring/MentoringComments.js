@@ -11,15 +11,21 @@ class MentoringComments extends React.Component {
     this.submitNewComment = this.submitNewComment.bind(this)
     this.mRs = ['','Not Yet','Approaching','Meeting','Exceeding']
     this.processDate = this.processDate.bind(this)
+    this.resetState = this.resetState.bind(this)
   }
+
+  resetState(){
+  	this.setState({newCommentText:'',newCommentRating:''})
+  }
+
   render(){
     return (<ul className="list-group">
-				{this.props.comments.map((comment) => <li key={"goalcomment" + comment.entryID} className="list-group-item"><p><strong>{comment.title + ' ' + comment.lastName + ': '}</strong>{comment.commentText}</p>{this.processDate(comment.submissionDateTime) + (comment.commenterUDID == this.props.studentUDID ? '' :' - ' + this.mRs[parseInt(comment.goalMR)])}</li> )}
+				{this.props.comments.map((comment,id) => <li key={"goalcomment" + id} className="list-group-item"><p><strong>{(comment.title && comment.lastName) ? comment.title + ' ' + comment.lastName + ': ' : "You: "}</strong>{comment.commentText}</p>{this.processDate(comment.submissionDateTime) + (comment.commenterUDID == this.props.studentUDID ? '' :' - ' + this.mRs[parseInt(comment.goalMR)])}</li> )}
 			{/* (i+16)%24 <= 12 ? ((i+16)%24 != 0 ? (i+16)%24 : 12) + 'am' : (((i+16)%24) - 12) + 'pm' */}
 			<li className="list-group-item">
 				<div className="form-group">
 				  <label htmlFor="exampleTextarea">New Comment:</label>
-				  <textarea className="form-control" id="exampleTextarea" rows="3" onChange={function(e){this.changeNewCommentText(e.target.value)}.bind(this)} defaultValue={this.state.newCommentText}></textarea>
+				  <textarea className="form-control" id="exampleTextarea" rows="3" onChange={function(e){this.changeNewCommentText(e.target.value)}.bind(this)} value={this.state.newCommentText}></textarea>
 				  <br/>
 				  <div className="btn-group" role="group" aria-label="...">
 					  <button type="button" className={"btn btn-default " + (this.state.newCommentRating == 1 ? 'active' : '')} onClick={function(e){this.changeNewCommentRating(1)}.bind(this)}>Not Yet</button>
@@ -42,11 +48,13 @@ class MentoringComments extends React.Component {
   }
 
   submitNewComment(){
-  	postRequestForReact('/sendgoalcomment', {commentText:this.state.newCommentText,goalMR:this.state.newCommentRating,goalID:this.props.goalID},console.log)
+  	var comment = {commentText:this.state.newCommentText,goalMR:this.state.newCommentRating,goalID:this.props.goalID}
+  	postRequestForReact('/sendgoalcomment', comment,this.props.updateGoalComments(comment))
+  	this.resetState()
   }
 
   processDate(datestring){
-
+  	if(!datestring) return "Just Submitted"
   	var datearr = datestring.split('T')
   	var timearr = datearr[1].split(":")
   	var timecombined = timearr[0] + ":" + timearr[1]
@@ -59,7 +67,7 @@ class MentoringComments extends React.Component {
   	var timestring = (i+16)%24 <= 12 ? ((i+16)%24 != 0 ? (i+16)%24 : 12) + ':' + timearr[1] + 'am' : (((i+16)%24) - 12) + ':' + timearr[1] + 'pm'
   	  	
   	
-  	console.log(dateS + ' ' + timestring)
+  	//console.log(dateS + ' ' + timestring)
 
   	return dateS + ' ' + timestring
   }

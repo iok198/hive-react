@@ -18,7 +18,7 @@ class BDRPanel extends React.Component {
                     </div>
                   </div>
 		<BDRPanelTable bdr={this.props.bdr} />
-		<div className="col-sm-12">
+		<div className="col-xs-12">
 		<div className="panel panel-default">
 		  <div className="panel-heading">
 		    {"Comments"}
