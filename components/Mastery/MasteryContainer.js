@@ -19,7 +19,7 @@ class MasteryContainer extends React.Component {
     super(props);
     //console.log(this.props.mArr)
     this.state = {mArrS:this.props.mArr,parsedMastery: parseMastery(this.props.mArr),
-      page:0,vpage:0,viewOption:'mRatings',assessMArr:null
+      page:0,vpage:0,viewOption:'mRatings',assessMArr:null,assessmentFilter:''
     }
     this.prevPage = this.prevPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
@@ -31,6 +31,7 @@ class MasteryContainer extends React.Component {
     this.filterMasteryStu = this.filterMasteryStu.bind(this)
     this.filterMasteryClassNo = this.filterMasteryClassNo.bind(this)
     this._getAssessmentGrades = this._getAssessmentGrades.bind(this)
+    this.filterAssessments = this.filterAssessments.bind(this)
     
   }
   
@@ -41,7 +42,8 @@ class MasteryContainer extends React.Component {
     page:0,vpage:0,
     viewOption:'mRatings',
     assessMArr: null,
-    assessmentsArr: null
+    assessmentsArr: null,
+    assessmentFilter: ''
   });
 }
   
@@ -52,23 +54,23 @@ class MasteryContainer extends React.Component {
     if(this.state.viewOption == 'mRatings'){
         view = (<div><button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('newLO')}.bind(this)}>New Learning Outcome</button>
       <button type="button" className="btn btn-primary" onClick={function(){this._viewOptionSelect('newAssessment')}.bind(this)}>New Assessment</button>
-      <button type="button" className="btn btn-primary" onClick={function(){this._getAssessmentGrades('s7',257)}.bind(this)}> Grade Assessment </button>
+      {/*<button type="button" className="btn btn-primary" onClick={function(){this._getAssessmentGrades('s7',257)}.bind(this)}> Grade Assessment </button>*/}
       <button type="button" className="btn btn-primary" onClick={function(){this._getAssessments(this.state.mArrS[2])}.bind(this)}> View Assessments </button>
       <MasteryTable page={this.state.page} vpage={this.state.vpage} 
           upVPage={this.upVPage} downVPage={this.downVPage}
           prevPage={this.prevPage} nextPage={this.nextPage}
           changeMastery={this.changeMastery} parsedMastery={this.state.parsedMastery} 
           mArrS={this.state.mArrS} filterMasteryStu={this.filterMasteryStu}
-          filterMasteryClassNo={this.filterMasteryClassNo}
+          filterMasteryClassNo={this.filterMasteryClassNo} filterAssessments={this.filterAssessments}
         /></div>)
       } else if (this.state.viewOption == 'newLO') {
         view = (<NewLOView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]} />)
       } else if (this.state.viewOption == 'newAssessment') {
         view = (<NewAssessView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]}/>)
-      } else if (this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null){
+      } else if (false && this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null){
         view = (<AssessmentContainer mArr={this.state.assessMArr}/>)
       } else if (this.state.viewOption == 'viewAssessments' && this.state.assessmentsArr != null){
-        view = (<AssessmentsList LOs={this.state.mArrS[1]} getAssessmentGrades={this._getAssessmentGrades} assessmentsArr={this.state.assessmentsArr}/>)
+        view = (<AssessmentsList LOs={this.state.mArrS[1]} getAssessmentGrades={this._getAssessmentGrades} assessmentsArr={this.state.assessmentsArr} initialFilter={this.state.assessmentFilter}/>)
       }
     
     return( <div className="container">
@@ -80,6 +82,14 @@ class MasteryContainer extends React.Component {
 	    </div> );
   }
   
+  filterAssessments(lofilter){
+    var stateSet = function(){return {assessmentFilter:'m' + lofilter + 'n'}}
+    var getAssessments = function(){this._getAssessments(this.props.course.courseStr)}.bind(this)
+    return ()=>{
+      this.setState(stateSet,getAssessments)
+    }
+
+  }
 
 
   _viewOptionSelect(view){

@@ -17,7 +17,8 @@ class NewGoalPanel extends React.Component {
     this.submitNewGoal = this.submitNewGoal.bind(this)
   }
   render(){
-    return (<div id="" className="panel panel-default">
+    return (<div className="col-xs-4">
+    	<div id="" className="panel panel-default">
     			<div id="" className="panel-heading">
     			Write a New Mentoring Goal
     			</div>
@@ -55,7 +56,7 @@ class NewGoalPanel extends React.Component {
 				  </div>
 				</form>
 				</div>
-				</div>)
+				</div></div>)
   }
 
   updateNewGoalState(property,value){

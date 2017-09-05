@@ -81,7 +81,7 @@ app.get('/', function (req, res) {
 
 app.get('/bdrsplusc/:queryStr',function(req, res) {
   console.log([bdrQueries(req.params.queryStr.split("n")).query,'select * from hive1617.bdrComments where bdrID in (select entryID from hive1617.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; "))
-  connection.query([bdrQueries(req.params.queryStr.split("n")).query,'select * from hive1617.bdrComments where bdrID in (select entryID from hive1617.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; "),queryCallbacks.default(req,res))
+  connection.query([bdrQueries(req.params.queryStr.split("n")).query,'select bc.*, u.title, u.lastName from hive1617.bdrComments bc left join hive1617.userDirectory u on bc.commenterID=u.entryID where bc.bdrID in (select entryID from hive1617.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; "),queryCallbacks.default(req,res))
 })
 
 app.get('/bdrs/:queryStr',function(req, res) {
@@ -275,6 +275,20 @@ app.post("/sendbdr",function(req,res){
       console.log('new bdr')
       console.log(reqjson)
       connection.query('INSERT INTO hive1617.bdrs (studentUDID,incidentDateTime,incidentPeriod,othersInvolved,problemBehavior,behaviorAnecdote, teacherResponse,possibleMotivation,location,staffUDID,swipCode,submissionDateTime) values (?,?,?,?,?,?,?,?,?,?,?,NOW())',[reqjson.studentUDID,reqjson.incidentDateTime,reqjson.incidentPeriod,reqjson.othersInvolved,reqjson.problemBehavior,reqjson.behaviorAnecdote,reqjson. teacherResponse,reqjson.possibleMotivation,reqjson.location,reqjson.staffUDID,reqjson.swipCode],function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
+    })
+      //res.send('goal commented')
+    }
+  }
+)
+
+app.post("/sendbdrcomment",function(req,res){
+    var reqjson =req.body
+    if(req.user){
+      console.log('new bdr')
+      console.log(reqjson)
+      connection.query('INSERT INTO hive1617.bdrComments (bdrID,commenterID,commentText,commentDT) values (?,?,?,NOW());' + (!!reqjson.restoring ? 'UPDATE hive1617.bdrs SET swipCode=(-1*swipCode), restoreDateTime=NOW() WHERE entryID=' + connection.escape(reqjson.bdrID) : ''),[reqjson.bdrID,reqjson.commenterID,reqjson.commentText],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
     })

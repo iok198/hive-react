@@ -20,7 +20,7 @@ class MentoringComments extends React.Component {
 
   render(){
     return (<ul className="list-group">
-				{this.props.comments.map((comment,id) => <li key={"goalcomment" + id} className="list-group-item"><p><strong>{(comment.title && comment.lastName) ? comment.title + ' ' + comment.lastName + ': ' : "You: "}</strong>{comment.commentText}</p>{this.processDate(comment.submissionDateTime) + (comment.commenterUDID == this.props.studentUDID ? '' :' - ' + this.mRs[parseInt(comment.goalMR)])}</li> )}
+				{this.props.comments.map((comment,id) => <li key={"goalcomment" + id} className="list-group-item"><strong>{(comment.title && comment.lastName) ? comment.title + ' ' + comment.lastName + ': ' : "You: "}</strong>{comment.commentText}<br/>{this.processDate(comment.submissionDateTime) + (comment.commenterUDID == this.props.studentUDID ? '' :' - ' + this.mRs[parseInt(comment.goalMR)])}</li> )}
 			{/* (i+16)%24 <= 12 ? ((i+16)%24 != 0 ? (i+16)%24 : 12) + 'am' : (((i+16)%24) - 12) + 'pm' */}
 			<li className="list-group-item">
 				<div className="form-group">

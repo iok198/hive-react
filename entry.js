@@ -19,7 +19,7 @@ getRequestForReact("/users",(arr) => ( [
           document.getElementById('content')
   
   ]),function(arr) {
-	getRequestForReact("/bdrsplusc/" + arr[0].entryID, (arr2) => ( [<BDRJumbo bdrs={arr2} viewer={arr[0].entryID}/>,
+	getRequestForReact("/bdrsplusc/" + arr[0].entryID, (arr2) => ( [<BDRJumbo bdrs={arr2} viewer={arr[0]}/>,
         document.getElementById('content2')]))
 	ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
           document.getElementById('content3'))

@@ -3,7 +3,7 @@ import React from 'react'
 class MasteryHeadTD extends React.Component {
     render(){
         return <td id={"mastery-col-head-" + this.props.mRecord.courseStrLOID } className="mastery-column" style={{left: (40 + this.props.colOffset*140) + 'px'}}>
-                      <span className="badge" ># Assessment(s)</span>
+                      <span className="badge" onClick={this.props.filterAssessments(this.props.mRecord.LOID)}>Assessments</span><br/>
                       <span className="lo-text-span">{this.props.mRecord.LOText}</span>
                       <br/>
                       <span className="small">({this.props.mRecord.courseStrLOID})</span>

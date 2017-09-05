@@ -7,14 +7,14 @@ class BDRPanel extends React.Component {
       super(props)
       console.log('bdrpanel props')
       console.log(this.props)
-      this.createRestoreDialog = this.createRestoreDialog.bind(this)
+      //this.createRestoreDialog = this.createRestoreDialog.bind(this)
   }
   render() {
     return <div id="" className="panel panel-default">
               <div id="" className="panel-body">
                   <div id="" className="panel panel-default">
                     <div id="" className={"panel-body panel-" + this.props.bdr.swipCode + "swip"}>
-                      {((parseInt(this.props.bdr.swipCode) > 0) ? ("-" + this.props.bdr.swipCode + " SWIP(s): ") : "Restored: ") + " " + this.props.bdr.problemBehavior}
+                      {((parseInt(this.props.bdr.swipCode) > 0) ? ("-" + this.props.bdr.swipCode + " SWIP(s): ") : "Restored: ") + " " + this.props.bdr.problemBehavior + " - (BDR-i" + this.props.bdr.entryID + ".s" + this.props.bdr.studentUDID + ".a" + this.props.bdr.staffUDID +")"}
                     </div>
                   </div>
 		<BDRPanelTable bdr={this.props.bdr} />
@@ -23,10 +23,7 @@ class BDRPanel extends React.Component {
 		  <div className="panel-heading">
 		    {"Comments"}
 		  </div>
-		  <div className="panel-body">
-		    {!!this.props.bdr.restoreAnecdote ? this.props.bdr.restoreAnecdote : this.createRestoreDialog(this.props.bdr.entryID)}
-		  </div>
-      <BDRComments comments={this.props.bdr.comments} bdr={this.props.bdr} />
+      <BDRComments comments={this.props.bdr.comments} bdr={this.props.bdr} restored={!(parseInt(this.props.bdr.swipCode) > 0)} viewerID={this.props.viewerID} viewer={this.props.viewer} updateBDRComments={this.props.updateBDRComments}/>
       {/*<ul className="list-group">
         {this.props.bdr.comments.map((comment)=>(<li key={comment.entryID} className="list-group-item">{comment.commentText}</li>))}
       </ul>*/}
@@ -37,12 +34,13 @@ class BDRPanel extends React.Component {
             </div>;
   }
   
-  createRestoreDialog(bdrID){
+  /*createCommentDialog(bdrID){
     return <div className="form-group">
-      <textarea className="form-control" rows="5" id={"restore" +  bdrID}></textarea>
-      <button type="button" className="btn btn-success" onClick={this.props.restore}>{"Restore"}</button>
+      <textarea className="form-control" rows="3" id={"restore" +  bdrID}></textarea>
+      
+      <button type="button" className="btn btn-primary" onClick={this.props.restore}>{"Restore"}</button>
     </div> 
-  }
+  }*/
   
 }
 

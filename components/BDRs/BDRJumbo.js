@@ -27,6 +27,7 @@ class BDRJumbo extends React.Component {
     this.getBDRsByUDID = this.getBDRsByUDID.bind(this)
     this.setSWIPTableFilterByUDID = this.setSWIPTableFilterByUDID.bind(this)
     this.mergeBDRsToComments = this.mergeBDRsToComments.bind(this)
+    this.updateBDRComments = this.updateBDRComments.bind(this)
 
    }
   
@@ -56,6 +57,7 @@ class BDRJumbo extends React.Component {
   getSWIPsForThreshold(swipThreshold){
     var changeSWIPArrState = this.changeSWIPArrState.bind(this)
     return function(){
+      console.log('swips update')
       getRequestToArr("/swips/" + swipThreshold,changeSWIPArrState)}
   }
 
@@ -112,7 +114,7 @@ class BDRJumbo extends React.Component {
     } else if (this.state.viewOption == "stulookup") {
       list = <div><SWIPContainer setSWIPTableFilterByUDID={this.setSWIPTableFilterByUDID} swipRows={this.state.swipArr} getBDRsByUDID={function(){return null}} swipThreshold={"le20"} nameFilter={""} classFilter={""} udidFilter={this.state.udidFilter} /> {this._getBDRs()}</div>
     } else if (this.state.viewOption == "newBDR") {
-      list = <NewBDRPanel authorUDID={this.props.viewer} newBDRTrigger={function(){this._viewOptionSelect('mybdr')}.bind(this)}/>
+      list = <NewBDRPanel authorUDID={this.props.viewer.entryID} newBDRTrigger={function(){this._viewOptionSelect('mybdr')}.bind(this)}/>
     }
     else list = null
     
@@ -144,7 +146,7 @@ class BDRJumbo extends React.Component {
         this.setState({viewOption:"newBDR"})
         break
       case "mybdr":
-        this.getBDRsByUDID(this.props.viewer)()
+        this.getBDRsByUDID(this.props.viewer.entryID)()
         this.setState({viewOption:"bdr"})
         break
       default:
@@ -155,14 +157,25 @@ class BDRJumbo extends React.Component {
   _getBDRs(){
     console.log('__getBDRs')
     console.log(this.state.bdrArr)
-    var bdrArr = this.state.bdrArr;
-    var bdrMap = bdrArr.map((bdr) => {
+    var bdrArr = this.state.bdrArr
+    var bdrMap = bdrArr.map((bdr,id) => {
         if(!bdr.hasOwnProperty('comments')){bdr.comments = []}
-      return (<BDRPanel key={bdr.entryID} bdr={bdr} />)
+      return (<BDRPanel key={bdr.entryID} bdr={bdr} viewerID={this.props.viewer.entryID} viewer={this.props.viewer} updateBDRComments={function(comment){this.updateBDRComments(id,comment)}.bind(this)}/>)
     })
     //bdrMap.splice(0,0,<NewBDRPanel key={0}/>)
     return bdrMap
   }
+
+  updateBDRComments(bdrArrID,comment){
+    var bdrArr = this.state.bdrArr.slice()
+    if(bdrArr[bdrArrID].swipCode > 0 && comment.restoring){
+      bdrArr[bdrArrID].swipCode = parseInt((bdrArr[bdrArrID].swipCode)*-1)
+      //this.getSWIPsForThreshold.bind(this)("le20")
+    }
+    bdrArr[bdrArrID].comments.push(comment)
+    this.setState.bind(this)(()=>{bdrArr:bdrArr},this.getSWIPsForThreshold.bind(this)("le20"))
+  }
+
 }
 
 module.exports = BDRJumbo;
