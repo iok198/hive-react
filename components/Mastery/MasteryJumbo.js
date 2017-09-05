@@ -46,7 +46,7 @@ class MasteryJumbo extends React.Component {
       //let list = this._getMastery(this.state.parsedMastery);
     
     return( <div className="jumbotron">
-              <h1><span onClick={this.resetState} className="home-header"><img height="100" src="./public/img/MasteryGraph.png"/>Mastery</span>{((this.state.activeCourse.courseTitle != '')  ? (": " + this.state.activeCourse.courseTitle) : "" )}</h1>
+              <h1><span onClick={this.resetState} className="home-header"><img height="100" src="./public/img/MasteryGraph.png"/>Mastery</span>{((this.state.activeCourse.courseTitle != '')  ? (<span onClick={this.getMasteryForCourse(this.state.activeCourse)}>{": " + this.state.activeCourse.courseTitle}</span>) : "" )}</h1>
         {(this.state.activeCourse.courseTitle == '') ? (<ul className="nav nav-pills">
             {Object.keys(this.props.stuCourseQuObj.strObj).map((key,id)=> (<li className={(this.state.activeCourse.courseStr == key) ? 'active' : ''} key={"masterynav" + key} onClick={this.getMasteryForCourse({courseStr:key,courseTitle:this.props.stuCourseQuObj.strObj[key]})}><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.stuCourseQuObj.strObj[key]}</a></li>))}
         </ul>) : null}

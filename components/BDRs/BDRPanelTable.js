@@ -22,7 +22,7 @@ class BDRPanelTable extends React.Component {
   }
 
   render() {
-    return <div id="" className="col-xs-12">
+    return <div id="" className="col-xs-12 bdr-panel-table">
 
 
                 <div id="" className="row bdr-row">

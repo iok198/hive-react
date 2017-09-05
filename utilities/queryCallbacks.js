@@ -7,6 +7,13 @@ function defaultQueryCallback(req,res){
 }
 }
 
+function insertQueryCallback(req,res){
+  return function(err,rsl){
+    if(err){console.log(err)}
+    res.send(JSON.stringify(rsl.insertId))
+  }
+}
+
 function masteryQueryCallback(req,res,courseStr){
   return function (err,rsl,fds){
     if(err){console.log(err)}
@@ -32,5 +39,5 @@ function usersQueryCallback(req,res){
 }
 
 module.exports = {default: defaultQueryCallback,mastery:masteryQueryCallback,
-    users:usersQueryCallback
+    users:usersQueryCallback,insert:insertQueryCallback
 }
