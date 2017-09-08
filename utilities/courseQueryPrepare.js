@@ -3,8 +3,8 @@ function courseQueryPrep(obj) {
     var queryArr = []
     var courseSlots = ["Classification", "Mathematics",
         "English Language Arts", "Science", "Art/Music", "Technology",
-        "Physical Education", "ELA 2", "Problem Solving", "Algebra 1",
-        "Advanced Science", "Spanish"
+        "Physical Education", "Social Studies", "Problem Solving", "Algebra 1",
+        "EArth Science", "Spanish"
     ]
     var baseStr = "s..........."
     var strMap = {'6':['6'], '7':['7'], '8':['8'], 'b':['6','7'], 'B':['7','8'], 'A':['6','7','8'], 'E':['6','8']}

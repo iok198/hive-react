@@ -16,7 +16,7 @@ function extractProfile (profile) {
 
 function queryUD(connection,email,done,extracted){
     return function(){
-    connection.query("SELECT * FROM hive1617.userDirectory WHERE " +
+    connection.query("SELECT * FROM hive1718.userDirectory WHERE " +
                             "emailID REGEXP " + "'" + email + 
                             "' OR altEmailStr REGEXP '" + email + "'",
                         function (err,rsl,fds){
@@ -36,7 +36,7 @@ function strategyConfig(connection){
         new GoogleStrategy(googPassCred,
             function(accessToken, refreshToken, profile, done) {
                 console.log(extractProfile(profile))
-                console.log("SELECT * FROM hive1617.userDirectory " +
+                console.log("SELECT * FROM hive1718.userDirectory " +
                             "WHERE emailID REGEXP " + "'" + profile.emails[0].value + 
                             "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
                 queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()
