@@ -79,7 +79,8 @@ app.get('/', function (req, res) {
           res.sendFile(__dirname + '/public/index.html')
           break
         default:
-          res.sendFile(__dirname + '/public/index.html')
+          //res.sendFile(__dirname + '/public/index.html')
+          res.send(doggo)
       }
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
