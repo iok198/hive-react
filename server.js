@@ -79,8 +79,8 @@ app.get('/', function (req, res) {
           res.sendFile(__dirname + '/public/index.html')
           break
         default:
-          //res.sendFile(__dirname + '/public/index.html')
-          res.send(doggo)
+          res.sendFile(__dirname + '/public/index.html')
+          //res.send(doggo)
       }
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
@@ -135,6 +135,15 @@ app.get('/allstudents',function(req, res){
   //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
   //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
 })
+
+app.get('/coursestudents/:courseStr', function(req, res){
+  if(req.user){console.log('user request from:')
+    console.log(req.user)
+    connection.query('SELECT concat(title,\' \',lastName) as name, entryID, concat(emailID,\', \',IFNULL(altEmailStr,\'\')) as emails FROM hive1718.userDirectory where courseStr REGEXP ?',[req.params.courseStr],queryCallbacks.default(req,res,req.params.courseStr))
+  }
+  //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
+  //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
+}) //need to leverage to populate assessmentratings
 
 app.get('/mentees/:udid',function(req, res){
   if(req.user){console.log('mentee request from:')
