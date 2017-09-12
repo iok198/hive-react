@@ -27,12 +27,13 @@ class MentoringComments extends React.Component {
 				  <label htmlFor="exampleTextarea">New Comment:</label>
 				  <textarea className="form-control" id="exampleTextarea" rows="3" onChange={function(e){this.changeNewCommentText(e.target.value)}.bind(this)} value={this.state.newCommentText}></textarea>
 				  <br/>
-				  <div className="btn-group" role="group" aria-label="...">
+          { this.props.viewer.courseStr.substring(0,1) != 's' ?
+				  (<div className="btn-group" role="group" aria-label="...">
 					  <button type="button" className={"btn btn-default " + (this.state.newCommentRating == 1 ? 'active' : '')} onClick={function(e){this.changeNewCommentRating(1)}.bind(this)}>Not Yet</button>
 					  <button type="button" className={"btn btn-default " + (this.state.newCommentRating == 2 ? 'active' : '')} onClick={function(e){this.changeNewCommentRating(2)}.bind(this)}>Approaching</button>
 					  <button type="button" className={"btn btn-default " + (this.state.newCommentRating == 3 ? 'active' : '')} onClick={function(e){this.changeNewCommentRating(3)}.bind(this)}>Meeting</button>
 					  <button type="button" className={"btn btn-default " + (this.state.newCommentRating == 4 ? 'active' : '')} onClick={function(e){this.changeNewCommentRating(4)}.bind(this)}>Exceeding</button>
-				  </div>
+				  </div>) : null }
 				  <button type="button" className="btn btn-primary" onClick={this.submitNewComment}>Submit</button>
 				</div>
   			</li>

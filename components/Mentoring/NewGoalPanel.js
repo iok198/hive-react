@@ -69,7 +69,8 @@ class NewGoalPanel extends React.Component {
   }
 
   submitNewGoal(){
-  	postRequestForReact('/sendgoal', {studentUDID:this.props.menteeUDID,goalText:this.state.newGoalText,masteryReflection:this.state.masteryReflection,behaviorReflection:this.state.behaviorReflection,personalReflection:this.state.personalReflection,goalStrategy:this.state.newGoalStrategy},console.log)
+  	var goalObj = {studentUDID:this.props.menteeUDID,goalText:this.state.newGoalText,masteryReflection:this.state.masteryReflection,behaviorReflection:this.state.behaviorReflection,personalReflection:this.state.personalReflection,goalStrategy:this.state.newGoalStrategy}
+  	postRequestForReact('/sendgoal', goalObj,function(){this.props.appendGoal(goalObj)}.bind(this))
   }
 
 }

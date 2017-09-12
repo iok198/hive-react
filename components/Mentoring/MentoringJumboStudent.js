@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 var MentoringContainer = require('./MentoringContainer.js')
 var getRequestToArr = require('../../utilities/getRequestToArr.js')
 
-class MentoringJumbo extends React.Component {
+class MentoringJumboStudent extends React.Component {
   constructor(props){
   	super(props)
   	this.state = {activeMentoring: '',activeGoals:[]}
@@ -14,17 +14,14 @@ class MentoringJumbo extends React.Component {
   	this.getRequestToArr = getRequestToArr.bind(this)
   	this.mergeGoalsToComments = this.mergeGoalsToComments.bind(this)
   	this.updateGoalComments = this.updateGoalComments.bind(this)
-    this.appendGoal = this.appendGoal.bind(this)
   }
   render(){
       //let name = this.props.user.title;
+
     
     return( <div id="" className="jumbotron">
-              <h1>{<span onClick={this.getMentee('')}>Mentoring</span>}{(this.state.activeMentoring.hasOwnProperty('title') ? ': ' + this.state.activeMentoring.title : '' )}</h1>
-              {(this.props.viewer.courseStr.substring(0,1) != 's' && this.state.activeMentoring == '') ? (<ul className="nav nav-pills">
-            {this.props.mentees.map((mentee,id)=> (<li className={(this.state.activeMentoring.entryID == mentee.entryID) ? 'active' : ''} key={"mentoringnav" + mentee.entryID} onClick={this.getMentee(mentee)}><a href="#" onClick={function(event){event.preventDefault();}}>{mentee.title}</a></li>))}
-        </ul>) : null}
-        {(this.state.activeMentoring != '') ? (<MentoringContainer appendGoal={this.appendGoal} goals={this.state.activeGoals} mentee={this.state.activeMentoring} updateGoalComments={this.updateGoalComments} viewer={this.props.viewer}/>) : null}
+              <h1>Mentoring {(this.state.activeMentoring.hasOwnProperty('mentorName') ? 'with ' + this.state.activeMentoring.mentorName : '' )}</h1>
+        {(this.state.activeMentoring != '') ? (<MentoringContainer goals={this.state.activeGoals} mentee={this.state.activeMentoring} updateGoalComments={this.updateGoalComments} appendGoal={this.props.appendGoal} viewer={this.props.viewer}/>) : null}
 	    </div> );
   }
 
@@ -80,12 +77,6 @@ class MentoringJumbo extends React.Component {
   	this.setGoalsState.bind(this)(goalState)
   }
 
-  appendGoal(goal){
-    var goalState = this.state.activeGoals.slice()
-    var goalPlusC = Object.assign({comments:[]},goal)
-    goalState.push(goalPlusC)
-    this.setGoalsState.bind(this)(goalState)
-  }
 }
 
-module.exports = MentoringJumbo;
+module.exports = MentoringJumboStudent;

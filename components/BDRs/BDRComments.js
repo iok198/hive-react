@@ -24,9 +24,9 @@ class BDRComments extends React.Component {
 					  <label htmlFor="exampleTextarea">New Comment:</label>
 					  <textarea className="form-control" id="exampleTextarea" rows="3" onChange={function(e){this.changeNewCommentText(e.target.value)}.bind(this)} value={this.state.newCommentText}></textarea>
 					  <br/>
-					  <div className="checkbox" onClick={this.toggleRestoring}>
+					  {this.props.viewer.courseStr.substring(0,1) != 's' ? (<div className="checkbox" onClick={this.toggleRestoring}>
 					      <label><input type="checkbox" checked={this.state.restoring}/>Restore with this comment.</label>
-					  </div>
+					  </div>) : null}
 					  <button type="button" className="btn btn-primary" onClick={this.submitNewComment}>Submit</button>
 					</div>
 	  			</li>}
@@ -48,6 +48,7 @@ class BDRComments extends React.Component {
   	var postObj = {bdrID:this.props.bdr.entryID,commenterID:this.props.viewerID,commentText:this.state.newCommentText,restoring:this.state.restoring}
   	console.log(postObj)
   	postRequestForReact('/sendbdrcomment',postObj,this.props.updateBDRComments(Object.assign(postObj,{title:this.props.viewer.title,lastName:this.props.viewer.lastName}) ))
+  	this.resetState()
   }
 }
 
