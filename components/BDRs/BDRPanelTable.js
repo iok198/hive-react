@@ -36,11 +36,11 @@ class BDRPanelTable extends React.Component {
 		  <BDRPTableCell colwidth="4" middlecell="bdr-middle-cell" header="Others Involved"> {this.state.othersInvolved} </BDRPTableCell>
 		  <BDRPTableCell colwidth="4" header="Possible Motivation"> {this.state.possibleMotivation} </BDRPTableCell>
                 </div>
-
-                <div id="" className="row bdr-row">
+                {this.props.viewer.courseStr.substring(0,1) != 's' ?
+                (<div id="" className="row bdr-row">
                   <BDRPTableCell colwidth="6" header="Incident Description"> {this.state.behaviorAnecdote } </BDRPTableCell>
-		  <BDRPTableCell colwidth="6" header="Staff Response"> {this.state.teacherResponse} </BDRPTableCell>
-                </div>
+		              <BDRPTableCell colwidth="6" header="Staff Response"> {this.state.teacherResponse} </BDRPTableCell>
+                </div>) : null}
               </div>;
   }
 }
