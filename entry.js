@@ -22,12 +22,13 @@ getRequestForReact("/users",(arr) => ( [
   ]),function(arr) {
 	getRequestForReact("/bdrsplusc/" + arr[0].entryID, (arr2) => ( [<BDRJumbo bdrs={arr2} viewer={arr[0]}/>,
         document.getElementById('content2')]))
-	ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
-          document.getElementById('content3'))
+
 	//ReactDOM.render(<MentoringJumbo user={arr[0]} mentoringStr={arr[0].mentoringStr}/>,document.getElementById('content5'))
 	switch(arr[0].courseStr.substring(0,1)){
     case 't':
       getRequestForReact("/mentees/" + arr[0].entryID, (mentArr) => ( [<MentoringJumbo mentees={mentArr} viewer={arr[0]}/>,document.getElementById('content5')]))
+      ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
+        document.getElementById('content3'))
       break
     case 's':
       ReactDOM.render(<MentoringJumbo mentees={[]} viewer={arr[0]}/>,document.getElementById('content5'))
