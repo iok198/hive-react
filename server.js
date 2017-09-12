@@ -92,7 +92,7 @@ app.get('/bdrsplusc/:queryStr',function(req, res) {
     connection.query(query,queryCallbacks.default(req,res))}
   else if (req.user && req.user.courseStr.substring(0,1) == 's'){
     var queryS = [bdrQueries(req.params.queryStr.split("n")).queryS,'select bc.*, u.title, u.lastName from hive1718.bdrComments bc left join hive1718.userDirectory u on bc.commenterID=u.entryID where bc.bdrID in (select entryID from hive1718.bdrs where staffUDID in (' + req.params.queryStr.split("n").join(", ") + ') or studentUDID in (' + req.params.queryStr.split("n").join(", ") + '))'].join("; ")
-    connection.query(query,queryCallbacks.default(req,res))}
+    connection.query(queryS,queryCallbacks.default(req,res))}
   else {res.send('[]')}
   }
   
