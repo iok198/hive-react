@@ -17,7 +17,7 @@ class BDRPanel extends React.Component {
                       {((parseInt(this.props.bdr.swipCode) > 0) ? ("-" + this.props.bdr.swipCode + " SWIP(s): ") : "Restored: ") + " " + this.props.bdr.problemBehavior + " - (BDR-i" + this.props.bdr.entryID + ".s" + this.props.bdr.studentUDID + ".a" + this.props.bdr.staffUDID +")"}
                     </div>
                   </div>
-		<BDRPanelTable bdr={this.props.bdr} />
+		<BDRPanelTable bdr={this.props.bdr} viewer={this.props.viewer} />
 		<div className="col-xs-12">
 		<div className="panel panel-default">
 		  <div className="panel-heading">
