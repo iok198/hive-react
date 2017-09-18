@@ -27,11 +27,13 @@ getRequestForReact("/users",(arr) => ( [
 	switch(arr[0].courseStr.substring(0,1)){
     case 't':
       getRequestForReact("/mentees/" + arr[0].entryID, (mentArr) => ( [<MentoringJumbo mentees={mentArr} viewer={arr[0]}/>,document.getElementById('content5')]))
-      ReactDOM.render(<MasteryJumbo user={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
+      ReactDOM.render(<MasteryJumbo viewer={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
         document.getElementById('content3'))
       break
     case 's':
       ReactDOM.render(<MentoringJumbo mentees={[]} viewer={arr[0]}/>,document.getElementById('content5'))
+      ReactDOM.render(<MasteryJumbo viewer={arr[0]} stuCourseQuObj={stuCourseQuObj(arr[0])}/>,
+        document.getElementById('content3'))
       break
   }
 })

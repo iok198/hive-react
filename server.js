@@ -4,8 +4,7 @@ var app = express()
 var connection = require('./hive-sql.js')
 var courseQueryPrepare = require('./utilities/courseQueryPrepare.js')
 var queryCallbacks = require('./utilities/queryCallbacks.js')
-var gradeQueries = require('./components/Mastery/utilities/gradeQueries2.js')
-var gradeQueries3 = require('./components/Mastery/utilities/gradeQueries3.js')
+var gradeQueries = require('./components/Mastery/utilities/gradeQueries2a.js')
 var bdrQueries = require('./components/BDRs/utilities/bdrQueries.js')
 var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQueries.js')
 //var parseAssessment = require('./components/Mastery/utilities/parseAssessment.js')
@@ -175,9 +174,24 @@ app.get('/goalsplusc/:udid',function(req,res){
   }
 })
 
-app.get('/mastery/:courseStr',function(req,res){
-  var queries = gradeQueries(connection.escape(req.params.courseStr))
-  connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+app.get(['/mastery/:courseStr','/mastery/:courseStr/:stuUDID'],function(req,res){
+  if(req.user && req.user.courseStr.substring(0,1) != 's'){
+    if(!!req.params.stuUDID && !!req.params.courseStr){
+      var stuUDID = req.params.stuUDID
+      var queries = gradeQueries(connection.escape(req.params.courseStr),connection.escape(stuUDID))
+      connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+    }
+    else {
+      var queries = gradeQueries(connection.escape(req.params.courseStr))
+      connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+    }
+  }
+  else if (req.user && (req.user.courseStr.substring(0,1) == 's')){
+    var stuUDID = req.user.entryID
+    var queries = gradeQueries(connection.escape(req.params.courseStr),connection.escape(stuUDID))
+    //console.log(queries)
+    connection.query(["SET @@group_concat_max_len = 8000",queries.studentRatingQuery, queries.studentBulkQuery].join("; "),queryCallbacks.mastery(req,res,req.params.courseStr))
+  }
 })
 
 app.get('/assessments/:courseStr/:assessID',function(req,res){
@@ -240,10 +254,6 @@ app.get('/mybdrs',function(req, res) {
 app.get('/los/:courseQueryStr',function(req, res){
   console.log('SELECT * FROM LOs WHERE courseStr REGEXP ' + req.params.courseQueryStr.toString())
   connection.query('SELECT * FROM LOs WHERE courseStr REGEXP \'' + req.params.courseQueryStr.toString() + '\'', queryCallbacks.default(req,res))
-})
-
-app.get('/grades3/:courseQueryStr',function(req, res){
-  connection.query(gradeQueries3(connection.escape(req.params.courseQueryStr.toString())).joined, queryCallbacks.default(req,res))
 })
 
 
