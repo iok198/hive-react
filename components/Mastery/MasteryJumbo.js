@@ -50,7 +50,7 @@ class MasteryJumbo extends React.Component {
         {(this.state.activeCourse.courseTitle == '') ? (<ul className="nav nav-pills">
             {Object.keys(this.props.stuCourseQuObj.strObj).map((key,id)=> (<li className={(this.state.activeCourse.courseStr == key) ? 'active' : ''} key={"masterynav" + key} onClick={this.getMasteryForCourse({courseStr:key,courseTitle:this.props.stuCourseQuObj.strObj[key]})}><a href="#" onClick={function(event){event.preventDefault();}}>{this.props.stuCourseQuObj.strObj[key]}</a></li>))}
         </ul>) : null}
-        {(this.state.mArr.length > 0) ? <MasteryContainer getMasteryForCourse={this.getMasteryForCourse} course={this.state.activeCourse} mArr={this.state.mArr} /> : null}
+        {(this.state.mArr.length > 0) ? <MasteryContainer getMasteryForCourse={this.getMasteryForCourse} course={this.state.activeCourse} mArr={this.state.mArr} viewer={this.props.viewer} /> : null}
 	    </div> );
   }
 
