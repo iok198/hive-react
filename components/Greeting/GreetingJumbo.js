@@ -8,7 +8,16 @@ class GreetingJumbo extends React.Component {
     return( <div id="" className="jumbotron">
               <div><img height="50" src="./public/img/hivelogo.png"/></div>
               <h1>Hello {name + " " + this.props.user.lastName}</h1>
-              {(this.props.user.courseStr.substring(0,1) != 's') ? (<p><a href="https://sites.google.com/a/ms442.org/the-hub">{"Visit the Hub"}</a></p>) : (<a href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link"><img src="http://www.freeiconspng.com/uploads/wrench-icon-3.png" /></a>)}
+              {(this.props.user.courseStr.substring(0,1) != 's') ? (<p>
+              	<a className="btn btn-info btn-lg" href="https://sites.google.com/a/ms442.org/the-hub">
+              	<span className="glyphicon glyphicon-briefcase"></span> {"Visit the Hub"}
+              </a>
+              <a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
+          <span className="glyphicon glyphicon-wrench"></span> Tech Repair
+        </a>
+              	</p>) : (<a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
+          <span className="glyphicon glyphicon-wrench"></span> Tech Repair
+        </a>)}
 	    </div> );
   }
 
