@@ -70,7 +70,10 @@ class MasteryContainer extends React.Component {
             /></div>)
         }
         else if(this.props.viewer.courseStr.substring(0,1) == 's'){
+            console.log('student mastery')
+            console.log(this.state.parsedMastery)
           view = (
+
             <MasteryStudentPanel parsedMastery={this.state.parsedMastery} 
               mArrS={this.state.mArrS} viewer={this.props.viewer}/>
             )
@@ -79,7 +82,9 @@ class MasteryContainer extends React.Component {
         view = (<NewLOView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]} />)
       } else if (this.state.viewOption == 'newAssessment') {
         view = (<NewAssessView postRequestForReact={postRequestForReact} cancel={function(){this._viewOptionSelect('mRatings')}.bind(this)} submitter={this.props.getMasteryForCourse(this.props.course)} courseStr={this.state.mArrS[2]} LOs={this.state.mArrS[1]}/>)
-      } else if (false && this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null){
+      } else if (this.state.viewOption == 'gradeAssessment' && this.state.assessMArr != null){
+        console.log(this.state.assessMArr)
+        console.log('that\'s the assessment')
         view = (<AssessmentContainer mArr={this.state.assessMArr}/>)
       } else if (this.state.viewOption == 'viewAssessments' && this.state.assessmentsArr != null){
         view = (<AssessmentsList LOs={this.state.mArrS[1]} getAssessmentGrades={this._getAssessmentGrades} assessmentsArr={this.state.assessmentsArr} initialFilter={this.state.assessmentFilter}/>)

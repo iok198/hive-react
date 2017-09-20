@@ -330,6 +330,20 @@ app.post("/sendbdrcomment",function(req,res){
   }
 )
 
+app.post("/sendnewgrade",function(req,res){
+    var reqjson =req.body
+    if(req.user){
+      console.log('new grades')
+      console.log(reqjson)
+      connection.query('INSERT INTO hive1718.assessmentRatings (assessmentID,studentUDID,ratings) values (?,?,?)',[reqjson.assessmentID,reqjson.studentUDID,reqjson.ratings],function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
+    })
+      //res.send('grade added')
+    }
+  }
+)
+
 
 
 app.get('/authd',
