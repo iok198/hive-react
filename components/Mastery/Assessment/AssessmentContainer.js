@@ -47,7 +47,7 @@ class AssessmentContainer extends React.Component{
   }
 
  
-  changeAssessment(stuUDID,loid,mRating0,mArrKey){
+  changeAssessment(stuUDID,loid,mRating0,mArrKey,mRatingStr){
 
     return () => {
       var mArrS = {}
@@ -55,12 +55,26 @@ class AssessmentContainer extends React.Component{
       console.log(mArrS)
       console.log(this.state.parsedAssessment)
       var newState = (mArrC) => ((prevState,props) => ({mArrS:mArrC,parsedAssessment:parseAssessment(mArrC)}))
-      var re = new RegExp('m' + loid + ":" + "(\\d)*" + 'n')
-      mArrS[0][mArrKey].recentrating = mArrS[0][mArrKey].recentrating.replace(re,'m' + loid + ':' + mRating0 + 'n')
-      var reqbody = {assessRatingID: mArrS[0][mArrKey].maxID,  string: mArrS[0][mArrKey].recentrating}
-      this.setState(newState(mArrS),postRequestForReact("/sendgrades",reqbody,console.log))
+      if(!!mArrS[0][mArrKey].recentrating){
+        var re = new RegExp('m' + loid + ":" + "(\\d)*" + 'n')
+        mArrS[0][mArrKey].recentrating = mArrS[0][mArrKey].recentrating.replace(re,'m' + loid + ':' + mRating0 + 'n')
+        var reqbody = {assessRatingID: mArrS[0][mArrKey].maxID,  string: mArrS[0][mArrKey].recentrating}
+        this.setState(newState(mArrS),postRequestForReact("/sendgrades",reqbody,console.log))}
+      else {
+        var re = new RegExp('m' + loid + ":" + "(\\d)*" + 'n')
+        mArrS[0][mArrKey].recentrating = mRatingStr.replace(re,'m' + loid + ':' + mRating0 + 'n')
+        var reqbody = {assessmentID: mArrS[2][0].assessID,  ratings: mArrS[0][mArrKey].recentrating,studentUDID:stuUDID}
+        this.setState(newState(mArrS),postRequestForReact("/sendnewgrade",reqbody,function(res){
+          console.log(res)
+          mArrS[0][mArrKey].maxID = JSON.parse(res).insertId
+          this.setState({mArrS:mArrS,parsedAssessment:parseAssessment(mArrS)})
+          console.log(mArrS)
+        }.bind(this)))}
+        //console.log(reqbody)
+      }
+
     }
-  }
+  //}
   
     
 }
