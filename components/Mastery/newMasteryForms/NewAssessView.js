@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+var datesList = require('../../../devutil/dates.js')
 
 class newAssessView extends React.Component {
 	constructor(props){
@@ -33,8 +34,8 @@ class newAssessView extends React.Component {
                     	<input className="form-control" value={this.state.AssessLink} id="AssessLink" onChange={function(e){this.changeInput({AssessLink:e.target.value})}.bind(this)}/>
                       <br/>
                     	<label htmlFor="assessSelDate"><span className="glyphicon glyphicon-calendar"></span> Date:</label>
-                    	<select className="form-control" value={this.state.AssessDate} id="assessSelDate" onChange={function(e){this.changeInput({AssessDate:e.target.value})}.bind(this)}>
-                    		<option value="2017-07-01">07/01/2017</option>
+                    	<select className="form-control" value={this.state.AssessDate} id="assessSelDate" onChange={function(e){var assessDJ = new Date(e.target.value).toJSON(); var str = assessDJ.substring(0,10) + ' ' + assessDJ.substring(11,19); this.changeInput({AssessDate:str})}.bind(this)}>
+                    		{datesList.map((date,id)=>(<option key={id}>{date}</option>))}
                     	</select>
                 	  <br/>
                 	  <br/>

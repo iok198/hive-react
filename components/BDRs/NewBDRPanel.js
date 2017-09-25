@@ -36,7 +36,7 @@ class NewBDRPanel extends React.Component {
                     <span id="bdrPrevDate" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelTimeH"><span className="glyphicon glyphicon-time"></span> Time:</label>
-                    <select className="form-control bdrSel" id="bdrSelTimeH" onChange={function(e){this.updateNewBDRState('incidentTimeH',e.target.value)()}.bind(this)}>{hours.map((h,id)=>(<option key={id} value={id}>{h}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelTimeH" onChange={function(e){this.updateNewBDRState('incidentTimeH',e.target.value)()}.bind(this)}>{hours.map((h,id)=>(<option key={id} value={id < 10 ? ('0' + id) : ('' + id)}>{h}</option>))}</select>
                     <select className="form-control bdrSel" id="bdrSelTimeM" onChange={function(e){this.updateNewBDRState('incidentTimeM',e.target.value)()}.bind(this)}>{minutes.map((m,id)=>(<option key={id} value={m.substring(1)}>{m}</option>))}</select>
                     <br/>
                     <label htmlFor="bdrSelLoc"><span className="glyphicon glyphicon-globe"></span> Location:</label>

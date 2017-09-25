@@ -48,7 +48,7 @@ function parseMastery(mArr){
       if(!rowsByStu.hasOwnProperty(obj.entryID)){
         rowsByStu[obj.entryID] = Object.assign({},columns)
       }
-      if(!!obj.courseStrLOIDsID){
+      if(!!obj.courseStrLOIDsID && obj.courseStrLOIDsID != null){
       var cLstr = obj.courseStrLOIDsID.split('-')
       var cL = cLstr[0] + '-' + cLstr[1]
       
@@ -84,8 +84,8 @@ function parseMastery(mArr){
       rowsByStu[obj.entryID][cL].masteryID = columns[cL]
       }
       
-      rowsByStu[obj.entryID][cL] = Object.assign({},objC)
-      rowsByStu[obj.entryID][cL].masteryID = columns[cL]
+      //rowsByStu[obj.entryID][cL] = Object.assign({},objC)
+      //rowsByStu[obj.entryID][cL].masteryID = columns[cL]
     }
     
     sMasteryArr.forEach(sFit)
