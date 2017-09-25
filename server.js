@@ -225,7 +225,10 @@ app.post("/newlo",function(req,res){
     if (error) throw error;
     
     })}*/
-    res.send(JSON.stringify(req.body))
+    if(reqjson.hasOwnProperty("courseStr") && reqjson.hasOwnProperty("LOCode") && reqjson.hasOwnProperty("LOText")){
+      connection.query('insert into hive1718.LOs (courseStr,LOCode,LOText) values (?,?,?)', [reqjson.courseStr,reqjson.LOCode,reqjson.LOText], queryCallbacks.insert(req,res))
+    }
+    //res.send(JSON.stringify(req.body))
   
   }
 )
@@ -335,10 +338,18 @@ app.post("/sendnewgrade",function(req,res){
     if(req.user){
       console.log('new grades')
       console.log(reqjson)
+      if(reqjson.hasOwnProperty('assessmentID')){
       connection.query('INSERT INTO hive1718.assessmentRatings (assessmentID,studentUDID,ratings) values (?,?,?)',[reqjson.assessmentID,reqjson.studentUDID,reqjson.ratings],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
+    })}
+      else {
+        console.log('new mratings')
+        connection.query('INSERT INTO hive1718.assessmentRatings (studentUDID,ratings,assessmentID) values (?,?,(select entryID from hive1718.assessments where courseStr regexp ? and MRatings = \'y\'))',[reqjson.studentUDID,reqjson.ratings,reqjson.courseStr],function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
     })
+      }
       //res.send('grade added')
     }
   }

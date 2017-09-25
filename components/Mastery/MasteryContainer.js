@@ -151,13 +151,24 @@ class MasteryContainer extends React.Component {
   changeMastery(stuUDID,mString,mRating0,mArrKey){
 
     return () => {
+      console.log(stuUDID,mString,mRating0,mArrKey)
       var mArrS = {}
       for(var ki in this.state.mArrS){mArrS[ki] = this.state.mArrS[ki]}
       console.log(mArrS)
       console.log(this.state.parsedMastery.mRatingStrs[stuUDID])
       var newState = (mArrC) => ((prevState,props) => ({mArrS:mArrC,parsedMastery:parseMastery(mArrC)}))
-      mArrS[0][mArrKey].mRating0 = parseInt(mRating0)
-      this.setState(newState(mArrS),postRequestForReact("/sendgrades",parseMastery(mArrS).mRatingStrs[stuUDID],console.log))
+      if(!!mArrS[0][mArrKey].maxID){
+        mArrS[0][mArrKey].mRating0 = parseInt(mRating0)
+        this.setState(newState(mArrS),postRequestForReact("/sendgrades",parseMastery(mArrS).mRatingStrs[stuUDID],console.log))
+      } else {
+        postRequestForReact("/sendnewgrade",{studentUDID:stuUDID,ratings:'m' + mString + ':' + mRating0 + 'n',courseStr:mArrS[2]},function(res){
+          console.log('new grade with id:')
+          console.log(JSON.parse(res).insertId)
+          mArrS[0][mArrKey].maxID = JSON.parse(res).insertId
+          mArrS[0][mArrKey].mRating0 = parseInt(mRating0)
+          this.setState({mArrS:mArrS,parsedMastery:parseMastery(mArrS)})
+        }.bind(this))
+      }
     }
   }
   
