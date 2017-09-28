@@ -12,7 +12,7 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var passportConfig = require('./utilities/passportConfig.js')
 var passport = passportConfig.passport
-var sitedownforwork = true;
+var sitedownforwork = false && true;
 app.use(function (req, res, next) {
   console.log(req.originalUrl)
   next()
