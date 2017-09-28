@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
 passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
     console.log(user)
-    console.log('userrrr')
+    console.log('user serialized')
     done(null, user.emailID)
   }
 )
@@ -69,7 +69,7 @@ passport.deserializeUser(function(emailID,done){
 
 app.get('/', function (req, res) {
     //console.log(req)
-    if(req.user){console.log('got a user')
+    if(req.user){console.log('req.user found')
     console.log(req.user.emailID)
       //res.send(req.session)
       //res.redirect('/users')

@@ -22,7 +22,7 @@ function queryUD(connection,email,done,extracted){
                         function (err,rsl,fds){
                             if(err) throw err
                             if(rsl.length > 0){
-                                console.log('rsl: (emailID entryID lastName')
+                                console.log('rsl: (emailID entryID lastName)')
                                 console.log(rsl[0].emailID,rsl[0].entryID,rsl[0].lastName)
                                 done(null,rsl[0])
                             } else { done(null,extracted)}
