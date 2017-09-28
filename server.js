@@ -74,11 +74,11 @@ app.get('/', function (req, res) {
       //res.send(req.session)
       //res.redirect('/users')
       switch(req.user.courseStr.substring(0,1)){
-        case 't':
+        /*case 't':
           res.sendFile(__dirname + '/public/index.html')
-          break
+          break */
         default:
-          res.sendFile(__dirname + '/public/index.html')
+          res.sendFile(__dirname + '/public/maintenance.html')
           //res.send(doggo)
       }
     }
