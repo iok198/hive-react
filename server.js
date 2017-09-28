@@ -43,8 +43,8 @@ app.use(function (req, res, next) {
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({
   secret: 'cris1s',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }))
   app.use(passport.initialize())
   app.use(passport.session())
