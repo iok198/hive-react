@@ -12,7 +12,7 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var passportConfig = require('./utilities/passportConfig.js')
 var passport = passportConfig.passport
-
+var sitedownforwork = true;
 app.use(function (req, res, next) {
   console.log(req.originalUrl)
   next()
@@ -73,12 +73,16 @@ app.get('/', function (req, res) {
     console.log(req.user.emailID)
       //res.send(req.session)
       //res.redirect('/users')
-      switch(req.user.courseStr.substring(0,1)){
+      // switch(req.user.courseStr.substring(0,1)){
+        switch(sitedownforwork){
         /*case 't':
           res.sendFile(__dirname + '/public/index.html')
           break */
+        case true: 
+          res.sendFile(__dirname + '/public/maintenance.html') 
+          break()
         default:
-          res.sendFile(__dirname + '/public/maintenance.html')
+          res.sendFile(__dirname + '/public/index.html')
           //res.send(doggo)
       }
     }
