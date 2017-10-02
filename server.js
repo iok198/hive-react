@@ -11,9 +11,7 @@ var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQuer
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var uuid = require('node-uuid')
-var passportConfig = require('./utilities/passportConfig.js')
-var passport = passportConfig.passport
-var sitedownforwork = false && true;
+
 app.use(function (req, res, next) {
   console.log(req.originalUrl)
   next()
@@ -37,7 +35,11 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next()
 })
-
+  app.use('/public',express.static('public'))
+  app.use('/public/img',express.static(__dirname +  'public/img'))
+  var passportConfig = require('./utilities/passportConfig.js')
+  var passport = passportConfig.passport
+  var sitedownforwork = false && true;
 
   app.use(bodyParser.json())
   //app.use(cookieParser())
@@ -52,8 +54,7 @@ app.use(function (req, res, next) {
 }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use('/public',express.static('public'))
-  app.use('/public/img',express.static(__dirname +  'public/img'))
+
 
 passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
