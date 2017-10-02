@@ -10,6 +10,7 @@ var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQuer
 //var parseAssessment = require('./components/Mastery/utilities/parseAssessment.js')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
+var uuid = require('node-uuid')
 var passportConfig = require('./utilities/passportConfig.js')
 var passport = passportConfig.passport
 var sitedownforwork = false && true;
@@ -42,6 +43,9 @@ app.use(function (req, res, next) {
   //app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({
+  genid:function () {
+        return uuid.v4()
+    },
   secret: 'cris1s',
   resave: true,
   saveUninitialized: true
@@ -362,7 +366,9 @@ app.post("/sendnewgrade",function(req,res){
 
 
 app.get('/authd',
-  passport.authenticate('google', { scope: ['email'] }));
+  passport.authenticate('google', { scope: ['email'] })
+
+  )
   
 app.get('/authd/callback', 
   passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true }))
