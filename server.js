@@ -67,7 +67,26 @@ passport.deserializeUser(function(emailID,done){
 
 
 
-app.get('/', function (req, res) {
+/* app.get('/', function (req, res) {
+    //console.log(req)
+    if(req.user){console.log('req.user found')
+    console.log(req.user.emailID)
+      //res.send(req.session)
+      //res.redirect('/users')
+      // switch(req.user.courseStr.substring(0,1)){
+        switch(sitedownforwork){
+        case true: 
+          res.sendFile(__dirname + '/public/maintenance.html') 
+          break
+        default:
+          res.sendFile(__dirname + '/public/index.html')
+          //res.send(doggo)
+      }
+    }
+    else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
+}) */
+
+app.get('/', passport.authenticate('google', function (req, res) {
     //console.log(req)
     if(req.user){console.log('req.user found')
     console.log(req.user.emailID)
@@ -87,7 +106,7 @@ app.get('/', function (req, res) {
       }
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
-})
+}))
 
 app.get('/bdrsplusc/:queryStr',function(req, res) {
   if(req.user && req.user.courseStr.substring(0,1) != 's'){
@@ -326,7 +345,7 @@ app.post("/sendbdr",function(req,res){
 app.post("/sendbdrcomment",function(req,res){
     var reqjson =req.body
     if(req.user){
-      console.log('new bdr')
+      console.log('new bdr comment')
       console.log(reqjson)
       connection.query('INSERT INTO hive1718.bdrComments (bdrID,commenterID,commentText,commentDT) values (?,?,?,NOW());' + (!!reqjson.restoring ? 'UPDATE hive1718.bdrs SET swipCode=(-1*swipCode), restoreDateTime=NOW() WHERE entryID=' + connection.escape(reqjson.bdrID) : ''),[reqjson.bdrID,reqjson.commenterID,reqjson.commentText],function (error, results, fields) {
     if (error) throw error;
