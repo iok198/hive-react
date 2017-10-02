@@ -88,7 +88,7 @@ passport.deserializeUser(function(emailID,done){
 
 app.get('/', passport.authenticate('google', function (req, res) {
     //console.log(req)
-    if(req.user){console.log('req.user found')
+    if(req.user){console.log('req.user found'){
     console.log(req.user.emailID)
       //res.send(req.session)
       //res.redirect('/users')
