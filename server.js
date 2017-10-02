@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
         return uuid.v4()
     },
   secret: 'cris1s',
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }))
   app.use(passport.initialize())
