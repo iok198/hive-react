@@ -35,11 +35,12 @@ function strategyConfig(connection){
     passport.use(
         new GoogleStrategy(googPassCred,
             function(accessToken, refreshToken, profile, done) {
+                process.nextTick(function(){
                 console.log(extractProfile(profile))
                 console.log("SELECT * FROM hive1718.userDirectory " +
                             "WHERE emailID REGEXP " + "'" + profile.emails[0].value + 
                             "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()
+                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()})
             }
         )
     )

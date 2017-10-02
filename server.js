@@ -119,7 +119,7 @@ app.get('/swips/:threshold',function(req,res){
         + 'WHERE ( (u.courseStr REGEXP \'s\') AND ((s.SWIPS' + threshold + ') OR IF(20' + threshold +',ISNULL(s.SWIPS),FALSE)) ) ' + addlcon + ' ORDER BY u.classNo, u.lastName ', queryCallbacks.default(req,res))
 })
 
-app.get('/users',function(req, res){
+app.get('/users', isLoggedIn, function(req, res){
   if(req.user){console.log('user request from:')
     console.log(req.user)
     res.send(JSON.stringify([req.user]))
@@ -367,7 +367,11 @@ app.get('/authd',
 app.get('/authd/callback', 
   passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true }))
   
+function isLoggedIn(req,res,next){
+  if(req.isAuthenticated()) return next();
 
+  res.redirect('/')
+}
   
 app.get('/login', function (req, res) {
   res.send('Hello World!')
