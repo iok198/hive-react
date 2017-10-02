@@ -67,28 +67,9 @@ passport.deserializeUser(function(emailID,done){
 
 
 
-/* app.get('/', function (req, res) {
+app.get('/', function (req, res) {
     //console.log(req)
     if(req.user){console.log('req.user found')
-    console.log(req.user.emailID)
-      //res.send(req.session)
-      //res.redirect('/users')
-      // switch(req.user.courseStr.substring(0,1)){
-        switch(sitedownforwork){
-        case true: 
-          res.sendFile(__dirname + '/public/maintenance.html') 
-          break
-        default:
-          res.sendFile(__dirname + '/public/index.html')
-          //res.send(doggo)
-      }
-    }
-    else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
-}) */
-
-app.get('/', passport.authenticate('google', function (req, res) {
-    //console.log(req)
-    if(req.user){console.log('req.user found'){
     console.log(req.user.emailID)
       //res.send(req.session)
       //res.redirect('/users')
@@ -106,7 +87,7 @@ app.get('/', passport.authenticate('google', function (req, res) {
       }
     }
     else{res.sendFile(__dirname + '/public/img/google_signin_buttons/btn_google_signin_dark_normal_web.png')}
-}))
+})
 
 app.get('/bdrsplusc/:queryStr',function(req, res) {
   if(req.user && req.user.courseStr.substring(0,1) != 's'){
@@ -138,14 +119,14 @@ app.get('/swips/:threshold',function(req,res){
         + 'WHERE ( (u.courseStr REGEXP \'s\') AND ((s.SWIPS' + threshold + ') OR IF(20' + threshold +',ISNULL(s.SWIPS),FALSE)) ) ' + addlcon + ' ORDER BY u.classNo, u.lastName ', queryCallbacks.default(req,res))
 })
 
-app.get('/users',function(req, res){
+app.get('/users', passport.authenticate('google', function(req, res){
   if(req.user){console.log('user request from:')
     console.log(req.user)
     res.send(JSON.stringify([req.user]))
   }
   //connection.query('SELECT * FROM userDirectory where entryID=1',usersQueryCallback(req,res))
   //connection.query('SELECT * FROM userDirectory where emailID REGEXP ' + req.user,usersQueryCallback(req,res))
-})
+}))
 
 app.get('/users/:udid',function(req, res){
   if(req.user){console.log('user request from:')
