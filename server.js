@@ -366,6 +366,16 @@ app.post("/sendnewgrade",function(req,res){
   }
 )
 
+app.get('/attendance',function(req,res){
+    if(req.user != 's'){
+      connection.query('select concat(u.title,\' \',u.lastName) as name, u.entryID, b.problemBehavior from hive1718.userDirectory u left join (select * from hive1718.bdrs where problemBehavior regexp \'Arrival\') b on u.entryID=b.studentUDID where u.courseStr regexp \'s\'', function (error, results, fields) {
+        if (error) throw error;
+        res.send(results)
+      })
+
+    } else res.send('')
+})
+
 
 
 app.get('/authd',

@@ -13,7 +13,11 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class NewBDRPanel extends React.Component {
   constructor(props){
     super(props)
-    this.state = {studentUDID:null,incidentDate:'',incidentTimeH:'',incidentTimeM:'',othersInvolved:'',problemBehavior:'',behaviorAnecdote:'', teacherResponse:'',possibleMotivation:'',location:''}
+    var d = new Date()
+    dm = d.getMonth()
+    dd = d.getDate()
+    dy = d.getFullYear()
+    this.state = {studentUDID:48,incidentDate:((dm < 10 ? "0" : "") + dm + "/" + ((dd < 10 ? "0" : "") + dd + "/" + dy,incidentTimeH:'08',incidentTimeM:'00',othersInvolved:'',problemBehavior:'Class Disruption/Non-compliant',behaviorAnecdote:'', teacherResponse:'',possibleMotivation:'Obtain Peer Attention',location:'Classroom'}
     this.updateNewBDRState = this.updateNewBDRState.bind(this)
     this.setState = this.setState.bind(this)
     this.submitNewBDR = this.submitNewBDR.bind(this)
@@ -28,7 +32,7 @@ class NewBDRPanel extends React.Component {
     			<form role="form" id="bdrForm">
                   <div className="form-group">
                     <label htmlFor="bdrSelStu"><span className="glyphicon glyphicon-user"></span> Student Name (Class):</label>
-                    <select className="form-control bdrSel" id="bdrSelStu" onChange={function(e){this.updateNewBDRState('studentUDID',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID} value={student.entryID}>{student.name}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelStu" onChange={function(e){this.updateNewBDRState('studentUDID',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID} value={student.entryID}>{student.name + ' (' + student.classNo + ')'}</option>))}</select>
                     <span id="bdrPrevStu" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelDate"><span className="glyphicon glyphicon-calendar"></span> Date:</label>
@@ -44,7 +48,7 @@ class NewBDRPanel extends React.Component {
                     <span id="bdrPrevLoc" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelOthers"><span className="glyphicon glyphicon-tent"></span> Others Involved:</label>
-                    <select className="form-control bdrSel" id="bdrSelOthers" multiple onChange={function(e){this.updateNewBDRState('othersInvolved',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID}>{student.name}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelOthers" multiple onChange={function(e){this.updateNewBDRState('othersInvolved',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID}>{student.name + ' (' + student.classNo + ')'}</option>))}</select>
                     <span id="bdrPrevOthers" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelBeh"><span className="glyphicon glyphicon-exclamation-sign"></span> Behavior:</label>
