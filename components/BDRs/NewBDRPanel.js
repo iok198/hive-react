@@ -134,7 +134,7 @@ class NewBDRPanel extends React.Component {
 
     console.log(this.state.problemBehavior)
     console.log(behaviors[this.state.problemBehavior])*/
-    var postObject = {studentUDID:this.state.studentUDID,incidentDateTime:datetime,incidentPeriod:period,othersInvolved:this.state.othersInvolved,problemBehavior:this.state.problemBehavior,behaviorAnecdote:this.state.behaviorAnecdote, teacherResponse:this.state.teacherResponse,possibleMotivation:this.state.possibleMotivation,location:this.state.location,staffUDID:this.props.authorUDID,swipCode:behaviors[this.state.problemBehavior]}
+    var postObject = {studentUDID:this.state.studentUDID,incidentDateTime:datetime,incidentPeriod:period,othersInvolved:(this.state.othersInvolved != [] ? this.state.othersInvolved : ''),problemBehavior:this.state.problemBehavior,behaviorAnecdote:this.state.behaviorAnecdote, teacherResponse:this.state.teacherResponse,possibleMotivation:this.state.possibleMotivation,location:this.state.location,staffUDID:this.props.authorUDID,swipCode:behaviors[this.state.problemBehavior]}
     console.log(postObject)
   	postRequestForReact('/sendbdr', postObject,this.props.newBDRTrigger)
   }
