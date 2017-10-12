@@ -18,7 +18,7 @@ class NewBDRPanel extends React.Component {
     dd = d.getDate()
     dy = d.getFullYear()
     this.state = {studentUDID:48,
-      incidentDate:(dm < 10 ? "0" : "") + this.dm + "/" + (this.dd < 10 ? "0" : "") + this.dd + "/" + this.dy,
+      incidentDate:(this.dm < 10 ? "0" : "") + this.dm + "/" + (this.dd < 10 ? "0" : "") + this.dd + "/" + this.dy,
         incidentTimeH:'08',
         incidentTimeM:'00',
         othersInvolved:'',
