@@ -20,7 +20,7 @@ class NewBDRPanel extends React.Component {
     this.state = {
         studentUDID:48,
         //incidentDate:(dm < 10 ? "0" : "") + dm + "/" + (dd < 10 ? "0" : "") + dd + "/" + dy,
-        incidentDate: d.toString().substring(0,15)
+        incidentDate: d.toString().substring(0,15),
         incidentTimeH:'08',
         incidentTimeM:'00',
         othersInvolved:'',
