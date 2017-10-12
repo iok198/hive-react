@@ -17,7 +17,16 @@ class NewBDRPanel extends React.Component {
     dm = d.getMonth()
     dd = d.getDate()
     dy = d.getFullYear()
-    this.state = {studentUDID:48,incidentDate:((dm < 10 ? "0" : "") + dm + "/" + ((dd < 10 ? "0" : "") + dd + "/" + dy,incidentTimeH:'08',incidentTimeM:'00',othersInvolved:'',problemBehavior:'Class Disruption/Non-compliant',behaviorAnecdote:'', teacherResponse:'',possibleMotivation:'Obtain Peer Attention',location:'Classroom'}
+    this.state = {studentUDID:48,
+      incidentDate:(dm < 10 ? "0" : "") + dm + "/" + (dd < 10 ? "0" : "") + dd + "/" + dy,
+        incidentTimeH:'08',
+        incidentTimeM:'00',
+        othersInvolved:'',
+        problemBehavior:'Class Disruption/Non-compliant',
+        behaviorAnecdote:'',
+        teacherResponse:'',
+        possibleMotivation:'Obtain Peer Attention',
+        location:'Classroom'}
     this.updateNewBDRState = this.updateNewBDRState.bind(this)
     this.setState = this.setState.bind(this)
     this.submitNewBDR = this.submitNewBDR.bind(this)
