@@ -23,7 +23,7 @@ class NewBDRPanel extends React.Component {
         incidentDate: d.toString().substring(0,15),
         incidentTimeH:'08',
         incidentTimeM:'00',
-        othersInvolved:'',
+        othersInvolved:[],
         problemBehavior:'Class Disruption/Non-compliant',
         behaviorAnecdote:'',
         teacherResponse:'',
