@@ -324,7 +324,10 @@ app.post("/sendbdr",function(req,res){
       connection.query('INSERT INTO hive1718.bdrs (studentUDID,incidentDateTime,incidentPeriod,othersInvolved,problemBehavior,behaviorAnecdote, teacherResponse,possibleMotivation,location,staffUDID,swipCode,submissionDateTime) values (?,?,?,?,?,?,?,?,?,?,?,NOW())',[reqjson.studentUDID,reqjson.incidentDateTime,reqjson.incidentPeriod,reqjson.othersInvolved,reqjson.problemBehavior,reqjson.behaviorAnecdote,reqjson.teacherResponse,reqjson.possibleMotivation,reqjson.location,reqjson.staffUDID,reqjson.swipCode],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
-    })
+    connection.query('select * from (select u1.emailID as sEmailID, concat(u1.firstName,\' \',u2.lastName) as sName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.studentUDID + ') u1 join (select emailID, concat(firstName,\' \',lastName) as aName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.staffUDID + ') u2 on u1.j = u2.j', function (error, results, fields) { if (error) throw error;
+    console.log(results) })
+    }
+    )
       //res.send('goal commented')
     }
   }
