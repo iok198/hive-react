@@ -11,6 +11,22 @@ var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQuer
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var uuid = require('node-uuid')
+var nmail = require('./nmail.js')
+
+function datetimeToString(dateString){
+  var date = new Date(dateString)
+  var mon = date.getMonth() + 1
+  var day = date.getDate()
+  var y = date.getFullYear()
+
+  var h = date.getHours()
+  var ampm = (h < 12 ? 'AM' : 'PM')
+  var hph = '' + (100 + (h%12 == 0 ? 12 : (ampm == 'AM' ? h : h%12)))
+  var hf = hph.substring(1)
+  var min = ('' + (100 + date.getMinutes())).substring(1)
+
+  return mon + '/' + day + '/' + y + ' ' + hf + ':' + min + ' ' + ampm
+}
 
 app.use(function (req, res, next) {
   console.log(req.originalUrl)
@@ -307,7 +323,8 @@ app.post("/sendgoal",function(req,res){
       console.log('goal')
       console.log(goalerUDID)
       console.log(reqjson)
-      connection.query('INSERT INTO hive1718.goals (studentUDID,goalText,submissionDateTime,masteryReflection,behaviorReflection,personalReflection,goalStrategy) values (' + [reqjson.studentUDID,"'" + reqjson.goalText + "'","NOW()","'" + reqjson.masteryReflection + "'","'" + reqjson.behaviorReflection + "'","'" + reqjson.personalReflection + "'","'" + reqjson.goalStrategy + "'"].join(", ") + ')',function (error, results, fields) {
+      var values = [reqjson.studentUDID,reqjson.goalText,reqjson.masteryReflection,reqjson.behaviorReflection,reqjson.personalReflection,reqjson.goalStrategy]
+      connection.query('INSERT INTO hive1718.goals (studentUDID,goalText,submissionDateTime,masteryReflection,behaviorReflection,personalReflection,goalStrategy) values (?,?,NOW(),?,?,?,?)',values,function (error, results, fields) {
     if (error) throw error;
     res.send(results)
     })
@@ -324,8 +341,18 @@ app.post("/sendbdr",function(req,res){
       connection.query('INSERT INTO hive1718.bdrs (studentUDID,incidentDateTime,incidentPeriod,othersInvolved,problemBehavior,behaviorAnecdote, teacherResponse,possibleMotivation,location,staffUDID,swipCode,submissionDateTime) values (?,?,?,?,?,?,?,?,?,?,?,NOW())',[reqjson.studentUDID,reqjson.incidentDateTime,reqjson.incidentPeriod,reqjson.othersInvolved,reqjson.problemBehavior,reqjson.behaviorAnecdote,reqjson.teacherResponse,reqjson.possibleMotivation,reqjson.location,reqjson.staffUDID,reqjson.swipCode],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
-    connection.query('select * from (select emailID as sEmailID, concat(firstName,\' \',lastName) as sName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.studentUDID + ') u1 join (select emailID, concat(firstName,\' \',lastName) as aName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.staffUDID + ') u2 on u1.j = u2.j', function (error, results, fields) { if (error) throw error;
-    console.log(results) })
+    connection.query('select * from (select classNo, emailID as sEmailID, concat(title,\' \',lastName) as sName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.studentUDID + ') u1 join (select emailID, concat(title,\' \',lastName) as aName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.staffUDID + ') u2 on u1.j = u2.j', function (error, results, fields) { if (error) throw error;
+    console.log(results)
+    var res0 = results[0]
+    //console.log(reqjson)
+    nmail([res0.sEmailID,res0.aEmailID,'ymolina@ms442.org','jsutton@ms442.org','camacho@ms442.org'].join(', '),'New BDR: ' + res0.aName + ' -> ' + res0.sName + ' (' + res0.classNo + ')',
+      ['<strong>Behavior:</strong> ' + reqjson.problemBehavior,
+       '<strong>Date/Time:</strong> ' + datetimeToString(reqjson.incidentDateTime),
+       '<strong>Period:</strong> ' + reqjson.incidentPeriod,
+       '<strong>Period:</strong> ' + reqjson.location,
+       '<strong>SWIPs Lost:</strong> ' + reqjson.swipCode
+      ].join('<br/>'))
+    })
     }
     )
       //res.send('goal commented')

@@ -70,7 +70,11 @@ class NewGoalPanel extends React.Component {
 
   submitNewGoal(){
   	var goalObj = {studentUDID:this.props.menteeUDID,goalText:this.state.newGoalText,masteryReflection:this.state.masteryReflection,behaviorReflection:this.state.behaviorReflection,personalReflection:this.state.personalReflection,goalStrategy:this.state.newGoalStrategy}
-  	postRequestForReact('/sendgoal', goalObj,function(){this.props.appendGoal(goalObj)}.bind(this))
+  	postRequestForReact('/sendgoal', goalObj,
+  		function(res){
+  			goalObj.entryID = res.insertId
+  			this.props.appendGoal(goalObj)
+  		}.bind(this))
   }
 
 }
