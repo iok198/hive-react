@@ -408,7 +408,7 @@ app.post("/sendnewgrade",function(req,res){
 
 app.get('/attendance',function(req,res){
     if(req.user != 's'){
-      var query = 'select concat(u.title,\' \',u.lastName) as name, u.classNo as classNo, u.entryID, b.problemBehavior, b.swipCode, b.entryID as bdrID from hive1718.userDirectory u left join (select b1.*, bc.commentText from hive1718.bdrs b1 left join hive1718.bdrComments bc on b1.entryID = bc.bdrID  where b1.problemBehavior regexp concat(\'Arrival: \',substring(DATE_SUB(now(), interval 14400 second),6,5))) b on u.entryID=b.studentUDID where u.courseStr regexp \'s\' order by classNo, u.lastName'
+      var query = 'select concat(u.title,\' \',u.lastName) as name, u.classNo as classNo, u.entryID, b.problemBehavior, b.swipCode, b.entryID as bdrID, b.commentText from hive1718.userDirectory u left join (select b1.*, bc.commentText as commentText from hive1718.bdrs b1 left join hive1718.bdrComments bc on b1.entryID = bc.bdrID  where b1.problemBehavior regexp concat(\'Arrival: \',substring(DATE_SUB(now(), interval 14400 second),6,5))) b on u.entryID=b.studentUDID where u.courseStr regexp \'s\' order by classNo, u.lastName'
       console.log(query)
       connection.query(query, function (error, results, fields) {
         if (error) throw error;
