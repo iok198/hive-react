@@ -16,7 +16,7 @@ var parseMastery2 = require('./components/Mastery/utilities/parseMastery2.js')
         document.getElementById('content2')]))*/
 
 getRequestForReact("/users",(arr) => ( [
-          <GreetingJumbo user={arr[0]} />,
+          <GreetingJumbo viewer={arr[0]} />,
           document.getElementById('content')
   
   ]),function(arr) {

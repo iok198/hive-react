@@ -11,12 +11,12 @@ class GreetingJumbo extends React.Component {
   	this.state = {attendance:null}
   }
   render(){
-      let name = this.props.user.title;
+      let name = this.props.viewer.title;
     
     return( <div id="" className="jumbotron">
               <div><img height="50" src="./public/img/hivelogo.png"/></div>
-              <h1>Hello {name + " " + this.props.user.lastName}</h1>
-              {(this.props.user.courseStr.substring(0,1) != 's') ? (<p>
+              <h1>Hello {name + " " + this.props.viewer.lastName}</h1>
+              {(this.props.viewer.courseStr.substring(0,1) != 's') ? (<p>
               	<a className="btn btn-info btn-lg" href="https://sites.google.com/a/ms442.org/the-hub">
               	<span className="glyphicon glyphicon-briefcase"></span>Visit the Hub
               </a>
@@ -27,7 +27,7 @@ class GreetingJumbo extends React.Component {
               	</p>) : (<a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
           <span className="glyphicon glyphicon-wrench"></span> Tech Repair
         </a>)}
-        {!!this.state.attendance ? <LateOOUForm sendLateOOU={this.sendLateOOU.bind(this)} students={this.state.attendance} /> : null}
+        {!!this.state.attendance ? <LateOOUForm viewer={this.props.viewer} sendLateOOU={this.sendLateOOU.bind(this)} students={this.state.attendance} /> : null}
 	    </div> );
   }
 
@@ -46,12 +46,18 @@ class GreetingJumbo extends React.Component {
   	postRequestForReact('/sendbdr', postObject,console.log)
   }
 
-  upgradeLateOOU(studentUDID,comment){
-  	console.log(studentUDID,comment)
+  upgradeLateOOU(studentUDID,comment,bdrID){
+  	//bdrID,commenterID,commentText,commentDT
+  	var postObject = {commenterID:this.props.viewer.entryID,commentText:comment,bdrID:bdrID}
+  	//console.log(studentUDID,comment)
+  	postRequestForReact('/upgradelateoou',postObject,this.viewAttendance.bind(this))
   }
 
-  restoreLateOOU(studentUDID,comment){
-  	console.log(studentUDID,comment)
+  restoreLateOOU(studentUDID,comment,bdrID){
+  	//console.log(studentUDID,comment)
+  	var postObject = {commenterID:this.props.viewer.entryID,commentText:comment,bdrID:bdrID,restoring:true}
+  	postRequestForReact('/sendbdrcomment',postObject,this.viewAttendance.bind(this))
+
   }
 
 }
