@@ -349,7 +349,7 @@ app.post("/sendbdr",function(req,res){
       ['<strong>Behavior:</strong> ' + reqjson.problemBehavior,
        '<strong>Date/Time:</strong> ' + datetimeToString(reqjson.incidentDateTime),
        '<strong>Period:</strong> ' + reqjson.incidentPeriod,
-       '<strong>Period:</strong> ' + reqjson.location,
+       '<strong>Location:</strong> ' + reqjson.location,
        '<strong>SWIPs Lost:</strong> ' + reqjson.swipCode
       ].join('<br/>'))
     })
@@ -398,7 +398,9 @@ app.post("/sendnewgrade",function(req,res){
 
 app.get('/attendance',function(req,res){
     if(req.user != 's'){
-      connection.query('select concat(u.title,\' \',u.lastName) as name, u.entryID, b.problemBehavior from hive1718.userDirectory u left join (select * from hive1718.bdrs where problemBehavior regexp \'Arrival\') b on u.entryID=b.studentUDID where u.courseStr regexp \'s\'', function (error, results, fields) {
+      var query = 'select concat(u.title,\' \',u.lastName) as name, u.classNo as classNo, u.entryID, b.problemBehavior, b.swipCode from hive1718.userDirectory u left join (select b1.*, bc.commentText from hive1718.bdrs b1 left join hive1718.bdrComments bc on b1.entryID = bc.bdrID  where b1.problemBehavior regexp concat(\'Arrival: \',substring(DATE_SUB(now(), interval 14400 second),6,5))) b on u.entryID=b.studentUDID where u.courseStr regexp \'s\' order by classNo, u.lastName'
+      console.log(query)
+      connection.query(query, function (error, results, fields) {
         if (error) throw error;
         res.send(results)
       })
