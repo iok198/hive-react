@@ -27,7 +27,7 @@ class GreetingJumbo extends React.Component {
               	</p>) : (<a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
           <span className="glyphicon glyphicon-wrench"></span> Tech Repair
         </a>)}
-        {!!this.state.attendance ? <LateOOUForm viewer={this.props.viewer} sendLateOOU={this.sendLateOOU.bind(this)} students={this.state.attendance} /> : null}
+        {!!this.state.attendance ? <LateOOUForm viewer={this.props.viewer} sendLateOOU={this.sendLateOOU.bind(this)} students={this.state.attendance} restoreLateOOU={this.restoreLateOOU.bind(this)} upgradeLateOOU={this.upgradeLateOOU.bind(this)} /> : null}
 	    </div> );
   }
 
