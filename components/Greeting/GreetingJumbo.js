@@ -43,7 +43,7 @@ class GreetingJumbo extends React.Component {
   	var incidentDateTime = incidentDate + ' 08:06'
   	var postObject = {studentUDID:studentUDID,incidentDateTime:incidentDateTime,incidentPeriod:'1',othersInvolved:'',problemBehavior:lateoou + (d.getMonth() + 101 + '').substring(1) + '-' + (d.getDate() + 100 + '').substring(1),behaviorAnecdote:'', teacherResponse:'Student was referred to late dismissal.',possibleMotivation:'',location:'',staffUDID:3,swipCode:swipCode}
 
-  	postRequestForReact('/sendbdr', postObject,console.log)
+  	postRequestForReact('/sendbdr', postObject,this.viewAttendance.bind(this))
   }
 
   upgradeLateOOU(studentUDID,comment,bdrID){
