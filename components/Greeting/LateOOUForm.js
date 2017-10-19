@@ -21,7 +21,7 @@ class LateOOUForm extends React.Component {
                             buttons = (<tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td><span className="btn btn-info" onClick={function(){this.props.upgradeLateOOU(student.entryID,"Student attended same-day Lunch Detention.",student.bdrID)}.bind(this)}>Attended Lunch Detention</span></td><td><span className="btn btn-info" onClick={function(){this.props.upgradeLateOOU(student.entryID,'Student attended same-day Late Dismissal.',student.bdrID)}.bind(this)}>Attended Late Dismissal</span></td></tr>)
                           }
                           else if (parseInt(student.swipCode) < 0) {
-                            <tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td>Attended same-day Lunch Detention & Late Dismissal</td></tr>
+                            buttons = (<tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td>Attended same-day Lunch Detention & Late Dismissal</td></tr>)
                           }
                           else if (student.commentText = 'Student attended same-day Lunch Detention.') {
                             buttons = (<tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td><span className="btn btn-info" onClick={function(){this.props.restoreLateOOU(student.entryID,"Student attended same-day Late Dismissal.",student.bdrID)}.bind(this)}>Attended Late Dismissal</span></td></tr>)
@@ -31,8 +31,9 @@ class LateOOUForm extends React.Component {
                           }
                         }
                         else {
+                          console.log(student)
                           if (parseInt(student.swipCode) < 0) {
-                            <tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td>Attended same-day Late Dismissal</td></tr>
+                            buttons = (<tr key={id}><td>{student.name + ' (' + student.classNo + ') late & oou'}</td><td>Attended same-day Late Dismissal</td></tr>)
                           }
                           else {
                           buttons = (<tr key={id}><td>{student.name + ' (' + student.classNo + ') only 1'}</td><td><span className="btn btn-info" onClick={function(){this.props.restoreLateOOU(student.entryID,"Student attended same-day Late Dismissal.",student.bdrID)}.bind(this)}>Attended Late Dismissal</span></td></tr>)
