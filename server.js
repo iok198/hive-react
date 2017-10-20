@@ -307,7 +307,7 @@ app.post("/sendgoalcomment",function(req,res){
       console.log('goalComment')
       console.log(commenterUDID)
       console.log(reqjson)
-      connection.query('INSERT INTO hive1718.goalComments (commenterUDID,goalID,submissionDateTime,commentText,goalMR) values (' + [commenterUDID,reqjson.goalID,"NOW()","'" + reqjson.commentText + "'","'" + reqjson.goalMR + "'"].join(", ") + ')',function (error, results, fields) {
+      connection.query('INSERT INTO hive1718.goalComments (commenterUDID,goalID,submissionDateTime,commentText,goalMR) values (?,?,NOW(),?,?)',[commenterUDID,reqjson.goalID,reqjson.commentText,reqjson.goalMR],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
     })
