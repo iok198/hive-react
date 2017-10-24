@@ -345,7 +345,7 @@ app.post("/sendbdr",function(req,res){
     console.log(results)
     var res0 = results[0]
     //console.log(reqjson)
-    nmail([res0.sEmailID,res0.aEmailID,'ymolina@ms442.org','jsutton@ms442.org','camacho@ms442.org'].join(', '),'New BDR: ' + res0.aName + ' -> ' + res0.sName + ' (' + res0.classNo + ')',
+    nmail([res0.sEmailID,res0.aEmailID,'ymolina@ms442.org','jsutton@ms442.org','camacho@ms442.org','gtavoularis@ms442.org'].join(', '),'New BDR: ' + res0.aName + ' -> ' + res0.sName + ' (' + res0.classNo + ')',
       ['<strong>Behavior:</strong> ' + reqjson.problemBehavior,
        '<strong>Date/Time:</strong> ' + datetimeToString(reqjson.incidentDateTime),
        '<strong>Period:</strong> ' + reqjson.incidentPeriod,
