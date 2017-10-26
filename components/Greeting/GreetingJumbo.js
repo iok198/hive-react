@@ -2,23 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class GreetingJumbo extends React.Component {
-  render(){
-      let name = this.props.user.title;
-    
-    return( <div id="" className="jumbotron">
-              <div><img height="50" src="./public/img/hivelogo.png"/></div>
-              <h1>Hello {name + " " + this.props.user.lastName}</h1>
-              {(this.props.user.courseStr.substring(0,1) != 's') ? (<p>
-              	<a className="btn btn-info btn-lg" href="https://sites.google.com/a/ms442.org/the-hub">
-              	<span className="glyphicon glyphicon-briefcase"></span> {"Visit the Hub"}
-              </a>
-              <a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
-          <span className="glyphicon glyphicon-wrench"></span> Tech Repair
+  render() {
+    let name = this.props.user.title;
+
+    return (
+      <div id="" className="jumbotron">
+        <div><img height="50" src="./public/img/hivelogo.png" /></div>
+        <h1>Hello {name + " " + this.props.user.lastName}</h1>
+        {(this.props.user.courseStr.substring(0, 1) != 's') ? (<p>
+          <a className="btn btn-info btn-lg" href="https://sites.google.com/a/ms442.org/the-hub">
+            <span className="glyphicon glyphicon-briefcase"></span> {"Visit the Hub"}
+          </a>
+          <a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
+            <span className="glyphicon glyphicon-wrench"></span> Tech Repair
         </a>
-              	</p>) : (<a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
+        </p>) : (<a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf3LAsfrbyfJLvE55AtkOE4W2BJV4rXnb0CACBMJ4aDIbtHLw/viewform?usp=sf_link">
           <span className="glyphicon glyphicon-wrench"></span> Tech Repair
         </a>)}
-	    </div> );
+        <a className="btn btn-info btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSfWXDJ3tcn_ge0LO2lQMtwxZpc5N9y1PO6d5ipifl9p0zABLQ/viewform?usp=sf_link">
+          <span className="glyphicon glyphicon-education"></span> Tech Tutoring
+        </a>
+      </div>
+    );
   }
 
 }
