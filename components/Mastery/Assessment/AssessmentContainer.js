@@ -15,6 +15,8 @@ class AssessmentContainer extends React.Component{
       this.nextPage = this.nextPage.bind(this)
       this.upVPage = this.upVPage.bind(this)
       this.downVPage = this.downVPage.bind(this)
+      this.filterAssessmentStu = this.filterAssessmentStu.bind(this)
+      this.filterAssessmentClassNo = this.filterAssessmentClassNo.bind(this)
       this.changeAssessment = this.changeAssessment.bind(this)
     }
     render(){
@@ -26,7 +28,7 @@ class AssessmentContainer extends React.Component{
               </div>
               <div className="panel-body">
                 <AssessmentTable parsedAssessment={this.state.parsedAssessment} page={this.state.page} vpage={this.state.vpage} 
-                upVPage={this.upVPage} downVPage={this.downVPage} nextPage={this.nextPage} prevPage={this.prevPage} 
+                upVPage={this.upVPage} downVPage={this.downVPage} nextPage={this.nextPage} prevPage={this.prevPage} filterAssessmentStu={this.filterAssessmentStu}
                 changeAssessment={this.changeAssessment} />
               </div>
             </div>)
@@ -44,6 +46,19 @@ class AssessmentContainer extends React.Component{
   }
   downVPage(){
     this.setState({vpage:this.state.vpage + 1})
+  }
+
+  filterAssessmentStu(text){
+    var mArrC = this.state.mArrS.slice(0,3)
+    if(text != '') mArrC.push(text)
+    this.setState({mArrS:mArrC,parsedAssessment:parseAssessment(mArrC)})
+  }
+  
+  filterAssessmentClassNo(text){
+    var mArrC = this.state.mArrS.slice(0,3)
+    mArrC.push('')
+    if(text != '') mArrC.push(text)
+    this.setState({mArrS:mArrC,parsedAssessment:parseAssessment(mArrC)})
   }
 
  

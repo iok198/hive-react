@@ -2,6 +2,8 @@ function parseAssessment(mArr){
     var studentRows = mArr[0]
     var LOs = mArr[1]
     var assessmentModel = mArr[2][0]
+    const studentName = (mArr.length < 4) ? (false) : mArr[3]
+    const classNoF = (mArr.length < 5) ? false : mArr[4]
     console.log(mArr)
     
     var mRating0s={}
@@ -22,6 +24,7 @@ function parseAssessment(mArr){
     var rowsByStu = {}
     
     studentRows.forEach((row,id) => {
+        if((!!classNoF && row.classNo.indexOf(classNoF) < 0) || (!!studentName && (row.title + ' ' + row.lastName).toLowerCase().indexOf(studentName.toLowerCase()) < 0 ) ) return
         stuBios[row.uEntryID] = row.title + " " + row.lastName
         mRating0s[row.uEntryID] = {0:0,1:0,2:0,3:0,4:0}
         mRatingStrs[row.uEntryID] = ""

@@ -13,7 +13,22 @@ var postRequestForReact = require('../../utilities/postRequestForReact.js')
 class NewBDRPanel extends React.Component {
   constructor(props){
     super(props)
-    this.state = {studentUDID:null,incidentDate:'',incidentTimeH:'',incidentTimeM:'',othersInvolved:'',problemBehavior:'',behaviorAnecdote:'', teacherResponse:'',possibleMotivation:'',location:''}
+    var d = new Date()
+    //var dm = d.getMonth()
+    //var dd = d.getDate()
+    //var dy = d.getFullYear()
+    this.state = {
+        studentUDID:48,
+        //incidentDate:(dm < 10 ? "0" : "") + dm + "/" + (dd < 10 ? "0" : "") + dd + "/" + dy,
+        incidentDate: d.toString().substring(0,15),
+        incidentTimeH:'08',
+        incidentTimeM:'00',
+        othersInvolved:[],
+        problemBehavior:'Class Disruption/Non-compliant',
+        behaviorAnecdote:'',
+        teacherResponse:'',
+        possibleMotivation:'Obtain Peer Attention',
+        location:'Classroom'}
     this.updateNewBDRState = this.updateNewBDRState.bind(this)
     this.setState = this.setState.bind(this)
     this.submitNewBDR = this.submitNewBDR.bind(this)
@@ -28,39 +43,55 @@ class NewBDRPanel extends React.Component {
     			<form role="form" id="bdrForm">
                   <div className="form-group">
                     <label htmlFor="bdrSelStu"><span className="glyphicon glyphicon-user"></span> Student Name (Class):</label>
-                    <select className="form-control bdrSel" id="bdrSelStu" onChange={function(e){this.updateNewBDRState('studentUDID',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID} value={student.entryID}>{student.name}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelStu" onChange={function(e){this.updateNewBDRState('studentUDID',e.target.value)()}.bind(this)} value={this.state.studentUDID}>
+                      {studentList.map((student)=>(<option key={student.entryID} value={student.entryID}>{student.name + ' (' + student.classNo + ')'}</option>))}
+                    </select>
                     <span id="bdrPrevStu" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelDate"><span className="glyphicon glyphicon-calendar"></span> Date:</label>
-                    <select className="form-control bdrSel" id="bdrSelDate" onChange={function(e){this.updateNewBDRState('incidentDate',e.target.value)()}.bind(this)}>{datesList.map((date,id)=>(<option key={id}>{date}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelDate" onChange={function(e){this.updateNewBDRState('incidentDate',e.target.value)()}.bind(this)} value={this.state.incidentDate}>
+                      {datesList.map((date,id)=>(<option key={id}>{date}</option>))}
+                    </select>
                     <span id="bdrPrevDate" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelTimeH"><span className="glyphicon glyphicon-time"></span> Time:</label>
-                    <select className="form-control bdrSel" id="bdrSelTimeH" onChange={function(e){this.updateNewBDRState('incidentTimeH',e.target.value)()}.bind(this)}>{hours.map((h,id)=>(<option key={id} value={id < 10 ? ('0' + id) : ('' + id)}>{h}</option>))}</select>
-                    <select className="form-control bdrSel" id="bdrSelTimeM" onChange={function(e){this.updateNewBDRState('incidentTimeM',e.target.value)()}.bind(this)}>{minutes.map((m,id)=>(<option key={id} value={m.substring(1)}>{m}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelTimeH" onChange={function(e){this.updateNewBDRState('incidentTimeH',e.target.value)()}.bind(this)} value={this.state.incidentTimeH}>
+                      {hours.map((h,id)=>(<option key={id} value={id < 10 ? ('0' + id) : ('' + id)}>{h}</option>))}
+                    </select>
+                    <select className="form-control bdrSel" id="bdrSelTimeM" onChange={function(e){this.updateNewBDRState('incidentTimeM',e.target.value)()}.bind(this)} value={this.state.incidentTimeM}>
+                      {minutes.map((m,id)=>(<option key={id} value={m.substring(1)}>{m}</option>))}
+                    </select>
                     <br/>
                     <label htmlFor="bdrSelLoc"><span className="glyphicon glyphicon-globe"></span> Location:</label>
-                    <select className="form-control bdrSel" id="bdrSelLoc" onChange={function(e){this.updateNewBDRState('location',e.target.value)()}.bind(this)}>{locations.map((loc,id)=>(<option key={id}>{loc}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelLoc" onChange={function(e){this.updateNewBDRState('location',e.target.value)()}.bind(this)} value={this.state.location}>
+                      {locations.map((loc,id)=>(<option key={id}>{loc}</option>))}
+                    </select>
                     <span id="bdrPrevLoc" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelOthers"><span className="glyphicon glyphicon-tent"></span> Others Involved:</label>
-                    <select className="form-control bdrSel" id="bdrSelOthers" multiple onChange={function(e){this.updateNewBDRState('othersInvolved',e.target.value)()}.bind(this)}>{studentList.map((student)=>(<option key={student.entryID}>{student.name}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelOthers" multiple onChange={function(e){this.updateNewBDRState('othersInvolved',e.target.value)()}.bind(this)} value={this.state.othersInvolved}>
+                      {studentList.map((student)=>(<option key={student.entryID}>{student.name + ' (' + student.classNo + ')'}</option>))}
+                    </select>
                     <span id="bdrPrevOthers" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelBeh"><span className="glyphicon glyphicon-exclamation-sign"></span> Behavior:</label>
-                    <select className="form-control bdrSel" id="bdrSelBeh" onChange={function(e){this.updateNewBDRState('problemBehavior',e.target.value)()}.bind(this)}>{Object.keys(behaviors).map((beh,id)=>(<option key={id}>{beh}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelBeh" onChange={function(e){this.updateNewBDRState('problemBehavior',e.target.value)()}.bind(this)} value={this.state.problemBehavior}>
+                      {Object.keys(behaviors).map((beh,id)=>(<option key={id}>{beh}</option>))}
+                    </select>
                     <span id="bdrPrevBeh" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrTABehI"><span className="glyphicon glyphicon-comment"></span> Incident Description:</label>
-                    <textarea className="form-control bdrTA" id="bdrTABehI" rows="5" onChange={function(e){this.updateNewBDRState('behaviorAnecdote',e.target.value)()}.bind(this)}></textarea>
+                    <textarea className="form-control bdrTA" id="bdrTABehI" rows="5" onChange={function(e){this.updateNewBDRState('behaviorAnecdote',e.target.value)()}.bind(this)} value={this.state.behaviorAnecdote}></textarea>
                     <span id="bdrPrevBehI" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrSelPM"><span className="glyphicon glyphicon-grain"></span> Possible Motivation:</label>
-                    <select className="form-control bdrSel" id="bdrSelPM" onChange={function(e){this.updateNewBDRState('possibleMotivation',e.target.value)()}.bind(this)}>{possiblemotivations.map((pm,id)=>(<option key={id}>{pm}</option>))}</select>
+                    <select className="form-control bdrSel" id="bdrSelPM" onChange={function(e){this.updateNewBDRState('possibleMotivation',e.target.value)()}.bind(this)} value={this.state.possibleMotivation}>
+                      {possiblemotivations.map((pm,id)=>(<option key={id}>{pm}</option>))}
+                    </select>
                     <span id="bdrPrevPM" className="bdrPrevSpan"></span>
                     <br/>
                     <label htmlFor="bdrTAResponse"><span className="glyphicon glyphicon-comment"></span> Response/Intervention:</label>
-                    <textarea className="form-control bdrTA" id="bdrTAResponse" rows="5" onChange={function(e){this.updateNewBDRState('teacherResponse',e.target.value)()}.bind(this)}></textarea>
+                    <textarea className="form-control bdrTA" id="bdrTAResponse" rows="5" onChange={function(e){this.updateNewBDRState('teacherResponse',e.target.value)()}.bind(this)} value={this.state.teacherResponse}></textarea>
                     <span id="bdrPrevResponse" className="bdrPrevSpan"></span>
                     <button type="button" className="btn btn-primary" onClick={this.submitNewBDR}>Submit</button>		
                   </div>
@@ -103,7 +134,7 @@ class NewBDRPanel extends React.Component {
 
     console.log(this.state.problemBehavior)
     console.log(behaviors[this.state.problemBehavior])*/
-    var postObject = {studentUDID:this.state.studentUDID,incidentDateTime:datetime,incidentPeriod:period,othersInvolved:this.state.othersInvolved,problemBehavior:this.state.problemBehavior,behaviorAnecdote:this.state.behaviorAnecdote, teacherResponse:this.state.teacherResponse,possibleMotivation:this.state.possibleMotivation,location:this.state.location,staffUDID:this.props.authorUDID,swipCode:behaviors[this.state.problemBehavior]}
+    var postObject = {studentUDID:this.state.studentUDID,incidentDateTime:datetime,incidentPeriod:period,othersInvolved:(this.state.othersInvolved.length > 0 ? this.state.othersInvolved : ''),problemBehavior:this.state.problemBehavior,behaviorAnecdote:this.state.behaviorAnecdote, teacherResponse:this.state.teacherResponse,possibleMotivation:this.state.possibleMotivation,location:this.state.location,staffUDID:this.props.authorUDID,swipCode:behaviors[this.state.problemBehavior]}
     console.log(postObject)
   	postRequestForReact('/sendbdr', postObject,this.props.newBDRTrigger)
   }

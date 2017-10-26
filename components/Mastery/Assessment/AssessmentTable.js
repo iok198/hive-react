@@ -34,7 +34,7 @@ class AssessmentTable extends React.Component {
     return( 
       <table id="" className="table table-bordered">
               <tbody>
-              {(<AssessmentHeadTR key={3813} parsedAssessment={this.props.parsedAssessment} colOffset={0} page={this.props.page} upVPage={this.props.upVPage} downVPage={this.props.downVPage}/>)}
+              {(<AssessmentHeadTR key={3813} parsedAssessment={this.props.parsedAssessment} colOffset={0} page={this.props.page} upVPage={this.props.upVPage} downVPage={this.props.downVPage} prevPage={this.props.prevPage} nextPage={this.props.nextPage} filterAssessmentStu={this.props.filterAssessmentStu}/>)}
               {/*console.log(this.props.parsedAssessment.rowsByStu)*/}
               {Object.keys(this.props.parsedAssessment.rowsByStu).slice(0+5*(this.props.vpage),5+5*(this.props.vpage)).map((stuUDID,id1) => (<AssessmentStuTR key={stuUDID} stuData={this.props.parsedAssessment.rowsByStu[stuUDID]} mRating0s={this.props.parsedAssessment.mRating0s[stuUDID]} mRatingStr={this.props.parsedAssessment.mRatingStrs[stuUDID]} stuBio={this.props.parsedAssessment.stuBios[stuUDID]} stuUDID={stuUDID} colOffset={id1} page={this.props.page} courseLOIDs={Object.keys(this.props.parsedAssessment.alignModel)} changer={this.props.changeAssessment} />))}
               </tbody>

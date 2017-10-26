@@ -19,10 +19,20 @@
   .mback3 { background: #32CD32}
   
   .mback4 { background: #4169E1}
+
+  .light-mback1 { background:#FFD1AC }
+
+  .light-mback2 { background:#FFFF86 }
+
+  .light-mback3 { background:#B1FFB1 }
+
+  .light-mback4 { background:#C0E8FF }
   
   .modal-open {
     overflow: scroll;
 }
+
+  .mar-bot-0 {font-size:21px;}
   
   /* #navbar-brand-div,#navbar-right-ul,#topNavUL {margin-top:24px;} */
  

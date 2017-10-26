@@ -22,8 +22,8 @@ function queryUD(connection,email,done,extracted){
                         function (err,rsl,fds){
                             if(err) throw err
                             if(rsl.length > 0){
-                                console.log('rsl: ')
-                                console.log(rsl)
+                                console.log('rsl: (emailID entryID lastName)')
+                                console.log(rsl[0].emailID,rsl[0].entryID,rsl[0].lastName)
                                 done(null,rsl[0])
                             } else { done(null,extracted)}
                         }
@@ -35,11 +35,12 @@ function strategyConfig(connection){
     passport.use(
         new GoogleStrategy(googPassCred,
             function(accessToken, refreshToken, profile, done) {
+                process.nextTick(function(){
                 console.log(extractProfile(profile))
                 console.log("SELECT * FROM hive1718.userDirectory " +
                             "WHERE emailID REGEXP " + "'" + profile.emails[0].value + 
                             "' OR altEmailStr REGEXP '" + profile.emails[0].value + "'")
-                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()
+                queryUD(connection,profile.emails[0].value,done,extractProfile(profile))()})
             }
         )
     )

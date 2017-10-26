@@ -21,6 +21,7 @@ function parseMastery(mArr){
     var LOIDsIDkeys = {}
     var stuBios = {}
     var classNos = []
+    var maxIDs = {}
     
     function sFit(obj,id){
       if(!obj.courseStrLOIDsID || 
@@ -48,6 +49,11 @@ function parseMastery(mArr){
       
       if(!mRatingStrs.hasOwnProperty(obj.stuUDID)){
         mRatingStrs[obj.stuUDID] = {assessRatingID:obj.maxID,string:""}
+      }
+      if(!maxIDs.hasOwnProperty(obj.stuUDID)){
+        maxIDs[obj.stuUDID] = (obj.maxID == null) ? -1 : obj.maxID
+      } else {
+        if(obj.maxID > maxIDs[obj.stuUDID]) maxIDs[obj.stuUDID] = obj.maxID
       }
       mRatingStrs[obj.stuUDID].string += "m" + obj.LOID + ":" + obj.mRating0 + "n"
       switch(obj.mRating0){
@@ -92,7 +98,8 @@ function parseMastery(mArr){
       LOIDsIDkeys:LOIDsIDkeys,
       masteryArrS:masteryArrS,
       stuBios:stuBios,
-      classNos:classNos
+      classNos:classNos,
+      maxIDs:maxIDs
     }
   }
   

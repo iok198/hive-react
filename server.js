@@ -10,9 +10,24 @@ var assessGradeQueries = require('./components/Mastery/utilities/assessGradeQuer
 //var parseAssessment = require('./components/Mastery/utilities/parseAssessment.js')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
-var passportConfig = require('./utilities/passportConfig.js')
-var passport = passportConfig.passport
-var sitedownforwork = true;
+var uuid = require('node-uuid')
+var nmail = require('./nmail.js')
+
+function datetimeToString(dateString){
+  var date = new Date(dateString)
+  var mon = date.getMonth() + 1
+  var day = date.getDate()
+  var y = date.getFullYear()
+
+  var h = date.getHours()
+  var ampm = (h < 12 ? 'AM' : 'PM')
+  var hph = '' + (100 + (h%12 == 0 ? 12 : (ampm == 'AM' ? h : h%12)))
+  var hf = hph.substring(1)
+  var min = ('' + (100 + date.getMinutes())).substring(1)
+
+  return mon + '/' + day + '/' + y + ' ' + hf + ':' + min + ' ' + ampm
+}
+
 app.use(function (req, res, next) {
   console.log(req.originalUrl)
   next()
@@ -33,28 +48,36 @@ app.use(function (req, res, next) {
   // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true)
 
+  res.setHeader('Cache-Control','private, no-cache, no-store, must-revalidate')
+
   // Pass to next layer of middleware
   next()
 })
-
+  app.use('/public',express.static('public'))
+  app.use('/public/img',express.static(__dirname +  'public/img'))
+  var passportConfig = require('./utilities/passportConfig.js')
+  var passport = passportConfig.passport
+  var sitedownforwork = false && true;
 
   app.use(bodyParser.json())
   //app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({
+  genid:function () {
+        return uuid.v4()
+    },
   secret: 'cris1s',
   resave: true,
   saveUninitialized: true
 }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use('/public',express.static('public'))
-  app.use('/public/img',express.static(__dirname +  'public/img'))
+
 
 passportConfig.strategyConfig(connection)
 passport.serializeUser(function(user, done) {
     console.log(user)
-    console.log('userrrr')
+    console.log('user serialized')
     done(null, user.emailID)
   }
 )
@@ -69,7 +92,7 @@ passport.deserializeUser(function(emailID,done){
 
 app.get('/', function (req, res) {
     //console.log(req)
-    if(req.user){console.log('got a user')
+    if(req.user){console.log('req.user found')
     console.log(req.user.emailID)
       //res.send(req.session)
       //res.redirect('/users')
@@ -80,7 +103,7 @@ app.get('/', function (req, res) {
           break */
         case true: 
           res.sendFile(__dirname + '/public/maintenance.html') 
-          break()
+          break
         default:
           res.sendFile(__dirname + '/public/index.html')
           //res.send(doggo)
@@ -119,7 +142,7 @@ app.get('/swips/:threshold',function(req,res){
         + 'WHERE ( (u.courseStr REGEXP \'s\') AND ((s.SWIPS' + threshold + ') OR IF(20' + threshold +',ISNULL(s.SWIPS),FALSE)) ) ' + addlcon + ' ORDER BY u.classNo, u.lastName ', queryCallbacks.default(req,res))
 })
 
-app.get('/users',function(req, res){
+app.get('/users', isLoggedIn, function(req, res){
   if(req.user){console.log('user request from:')
     console.log(req.user)
     res.send(JSON.stringify([req.user]))
@@ -284,7 +307,7 @@ app.post("/sendgoalcomment",function(req,res){
       console.log('goalComment')
       console.log(commenterUDID)
       console.log(reqjson)
-      connection.query('INSERT INTO hive1718.goalComments (commenterUDID,goalID,submissionDateTime,commentText,goalMR) values (' + [commenterUDID,reqjson.goalID,"NOW()","'" + reqjson.commentText + "'","'" + reqjson.goalMR + "'"].join(", ") + ')',function (error, results, fields) {
+      connection.query('INSERT INTO hive1718.goalComments (commenterUDID,goalID,submissionDateTime,commentText,goalMR) values (?,?,NOW(),?,?)',[commenterUDID,reqjson.goalID,reqjson.commentText,reqjson.goalMR],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
     })
@@ -300,7 +323,8 @@ app.post("/sendgoal",function(req,res){
       console.log('goal')
       console.log(goalerUDID)
       console.log(reqjson)
-      connection.query('INSERT INTO hive1718.goals (studentUDID,goalText,submissionDateTime,masteryReflection,behaviorReflection,personalReflection,goalStrategy) values (' + [reqjson.studentUDID,"'" + reqjson.goalText + "'","NOW()","'" + reqjson.masteryReflection + "'","'" + reqjson.behaviorReflection + "'","'" + reqjson.personalReflection + "'","'" + reqjson.goalStrategy + "'"].join(", ") + ')',function (error, results, fields) {
+      var values = [reqjson.studentUDID,reqjson.goalText,reqjson.masteryReflection,reqjson.behaviorReflection,reqjson.personalReflection,reqjson.goalStrategy]
+      connection.query('INSERT INTO hive1718.goals (studentUDID,goalText,submissionDateTime,masteryReflection,behaviorReflection,personalReflection,goalStrategy) values (?,?,NOW(),?,?,?,?)',values,function (error, results, fields) {
     if (error) throw error;
     res.send(results)
     })
@@ -317,7 +341,20 @@ app.post("/sendbdr",function(req,res){
       connection.query('INSERT INTO hive1718.bdrs (studentUDID,incidentDateTime,incidentPeriod,othersInvolved,problemBehavior,behaviorAnecdote, teacherResponse,possibleMotivation,location,staffUDID,swipCode,submissionDateTime) values (?,?,?,?,?,?,?,?,?,?,?,NOW())',[reqjson.studentUDID,reqjson.incidentDateTime,reqjson.incidentPeriod,reqjson.othersInvolved,reqjson.problemBehavior,reqjson.behaviorAnecdote,reqjson.teacherResponse,reqjson.possibleMotivation,reqjson.location,reqjson.staffUDID,reqjson.swipCode],function (error, results, fields) {
     if (error) throw error;
     res.send(results)
+    connection.query('select * from (select classNo, emailID as sEmailID, concat(title,\' \',lastName) as sName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.studentUDID + ') u1 join (select emailID, concat(title,\' \',lastName) as aName, 1 as j from hive1718.userDirectory where entryID = ' + reqjson.staffUDID + ') u2 on u1.j = u2.j', function (error, results, fields) { if (error) throw error;
+    console.log(results)
+    var res0 = results[0]
+    //console.log(reqjson)
+    nmail([res0.sEmailID,res0.aEmailID,'ymolina@ms442.org','jsutton@ms442.org','camacho@ms442.org','gtavoularis@ms442.org'].join(', '),'New BDR: ' + res0.aName + ' -> ' + res0.sName + ' (' + res0.classNo + ')',
+      ['<strong>Behavior:</strong> ' + reqjson.problemBehavior,
+       '<strong>Date/Time:</strong> ' + datetimeToString(reqjson.incidentDateTime),
+       '<strong>Period:</strong> ' + reqjson.incidentPeriod,
+       '<strong>Location:</strong> ' + reqjson.location,
+       '<strong>SWIPs Lost:</strong> ' + reqjson.swipCode
+      ].join('<br/>'))
     })
+    }
+    )
       //res.send('goal commented')
     }
   }
@@ -326,7 +363,7 @@ app.post("/sendbdr",function(req,res){
 app.post("/sendbdrcomment",function(req,res){
     var reqjson =req.body
     if(req.user){
-      console.log('new bdr')
+      console.log('new bdr comment')
       console.log(reqjson)
       connection.query('INSERT INTO hive1718.bdrComments (bdrID,commenterID,commentText,commentDT) values (?,?,?,NOW());' + (!!reqjson.restoring ? 'UPDATE hive1718.bdrs SET swipCode=(-1*swipCode), restoreDateTime=NOW() WHERE entryID=' + connection.escape(reqjson.bdrID) : ''),[reqjson.bdrID,reqjson.commenterID,reqjson.commentText],function (error, results, fields) {
     if (error) throw error;
@@ -336,6 +373,16 @@ app.post("/sendbdrcomment",function(req,res){
     }
   }
 )
+
+app.post("/upgradelateoou",function(req,res){
+    var reqjson =req.body
+    if(req.user){
+      connection.query('INSERT INTO hive1718.bdrComments (bdrID,commenterID,commentText,commentDT) values (?,?,?,NOW());' + 'UPDATE hive1718.bdrs SET swipCode=1 WHERE entryID=' + connection.escape(reqjson.bdrID),[reqjson.bdrID,reqjson.commenterID,reqjson.commentText],function (error, results, fields) {
+    if (error) throw error;
+    res.send(results)
+    })
+    }
+})
 
 app.post("/sendnewgrade",function(req,res){
     var reqjson =req.body
@@ -359,15 +406,33 @@ app.post("/sendnewgrade",function(req,res){
   }
 )
 
+app.get('/attendance',function(req,res){
+    if(req.user != 's'){
+      var query = 'select concat(u.title,\' \',u.lastName) as name, u.classNo as classNo, u.entryID, b.problemBehavior, b.swipCode, b.entryID as bdrID, b.commentText from hive1718.userDirectory u left join (select b1.*, bc.commentText as commentText from hive1718.bdrs b1 left join hive1718.bdrComments bc on b1.entryID = bc.bdrID  where b1.problemBehavior regexp concat(\'Arrival: \',substring(DATE_SUB(now(), interval 14400 second),6,5))) b on u.entryID=b.studentUDID where u.courseStr regexp \'s\' order by classNo, u.lastName'
+      console.log(query)
+      connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results)
+      })
+
+    } else res.send('')
+})
+
 
 
 app.get('/authd',
-  passport.authenticate('google', { scope: ['email'] }));
+  passport.authenticate('google', { scope: ['email'] })
+
+  )
   
 app.get('/authd/callback', 
   passport.authenticate('google', {successRedirect: '/', failureRedirect: '/login',failureFlash: true }))
   
+function isLoggedIn(req,res,next){
+  if(req.isAuthenticated()) return next();
 
+  res.redirect('/')
+}
   
 app.get('/login', function (req, res) {
   res.send('Hello World!')

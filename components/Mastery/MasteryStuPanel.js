@@ -26,9 +26,9 @@ class MasteryStuPanel extends React.Component {
                   var mRatings = ["Unassessed","Not Yet","Approaching","Meeting","Exceeding"]
                   var masteryString = mRatings[mRating]
                   return (<li className="list-group-item" key={key}>
-                    <div className="container">
-                      <div className="col-xs-9">{LO.LOText}</div>
-                      <div className="col-xs-3"><span className="label label-default">{masteryString}</span>
+                    <div className="row">
+                      <div className={"col-xs-9 mar-bot-0 light-mback" + mRating}>{LO.LOText}</div>
+                      <div className="col-xs-3"><span className={"label label-default pull-right mar-bot-0 mback" + mRating}>{masteryString}</span>
                       </div>
                     </div>
                     </li>)} else {
